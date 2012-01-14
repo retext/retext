@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="Project Nowhere" basedir="." default="main">
+
+    <!-- props -->
+    <property name="htdocs.dir" value="${basedir}/htdocs"/>
+    <property name="build.dir" value="${htdocs.dir}/build"/>
+    <property name="asset.dir" value="${htdocs.dir}/assets"/>
+    <property name="final_js_base" value="${build.dir}/base.js"/>
+    <property name="final_css" value="${build.dir}/complete.css"/>
+
+    <!-- libraries -->
+    <property name="yui-compressor" location="vendor/yuicompressor-2.4.7.jar"/>
+    <property name="yui-compressor-ant-task" location="vendor/yui-compressor-ant-task-0.5.jar"/>
+
+    <!-- classpath -->
+    <path id="yui.classpath">
+        <pathelement location="${yui-compressor}"/>
+        <pathelement location="${yui-compressor-ant-task}"/>
+    </path>
+
+    <!-- task definitions -->
+    <taskdef name="yui-compressor" classname="net.noha.tools.ant.yuicompressor.tasks.YuiCompressorTask">
+        <classpath refid="yui.classpath"/>
+    </taskdef>
+
+    <!-- targets -->
+    <target name="concat">
+
+        <mkdir dir="${build.dir}"/>
+
+        <echo message="Building ${final_js_base}"/>
+        <concat destfile="${final_js_base}" force="true" fixlastline="true">
+            <fileset file="${htdocs.dir}/js/script.js"/>
+        </concat>
+
+        <echo message="Building ${final_css}"/>
+        <concat destfile="${final_css}" force="true" fixlastline="true">
+            <fileset file="${htdocs.dir}/css/normalize.css"/>
+            <fileset file="${htdocs.dir}/css/style.css"/>
+            <fileset file="${htdocs.dir}/css/helpers.css"/>
+            <fileset file="${htdocs.dir}/css/media.css"/>
+        </concat>
+
+    </target>
+
+    <target name="compress" depends="concat">
+
+        <mkdir dir="${asset.dir}"/>
+
+        <yui-compressor
+                warn="false"
+                munge="true"
+                preserveallsemicolons="false"
+                fromdir="${build.dir}"
+                todir="${asset.dir}"
+                />
+
+    </target>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <target name="main" depends="compress,concat,clean"/>
+
+</project>

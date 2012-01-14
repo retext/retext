@@ -1,0 +1,19 @@
+/* =============================================================================
+   PLACEHOLDER Media Queries for Responsive Design.
+   These override the primary ('mobile first') styles
+   Modify as content requires.
+   ========================================================================== */
+
+@media screen {
+}
+
+@media screen and (min-width: 480px) {
+}
+
+@media screen and (min-width: 768px) {
+}
+
+@media screen and (min-width: 1200px) {
+    nav { position: absolute; left: 105%; top: 0; width: 40%; }
+    nav ul { padding-left: 2em; }
+}
