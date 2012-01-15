@@ -11,9 +11,11 @@
 }
 
 @media screen and (min-width: 768px) {
+    nav.article { width: 30%; font-size: 0.625em; float: right; background-color: #c0c4c6; color: #1E353F; padding: 0 2%; margin-left: 2%; margin-bottom: 2%;  }
+    nav.article ul { padding-left: 1.75em; }
 }
 
 @media screen and (min-width: 1200px) {
-    nav.article { position: absolute; left: 105%; top: 0; width: 40%; }
-    nav.article ul { padding-left: 2em; }
+    nav.files { position: absolute; left: 105%; top: 0; width: 40%; }
+    nav.files ul { padding-left: 2em; }
 }

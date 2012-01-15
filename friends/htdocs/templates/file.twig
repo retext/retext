@@ -1,9 +1,28 @@
 {% extends "base.twig" %}
 {% block body %}
-<nav class="article">
-    {% for file in files %}
-    {% if loop.first %}
-    <p>Eingeloggt als @{{ username }}.<br/><a href="/logout">Abmelden.</a></p>
+<article>
+    <nav class="article">
+        <h2>{{ file.label }}</h2>
+        <p>Zuletzt
+            geändert: {% if file.modified == 0 %}Heute{% elseif file.modified == 1 %}Gestern{% else %}vor {{ file.modified }}
+            Tagen{% endif %}</p>
+        {% for entry in structure %}
+        {% if loop.first %}
+        <h3>Inhalt</h3>
+        <ul>
+            {% endif %}
+            <li><a href="#{{ entry.id }}">{{ entry.label }}</a></li>
+            {% if loop.last %}
+        </ul>
+        {% endif %}
+        {% endfor %}
+    </nav>
+    {{ content|raw }}
+</article>
+{% for file in files %}
+{% if loop.first %}
+<nav class="files">
+    <h2>Dokumente</h2>
     <ul>
         {% endif %}
         <li>
@@ -11,25 +30,8 @@
         </li>
         {% if loop.last %}
     </ul>
-    {% endif %}
-    {% endfor %}
-    <h2>{{ file.label }}</h2>
-
-    <p>Zuletzt
-        geändert: {% if file.modified == 0 %}Heute{% elseif file.modified == 1 %}Gestern{% else %}vor {{ file.modified }}
-        Tagen{% endif %}</p>
-    {% for entry in structure %}
-    {% if loop.first %}
-    <h3>Inhalt</h3>
-    <ul>
-        {% endif %}
-        <li><a href="#{{ entry.id }}">{{ entry.label }}</a></li>
-        {% if loop.last %}
-    </ul>
-    {% endif %}
-    {% endfor %}
 </nav>
-<article>
-    {{ content|raw }}
-</article>
-{% endblock %}
+{% endif %}
+{% endfor %}
+
+        {% endblock %}

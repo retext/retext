@@ -9,7 +9,7 @@ a:visited { color: #518BA7; }
 header, footer { text-align: center; width: 50%; min-width: 350px; margin: 0 auto; }
 article { margin: auto 2%; }
 article li { line-height: 150%; }
-nav.article { margin-left: 2%; }
+nav.files { margin-left: 2%; }
 
 h1 { margin-top: 10%; margin-bottom: 5%; }
 p { margin-top: 0; margin-bottom: 0.5em; line-height: 150%; }

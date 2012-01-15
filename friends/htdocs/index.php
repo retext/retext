@@ -158,8 +158,10 @@ $app->get('/oauth', function() use ($app)
         $app['session']->set('name', $json->name);
 
         // Mail me
-        $msg = sprintf('Login to %s from @%s', $_SERVER['HTTP_HOST'], $json->screen_name);
-        mail('m@retext.it', $msg, $msg);
+        if (!in_array($json->screen_name, array('markustacker', 'retext', 'coderbyheart'))) {
+            $msg = sprintf('Login to %s from @%s', $_SERVER['HTTP_HOST'], $json->screen_name);
+            mail('m@retext.it', $msg, $msg);
+        }
 
         return $app->redirect('/');
     } catch (OAuthException $e) {
