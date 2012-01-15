@@ -151,8 +151,11 @@ $app->get('/oauth', function() use ($app)
         $oauth->setToken($oauth_token_info['oauth_token'], $oauth_token_info['oauth_token_secret']);
         $oauth->fetch('https://twitter.com/account/verify_credentials.json');
         $json = json_decode($oauth->getLastResponse());
-
         $app['session']->set('username', $json->screen_name);
+
+        // Mail me
+        $msg = sprintf('Login to %s from @%s', $_SERVER['HTTP_HOST'], $json->screen_name);
+        mail('m@retext.it', $msg, $msg);
 
         return $app->redirect('/');
     } catch (OAuthException $e) {
