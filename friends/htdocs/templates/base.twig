@@ -26,10 +26,20 @@
 <header>
     <h1><img src="/img/retext-logo.png" width="320" height="111" alt="re:text &mdash; text workflow done right"/></h1>
 </header>
+<nav class="loginlogout">
+    <ul>
+        {% if username is null %}
+        <li><a href="/login">Anmelden</a></li>
+        {% else %}
+        <li>@{{ username }}</li>
+        <li><a href="/logout">Abmelden</a></li>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
 <div id="main" role="main">
     {% block body %}{% endblock %}
 </div>
-
 <footer>
     <ul>
         <li>re:text is made by <a href="http://coderbyheart.de/" rel="author">Markus Tacker</a></li>

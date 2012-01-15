@@ -14,6 +14,6 @@
 }
 
 @media screen and (min-width: 1200px) {
-    nav { position: absolute; left: 105%; top: 0; width: 40%; }
-    nav ul { padding-left: 2em; }
+    nav.article { position: absolute; left: 105%; top: 0; width: 40%; }
+    nav.article ul { padding-left: 2em; }
 }

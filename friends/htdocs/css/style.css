@@ -3,13 +3,15 @@ body { color: #c0c4c6; font-family: 'Bitter', serif; }
 a { color: #0095F2; text-decoration: none; }
 a:visited { color: #518BA7; }
 .highlight { background-color: #f15e00; color: #1E353F; padding: 0.5em; }
+.colorgreen { color: #95f200; }
 
 #main { max-width: 45em; margin: 0 auto; position: relative; }
 header, footer { text-align: center; width: 50%; min-width: 350px; margin: 0 auto; }
-article { margin: auto auto; }
+article { margin: auto 2%; }
 article li { line-height: 150%; }
+nav.article { margin-left: 2%; }
 
-h1 { margin-top: 5%; margin-bottom: 5%; }
+h1 { margin-top: 10%; margin-bottom: 5%; }
 p { margin-top: 0; margin-bottom: 0.5em; line-height: 150%; }
 header, footer { text-align: center; }
 a.pdf { padding-left: 20px; background: url(../img/icons/application-pdf.png) no-repeat 0 50%; }
@@ -19,3 +21,9 @@ footer { margin-top: 5em; }
 footer ul { list-style: none; }
 footer li { display: inline-block; margin: 0 0.5em; }
 .rel { position: relative; }
+
+.loginlogout { position: absolute; top: 0; right: 10%; background-color: #1E353F; font-size: 0.75em; width: auto; color: #c0c4c6; border: 1px solid #f15e00; border-top: 0; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; }
+
+.loginlogout ul { padding: 0; margin: 0; }
+.loginlogout li { list-style: none; float: left; margin: 0.5em; }
+.loginlogout li:not(:first-child) { border-left: 1px solid #95f200; margin-left: 0; padding-left: 0.5em; }

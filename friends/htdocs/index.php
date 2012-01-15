@@ -1,10 +1,13 @@
 <?php
 
-error_reporting(-1);
-ini_set('display_errors', 1);
+require_once __DIR__ . '/../config/config.php';
+
+if (DEV) {
+    error_reporting(-1);
+    ini_set('display_errors', 1);
+}
 setlocale(LC_ALL, 'de_DE.utf8');
 
-require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../vendor/silex.phar';
 require_once __DIR__ . '/../vendor/php-markdown/markdown.php';
 
@@ -63,7 +66,7 @@ $app->before(function () use ($app, $friends)
 
 $app->get('/', function() use($app)
 {
-    return $app['twig']->render('home.twig', array('username' => $app['session']->get('username'), 'vip' => $app['session']->get('vip'), 'DEV' => DEV, 'files' => $app['session']->get('vip') ? listFiles() : array()));
+    return $app['twig']->render('home.twig', array('username' => $app['session']->get('username'), 'name' => $app['session']->get('name'), 'vip' => $app['session']->get('vip'), 'DEV' => DEV, 'files' => $app['session']->get('vip') ? listFiles() : array()));
 });
 
 $app->get('/file/{filename}', function($filename) use($app)
@@ -102,7 +105,7 @@ $app->get('/file/{filename}', function($filename) use($app)
             );
             $md = str_replace('<' . $h . '>' . $match[2] . '</' . $h . '>', '<' . $h . ' id="' . $id . '">' . $match[2] . '</' . $h . '>', $md);
         }
-        return $app['twig']->render('file.twig', array('username' => $app['session']->get('username'), 'vip' => $app['session']->get('vip'), 'DEV' => DEV, 'files' => $files, 'file' => $file, 'content' => $md, 'structure' => $structure));
+        return $app['twig']->render('file.twig', array('username' => $app['session']->get('username'), 'name' => $app['session']->get('name'), 'vip' => $app['session']->get('vip'), 'DEV' => DEV, 'files' => $files, 'file' => $file, 'content' => $md, 'structure' => $structure));
     }
 });
 
@@ -152,6 +155,7 @@ $app->get('/oauth', function() use ($app)
         $oauth->fetch('https://twitter.com/account/verify_credentials.json');
         $json = json_decode($oauth->getLastResponse());
         $app['session']->set('username', $json->screen_name);
+        $app['session']->set('name', $json->name);
 
         // Mail me
         $msg = sprintf('Login to %s from @%s', $_SERVER['HTTP_HOST'], $json->screen_name);

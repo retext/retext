@@ -1,7 +1,6 @@
 {% extends "base.twig" %}
 {% block body %}
-
-<nav>
+<nav class="article">
     {% for file in files %}
     {% if loop.first %}
     <p>Eingeloggt als @{{ username }}.<br/><a href="/logout">Abmelden.</a></p>
@@ -33,6 +32,4 @@
 <article>
     {{ content|raw }}
 </article>
-
-
-        {% endblock %}
+{% endblock %}

@@ -1,28 +1,39 @@
 {% extends "base.twig" %}
 {% block body %}
-{% if username is null %}
-<p>Zutritt nur für VIPs.<br/><a href="/login">Bitte melde Dich mit deinem Twitter-Konto an.</a></p>
-{% else %}
-<p>Hallo @{{ username }}, schön Dich zu sehen. <a href="/logout">Abmelden.</a></p>
-{% if not vip %}
-<p>Leider bist Du noch nicht mit mir befreundet.</p>
-{% else %}
-<p>Die Inhalte auf dieser Seite sind nur <a href="http://twitter.com/retext/friends/members">ganz wenigen Leuten</a> zugänglich. Mir geht es darum, Dich über die Entwicklung des Projektes auf dem Laufenden zu halten, und schon ein wenige Feedback zu bekommen.</p>
-<p>Die unten aufgelisten Dokumente kannst Du dir direkt hier ansehen, bzw. herunterladen. Bearbeitet werden können Sie von dir auch, dazu musst Du meinem Dropbox-Share beitreten.</p>
-<p class="highlight"><strong>Es ist jedoch extrem wichtig</strong>, dass Du keine Inhalte, ohne meine Zustimmung an Dritte weitergibst!</p>
-<p>Folgende Dokumente habe ich für dich bereitgestellt:</p>
-{% for file in files %}
-{% if loop.first %}
-<ul>
+<article>
+    {% if username is null %}
+    <p>Zutritt nur für VIPs.<br/><a href="/login">Bitte melde Dich mit deinem Twitter-Konto an.</a></p>
+    {% else %}
+    <p>Hallo <em>{{ name }}</em>, schön Dich zu sehen. <a href="/logout">Abmelden.</a></p>
+    {% if not vip %}
+    <p>Leider bist Du noch nicht mit mir befreundet.<br>Du kannst Dich aber gerne <a href="http://twitter.com/retext">vorstellen</a>.
+    </p>
+    {% else %}
+    <p>Die Inhalte auf dieser Seite sind nur <a href="http://twitter.com/retext/friends/members">ganz wenigen Leuten</a>
+        zugänglich. Mir geht es darum, Dich über die Entwicklung des Projektes auf dem Laufenden zu halten, und schon
+        ein wenige Feedback zu bekommen.</p>
+
+    <p>Die unten aufgelisten Dokumente kannst Du dir direkt hier ansehen, bzw. herunterladen. Bearbeitet werden können
+        Sie von dir auch, dazu musst Du meinem Dropbox-Share beitreten.</p>
+
+    <p class="highlight"><strong>Es ist jedoch extrem wichtig</strong>, dass Du keine Inhalte, ohne meine Zustimmung an
+        Dritte weitergibst!</p>
+
+    <p>Folgende Dokumente habe ich für dich bereitgestellt:</p>
+    {% for file in files %}
+    {% if loop.first %}
+    <ul>
+        {% endif %}
+        <li>
+            <a href="/file/{{ file.file }}" class="{{ file.type }}">{{ file.label }}</a>
+            <small>{% if file.modified == 0 %}Heute geändert.{% elseif file.modified == 1 %}Gestern geändert.{% else %}Vor {{ file.modified }}
+                Tagen geändert.{% endif %}</small>
+        </li>
+        {% if loop.last %}
+    </ul>
     {% endif %}
-    <li>
-        <a href="/file/{{ file.file }}" class="{{ file.type }}">{{ file.label }}</a>
-        <small>{% if file.modified == 0 %}Heute geändert.{% elseif file.modified == 1 %}Gestern geändert.{% else %}Vor {{ file.modified }} Tagen geändert.{% endif %}</small>
-    </li>
-    {% if loop.last %}
-</ul>
-{% endif %}
-{% endfor %}
-{% endif %}
-{% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endif %}
+</article>
 {% endblock %}
