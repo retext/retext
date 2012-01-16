@@ -61,23 +61,44 @@ $app->register(new Silex\Provider\SessionServiceProvider());
 
 $app->before(function () use ($app, $friends)
 {
+    $app['session']->set('authenticated', $app['session']->get('username') !== null);
     $app['session']->set('vip', in_array(strtolower($app['session']->get('username')), $friends));
+
+    $app['twig']->addGlobal('username', $app['session']->get('username'));
+    $app['twig']->addGlobal('name', $app['session']->get('name'));
+    $app['twig']->addGlobal('vip', $app['session']->get('vip'));
+    $app['twig']->addGlobal('DEV', DEV);
+});
+
+$app->error(function (\Exception $e, $code) use($app) {
+    return new Symfony\Component\HttpFoundation\Response(
+        $app['twig']->render('error.twig', array('message' => $e->getMessage(), 'code' => $code)),
+        $code
+    );
 });
 
 $app->get('/', function() use($app)
 {
-    return $app['twig']->render('home.twig', array('username' => $app['session']->get('username'), 'name' => $app['session']->get('name'), 'vip' => $app['session']->get('vip'), 'DEV' => DEV, 'files' => $app['session']->get('vip') ? listFiles() : array()));
+    return $app['twig']->render('home.twig', array('files' => $app['session']->get('vip') ? listFiles() : array()));
+});
+
+$app->get('/reload', function() use($app)
+{
+    apc_delete('files-ttl');
+    apc_delete('friends-ttl');
+    return $app->redirect('/');
 });
 
 $app->get('/file/{filename}', function($filename) use($app)
 {
-    if (!$app['session']->get('vip')) $app->abort(403, 'You are not my friend.');
     $files = listFiles();
     $file = array_filter($files, function($item) use($filename)
     {
         return $item['file'] == $filename;
     });
     if (empty($file)) $app->abort(404, 'The file ' . $filename . ' could not be found.');
+    if (!$app['session']->get('authenticated')) $app->abort(403, 'Not authenticated.');
+    if (!$app['session']->get('vip')) $app->abort(403, 'You are not my friend.');
     $file = array_pop($file);
 
     if ($file['type'] !== 'txt') {
@@ -90,10 +111,11 @@ $app->get('/file/{filename}', function($filename) use($app)
         finfo_close($fi);
         return $app->stream($stream, 200, array('Content-Type' => $mime));
     } else {
+        if (!is_file(DROPBOX . $file['file'])) $app->abort(404, 'Das Dokument wurde gelöscht.');
         $content = file_get_contents(DROPBOX . $file['file']);
-        $structure = array();
         preg_match_all('/^(#+) (.+)/m', $content, $matches, PREG_SET_ORDER);
         $md = Markdown($content);
+        $structure = array();
         foreach ($matches as $match) {
             $lvl = strlen($match[1]);
             if ($lvl != 2) continue;
@@ -105,7 +127,7 @@ $app->get('/file/{filename}', function($filename) use($app)
             );
             $md = str_replace('<' . $h . '>' . $match[2] . '</' . $h . '>', '<' . $h . ' id="' . $id . '">' . $match[2] . '</' . $h . '>', $md);
         }
-        return $app['twig']->render('file.twig', array('username' => $app['session']->get('username'), 'name' => $app['session']->get('name'), 'vip' => $app['session']->get('vip'), 'DEV' => DEV, 'files' => $files, 'file' => $file, 'content' => $md, 'structure' => $structure));
+        return $app['twig']->render('file.twig', array('files' => $files, 'file' => $file, 'content' => $md, 'structure' => $structure));
     }
 });
 

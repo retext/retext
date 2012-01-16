@@ -10,8 +10,10 @@ header, footer { text-align: center; width: 50%; min-width: 350px; margin: 0 aut
 article { margin: auto 2%; }
 article li { line-height: 150%; }
 nav.files { margin-left: 2%; }
+nav.article { font-size: 0.625em; background-color: #3B4F58; padding: 0 2%; margin-bottom: 2%; border-radius: 10px; }
+nav.article ul { padding-left: 1.75em; }
 
-h1 { margin-top: 10%; margin-bottom: 5%; }
+header h1 { margin-top: 10%; margin-bottom: 5%; }
 p { margin-top: 0; margin-bottom: 0.5em; line-height: 150%; }
 header, footer { text-align: center; }
 a.pdf { padding-left: 20px; background: url(../img/icons/application-pdf.png) no-repeat 0 50%; }
