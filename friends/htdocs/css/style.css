@@ -1,8 +1,8 @@
 html { background: #1E353F url(../img/bg-pattern.png); }
-body { color: #c0c4c6; font-family: 'Bitter', serif; }
+body { color: #c0c4c6; font-family: 'Bitter', serif; text-shadow: black 1px 1px 2px; }
 a { color: #0095F2; text-decoration: none; }
 a:visited { color: #518BA7; }
-.highlight { background-color: #f15e00; color: #1E353F; padding: 0.5em; }
+.highlight { background-color: #B75311; color: #fff; padding: 0.5em; border-radius: 10px; }
 .colorgreen { color: #95f200; }
 
 #main { max-width: 45em; margin: 0 auto; position: relative; }
