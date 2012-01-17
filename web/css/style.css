@@ -1,5 +1,5 @@
 html { background: #1E353F url(../img/bg-pattern.png); }
-body { color: #c0c4c6; font-family: 'Bitter', serif; text-align: center; }
+body { color: #c0c4c6; font-family: 'Bitter', serif; text-align: center; text-shadow: black 1px 1px 2px; }
 a { color: #0095F2; text-decoration: none; }
 a:visited { color: #518BA7; }
 #main { width: 320px; display: inline-block; text-align: left; }
