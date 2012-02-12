@@ -2,10 +2,13 @@
 {% block body %}
 <article>
     <nav class="article">
+        <a href="/editor?file={{ file.file }}" class="button">bearbeiten</a>
         <h2>{{ file.label }}</h2>
         <p>Zuletzt
             geändert: {% if file.modified == 0 %}Heute{% elseif file.modified == 1 %}Gestern{% else %}vor {{ file.modified }}
             Tagen{% endif %}</p>
+        {% if admin %}
+        {% endif %}
         {% for entry in structure %}
         {% if loop.first %}
         <h3>Inhalt</h3>

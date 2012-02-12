@@ -32,23 +32,39 @@ function listFiles()
 
 function filterList(array $list)
 {
-    return array_map(function($item) { return $item->screen_name; }, $list);
+    return array_map(function($item)
+    {
+        return $item->screen_name;
+    }, $list);
 }
 
-function listFriends()
+function getFriends()
 {
     if (!apc_exists('friends-ttl')) {
         apc_store('friends-ttl', '-', 60 * 60 * 24);
         $friendsList = json_decode(file_get_contents('https://api.twitter.com/1/lists/members.json?slug=friends&owner_screen_name=retext&skip_status=1'));
-        $teamList = json_decode(file_get_contents('https://api.twitter.com/1/lists/members.json?slug=team&owner_screen_name=retext&include_entities=0&skip_status=1'));
-        $friends = array_merge(filterList($friendsList->users), filterList($teamList->users));
-        $friends[] = 'retext';
+        $friends = filterList($friendsList->users);
         apc_store('friends', $friends);
     }
     return apc_fetch('friends');
 }
 
-$friends = listFriends();
+function getTeam()
+{
+    if (!apc_exists('team-ttl')) {
+        apc_store('team-ttl', '-', 60 * 60 * 24);
+        $teamList = json_decode(file_get_contents('https://api.twitter.com/1/lists/members.json?slug=team&owner_screen_name=retext&include_entities=0&skip_status=1'));
+        $teamList = filterList($teamList->users);
+        $teamList[] = 'retext';
+        apc_store('team', $teamList);
+    }
+    return apc_fetch('team');
+}
+
+function listFriends()
+{
+    return array_merge(getFriends(), getTeam());
+}
 
 $app = new Silex\Application();
 $app['debug'] = true;
@@ -59,18 +75,36 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 ));
 $app->register(new Silex\Provider\SessionServiceProvider());
 
-$app->before(function () use ($app, $friends)
+$getFile = function($filename) use($app)
+{
+    $files = listFiles();
+    $file = array_filter($files, function($item) use($filename)
+    {
+        return $item['file'] == $filename;
+    });
+    if (empty($file)) $app->abort(404, 'The file ' . $filename . ' could not be found.');
+    $file = array_pop($file);
+    if (!is_file(DROPBOX . $file['file'])) $app->abort(404, 'Das Dokument wurde gelöscht.');
+    return $file;
+};
+
+$friends = listFriends();
+$team = getTeam();
+$app->before(function () use ($app, $friends, $team)
 {
     $app['session']->set('authenticated', $app['session']->get('username') !== null);
     $app['session']->set('vip', in_array(strtolower($app['session']->get('username')), $friends));
+    $app['session']->set('admin', in_array(strtolower($app['session']->get('username')), $team));
 
     $app['twig']->addGlobal('username', $app['session']->get('username'));
     $app['twig']->addGlobal('name', $app['session']->get('name'));
     $app['twig']->addGlobal('vip', $app['session']->get('vip'));
+    $app['twig']->addGlobal('admin', $app['session']->get('admin'));
     $app['twig']->addGlobal('DEV', DEV);
 });
 
-$app->error(function (\Exception $e, $code) use($app) {
+$app->error(function (\Exception $e, $code) use($app)
+{
     return new Symfony\Component\HttpFoundation\Response(
         $app['twig']->render('error.twig', array('message' => $e->getMessage(), 'code' => $code)),
         $code
@@ -89,18 +123,11 @@ $app->get('/reload', function() use($app)
     return $app->redirect('/');
 });
 
-$app->get('/file/{filename}', function($filename) use($app)
+$app->get('/file/{filename}', function($filename) use($app, $getFile)
 {
-    $files = listFiles();
-    $file = array_filter($files, function($item) use($filename)
-    {
-        return $item['file'] == $filename;
-    });
-    if (empty($file)) $app->abort(404, 'The file ' . $filename . ' could not be found.');
     if (!$app['session']->get('authenticated')) $app->abort(403, 'Not authenticated.');
     if (!$app['session']->get('vip')) $app->abort(403, 'You are not my friend.');
-    $file = array_pop($file);
-
+    $file = $getFile($filename);
     if ($file['type'] !== 'txt') {
         $stream = function () use ($file)
         {
@@ -111,7 +138,6 @@ $app->get('/file/{filename}', function($filename) use($app)
         finfo_close($fi);
         return $app->stream($stream, 200, array('Content-Type' => $mime));
     } else {
-        if (!is_file(DROPBOX . $file['file'])) $app->abort(404, 'Das Dokument wurde gelöscht.');
         $content = file_get_contents(DROPBOX . $file['file']);
         preg_match_all('/^(#+) (.+)/m', $content, $matches, PREG_SET_ORDER);
         $md = Markdown($content);
@@ -127,8 +153,27 @@ $app->get('/file/{filename}', function($filename) use($app)
             );
             $md = str_replace('<' . $h . '>' . $match[2] . '</' . $h . '>', '<' . $h . ' id="' . $id . '">' . $match[2] . '</' . $h . '>', $md);
         }
-        return $app['twig']->render('file.twig', array('files' => $files, 'file' => $file, 'content' => $md, 'structure' => $structure));
+        return $app['twig']->render('file.twig', array('files' => listFiles(), 'file' => $file, 'content' => $md, 'structure' => $structure));
     }
+});
+
+$app->get('/editor', function() use($app, $getFile)
+{
+    if (!$app['session']->get('authenticated')) $app->abort(403, 'Not authenticated.');
+    if (!$app['session']->get('admin')) $app->abort(403, 'You are not and admin.');
+    $file = $getFile($app['request']->get('file'));
+    $contents = file_get_contents(DROPBOX . $file['file']);
+    return $app['twig']->render('editor.twig', array('file' => $file, 'contents' => $contents, 'markdown' => Markdown($contents)));
+});
+
+$app->post('/editor', function() use($app, $getFile)
+{
+    if (!$app['session']->get('authenticated')) $app->abort(403, 'Not authenticated.');
+    if (!$app['session']->get('admin')) $app->abort(403, 'You are not and admin.');
+    $file = $getFile($app['request']->get('file'));
+    $contents = $app['request']->get('content');
+    file_put_contents(DROPBOX . $file['file'], $contents);
+    return $app['twig']->render('editor.twig', array('file' => $file, 'contents' => $contents, 'markdown' => Markdown($contents)));
 });
 
 $app->get('/login', function () use ($app)

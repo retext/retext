@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="de-de">
+<head>
+    {% include 'head.twig' %}
+</head>
+<body class="editor">
+{% include 'loginout.twig' %}
+<form method="POST" action="">
+    <fieldset>
+        <legend>{{ file.file }}</legend>
+        <p>
+            <textarea name="content">{{ contents }}</textarea>
+        </p>
+
+        <div class="buttons">
+            <a href="/file/{{ file.file }}" class="button">zurück</a>
+            <button type="submit">speichern</button>
+            <input type="hidden" name="file" value="{{ file.file }}">
+        </div>
+    </fieldset>
+</form>
+<div class="preview">
+    {{ markdown|raw }}
+</div>
+</body>
+</html>

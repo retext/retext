@@ -1,0 +1,11 @@
+<nav class="loginlogout">
+    <ul>
+        {% if username is null %}
+        <li><a href="/login">Anmelden</a></li>
+        {% else %}
+        <li>@{{ username }}</li>
+        <li><a href="/logout">Abmelden</a></li>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
