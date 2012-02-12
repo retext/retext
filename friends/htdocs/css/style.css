@@ -9,10 +9,10 @@ a:visited { color: #518BA7; }
 
 #main { max-width: 45em; margin: 0 auto; position: relative; }
 header, footer { text-align: center; width: 50%; min-width: 350px; margin: 0 auto; }
-article { margin: auto 2%; }
+article { margin: auto 2%; padding: 1em; }
 article li { line-height: 150%; }
 nav.files { margin-left: 2%; }
-nav.article { font-size: 0.625em; background-color: #3B4F58; padding: 0 2%; margin-bottom: 2%; border-radius: 10px; }
+nav.article { font-size: 0.625em; background-color: #f0f0f0; padding: 0 2%; margin-bottom: 2%; border-radius: 10px; }
 nav.article ul { padding-left: 1.75em; }
 
 header h1 { margin-top: 10%; margin-bottom: 5%; }
@@ -39,7 +39,7 @@ blockquote { border-left: 0.25em solid #95F200; padding-left: 0.5em; font-style:
 .button:visited { color: #f0f0f0;  }
 nav.article .button { float: right; margin-top: 1em; }
 body.editor textarea { }
-body.editor form, body.editor .preview { float: left; width: 50%; margin-top: 2em; padding: 1em; }
+body.editor form, body.editor article.document { float: left; width: 50%; margin: 2em 0 0 0; padding: 1em; }
 body.editor textarea { width: 100%; height: 800px; padding: 1em; font-family: monospace; font-size: 120%; }
 body.editor button { float: right; }
-body.editor .preview { font-family: serif; color: #272727; text-shadow: none; }
+article.document { font-family: Bitter; color: #272727; text-shadow: none; background-color: #fff; border-radius: 1em; }
