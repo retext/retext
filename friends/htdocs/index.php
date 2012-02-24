@@ -139,6 +139,13 @@ $app->get('/file/{filename}', function($filename) use($app, $getFile)
         return $app->stream($stream, 200, array('Content-Type' => $mime));
     } else {
         $content = file_get_contents(DROPBOX . $file['file']);
+	// Replace dot graphs
+	$dotstart = '[dot]';
+	$dotend = '[/dot]';
+	while($pos = stripos($content, $dotstart)) {
+		$posend = stripos($content, $dotend);
+		$content = substr($content, 0, $pos) . '(DOT-Grafik entfernt)' . substr($content, $posend + strlen($dotend));
+	}
         preg_match_all('/^(#+) ([^\n\r]+)/m', $content, $matches, PREG_SET_ORDER);
         $md = Markdown($content);
         $structure = array();
