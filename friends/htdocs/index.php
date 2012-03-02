@@ -142,7 +142,9 @@ $app->get('/file/{filename}', function($filename) use($app, $getFile)
     if (!$app['session']->get('authenticated')) $app->abort(403, 'Not authenticated.');
     if (!$app['session']->get('vip')) $app->abort(403, 'You are not my friend.');
     $file = $getFile($filename);
-    if ($file['type'] !== 'txt') {
+    if ($file['type'] == 'mp4' && $app['request']->get('dl') != '1') {
+        return $app['twig']->render('video.twig', array('files' => listFiles(), 'file' => $file));
+    } elseif ($file['type'] !== 'txt') {
         $stream = function () use ($file)
         {
             readfile(DROPBOX . $file['file']);

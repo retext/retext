@@ -1,0 +1,14 @@
+{% for file in files %}
+{% if loop.first %}
+<nav class="files">
+    <h2>Dokumente</h2>
+    <ul>
+        {% endif %}
+        <li>
+            <a href="/file/{{ file.file }}" class="{{ file.type }}">{{ file.label }}</a>
+        </li>
+        {% if loop.last %}
+    </ul>
+</nav>
+{% endif %}
+{% endfor %}
