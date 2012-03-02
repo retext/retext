@@ -181,7 +181,9 @@ $app->get('/dot', function() use($app)
             0 => array('pipe', 'r'),
             2 => array('pipe', 'w'),
         );
-        $cmd = '`which env` dot -Tpng';
+        $renderer = 'dot';
+        if (stristr($data, 'neato')) $renderer = 'neato';
+        $cmd = "`which env` {$renderer} -Tpng";
         $cmd .= ' -o ' . $outfile;
         $process = proc_open($cmd, $descriptorspec, $pipes, sys_get_temp_dir());
 
