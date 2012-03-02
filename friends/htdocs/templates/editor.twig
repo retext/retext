@@ -2,6 +2,7 @@
 <html lang="de-de">
 <head>
     {% include 'head.twig' %}
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 </head>
 <body class="editor">
 {% include 'loginout.twig' %}
@@ -9,7 +10,7 @@
     <fieldset>
         <legend>{{ file.file }}</legend>
         <p>
-            <textarea name="content">{{ contents }}</textarea>
+            <textarea name="content" id="editor">{{ contents }}</textarea>
         </p>
 
         <div class="buttons">
@@ -19,8 +20,10 @@
         </div>
     </fieldset>
 </form>
-<article class="document preview">
+<article class="document preview" id="preview">
     {{ markdown|raw }}
 </article>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="/js/editor.js"></script>
 </body>
 </html>

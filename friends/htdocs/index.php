@@ -61,6 +61,20 @@ function getTeam()
     return apc_fetch('team');
 }
 
+function dotFilter($content)
+{
+    // Replace dot graphs
+    $dotstart = '[dot]';
+    $dotend = '[/dot]';
+    $nchart = 0;
+    while ($pos = stripos($content, $dotstart)) {
+        $posend = stripos($content, $dotend);
+        $dotdata = substr($content, $pos + strlen($dotstart), $posend - $pos - strlen($dotend));
+        $content = substr($content, 0, $pos) . sprintf('![Diagramm %d](/dot?data=%s)', ++$nchart, rawurlencode($dotdata)) . substr($content, $posend + strlen($dotend));
+    }
+    return $content;
+}
+
 function listFriends()
 {
     return array_merge(getFriends(), getTeam());
@@ -139,13 +153,7 @@ $app->get('/file/{filename}', function($filename) use($app, $getFile)
         return $app->stream($stream, 200, array('Content-Type' => $mime));
     } else {
         $content = file_get_contents(DROPBOX . $file['file']);
-	// Replace dot graphs
-	$dotstart = '[dot]';
-	$dotend = '[/dot]';
-	while($pos = stripos($content, $dotstart)) {
-		$posend = stripos($content, $dotend);
-		$content = substr($content, 0, $pos) . '(DOT-Grafik entfernt)' . substr($content, $posend + strlen($dotend));
-	}
+        $content = dotFilter($content);
         preg_match_all('/^(#+) ([^\n\r]+)/m', $content, $matches, PREG_SET_ORDER);
         $md = Markdown($content);
         $structure = array();
@@ -164,13 +172,43 @@ $app->get('/file/{filename}', function($filename) use($app, $getFile)
     }
 });
 
+$app->get('/dot', function() use($app)
+{
+    $data = $app['request']->get('data');
+    $outfile = sys_get_temp_dir() . DIRECTORY_SEPARATOR . sha1($data) . '.png';
+    if (!file_exists($outfile)) {
+        $descriptorspec = array(
+            0 => array('pipe', 'r'),
+            2 => array('pipe', 'w'),
+        );
+        $cmd = '`which env` dot -Tpng';
+        $cmd .= ' -o ' . $outfile;
+        $process = proc_open($cmd, $descriptorspec, $pipes, sys_get_temp_dir());
+
+        fwrite($pipes[0], $data);
+        fclose($pipes[0]);
+        $dotErrors = '';
+        while (!feof($pipes[2])) {
+            $dotErrors .= fgets($pipes[2]);
+        }
+        fclose($pipes[2]);
+        $dotCode = proc_close($process);
+        if ($dotCode != 0) $app->abort($dotErrors . ' (' . $dotCode . ')');
+    }
+    $stream = function () use ($outfile)
+    {
+        readfile($outfile);
+    };
+    return $app->stream($stream, 200, array('Content-Type' => 'image/png'));
+});
+
 $app->get('/editor', function() use($app, $getFile)
 {
     if (!$app['session']->get('authenticated')) $app->abort(403, 'Not authenticated.');
     if (!$app['session']->get('admin')) $app->abort(403, 'You are not and admin.');
     $file = $getFile($app['request']->get('file'));
     $contents = file_get_contents(DROPBOX . $file['file']);
-    return $app['twig']->render('editor.twig', array('file' => $file, 'contents' => $contents, 'markdown' => Markdown($contents)));
+    return $app['twig']->render('editor.twig', array('file' => $file, 'contents' => $contents, 'markdown' => Markdown(dotFilter($contents))));
 });
 
 $app->post('/editor', function() use($app, $getFile)
@@ -180,7 +218,7 @@ $app->post('/editor', function() use($app, $getFile)
     $file = $getFile($app['request']->get('file'));
     $contents = $app['request']->get('content');
     file_put_contents(DROPBOX . $file['file'], $contents);
-    return $app['twig']->render('editor.twig', array('file' => $file, 'contents' => $contents, 'markdown' => Markdown($contents)));
+    return $app['twig']->render('editor.twig', array('file' => $file, 'contents' => $contents, 'markdown' => Markdown(dotFilter($contents))));
 });
 
 $app->get('/login', function () use ($app)
