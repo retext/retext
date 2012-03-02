@@ -1,6 +1,7 @@
 {% extends "base.twig" %}
 {% block body %}
 <article class="video">
+    <h2>{{ file.label }}</h2>
     <video src="/file/{{ file.file }}?dl=1" controls width="600" height="338"></video>
     <p>Download: <a href="file/{{ file.file }}?dl=1">{{ file.label }}</a></p>
 </article>
