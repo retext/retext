@@ -43,3 +43,4 @@ body.editor form, body.editor article.document { float: left; width: 50%; margin
 body.editor textarea { width: 100%; height: 800px; padding: 1em; font-family: monospace; font-size: 120%; }
 body.editor button { float: right; }
 article.document { font-family: Bitter; color: #272727; text-shadow: none; background-color: #fff; border-radius: 1em; }
+article.document img { width: 100%; padding: 1em 5em; }
