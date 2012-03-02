@@ -1,0 +1,55 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[paper=a4paper,width=15cm,left=30mm,height=22cm]{geometry}
+
+\usepackage{xltxtra}
+\setmainfont[Mapping=tex-text]{Bitter}
+\usepackage{setspace}
+\linespread{1.20}
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{0em}
+
+\usepackage[german]{babel}
+\usepackage{graphicx}
+\usepackage{acronym}
+
+\usepackage{hyperref}
+\usepackage[usenames,dvipsnames]{xcolor}
+\hypersetup{
+    bookmarks=true, % Test
+    colorlinks=true,
+    linkcolor=NavyBlue,
+    citecolor=NavyBlue,
+    urlcolor=NavyBlue
+}
+
+\begin{document}
+\author{Markus Tacker}
+\title{re:text -- Die Idee}
+
+\begin{center}
+
+\begin{huge}re:text\end{huge}\\
+\begin{small}text workflow done right\end{small}
+
+\bigskip
+
+\begin{huge}Konzept\end{huge}
+
+\bigskip
+
+\begin{small}Markus Tacker\\
+\today
+
+\textcolor{red}{Vertraulich! Nicht für die Weitergabe bestimmt!}
+
+\end{small}
+
+\end{center}
+
+\tableofcontents
+
+\include{idea-abstract}
+
+\include{idea-contents}
+
+\end{document}
