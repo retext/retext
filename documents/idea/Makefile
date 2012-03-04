@@ -14,6 +14,7 @@ fetchcontents:
 	cat /mnt/extra/Dropbox/Projekte/retext/Dokumente/Konzept\ -\ Abstract.txt  > idea-abstract.txt
 	echo "" >> idea-abstract.txt
 	cat idea-abstract.txt | ./markdown-to-latex.py > idea-abstract.tex
+	sed -i "s/section{/section*{/g" idea-abstract.tex
 
 
 idea.pdf: *.tex fetchcontents
