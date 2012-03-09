@@ -16,18 +16,27 @@ function listFiles()
     if (!apc_exists('files-ttl')) {
         apc_store('files-ttl', '-', 60 * 60);
         $files = array();
-        foreach (new IteratorIterator(new DirectoryIterator(DROPBOX)) as $file) {
+        foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator(DROPBOX)) as $file) {
             if (is_dir($file->getPathname())) continue;
             if (substr($file->getPathname(), -1) == '~') continue;
             $type = substr($file->getPathname(), -3);
             $mtime = filemtime($file->getPathname());
-            $files[] = array('type' => $type, 'file' => $file->getFilename(), 'label' => substr($file->getFilename(), 0, -4), 'modified' => round((time() - $mtime) / 86400));
+            $files[] = array('type' => $type, 'file' => rawurlencode(str_replace(DROPBOX, '', $file->getPathname())), 'label' => substr($file->getFilename(), 0, -4), 'modified' => round((time() - $mtime) / 86400));
             $sort[] = $mtime;
         }
         array_multisort($sort, SORT_DESC, $files);
         apc_store('files', $files);
     }
     return apc_fetch('files');
+}
+
+function listDocuments()
+{
+    $files = listFiles();
+    return array_filter($files, function($file)
+    {
+        return strstr($file['file'], '/') === false;
+    });
 }
 
 function filterList(array $list)
@@ -71,6 +80,20 @@ function dotFilter($content)
         $posend = stripos($content, $dotend);
         $dotdata = substr($content, $pos + strlen($dotstart), $posend - $pos - strlen($dotend));
         $content = substr($content, 0, $pos) . sprintf('![Diagramm %d](/dot?data=%s)', ++$nchart, rawurlencode($dotdata)) . substr($content, $posend + strlen($dotend));
+    }
+    return $content;
+}
+
+function mediaFilter($content)
+{
+    preg_match_all('/!\[[^\]+]+\]\(([^\)]+)\)/', $content, $matches, PREG_SET_ORDER);
+    foreach ($matches as $k => $match) {
+        $newsrc = '/file?file=' . rawurlencode($match[1]);
+        if (substr($newsrc, -3) != 'png') $newsrc .= '.png';
+
+        $newtag = str_replace($match[1], $newsrc, $match[0]);
+        $linktag = '_Abbildung ' . ($k + 1) . ': ' . substr($newtag, 1) . '_';
+        $content = str_replace($match[0], $newtag . PHP_EOL . PHP_EOL . $linktag, $content);
     }
     return $content;
 }
@@ -127,7 +150,7 @@ $app->error(function (\Exception $e, $code) use($app)
 
 $app->get('/', function() use($app)
 {
-    return $app['twig']->render('home.twig', array('files' => $app['session']->get('vip') ? listFiles() : array()));
+    return $app['twig']->render('home.twig', array('files' => $app['session']->get('vip') ? listDocuments() : array()));
 });
 
 $app->get('/reload', function() use($app)
@@ -143,7 +166,7 @@ $app->get('/file/{filename}', function($filename) use($app, $getFile)
     if (!$app['session']->get('vip')) $app->abort(403, 'You are not my friend.');
     $file = $getFile($filename);
     if ($file['type'] == 'mp4' && $app['request']->get('dl') != '1') {
-        return $app['twig']->render('video.twig', array('files' => listFiles(), 'file' => $file));
+        return $app['twig']->render('video.twig', array('files' => listDocuments(), 'file' => $file));
     } elseif ($file['type'] !== 'txt') {
         $stream = function () use ($file)
         {
@@ -155,6 +178,7 @@ $app->get('/file/{filename}', function($filename) use($app, $getFile)
         return $app->stream($stream, 200, array('Content-Type' => $mime));
     } else {
         $content = file_get_contents(DROPBOX . $file['file']);
+        $content = mediaFilter($content);
         $content = dotFilter($content);
         preg_match_all('/^(#+) ([^\n\r]+)/m', $content, $matches, PREG_SET_ORDER);
         $md = Markdown($content);
@@ -170,8 +194,23 @@ $app->get('/file/{filename}', function($filename) use($app, $getFile)
             );
             $md = str_replace('<' . $h . '>' . $match[2] . '</' . $h . '>', '<' . $h . ' id="' . $id . '">' . $match[2] . '</' . $h . '>', $md);
         }
-        return $app['twig']->render('file.twig', array('files' => listFiles(), 'file' => $file, 'content' => $md, 'structure' => $structure));
+        return $app['twig']->render('file.twig', array('files' => listDocuments(), 'file' => $file, 'content' => $md, 'structure' => $structure));
     }
+});
+
+$app->get('/file', function() use($app, $getFile)
+{
+    if (!$app['session']->get('authenticated')) $app->abort(403, 'Not authenticated.');
+    if (!$app['session']->get('vip')) $app->abort(403, 'You are not my friend.');
+    $file = $getFile($app['request']->get('file'));
+    $stream = function () use ($file)
+    {
+        readfile(DROPBOX . $file['file']);
+    };
+    $fi = finfo_open(FILEINFO_MIME_TYPE);
+    $mime = finfo_file($fi, DROPBOX . $file['file']);
+    finfo_close($fi);
+    return $app->stream($stream, 200, array('Content-Type' => $mime));
 });
 
 $app->get('/dot', function() use($app)
@@ -212,7 +251,7 @@ $app->get('/editor', function() use($app, $getFile)
     if (!$app['session']->get('admin')) $app->abort(403, 'You are not and admin.');
     $file = $getFile($app['request']->get('file'));
     $contents = file_get_contents(DROPBOX . $file['file']);
-    return $app['twig']->render('editor.twig', array('file' => $file, 'contents' => $contents, 'markdown' => Markdown(dotFilter($contents))));
+    return $app['twig']->render('editor.twig', array('file' => $file, 'contents' => $contents, 'markdown' => Markdown(dotFilter(mediaFilter($contents)))));
 });
 
 $app->post('/editor', function() use($app, $getFile)
@@ -222,7 +261,7 @@ $app->post('/editor', function() use($app, $getFile)
     $file = $getFile($app['request']->get('file'));
     $contents = $app['request']->get('content');
     file_put_contents(DROPBOX . $file['file'], $contents);
-    return $app['twig']->render('editor.twig', array('file' => $file, 'contents' => $contents, 'markdown' => Markdown(dotFilter($contents))));
+    return $app['twig']->render('editor.twig', array('file' => $file, 'contents' => $contents, 'markdown' => Markdown(dotFilter(mediaFilter($contents)))));
 });
 
 $app->get('/login', function () use ($app)
