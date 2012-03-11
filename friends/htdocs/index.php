@@ -35,7 +35,7 @@ function listDocuments()
     $files = listFiles();
     return array_filter($files, function($file)
     {
-        return strstr($file['file'], '/') === false;
+        return strstr(urldecode($file['file']), '/') === false;
     });
 }
 
@@ -115,13 +115,14 @@ $app->register(new Silex\Provider\SessionServiceProvider());
 $getFile = function($filename) use($app)
 {
     $files = listFiles();
-    $file = array_filter($files, function($item) use($filename)
+    $encFilename = rawurlencode($filename);
+    $file = array_filter($files, function($item) use($encFilename)
     {
-        return $item['file'] == $filename;
+        return $item['file'] == $encFilename;
     });
     if (empty($file)) $app->abort(404, 'The file ' . $filename . ' could not be found.');
     $file = array_pop($file);
-    if (!is_file(DROPBOX . $file['file'])) $app->abort(404, 'Das Dokument wurde gelöscht.');
+    if (!is_file(DROPBOX . urldecode($file['file']))) $app->abort(404, 'Das Dokument wurde gelöscht.');
     return $file;
 };
 
@@ -170,14 +171,14 @@ $app->get('/file/{filename}', function($filename) use($app, $getFile)
     } elseif ($file['type'] !== 'txt') {
         $stream = function () use ($file)
         {
-            readfile(DROPBOX . $file['file']);
+            readfile(DROPBOX . urldecode($file['file']));
         };
         $fi = finfo_open(FILEINFO_MIME_TYPE);
-        $mime = finfo_file($fi, DROPBOX . $file['file']);
+        $mime = finfo_file($fi, DROPBOX . urldecode($file['file']));
         finfo_close($fi);
         return $app->stream($stream, 200, array('Content-Type' => $mime));
     } else {
-        $content = file_get_contents(DROPBOX . $file['file']);
+        $content = file_get_contents(DROPBOX . urldecode($file['file']));
         $content = mediaFilter($content);
         $content = dotFilter($content);
         preg_match_all('/^(#+) ([^\n\r]+)/m', $content, $matches, PREG_SET_ORDER);
@@ -205,10 +206,10 @@ $app->get('/file', function() use($app, $getFile)
     $file = $getFile($app['request']->get('file'));
     $stream = function () use ($file)
     {
-        readfile(DROPBOX . $file['file']);
+        readfile(DROPBOX . urldecode($file['file']));
     };
     $fi = finfo_open(FILEINFO_MIME_TYPE);
-    $mime = finfo_file($fi, DROPBOX . $file['file']);
+    $mime = finfo_file($fi, DROPBOX . urldecode($file['file']));
     finfo_close($fi);
     return $app->stream($stream, 200, array('Content-Type' => $mime));
 });
@@ -250,7 +251,7 @@ $app->get('/editor', function() use($app, $getFile)
     if (!$app['session']->get('authenticated')) $app->abort(403, 'Not authenticated.');
     if (!$app['session']->get('admin')) $app->abort(403, 'You are not and admin.');
     $file = $getFile($app['request']->get('file'));
-    $contents = file_get_contents(DROPBOX . $file['file']);
+    $contents = file_get_contents(DROPBOX . urldecode($file['file']));
     return $app['twig']->render('editor.twig', array('file' => $file, 'contents' => $contents, 'markdown' => Markdown(dotFilter(mediaFilter($contents)))));
 });
 
@@ -260,7 +261,7 @@ $app->post('/editor', function() use($app, $getFile)
     if (!$app['session']->get('admin')) $app->abort(403, 'You are not and admin.');
     $file = $getFile($app['request']->get('file'));
     $contents = $app['request']->get('content');
-    file_put_contents(DROPBOX . $file['file'], $contents);
+    file_put_contents(DROPBOX . urldecode($file['file']), $contents);
     return $app['twig']->render('editor.twig', array('file' => $file, 'contents' => $contents, 'markdown' => Markdown(dotFilter(mediaFilter($contents)))));
 });
 
