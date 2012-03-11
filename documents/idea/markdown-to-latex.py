@@ -14,8 +14,23 @@ if __name__ == "__main__":
     for line in sys.stdin.readlines():
         content = content + line
 
-    # Replace DOT
     m = 0
+
+    # Replace Images
+    for img in re.findall('(!\[([^\]+]+)\]\(([^\)]+)\))', content):
+        m = m+1
+        latexfig = """\\begin{figure}[htb]
+\\begin{center}
+\includegraphics[width=\\textwidth]{%s}
+\caption{%s}
+\label{chart:%d}
+\end{center}
+\end{figure}
+
+""" % (img[2], img[1], m)
+        content = content.replace(img[0], latexfig)
+
+    # Replace DOT
     while content.find(DOTSTART) >= 0:
         m = m+1
         pos = content.find(DOTSTART)

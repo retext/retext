@@ -16,6 +16,8 @@ fetchcontents:
 	cat idea-abstract.txt | ./markdown-to-latex.py > idea-abstract.tex
 	sed -i "s/section{/section*{/g" idea-abstract.tex
 
+	cp /mnt/extra/Dropbox/Projekte/retext/Dokumente/media/* ./media
+
 
 idea.pdf: *.tex fetchcontents
 #	-xelatex -interaction=nonstopmode idea.tex
