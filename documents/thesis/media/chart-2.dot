@@ -1,0 +1,46 @@
+
+# neato
+digraph G {
+fontname=Arial
+fontcolor=gray50
+
+labelloc=bottom
+labelfloat=True
+node [ fontname=Arial shape=ellipse ]
+fontsize=10
+rankdir=TB
+
+Text [ shape=folder ]
+
+node [ shape=none ]
+PA [ label="Projektleiter\nAgentur" ]
+Konzepter
+Designer
+Produktion 
+
+PC [ label="Projektleiter\nKunde" ]
+Fachabteilung
+GF [ label="Geschäftsführung" ]
+Marketing [ label="Marketing\nKunde" ]
+
+Texter
+Ubersetzer [ label="Übersetzer" ]
+Rechtsanwalt
+MarketingExtern [ label="externes Marketing\nz.B. SEO" ]
+
+edge [ len=1.5 ]
+Fachabteilung -> Text
+Rechtsanwalt -> Text
+GF -> Text
+PC -> Text
+PA -> Text
+Marketing -> Text
+MarketingExtern -> Text
+
+Texter -> Text
+Ubersetzer -> Text
+Produktion -> Text
+Designer -> Text
+Konzepter -> Text
+
+}

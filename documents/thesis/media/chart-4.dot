@@ -1,0 +1,74 @@
+
+digraph G {
+concentrate=True
+rankdir=LR
+fontname=Arial
+fontcolor=gray50
+
+labelloc=top
+labelfloat=True
+
+node [ fontname=Arial ]
+edge [ fontsize=10 fontname=Arial color=lemonchiffon4 fontcolor=royalblue4 arrowsize=0.6 ]
+
+subgraph c0 {
+rank=same
+Form [ fontsize=10 shape=none label="Form\nfalsch" fontcolor=firebrick4 color=firebrick2 ]
+Neu [ shape=none ]
+Form -> Neu [ color=firebrick2 fontcolor=firebrick4 ]
+}
+
+subgraph c1 {
+rank=same
+Inhalt [ fontsize=10 label="Inhalt\nfalsch" shape=none fontcolor=firebrick4 ]
+Leer [ shape=none ]
+Inhalt -> Leer [ color=firebrick2 fontcolor=firebrick4 ]
+}
+
+subgraph c2 {
+rank=same
+Ortho [ fontsize=10 shape=none label="Rechtschreib-\nfehler" fontcolor=firebrick4 color=firebrick2 ]
+Befuellt [ shape=none label="Befüllt" ]
+Ortho -> Befuellt [ color=firebrick2 fontcolor=firebrick4 ]
+}
+
+
+subgraph c3 {
+rank=same
+node [ shape=none ]
+Korrigiert
+}
+
+
+subgraph c4 {
+rank=same
+node [ shape=none ]
+Geprueft [ label="Geprüft" ]
+}
+
+node [ shape=none ]
+
+# Ablauf
+edge [ color=chartreuse3 fontcolor=chartreuse4 headport=n tailport=e ]
+Neu -> Leer [ label=" Definieren" ]
+Leer -> Befuellt [ label=" Schreiben" ]
+Befuellt -> Korrigiert [ label=" Korrektur" ]
+Korrigiert -> Geprueft [ label=" Qualitätskontrolle" ]
+Geprueft -> Freigegeben [ label=" Freigabe" color=darkgoldenrod2 fontcolor=goldenrod4 ]
+Public [ label="Veröffentlicht" ]
+Freigegeben -> Public [ label=" Veröffentlichung" ]
+
+# QS
+edge [ labeldistance=2 color=firebrick2 fontcolor=firebrick4 headport=e tailport=w weight=0.1 ]
+Korrigiert -> Ortho
+Befuellt -> Inhalt
+Leer -> Form
+
+Geprueft -> Inhalt
+Geprueft -> Ortho
+Geprueft -> Form
+
+
+
+
+}

@@ -17,4 +17,4 @@ Thesis.pdf: Thesis.tex
 	xelatex -interaction=nonstopmode Thesis.tex
 
 clean:
-	-/bin/rm *.lof *.log *.lot *.aux *.bbl *.toc *.blg *.dvi *~
+	-/bin/rm *.lof *.log *.lot *.aux *.bbl *.toc *.blg *.dvi *~ *.out
