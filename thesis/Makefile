@@ -1,4 +1,4 @@
-all: Konzept.pdf Aufbau-und-Zeitplan.pdf
+all: Konzept.pdf Aufbau-und-Zeitplan.pdf Thesis.pdf
 
 Konzept.pdf: Konzept.tex
 #	-xelatex -interaction=nonstopmode Konzept.tex
@@ -10,5 +10,11 @@ Aufbau-und-Zeitplan.pdf: Aufbau-und-Zeitplan.tex
 	-xelatex -interaction=nonstopmode Aufbau-und-Zeitplan.tex
 	xelatex -interaction=nonstopmode Aufbau-und-Zeitplan.tex
 
+Thesis.pdf: Thesis.tex
+	-xelatex -interaction=nonstopmode Thesis.tex
+	-bibtex Thesis.aux
+	-xelatex -interaction=nonstopmode Thesis.tex
+	xelatex -interaction=nonstopmode Thesis.tex
+
 clean:
-	-/bin/rm *.lof *.log *.lot *.aux *.bbl *.toc *.blg *.dvi
+	-/bin/rm *.lof *.log *.lot *.aux *.bbl *.toc *.blg *.dvi *~
