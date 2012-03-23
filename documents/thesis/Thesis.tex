@@ -43,7 +43,7 @@ Bachelor of Science – B.Sc.\end{small}
 
 \vspace{2cm}
 
-\begin{huge}Konzept und Entwurf eines workflowgesteuerten Systems zur Verwaltung von Texten in Medienprodukten\end{huge}
+\begin{huge}Konzept und Entwurf eines workflowgesteuerten Systems zur Verwaltung von Texten in Marketingmedienn\end{huge}
 
 \end{center}
 
@@ -100,23 +100,34 @@ Offenbach am Main, \today & Markus Tacker
 
 \tableofcontents
 
+\vspace{6cm}
+
+\section*{Satz}
+
+Gesetzt mit \LaTeX{} / XeTeX \\
+Schrift: \href{http://friedrichalthausen.de/?page_id=411}{Vollkorn} von Friedrich Althausen
+
+\section*{Diagramme}
+
+Erstellt mit \href{http://www.graphviz.org/}{GraphViz} und \href{https://docs.google.com/}{Google Docs}
+
 \pagebreak
 
 \section{Abstract}
 
 \emph{Das Problem:} Nahezu alle Medien haben eines gemeinsam; sie beinhalten Text. Am Entstehungsprozess dieser Texte sind viele Personen beteiligt. Für diesen Prozess gibt es bisher jedoch kein System, mit der die Verwaltung dieses Vorganges leicht handhabbar ist.
 
-\emph{Die Lösung:} Diese Bachelor-Thesis stellt ein passgenauen Werkzeug vor, das für Texte in Medienprodukten die Zusammenstellung, Organisation, Rechtschreibprüfung, Abnahmen durch den Kunden, Übersetzung, Versionierung und Übergabe in die Produktion erledigt.
+\emph{Die Lösung:} Diese Bachelor-Thesis stellt ein passgenauen Werkzeug vor, das für Texte in Marketingmedien die Zusammenstellung, Organisation, Rechtschreibprüfung, Abnahmen durch den Kunden, Übersetzung, Versionierung und Übergabe in die Produktion erledigt.
 
 Nahezu alle Medien haben eines gemeinsam: Sie beinhalten Text. Für die Verwaltung von Texten bei Medienprojekten gibt es bisher keine ausgereifte Lösung – obwohl bei der Erstellung von Texten sehr viele Personen beteiligt sind, werden Texte in der Regel mit Office-Dokumenten verwaltet, meistens mit Word, vor allem bei großen Projekten kommt Excel zu Einsatz. Der Workflow von einem Bearbeiter zum nächsten erfolgt über den Austausch des Office-Dokumentes via E-Mail, Netzlaufwerk, File-Sharing-Anbieter (z.B. Dropbox) oder Ticketsystem. Dieser Prozess ist aufwendig und fehleranfällig. Sobald mehrere Personen gleichzeitig an den Texten arbeiten, wird manuelles Eingreifen notwendig um die gemachten Änderungen zusammenzuführen. Aufgrund der Vielzahl der am Text beteiligten Personen sind Office-Dateien ein denkbar schlecht geeignetes Mittel um Texte und ihre Änderungen sauber und nachvollziehbar zu verwalten. Auch das Übertragen von Texten aus Office-Dokumenten ist eine Fehlerquelle – es ist stupides Copy\&Paste. In den meisten Fällen müssen dabei im Dokument vorgenommene Formatierungen wie Umbrüche und Absätze entfernt werden um eine saubere Darstellung auf dem Endprodukt zu gewährleisten.
 
-Während der Umsetzung eines Projektes ist besonders Text der Bestandteil des fertigen Produktes, der oft bis zur letzten Minute geändert wird – egal wie viel Aufwand vorher in die Planung geflossen sind. Dies liegt unter anderem daran, dass Text im Gegensatz zu Grafiken, Fotos und anderen Multimedia-Elementen als einziger Informationsträger eindeutig ist und üblicherweise keinen Interpretationsspielraum offen lassen soll. So bietet er auch aus rechtlicher Sicht den problematischsten Bestandteil eines Medienproduktes. In Zeiten, in denen Konkurrenten jede Veröffentlichung der Konkurrenz von Anwälten begutachten lassen sind auch Kunden hier besonders vorsichtig – leider werden aber Texte üblicherweise erst sehr spät den Anwälten des Kunden vorgelegt und deren Expertise lässt sich zeitlich selten in den Projektablauf einplanen. Ein anderes typisches Beispiel für Text-Änderungen in letzter Minute sind Gewinnspiele und andere Angaben mit festen Terminen: Verzögern sich Projekte in der Umsetzung, müssen auch Gewinnspieltermine verschoben werden. 
+Während der Umsetzung eines Projektes ist besonders Text der Bestandteil des fertigen Produktes, der oft bis zur letzten Minute geändert wird – egal wie viel Aufwand vorher in die Planung geflossen sind. Dies liegt unter anderem daran, dass Text im Gegensatz zu Grafiken, Fotos und anderen Multimedia-Elementen als einziger Informationsträger eindeutig ist und üblicherweise keinen Interpretationsspielraum offen lassen soll. So bietet er auch aus rechtlicher Sicht den problematischsten Bestandteil eines Marketingmediens. In Zeiten, in denen Konkurrenten jede Veröffentlichung der Konkurrenz von Anwälten begutachten lassen sind auch Kunden hier besonders vorsichtig – leider werden aber Texte üblicherweise erst sehr spät den Anwälten des Kunden vorgelegt und deren Expertise lässt sich zeitlich selten in den Projektablauf einplanen. Ein anderes typisches Beispiel für Text-Änderungen in letzter Minute sind Gewinnspiele und andere Angaben mit festen Terminen: Verzögern sich Projekte in der Umsetzung, müssen auch Gewinnspieltermine verschoben werden. 
 
 \begin{figure}[htb]
 \begin{center}
 \includegraphics[width=\textwidth]{media/chart-2.pdf}
 \end{center}
-\caption{Bei der Erstellung von Texten für Medienprodukte beteiligte Personen}
+\caption{Bei der Erstellung von Texten für Marketingmedien beteiligte Personen}
 \label{chart:2}
 \end{figure}
 
@@ -136,13 +147,19 @@ Alle Vorgänge werden innerhalb der Anwendung protokolliert und sind so für jed
 
 \subsection{Definition}
 
-was sind „Texte in Medienprodukten“
+was sind „Texte in Marketingmedien“
+
+Journalisten erstellen Texte, die auf Recherchen basieren. Diese Texte unterliegen der Sorgfaltspflicht, Quellen müssen nicht genannt werden. 
+
+Redakteure sind für die Gesamtheit der Texte verantwortlich und stellen sicher, dass globale Vorgaben erfüllt werden.
+
+Copywriter sind die eigentlichen Texter, die lediglich Text erstellen, für die kein Fachwissen nötig ist, oder dieses schon vorliegt. Copywriter können Spezialwissen bezüglich SEO haben.
 
 \subsection{Die besondere Rolle von Text}
 
 Fast jedes Multimedia-Produkt enthält Text, denn Text ist im Gegensatz zu Grafiken, Fotos oder Animationen ein eindeutiger Informationsträger und unterliegt viel weniger stark einer Intepretation durch den Rezipienten eines Mediums als die symbolisierte oder stilisierte Darstellung von Informationen in audiovisuellen Medien. Auch aus rechtlichen Aspekten ist Text aus den genannten Gründen der einzige verbindliche Informationsträger – bestes Beispiel hierfür ist das sogenannte „Kleingedruckte“, dass sich gerade bei inhaltlich sehr stark komprimierten Werbeformen, wie z.B. Plakat- oder Fernsehwerbung, findet.
 
-Ist die Textmenge, die im Absatzmarketing zum Einsatz kommt, noch überschaubar, gibt es doch Medienprodukte, deren Hauptbestandteil Text ist. Hierunter fallen klassische Druckerzeugnisse wie Broschüren und Kataloge oder Produkte der Unternehmenskommunikation wie Jahresberichte und Pressemeldungen. Doch besonders digitale Medienprodukte werden oft mit großen Textmengen versehen – von der einfachen Produkt-Microsite, über Werbmittel wie Newsletter bis zur Unternehmenswebsite – die Möglichkeit Inhalte hierarchisch zu struktuieren und sogar über eine Suche zugänglich zu machen hebt eine Limitierung des Umfanges, wie bei Druckprodukten, praktisch auf.
+Ist die Textmenge, die im Absatzmarketing zum Einsatz kommt, noch überschaubar, gibt es doch Marketingmedien, deren Hauptbestandteil Text ist. Hierunter fallen klassische Druckerzeugnisse wie Broschüren und Kataloge oder Produkte der Unternehmenskommunikation wie Jahresberichte und Pressemeldungen. Doch besonders digitale Marketingmedien werden oft mit großen Textmengen versehen – von der einfachen Produkt-Microsite, über Werbmittel wie Newsletter bis zur Unternehmenswebsite – die Möglichkeit Inhalte hierarchisch zu struktuieren und sogar über eine Suche zugänglich zu machen hebt eine Limitierung des Umfanges, wie bei Druckprodukten, praktisch auf.
 
 \subsection{Erstellung von Texten in Projekten}
 
@@ -174,7 +191,7 @@ Neben den menschlichen Einflüssen gibt es auch projektbedingte Einflüsse auf T
 Betrachtet man die Arbeiten in Zusammenhang mit Text lassen sich diese in 6 eigenständige Operationen unterteilen:
 
 \begin{enumerate}
-\item{Durch \textbf{Definieren eines Textbausteines} wird festgelegt, wie der benötigte Text beschaffen sein muss. Die Aussage „Wir brauchen an dieser Stelle eine Überschrift“ ist ein Beispiel für diese Operation. Sie legt fest, wie der Textbausteine gestaltet werden muss, um die ihm zugedachte Aufgabe zu erfüllen. Neben der Angabe zur Platzierung auf dem Medienprodukt durch „an dieser Stelle“ wird implizit durch „eine Überschrift“ eine Angabe zur inhaltlichen und visuellen Gestaltung getroffen; Überschriften sollen kurz und knapp sein und ihre visuelle Gestaltung wird durch den Styleguide des Projektes festgelegt.}
+\item{Durch \textbf{Definieren eines Textbausteines} wird festgelegt, wie der benötigte Text beschaffen sein muss. Die Aussage „Wir brauchen an dieser Stelle eine Überschrift“ ist ein Beispiel für diese Operation. Sie legt fest, wie der Textbausteine gestaltet werden muss, um die ihm zugedachte Aufgabe zu erfüllen. Neben der Angabe zur Platzierung auf dem Marketingmedium durch „an dieser Stelle“ wird implizit durch „eine Überschrift“ eine Angabe zur inhaltlichen und visuellen Gestaltung getroffen; Überschriften sollen kurz und knapp sein und ihre visuelle Gestaltung wird durch den Styleguide des Projektes festgelegt.}
 \item{Das \textbf{Schreiben eines Textes} befüllt einen Textbaustein mit einem Text in einer Sprache. Bei diesem Vorgang wird der Text entsprechend der Vorgabe aus der Beschreibung als Original erstellt oder aus Quellen außerhalb des Projektes kopiert und eingefügt. }
 \item{In der \textbf{Korrektur} wird der Text inhaltlich und grammatikalisch überprüft und entsprechend angepasst. Der Korrektor muss dabei für eine grammatikalische Überprüfung des Textes kein Fachwissen bezogen auf das Projekt haben. Ist diese Fachwissen vorhanden, kann eine inhaltliche Korrektur vorgenommen werden.}
 \item{In der \textbf{Qualitätskontrolle} wird der Text dahingehend überprüft, ob er den Anforderungen gemäß der Beschreibung und inhaltlichen Vorgaben, auch hinsichtlich des gesamten Projektes entspricht. }
@@ -204,7 +221,7 @@ Diese Operationen werden auch 1:1 auf die übersetzte Version eines Textes angew
 
 \subsection{Word und Excel sind „leichtgewichtige“ Werkzeuge}
 
-So komplex auch die Abläufe bei der Erstellung von Texten für Medienprodukte sind, um so erstaunlicher ist die Tatsache, dass das Werkzeug der Wahl zur Abbildung dieser Prozesse in den allermeisten Fällen \emph{Microsoft Word} oder \emph{Excel} ist. Auf den ersten Blick bilden diese Werkzeuge viele der benötigten Funktionen rund um die Textprozesse ab, aber im alltäglichen Gebrauch treten viele Probleme gerade im Bereich des gemeinsamen Bearbeitens, paralleler oder nachträglicher Änderungen und der Übertragung der fertigen Texte in den Produktionsprozess auf. Der Grund für die Wahl der \emph{Office}-Produkte liegt auf der Hand: sind sie doch in den allermeisten Unternehmen der Standard zur Textverarbeitung und sogar plattformunabhängig verfügbar – zumindest existiert die Möglichkeit das Microsoft Office-Dateiformat auf allen Platformen zu bearbeiten. Da bei allen Projektbeteiligten eine Installation von \emph{Microsoft Office} vorausgesetzt werden kann, werden sie zu „leichtgewichtige“ Werkzeugen, die vom Anwender keine zusätzlichen Aufwände z.B. bei der Installation oder Eingewöhnung erfordern. Selbst auf Plattformen, die von \emph{Microsoft Office} nicht offiziell unterstützt werden (z.B. Linux) existieren Programme mit denen das Office-Dokumenten-Format geöffnet und bearbeitet werden kann.
+So komplex auch die Abläufe bei der Erstellung von Texten für Marketingmedien sind, um so erstaunlicher ist die Tatsache, dass das Werkzeug der Wahl zur Abbildung dieser Prozesse in den allermeisten Fällen \emph{Microsoft Word} oder \emph{Excel} ist. Auf den ersten Blick bilden diese Werkzeuge viele der benötigten Funktionen rund um die Textprozesse ab, aber im alltäglichen Gebrauch treten viele Probleme gerade im Bereich des gemeinsamen Bearbeitens, paralleler oder nachträglicher Änderungen und der Übertragung der fertigen Texte in den Produktionsprozess auf. Der Grund für die Wahl der \emph{Office}-Produkte liegt auf der Hand: sind sie doch in den allermeisten Unternehmen der Standard zur Textverarbeitung und sogar plattformunabhängig verfügbar – zumindest existiert die Möglichkeit das Microsoft Office-Dateiformat auf allen Platformen zu bearbeiten. Da bei allen Projektbeteiligten eine Installation von \emph{Microsoft Office} vorausgesetzt werden kann, werden sie zu „leichtgewichtige“ Werkzeugen, die vom Anwender keine zusätzlichen Aufwände z.B. bei der Installation oder Eingewöhnung erfordern. Selbst auf Plattformen, die von \emph{Microsoft Office} nicht offiziell unterstützt werden (z.B. Linux) existieren Programme mit denen das Office-Dokumenten-Format geöffnet und bearbeitet werden kann.
 
 \subsection{Die verwendeten Office-Funktionen}
 
@@ -231,7 +248,7 @@ Die im Verlauf des Projekts auftauchenden Probleme werden dann als gegeben akzep
 
 \subsection{Office-Programme sind die falschen Werkzeuge}
 
-Der Grund, warum Office-Programme wie \emph{Word} und \emph{Excel} verwendet werden ist der, dass keine keine dedizierten Lösungen existieren, die explizit die genannten Abläufe in der Textverarbeitung abbildet. Es existieren vielen Produkte aus dem Bereich der Projektverwaltungswerkzeuge, Mediendatenbanken oder Content-Management-Systemen die die Prozesse rund um die Erstellung von Medienprodukten vereinfachen, aber keine kann die genannten Probleme und Abläufe zufriedenstellend abbilden.
+Der Grund, warum Office-Programme wie \emph{Word} und \emph{Excel} verwendet werden ist der, dass keine keine dedizierten Lösungen existieren, die explizit die genannten Abläufe in der Textverarbeitung abbildet. Es existieren vielen Produkte aus dem Bereich der Projektverwaltungswerkzeuge, Mediendatenbanken oder Content-Management-Systemen die die Prozesse rund um die Erstellung von Marketingmedien vereinfachen, aber keine kann die genannten Probleme und Abläufe zufriedenstellend abbilden.
 
 \subsection{Beispiele aus der Praxis}
 
@@ -265,7 +282,7 @@ Vorstellung (basierend auf Interviews mit realen Personen), Analyse des Konzepts
 
 \section{Entwurf einer Anwendung}
 
-Diese vier Leitlinien repräsentieren die Grundgedanken bei der Entwicklung von \textbf{re:text}:
+Diese vier Leitlinien repräsentieren die Grundgedanken bei der Entwicklung von der Anwendung:
 
 \begin{itemize}
 \item{Das wichtigste zuerst: Die aktuelle Aufgabe soll immer im Fokus der Darstellung liegen.}
@@ -286,11 +303,13 @@ Diese Abbildung liefert einen Überblick über den Aufbau des Systems:
 \end{center}
 \end{figure}
 
-Die Zentrale Komponente von \textbf{re:text} bildet der Server. Für die Benutzer erfolgt der Zugriff mit Hilfe einer GUI, die mit der REST-API des Servers kommuniziert. In der ersten Version wird eine browserbasierte GUI auf Basis von HTML5 und JavaScript existieren, die auch schon auf Smartphones verwendet werden kann. Später kommen dann spezielle Plugins für Adobe-Produkte und weitere wichtige Produktionsumgebungen hinzu. Auch native GUIs für Smartphones verwenden die gleiche API. Die Schnittstellen können auch von Drittanbietern dazu verwendet werden, eigenen Clients für das System zu entwickeln. In die Endprodukte gelangen die Texten über den Export, exportiert wird dabei in viele Formate, neben Datenformaten wie z.B. XML werden auch Dokumentenformate wie z.B. Word exportiert. Der Export kann durch den Anwender erzeugt werden (\emph{Pull-Export}), aber auch automatisch, z.B. nach festgelegten Zeitplänen oder Ereignissen erfolgen. Dieser \emph{Push-Export} erfolgt auf je nach Projekt festlegbaren Orte, wie z.B. FTP-Server oder Versionsverwaltungssysteme. Die Benachrichtigungen über Aufgaben und Änderungen an Texten kann via E-Mail, aber auch mittels Instant-Messaging-Systeme oder durch den Aufruf fremde API-Endpunkte erfolgen – dies ist ebenfalls innerhalb eines Projektes und pro Nutzer individuell konfigurierbar.
+Die Zentrale Komponente der Anwendung bildet der Server. Für die Benutzer erfolgt der Zugriff mit Hilfe einer GUI, die mit der REST-API des Servers kommuniziert. In der ersten Version wird eine browserbasierte GUI auf Basis von HTML5 und JavaScript existieren, die auch schon auf Smartphones verwendet werden kann. Später kommen dann spezielle Plugins für Adobe-Produkte und weitere wichtige Produktionsumgebungen hinzu. Auch native GUIs für Smartphones verwenden die gleiche API. Die Schnittstellen können auch von Drittanbietern dazu verwendet werden, eigenen Clients für das System zu entwickeln. In die Endprodukte gelangen die Texten über den Export, exportiert wird dabei in viele Formate, neben Datenformaten wie z.B. XML werden auch Dokumentenformate wie z.B. Word exportiert. Der Export kann durch den Anwender erzeugt werden (\emph{Pull-Export}), aber auch automatisch, z.B. nach festgelegten Zeitplänen oder Ereignissen erfolgen. Dieser \emph{Push-Export} erfolgt auf je nach Projekt festlegbaren Orte, wie z.B. FTP-Server oder Versionsverwaltungssysteme. Die Benachrichtigungen über Aufgaben und Änderungen an Texten kann via E-Mail, aber auch mittels Instant-Messaging-Systeme oder durch den Aufruf fremde API-Endpunkte erfolgen – dies ist ebenfalls innerhalb eines Projektes und pro Nutzer individuell konfigurierbar.
 
 \subsection{Schnittstellen}
 
 Anforderungen, Umfang, Ausprägung für Import-, Export- und Benachrichtigungsschnittstellen
+
+Anbindung via CMIS http://en.wikipedia.org/wiki/Content\_Management\_Interoperability\_Services
 
 \subsection{Grundüberlegung zu einer GUI}
 
