@@ -10,7 +10,7 @@ Aufbau-und-Zeitplan.pdf: Aufbau-und-Zeitplan.tex
 	-xelatex -interaction=nonstopmode Aufbau-und-Zeitplan.tex
 	xelatex -interaction=nonstopmode Aufbau-und-Zeitplan.tex
 
-Thesis.pdf: Thesis.tex parts/*.tex
+Thesis.pdf: Thesis.tex parts/*.tex parts/*.bib
 	-xelatex -interaction=nonstopmode Thesis.tex
 	-bibtex Thesis.aux
 	-xelatex -interaction=nonstopmode Thesis.tex
