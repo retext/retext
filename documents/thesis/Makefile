@@ -18,3 +18,4 @@ Thesis.pdf: Thesis.tex parts/*.tex parts/*.bib
 
 clean:
 	-/bin/rm *.lof *.log *.lot *.aux *.bbl *.toc *.blg *.dvi *~ *.out
+	-find ./ -type f -name \*.bak | xargs rm
