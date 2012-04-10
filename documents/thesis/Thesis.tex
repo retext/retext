@@ -2,7 +2,7 @@
 \usepackage[paper=a4paper,width=15cm,height=22cm,twoside]{geometry}
 
 \usepackage{xltxtra}
-\setmainfont[Mapping=tex-text,BoldFont={Vollkorn-Bold},ItalicFont={Vollkorn-Italic},BoldItalicFont={Vollkorn-Bold Italic}]{Vollkorn}
+
 \usepackage{setspace}
 \linespread{1.15}
 \setlength{\parskip}{0.75em}
@@ -33,7 +33,12 @@
 \bibliographystyle{plain} 
 \bibdata{parts/bibliothek} 
 
+\usepackage{sectsty}
+\allsectionsfont{\sffamily} 
+
 \begin{document}
+
+\setmainfont[Mapping=tex-text]{ITC Stone Sans Std}
 
 \pagenumbering{roman}
 
@@ -41,7 +46,7 @@
 \input{parts/trennung.tex}
 
 \author{Markus Tacker}
-\title{Bachelor-Thesis zur Erlangung des akademischen Grades Bachelor of Science – B.Sc.}
+\title{Konzeption und Entwurf eines workflowgesteuerten Systems zur Verwaltung von Textbausteinen für \acl{IKTM}}
 
 \begin{center}
 
@@ -64,6 +69,9 @@
 \end{huge}
 
 \end{center}
+
+\setmainfont[Mapping=tex-text,BoldFont={Vollkorn-Bold},ItalicFont={Vollkorn-Italic},BoldItalicFont={Vollkorn-Bold Italic}]{Vollkorn}
+\setsansfont[Mapping=tex-text]{ITC Stone Sans Std}
 
 \vspace{8cm}
 
