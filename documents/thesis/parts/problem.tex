@@ -112,31 +112,47 @@ Wie in diesem Abschnitt gezeigt wurde, sind Textverarbeitungs- und Tabellenkalku
 
 Wie im vorangegangenen Abschnitt gezeigt wurde, sind Textverarbeitungs- und Tabellenkalkulationsprogramme wie \emph{Microsoft} \emph{Word} und \emph{Excel} der Standard für die Verwaltung von Texten in Projekten zur Erstellung für Informations- und Kommunikationsmedien. In den für diese Bachelor-Thesis geführten Interviews haben jedoch alle Personen von vielfältige Problemen in Zusammenhang mit diesen Programmen berichtet. Dies belegt zum einen, dass am gängigen Workflow viele Möglichkeiten zur Verbesserung existieren und liefert zum andere auch Hinweise, wie der verbesserte Workflow im Detail gestaltet werden muss. In diesem Abschnitt werden die beobachteten Probleme beschrieben.
 
-\label{p:serielles-konzept}\paragraph{Serielles Bearbeitungskonzept} Das grundsätzliche Bearbeitungskonzept, das in \emph{Word} und \emph{Excel} zum Einsatz kommt ist seriell, das bedeutet, dass eine Dokument gleichzeitig nur von einer Person bearbeitet werden kann. Soll mit mehreren Personen an einem Dokument gearbeitet werden, muss dieses zwischen allen Beteiligten ausgetauscht werden. Dies geschieht, in dem die Dokumenten-Datei entweder per E-Mail jeweils zum nächsten Bearbeiter verschickt wird oder die Datei auf ein, durch alle Beteiligten erreichbaren Speicherplatz verschoben werden. In Agenturen handelt es sich hierbei meistens um eine Netzwerklaufwerk -- hierauf haben aber nur die im lokalen Netzwerk integrierten Mitarbeiter Zugriff. Soll die Datei auch externen Mitarbeitern oder dem Kunden zur Verfügung gestellt werden, werden diese wieder per E-Mail verschickt oder in extern erreichbare Speicherort kopiert, wie z.B. FTP-Server, Wikis und Extranet-Portale oder es kommen spezielle Programme zum Dateiaustausch zum Einsatz, wie z.B. \emph{Dropbox}. Die Organisation dieses Austausches ist besonders dann aufwändig, wenn Dateien sich nicht mehr unter Kontrolle der Agentur befinden, weil sie z.B. zum Kunden zur Kontrolle geschickt wurden. Dann kommt es dazu, dass mehrere Versionen des Dokumentes parallel existieren: eine Version beim Kunden, die dort mit Änderungen und Ergänzungen versehen wird und eine Version in der Agentur in der sich aufgrund von Änderungen im Verlauf des Projekts Text ändern. Um anschließend alle Beteiligten auf den aktuellen Stand zu müssen die verschiedenen Versionen des Dokumentes manuell zusammengeführt werden -- automatisiert ist das mit \emph{Word} und \emph{Excel} nicht möglich. Neben dem zeitlichen Aufwand birgt das manuelle Zusammenführen weitere Fehlerquellen, da Änderungen an Texten durch Copy\&Paste übertragen werden, kann es gerade bei großen Dokumenten passieren, dass man die Änderungen an der falschen Stelle einarbeitet, sofern im Dokument sich ähnelnde Textabschnitte existieren. Aus Kostengründen und weil es sich dabei um eine repetitive Arbeit handelt ist es nicht selten der Fall, dass diese Änderungen von Praktikanten oder studentischen Aushilfen durchgeführt werden, die mangels inhaltlicher Kenntnis den Zusammenhang der Text nicht kennen, was ebenfalls die irrtümliche Änderungen am Text durch fehlerhaftes Copy\&Paste begünstigt. Tatsächlich existiert mit dem \emph{Microsoft} \emph{SharePoint}, einer Software für Intra-, Extra- und Internetportale, eine Lösung, die diese Probleme behebt \cite{sharepoint-shared-documents}. Mit Hilfe von \emph{Shared Documents} lassen sich Dokument zentral ablegen. Sollen diese editiert werden, müssen Sie von der jeweiligen Person \typoquotes{ausgecheckt} werden, dies sperrt den Zugriff auf das Dokument durch andere Mitarbeiter. Sobald das Bearbeiten abgeschlossen wurde, wird die Datei wieder \typoquotes{eingecheckt}. So wird sichergestellt, dass es nie zwei Versionen der Datei mit unterschiedlichen Änderungen gibt. Diese Funktion behebt aber nicht den Umstand, das an einem Dokument immer nur eine Person arbeiten kann. Des weiteren ist \emph{SharePoint} im Agentur-Umfeld kaum anzutreffen, was dem Umstand geschuldet ist, dass der Betrieb einer \emph{SharePoint}-Instanz mit hohen Lizenz- und Personalkosten verbunden ist. Zum anderen setzen die Funktionen zum gemeinsamen Bearbeiten von \emph{Word} oder \emph{Excel} voraus, dass alle Mitarbeiter über die neuesten Version verfügen \cite{sharepoint-wordversions}. Dies kann aber auf Kundenseite nicht vorausgesetzt werden.
+\label{p:serielles-konzept}\paragraph{Serielles Bearbeitungskonzept} Das grundsätzliche Bearbeitungskonzept, das in \emph{Word} und \emph{Excel} zum Einsatz kommt ist seriell, das bedeutet, dass eine Dokument gleichzeitig nur von einer Person bearbeitet werden kann. Soll mit mehreren Personen an einem Dokument gearbeitet werden, muss dieses zwischen allen Beteiligten ausgetauscht werden. Dies geschieht, in dem die Dokumenten-Datei entweder per E-Mail jeweils zum nächsten Bearbeiter verschickt wird oder die Datei auf ein, durch alle Beteiligten erreichbaren Speicherplatz verschoben werden. In Agenturen handelt es sich hierbei meistens um eine Netzwerklaufwerk -- hierauf haben aber nur die im lokalen Netzwerk integrierten Mitarbeiter Zugriff. Soll die Datei auch externen Mitarbeitern oder dem Kunden zur Verfügung gestellt werden, werden diese wieder per E-Mail verschickt oder in extern erreichbare Speicherort kopiert, wie z.B. FTP-Server, Wikis und Extranet-Portale oder es kommen spezielle Programme zum Dateiaustausch zum Einsatz, wie z.B. \emph{Dropbox}. Die Organisation dieses Austausches ist besonders dann aufwändig, wenn Dateien sich nicht mehr unter Kontrolle der Agentur befinden, weil sie z.B. zum Kunden zur Kontrolle geschickt wurden. Dann kommt es dazu, dass mehrere Versionen des Dokumentes parallel existieren: eine Version beim Kunden, die dort mit Änderungen und Ergänzungen versehen wird und eine Version in der Agentur in der sich aufgrund von Änderungen im Verlauf des Projekts Text ändern. Um anschließend alle Beteiligten auf den aktuellen Stand zu müssen die verschiedenen Versionen des Dokumentes manuell zusammengeführt werden -- automatisiert ist das mit \emph{Word} und \emph{Excel} nicht möglich. Neben dem zeitlichen Aufwand birgt das manuelle Zusammenführen weitere Fehlerquellen, da Änderungen an Texten durch Copy\&Paste übertragen werden, kann es gerade bei großen Dokumenten passieren, dass man die Änderungen an der falschen Stelle einarbeitet, sofern im Dokument sich ähnelnde Textabschnitte existieren. Aus Kostengründen und weil es sich dabei um eine repetitive Arbeit handelt ist es nicht selten der Fall, dass diese Änderungen von Praktikanten oder studentischen Aushilfen durchgeführt werden, die mangels inhaltlicher Kenntnis den Zusammenhang der Text nicht kennen, was ebenfalls die irrtümliche Änderungen am Text durch fehlerhaftes Copy\&Paste begünstigt. Auch ist die Eindeutigkeit der Dateiversionen nicht gewährleistet, allein aufgrund des Zeitstempels kann keine genaue Aussage darüber getroffen werden, welche Datei die neueste ist. So muss man sich auf ein Benamungsschema für Dateien einigen, das im besten Fall klar erkennen lässt \emph{welches} Dokument das neueste ist. Üblich sind dabei Ergänzungen des Dateinamens mit Datumsinformationen, wie z.B. \texttt{Text\_Online\_2012-04-13.docx}. Folgen nicht alle Beteiligten diesem Schema, weil diese z.B. nicht ausreichend informiert sind, oder kommt es zu gleichzeitiger Änderungen von zwei Personen kann es so auch zu zwei verschiedenen Dateien mit dem gleichen Dateinamen kommen. Durch die Verteilung der Dokumente an verschiedene Speicherorte kommt es zu Situationen, in denen nicht klar ist, wer aktuell die \emph{neueste} Dateiversion hat. 
+
+Tatsächlich existiert mit dem \emph{Microsoft} \emph{SharePoint}, einer Software für Intra-, Extra- und Internetportale, eine Lösung, die diese Probleme behebt \cite{sharepoint-shared-documents}. Mit Hilfe von \emph{Shared Documents} lassen sich Dokument zentral ablegen. Sollen diese editiert werden, müssen Sie von der jeweiligen Person \typoquotes{ausgecheckt} werden, dies sperrt den Zugriff auf das Dokument durch andere Mitarbeiter. Sobald das Bearbeiten abgeschlossen wurde, wird die Datei wieder \typoquotes{eingecheckt}. So wird sichergestellt, dass es nie zwei Versionen der Datei mit unterschiedlichen Änderungen gibt. Diese Funktion behebt aber nicht den Umstand, das an einem Dokument immer nur eine Person arbeiten kann. Des weiteren ist \emph{SharePoint} im Agentur-Umfeld kaum anzutreffen, was dem Umstand geschuldet ist, dass der Betrieb einer \emph{SharePoint}-Instanz mit hohen Lizenz- und Personalkosten verbunden ist. Zum anderen setzen die Funktionen zum gemeinsamen Bearbeiten von \emph{Word} oder \emph{Excel} voraus, dass alle Mitarbeiter über die neuesten Version verfügen \cite{sharepoint-wordversions}. Dies kann aber auf Kundenseite nicht vorausgesetzt werden. Aufgrund der unterschiedlichen Programm-Versionen aber auch unterschiedlicher Betriebssystemen, kommt es beim Austausch der Dateien zu verschiedenen Kompatibilitätsproblemen, da in Agenturen meistens \emph{Mac OS} verwendet wird, auf Kundenseite jedoch \emph{Windows} verbreitet ist.
+
+\paragraph{Feedback mit Verzögerung} Durch das Verteilen der Dokumente auf verschiedenen Speicherorten wird eine parallele Kommunikation des Arbeitsstandes mittels E-Mail nötig, bei der jeweils dem nächsten Bearbeiter mitgeteilt wird, dass er mit seiner Aufgabe weiter fortfahren kann. Der Ablauf und die Reihenfolge der Kommunikation ergibt sich durch die Aufgaben der Betiligten Personen, aber auch durch informelle Absprachen. Gerade zwischen Agentur und Kunden gibt es häufig \typoquotes{Flaschenhälse}, die zu Verzögerungen führen. Dies sind in den meisten Fällen die jeweiligen Projektleiter und Ansprechpartner, die auch bei technischen oder inhaltlichen Fragen jeweils der alleinige Empfänger sind, die Anfrage entgegen nehmen in in ihrem Unternehmen an die zuständige Person weiterleiten, auf deren Antwort warten um dann die Antwort zurück zu spielen. Hierdurch bilden sich umfangreiche und langlebige E-Mail-Kommunikationsketten, an denen viele, meistens zu viele, Personen beteiligt sind und in ungeordneter Reihenfolge Feedback liefern.
 
 % MARK
+
+\paragraph{Strukturierung von Dokumenten} 
+
+Sinnvolle Formatierung an zu legen, ist Anfangs sehr aufwändig
+
+Tabellen in Word sind schlimm
+
+Excel-Tabellen unterstützt keine Hierarchien, hier muss dann mit Workarounds gearbeitet werden
+
+Word-Seiten (A4) sind oft nicht breit genug für Tabellen, die man manchmal braucht
+
+Bilder einfügen in Word ist schlecht
+
+Excel: Formatierungsfehler: Zwei Zeilen statt Zeilenumbruch
+
+Probleme in Excel führen dazu: Änderungsfehler: Identifier gelöscht
+
+\paragraph{Formatierung} Bei der Formatierung von Textbestandteilen \emph{Word} und \emph{Excel} tauchen verschiedene Probleme auf. 
+
+Keine Formatierung bei einzelnen Worten (Excel-Zellen)
+
+Excel: Formatierungsfehler: Zwei Zeilen statt Zeilenumbruch
+
+Textformatierungen sind nicht vollständig zwischen aktuell verbreiteten Versionen austauschbar, besonders wenn Dokumente von neueren Versionen in älteren Versionen angezeigt und bearbeitet werden.
+
+\paragraph{Feedback und Kommunikation}
+
+Hinweise können nur unpräzise Platziert werden und können beim Bearbeiten von Text versehentlich gelöscht werden.
+
+Darstellung im Überarbeiten-Modus mit Notizen ist sehr unübersichtlich
 
 Fehlerquellen sind
 
 \begin{itemize}
-\item Nur serielles Bearbeiten
-\item Datei-Versions-Problem
-\item Benamung nicht einheitlich geregelt
-\item Wer hat das neueste Dokument?
-\item Keine Formatierung bei einzelnen Worten (Excel-Zellen)
-\item Zusammenführung nur manuell
-\item Copy\&Paste-Fehler, beim Zusammenführen kann es passieren, dass man an die falsche Stelle springt (wegen mangelnder Übersicht)
-\item Sinnvolle Formatierung an zu legen, ist Anfangs sehr aufwändig
-\item Tabellen in Word sind schlimm
-\item Excel-Tabellen unterstützt keine Hierarchien, hier muss dann mit Workarounds gearbeitet werden
-\item Word-Seiten (A4) sind oft nicht breit genug für Tabellen, die man manchmal braucht
-\item Bilder einfügen in Word ist schlecht
-\item Hinweise können nur unpräzise Platziert werden und können beim Bearbeiten von Text versehentlich gelöscht werden.
-\item Darstellung im Überarbeiten-Modus mit Notizen ist sehr unübersichtlich
-\item Excel: Formatierungsfehler: Zwei Zeilen statt Zeilenumbruch
-\item Änderungsfehler: Identifier gelöscht
-\item Format-Probleme zwischen den Verschiedenen Office-Versionen, zwischen den verschiedenen Betriebssystemen
-\item Sehr lange Laufzeiten bei Feedback
 \item Keine Infos zu Kann-Trennung bei unbekannten Sprachen
 \item Korrektur von Übersetzungen muss in zwei offenen Fenstern erfolgen (sofern  Word)
 \item Unterschiedliche Versionen des Dokuments (Anwälte müssen / sollen nicht alles lesen, weil teuer)
