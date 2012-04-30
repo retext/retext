@@ -1,6 +1,7 @@
 # neato
 digraph G {
-overlap=scale
+
+
 
 edge [ dir=both penwidth=4 color="#66cd00" ]
 node [ shape=circle fixedsize=1 width=1 fontsize=14 fillcolor="#B7B7B7" style=filled penwidth=0 ]
@@ -9,11 +10,11 @@ arthur [ label="Projektleitung\nArthur" fontsize=10 ]
 eva [ label="Konzept\nEva" width=3 ]
 lotte [ label="Lotte\nDesign" width=2.5 ]
 torsten [ label="Text\nTorsten" width=3 ]
-markus [ label="Kunde\nMarkus"  width=2 ]
-jorinde [ label="Übersetzung\nJorinde" width=1.5 ]
+markus [ label="Kunde\nMarkus"  width=2.5 ]
+jorinde [ label="Übersetzung\nJorinde" width=2 ]
 jan [ label="Produktion\nJan" width=2 ]
 
-edge [ penwidth=1 arrowsize=1 color="#CCCCCC" weight=0.1 style=dashed len=5 ]
+edge [ penwidth=1 arrowsize=1 color="#CCCCCC" weight=0.1 style=dashed len=6 ]
 arthur -> eva
 arthur -> markus
 arthur -> torsten
@@ -21,7 +22,7 @@ arthur -> lotte
 arthur -> jan
 arthur -> jorinde
 
-edge [ len=4 arrowsize=1.5  penwidth=4 style=solid color="#66cd00" ]
+edge [ arrowsize=1.5  penwidth=4 style=solid color="#66cd00" len=5 ]
 eva -> markus
 eva -> lotte
 eva -> torsten
@@ -30,5 +31,6 @@ lotte -> jan
 lotte -> torsten
 torsten -> jorinde
 torsten -> markus
+markus -> jorinde
 
 }
