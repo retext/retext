@@ -48,8 +48,8 @@ Markus Rüb & Sales Information and Communication\\
 Im vorigen Abschnitt wurden die Probleme geschildert, die im aktuell üblichen Projektverlauf auftreten und daraus gefolgert, was die wichtigsten Aspekte sind, die eine mögliche Lösung behandeln muss. Um den Entwurf eines Systems, dass den verschiedenen Anforderungen entspricht, im nächsten Abschnitt vorzubereiten werden in diesem Abschnitt Personas vorgestellt, die die typischen Benutzergruppen des Systems repräsentieren, und ihre Aufgaben und Erwartungen zusammenfassen. Personas sind ein wichtiger Baustein für den Entwurf eines Systems. Sie ermögliche es, Konzepte und Ideen schon während des Entwurfs zu verfizieren in dem deren Auswirkungen mit dem Nutzungsverhalten und den Erwartungen der Personas verglichen werden.
 
 \begin{quote}
-\typoquotes{\textit{Personas describe a site’s target users, giving a clear picture of how they’re likely to use the system, and what they’ll expect from it, among other
-things. […] Without personas, there is no common language for talking about what users want.}} \cite[S.15 ff.]{brown2007communicating}
+\citequotes{Personas describe a site’s target users, giving a clear picture of how they’re likely to use the system, and what they’ll expect from it, among other
+things. […] Without personas, there is no common language for talking about what users want.} \cite[S.15 ff.]{brown2007communicating}
 \end{quote}
 
 Personas bilden nicht nur im Entwurf eine wichtige Entscheidungshilfe sondern werden auch während der Umsetzung immer wieder zu Rate gezogen, in dem neue Funktionalitäten auf deren Relevanz und mögliche Probleme für bestimmte Personas hin überprüft werden. \cite[S.38 ff.]{cohn2004user}
@@ -82,7 +82,7 @@ Bei der Formulierung der Personas wurde bewusst darauf verzichtet, persönliche 
 \item eine Beschreibung der Aufgabe der Rolle, die diese Persona repräsentiert
 \item Angaben zu den Beteiligten, mit denen sich die Person im Verlauf des Projektes \emph{über Texte} austauschen wird, Abbildung~\ref{chart:personas-gewichtet}~(S.\pageref{chart:personas-gewichtet}) zeigt diese Beziehungen in einem, nach Anzahl der Kommunikationspartner gewichteten Graphen
 \item die verwendeten Werkzeug zur Erfüllung der Aufgabe und die technische Erfahrung
-\item die wichtigsten Szenarios, die die Persona mit Hilfe des Systems durchführen wird
+\item die wichtigsten Szenarien, die die Persona mit Hilfe des Systems durchführen wird
 \item allgemeine Anforderungen an das System
 \item und Angaben darüber, wie der Zugriff auf das System erfolgt.
 \end{itemize}
@@ -99,7 +99,7 @@ Nachfolgend finden sich die Steckbriefe der einzelnen Personas.
 \includegraphics[width=0.5\columnwidth]{media/eva.jpg}
 \end{center}
 
-\typoquotes{\textit{Ich möchte, dass alle Beteiligten einen guten Überblick über das Produkt haben.}}
+\citequotes{Ich möchte, dass alle Beteiligten einen guten Überblick über das Produkt haben.}
 
 Eva konzipiert als Informationsarchitektin das Produkt. Dabei legt sie entsprechend der Zielsetzung fest, wie das Produkt aufgebaut ist um die Erwartungen des Nutzers zu erfüllen und ihn das gewünschten Ergebnis im Sinne des Produktes leicht erreichen zu lassen. Hierzu erstellt sie einen Überblick über das Produkt mit Hilfe von Wireframes und macht dabei Vorgaben über die Platzierung von Texten und deren Funktion.
 
@@ -113,7 +113,7 @@ Evas wichtigstes Werkzeug ist \trademark{OmniGraffle} von \trademark{Omni Group}
 
 \columnbreak
 
-\textbf{Szenarios}
+\textbf{Szenarien}
 
 Eva legt fest, welche Text im Produkt verwendet werden. Hierzu definiert sie die einzelnen logischen Bestandteile des Produktes (z.B. Seiten, Abschnitte) und definiert dort die einzelnen Textbausteine.
 
@@ -143,9 +143,9 @@ Eva greift auf das System mit ihrem Laptop zu, sie verfügt über einen großen 
 \includegraphics[width=0.5\columnwidth]{media/lotte.jpg}
 \end{center}
 
-\typoquotes{\textit{Ich möchte, dass meine Vorgaben zur Gestaltung der Texte von allen berücksichtigt werden.}}
+\citequotes{Ich möchte, dass meine Vorgaben zur Gestaltung der Texte von allen berücksichtigt werden.}
 
-Lotte gestaltet als Art-Direktorin das Produkt. Sie entwirft dazu das Fein-Layout auf Basis der Wireframes, die von Eva~(\ref{p:eva}) erstellt wurden, indem sie für alle Darstellungs-Varianten präzise Entwürfe anfertigt. Hierbei legt sie auch genaue Vorgaben für die Formatierung der Texte im Produkt fest.
+Lotte gestaltet als Art-Direktorin das Produkt. Sie entwirft dazu das Fein-Layout auf Basis der Wireframes, die vom Konzept erstellt wurden, indem sie für alle Darstellungs-Varianten präzise Entwürfe anfertigt. Hierbei legt sie auch genaue Vorgaben für die Formatierung der Texte im Produkt fest.
 
 \textbf{Organisation, Abstimmung}
 
@@ -161,7 +161,7 @@ Lotte greift auf das System mit ihrem Laptop zu, sie verfügt über einen große
 
 \columnbreak
 
-\textbf{Szenarios}
+\textbf{Szenarien}
 
 Lotte erstellt einen Styleguide und legt dabei fest, welche Text-Klassen im Produkt verwendet werden. Text-Klassen sind z.B. Überschriften, Untertitel und Fließtext. Dazu macht sie für jede Klasse Angaben zu der verwendeten Schriftart, die Einschränkungen, wie z.B. die maximalen Zeilenanzahl oder Menge der Zeichen pro Zeile.
 
@@ -187,24 +187,35 @@ Lotte hat sehr hohe Ansprüche an die Gestaltung des Systems.
 \includegraphics[width=0.5\columnwidth]{media/torsten.jpg}
 \end{center}
 
-\typoquotes{\textit{Zitat}}
+\citequotes{Ich möchte den Texteditor an meine Bedürfnisse anpassen können und beim Schreiben in meinem \typoquotes{Flow} nicht unterbrochen werden.}
+
+Torsten erstellt auf Basis der vom Kunden gelieferten Materialien oder bereits bestehender Produkte die Texte für das Produkt. Hierbei muss er Vorgaben aus dem Konzept und dem Design berücksichtigen, sowie Wünschen und möglicherweise verbindliche Richtlinien des Kunden beachten. Hierzu erstellt Torsten für alle Textbausteine des Produktes die Texte in der endgültigen Fassung in seiner Muttersprache.
 
 \textbf{Organisation, Abstimmung}
 
-\ref{p:eva}
-\ref{p:lotte}
-\ref{p:jorinde}
-\ref{p:markus}
+Torsten ist selbständig. Er stimmt sich mit \emph{Eva}~(\ref{p:eva}) und \emph{Lotte}~(\ref{p:lotte}) bezüglich deren Vorgaben ab. Er berücksichtigt inhaltliche Vorgaben, die er von \emph{Markus}~(\ref{p:markus}) erhält. Er steht  \emph{Jorinde}~(\ref{p:jorinde}) für Rückfragen zur Verfügung.
 
 \textbf{Werkzeuge und technische Erfahrung}
 
+Torsten arbeitet mit \trademark{iWorks Pages} von \trademark{Apple}, da er die vielen Funktionen von \trademark{Word} als störend empfindet und diese nicht benötigt. Er ist nur im Umgang mit wenigen Programmen vertraut.
+
 \columnbreak
 
-\textbf{Szenarios}
+\textbf{Szenarien}
+
+Torsten verfasst die Texten zum Produkt, dazu befüllt der die vom Design vorgegeben Textbaustein. Dabei bekommt kann er die Vorgaben sehen, die für den jeweiligen Text gelten (z.B. maximale Textlänge). 
+
+Torsten benötigt Kontext-Information zum aktuellen Text und kann im System die vom Kunden zur Verfügung gestellten Materialien aufrufen. Auch die Hinweise zur Zielgruppe und Funktion des Textes aus dem Konzept kann er sich ansehen, ohne die aktuelle Ansicht des Systems verlassen zu müssen.
+
+Der Kunde wünscht Änderungen an den Texten. Diese sind im System bei den jeweiligen Textbausteinen hinterlegt, so das Torsten die jeweiligen Texte schnell anpassen kann, ohne sie erst aufwändig Suchen zu müssen.
 
 \textbf{Anforderungen}
 
+Das Editor zum Erstellen von Texten muss im System an Torsten Bedürfnisse anpassbar sein. Er möchte genaue Kontrolle darüber haben, \emph{wann} andere Projektmitarbeiter seine Texte sehen können. Feedback zu Texten soll zu den jeweiligen Textbausteinen zugeordnet werden können.
+
 \textbf{Zugang}
+
+Torsten arbeitet in seinem eigenen Büro oder von unterwegs, da er an mehreren Projekten gleichzeitig arbeitet. Er greift auf das System mit seinem Laptop zu und je nach Standort kann seine Internetverbindung auch nur mittel schnell sein.
 
 \end{multicols}
 
@@ -218,23 +229,39 @@ Lotte hat sehr hohe Ansprüche an die Gestaltung des Systems.
 \includegraphics[width=0.5\columnwidth]{media/markus.jpg}
 \end{center}
 
-\typoquotes{\textit{Zitat}}
+\citequotes{Ich möchte, dass die Vorgaben aus unserer Marketing"~, Fach"~ und Rechtsabteilung genau berücksichtigt werden. Änderungswünsche und Korrekturen sollen exakt befolgt werden.}
 
 \textbf{Organisation, Abstimmung}
 
-\ref{p:eva}
-\ref{p:torsten}
-\ref{p:jorinde}
+Markus stimmt sich über den Zweck des Produktes mit \emph{Eva}~(\ref{p:eva}) ab. \emph{Torsten}~(\ref{p:torsten}) gibt er Feedback und Änderungswünschen zu dessen Texten. Auch die Übersetzungen von \emph{Jorinde}~(\ref{p:jorinde}) kontrolliert und verbessert er. Wurden die Texte in das Produkt übernommen, hat er gibt er Änderungswünsche an den Inhalten und der Darstellung an \emph{Jan}~(\ref{p:jan}) weiter.
 
 \textbf{Werkzeuge und technische Erfahrung}
 
+Markus arbeitet vor allem mit \trademark{Word}, \trademark{Excel} und \trademark{PowerPoint}, ansonsten hat er keine weiteren Erfahrungen im Umgang mit Werkzeugen.
+
+\textbf{Zugang}
+
+Markus arbeitet von seinem Büro-PC aus und greift auf das System mit einer schnellen Internetverbindung zu. Er ist viel unterwegs und verwendet dann sein SmartPhone oder seinen Table-PC.
+
 \columnbreak
 
-\textbf{Szenarios}
+\textbf{Szenarien}
+
+Markus nimmt die fertigen Texten ab. Hierzu kann er einzelnen Textbausteine freigeben oder Änderungen anfordern, die er mit Hilfe von Kommentaren beschreibt. 
+
+Über eine Vorschau-Funktion kann Markus die Texte in der Darstellung überprüfen, die sie im Produkt haben werden.
+
+Markus legt Zugänge für Kollegen aus anderen Abteilungen an, damit diese selber Feedback zu den Texten abgeben können.
+
+Um den Projektablauf nicht zu verzögern beantwortet Markus Rückfragen zu Texten von unterwegs.
+
+Materialien können in das System eingestellt und einzelnen Textbausteinen oder ganzen Abschnitten zugeordnet werden.
+
+Markus kann sich alle Texte als \trademark{Word}-Dokument exportieren um Korrekturen darin vorzunehmen. Anschließend importiert er das Dokument. Dabei werden die Änderungen automatisch im System übernommen.
 
 \textbf{Anforderungen}
 
-\textbf{Zugang}
+Das System \citequotes{muss einfach funktionieren}, da er nicht gezwungen werden will, ein neues Systeme zu erlernen. Er erwartet, dass die wichtigen Funktionen auch mobil verfügbar sind. Die Daten im System und der Zugriff darauf müssen sicher sein. Er will festlegen, wer Zugriff erhält, mit der Möglichkeit, dies auch für einzelne Bereiche des Projektes definieren zu können.
 
 \end{multicols}
 
@@ -248,7 +275,7 @@ Lotte hat sehr hohe Ansprüche an die Gestaltung des Systems.
 \includegraphics[width=0.5\columnwidth]{media/jorinde.jpg}
 \end{center}
 
-\typoquotes{\textit{Zitat}}
+\citequotes{Zitat}
 
 \textbf{Organisation, Abstimmung}
 
@@ -259,7 +286,7 @@ Lotte hat sehr hohe Ansprüche an die Gestaltung des Systems.
 
 \columnbreak
 
-\textbf{Szenarios}
+\textbf{Szenarien}
 
 \textbf{Anforderungen}
 
@@ -277,18 +304,19 @@ Lotte hat sehr hohe Ansprüche an die Gestaltung des Systems.
 \includegraphics[width=0.5\columnwidth]{media/jan.jpg}
 \end{center}
 
-\typoquotes{\textit{Ich möchte bei Änderungen am Text nicht immer alle Projekt-Dateien anfassen müssen.}}
+\citequotes{Ich möchte bei Änderungen am Text nicht immer alle Projekt-Dateien anfassen müssen.}
 
 \textbf{Organisation, Abstimmung}
 
 \ref{p:eva}
 \ref{p:lotte}
+\emph{Markus}~(\ref{p:markus})
 
 \textbf{Werkzeuge und technische Erfahrung}
 
 \columnbreak
 
-\textbf{Szenarios}
+\textbf{Szenarien}
 
 \textbf{Anforderungen}
 
@@ -306,7 +334,7 @@ Lotte hat sehr hohe Ansprüche an die Gestaltung des Systems.
 \includegraphics[width=0.5\columnwidth]{media/arthur.jpg}
 \end{center}
 
-\typoquotes{\textit{Zitat}}
+\citequotes{Zitat}
 
 \textbf{Organisation, Abstimmung}
 
@@ -316,7 +344,7 @@ Arthur stimmt sich als Projektleiter mit allen Beteiligten ab, hat jedoch keinen
 
 \columnbreak
 
-\textbf{Szenarios}
+\textbf{Szenarien}
 
 \textbf{Anforderungen}
 
@@ -328,8 +356,8 @@ Arthur stimmt sich als Projektleiter mit allen Beteiligten ab, hat jedoch keinen
 
 \begin{figure}[htb]
 \begin{center}
-\includegraphics[width=0.55\textwidth]{media/personas-gewichtet.pdf}
-\caption{Abstimmung zwischen den Personas, gewichtet nach Anzahl der Kommunikationspartner}
+\includegraphics[width=0.85\textwidth]{media/personas-gewichtet.pdf}
+\caption{Abstimmung zwischen den Personas bezogen auf Text, gewichtet nach Anzahl der Kommunikationspartner}
 \label{chart:personas-gewichtet}
 \end{center}
 \end{figure}
