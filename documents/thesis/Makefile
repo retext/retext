@@ -19,3 +19,6 @@ Thesis.pdf: Thesis.tex parts/*.tex parts/*.bib media/*.pdf
 clean:
 	-/bin/rm *.lof *.log *.lot *.aux *.bbl *.toc *.blg *.dvi *~ *.out
 	-find ./ -type f -name \*.bak | xargs rm
+
+dropbox:
+	if [ -d /mnt/extra/Dropbox/Projekte/retext/Dokumente/Thesis/ ]; then cp Thesis.pdf /mnt/extra/Dropbox/Projekte/retext/Dokumente/Thesis/; fi	
