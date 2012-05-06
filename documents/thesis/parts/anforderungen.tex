@@ -1,0 +1,70 @@
+\section{Anforderungen}\label{l:anforderungen}
+
+Aus den Ausführungen in der Analyse des Problems in Abschnitt~\ref{l:problemanalyse}~(S.~\pageref{l:problemanalyse}~ff.), der Beschreibung der Personas in Abschnitt~\ref{l:personas}~(S.~\pageref{l:personas}~ff.) und der Analyse des Workflows der in Projekten typischerweise abläuft lassen sich funktionale Anforderungen an die Anwendung ableiten, die in diesem Abschnitt beschrieben werden. 
+
+\subsection{Funktionale Anforderungen}
+
+\begin{samepage}
+In Abschnitt~\ref{l:workflow} wurde gezeigt, welche Operationen Mitarbeiter in Projekten ausführen, in denen Informations- und Kommunikationsmedien erstellt werden:
+
+\begin{itemize}\itemsep -5pt
+\item Definition
+\item Befüllung
+\item Korrektur
+\item Kontrolle
+\item Freigabe
+\item Veröffentlichung
+\end{itemize}
+\end{samepage}
+
+\begin{samepage}
+und dass diese Operation Eigenschaften von Texten manipulieren, die sich in drei Bereiche unterteilen lassen:
+
+\begin{itemize}\itemsep -5pt
+\item Inhalt
+\item Attribute, namentlich Identifier, Klasse, Textlänge und Position
+\item Status
+\end{itemize}
+\end{samepage}
+
+Die Anwendung muss also geeignete Funktionen anbieten, die mindestesn diese Operationen ermöglichen.
+
+\TODO
+
+\paragraph{Typ} Überschrift, Untertitel, Bild-Beschreibung, Fließtext.
+
+\paragraph{Gleichzeitiges Bearbeiten von Texten} Es soll möglich sein, dass alle  Mitarbeiter gleichzeitig an den Texten eines Produktes arbeiten.
+
+
+Aufteilen der Texte in einzelne Bausteine um diese eindeutig identifizieren zu können. Dies verhindert Copy\&Paste-Fehler (vgl. S.~\pageref{p:serielles-konzept}).
+
+\label{l:hierarchien} Hierarchien sind aber in allen Produkten vorhanden und ein natürlicher Weg, Informationen zu gliedern. 
+
+Fallback-Texte
+
+\paragraph{Schnittstellen}
+
+Anforderungen, Umfang, Ausprägung für Import-, Export- und Benachrichtigungsschnittstellen
+
+Anbindung via CMIS http://en.wikipedia.org/wiki/Content\_Management\_Interoperability\_Services
+
+Export eines Text-Booklets für die Rechtschreibkontrolle. Identifier mit ausgeben, um Texte dann schnell finden zu können. Hier könnte man auch einen QR-Code drucken, dann kann man mit einer mobilen App den Text direkt ändern.
+
+Anbinden von Bilddatenbanken um projektspezifische Texte/Untertitel für Bilder zu definieren. Abgrenzung zu Video-Untertitel!
+
+\subsection{Nicht-Funktionale Anforderungen}
+
+\begin{itemize}
+\item Zuverlässigkeit (Systemreife, Wiederherstellbarkeit, Fehlertoleranz)
+\item Aussehen und Handhabung (Look and Feel)
+\item Benutzbarkeit (Verständlichkeit, Erlernbarkeit, Bedienbarkeit)
+\item Leistung und Effizienz (Antwortzeiten, Ressourcenbedarf, Wirtschaftlichkeit)
+\item Betrieb und Umgebungsbedingungen
+\item Wartbarkeit, Änderbarkeit (Analysierbarkeit, Stabilität, Prüfbarkeit, Erweiterbarkeit)
+\item Portierbarkeit und Übertragbarkeit (Anpassbarkeit, Installierbarkeit, Konformität, Austauschbarkeit)
+\item Sicherheitsanforderungen (Vertraulichkeit, Informationssicherheit, Datenintegrität, Verfügbarkeit)
+\item Korrektheit (Ergebnisse fehlerfrei)
+\item Flexibilität (Unterstützung von Standards)
+\item Skalierbarkeit (Änderungen des Problemumfangs bewältigen)
+\item Randbedingungen
+\end{itemize}

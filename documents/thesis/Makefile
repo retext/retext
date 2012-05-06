@@ -1,4 +1,4 @@
-all: Konzept.pdf Aufbau-und-Zeitplan.pdf Thesis.pdf Thesis-kindle.pdf
+all: Konzept.pdf Aufbau-und-Zeitplan.pdf Thesis.pdf
 
 Konzept.pdf: Konzept.tex
 #	-xelatex -interaction=nonstopmode Konzept.tex
