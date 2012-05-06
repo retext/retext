@@ -1,13 +1,6 @@
 \documentclass[11pt,a4paper]{article}
 \usepackage[paper=a4paper,width=15cm,height=22cm,twoside]{geometry}
 
-\usepackage{xltxtra}
-
-\usepackage{setspace}
-\linespread{1.15}
-\setlength{\parskip}{0.75em}
-\setlength{\parindent}{0em}
-
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhead{}
@@ -16,169 +9,34 @@
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
-\usepackage[german]{babel}
-\usepackage{graphicx}
-\usepackage{acronym}
-
-\usepackage{hyperref}
-\usepackage[usenames,dvipsnames]{xcolor}
-\hypersetup{
-    bookmarks=true,
-    colorlinks=true,
-    linkcolor=NavyBlue,
-    citecolor=NavyBlue,
-    urlcolor=NavyBlue
-}
-
-\bibliographystyle{plain} 
-\bibdata{parts/bibliothek} 
-
-\usepackage{sectsty}
-\allsectionsfont{\sffamily} 
-
-\usepackage{amsfonts}
-
-\usepackage{multicol}
-
-\input{parts/harveyballs.tex}
+\input{base.tex}
 
 \begin{document}
 
-\setmainfont[Mapping=tex-text]{ITC Stone Sans Std}
-
 \pagenumbering{roman}
 
-\setlength\fboxsep{0pt}
-\setlength\fboxrule{0.5pt}
+\input{parts/titel.tex}
 
-\input{parts/abkuerzungen.tex}
-\input{parts/trennung.tex}
-
-\begin{center}
-
-\begin{small}
-
-\textbf{Hochschule RheinMain\\Fachbereich Design Informatik Medien\\Studiengang Medieninformatik}
-
-\vspace{1cm}
-
-\textbf{Bachelor-Thesis\\zur Erlangung des akademischen Grades\\Bachelor of Science – B.Sc.}
-
-\end{small}
-
-\vspace{2cm}
-
-\begin{huge}
-
-\textbf{Konzeption und Entwurf eines workflowgesteuerten Systems zur Verwaltung von Texten für Informations- und Kommunikationsmedien}
-
-\end{huge}
-
-\end{center}
-
-\setmainfont[Mapping=tex-text,BoldFont={Vollkorn-Bold},ItalicFont={Vollkorn-Italic},BoldItalicFont={Vollkorn-Bold Italic}]{Vollkorn}
-\setsansfont[Mapping=tex-text]{ITC Stone Sans Std}
-
-\vspace{8cm}
-
-\begin{tabular}{@{}l l}
-vorgelegt von & Markus Tacker\\
-am & \today\\
-& \\
-Referent & Prof. Dr. Jörg Berdux\\
-Korreferent & Prof. Thomas Steffen
-\end{tabular}
-
-\pagebreak
-
-\section*{Erklärung gem. ABPO, Ziff. 6.4.3}
-
-Ich versichere, dass ich die Bachelor-Thesis selbständig verfasst und keine anderen als
-die angegebenen Hilfsmittel benutzt habe.
-
-\vspace{1cm}
-
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}l r@{}}
-Offenbach am Main, \today & Markus Tacker
-\end{tabular*}
-
-\section*{Verbreitung}
-
-Hiermit erkläre ich mein Einverständnis mit den im folgenden aufgeführten
-Verbreitungsformen dieser Bachelor-Thesis:
-
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}l r@{}}
-Einstellung der Arbeit in die Hochschulbibliothek mit Datenträger: & nein \\
-Einstellung der Arbeit in die Hochschulbibliothek ohne Datenträger: & nein \\
-Veröffentlichung des Titels der Arbeit im Internet: & ja \\
-Veröffentlichung der Arbeit im Internet: & nein
-\end{tabular*}
-
-\vspace{1cm}
-
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}l r@{}}
-Offenbach am Main, \today & Markus Tacker
-\end{tabular*}
-
-\section*{Satz}
-
-Gesetzt mit \LaTeX{} / XeTeX \\
-Schrift: ITC Stone Sans\footnote{\url{http://www.stonetypefoundry.com/itcstoneoverview.html}} und Vollkorn\footnote{\url{http://friedrichalthausen.de/?page_id=411}}
-
-\section*{Diagramme}
-
-Erstellt mit Graphviz\footnote{\url{http://www.graphviz.org/}} und Google Docs\footnote{\url{https://docs.google.com/}}
-
-\vspace{1cm}
-
-\pagebreak
-
-\section*{Ich danke}
-
-Prof. Dr. Jörg Berdux für die Betreuung dieser Bachelor-Thesis und meinem Korreferenten Prof. Thomas Steffen.
-
-Meinen Interviewpartnern Arthur Blozyk, Carsten Fischer, Masanori Fujita, Jorinde Gessner, Sandra-Charlotte Hildebrandt, Eva Kümml, Jan Lochner, Sebastian Nell, Tobias Rudolphi, Markus Rüb, Torsten Schölzel und Marc Stenzel.
-
-Den Professoren am Fachbereich Medieninformatik der Hochschule RheinMain, besonders Prof. Dr. Peter Barth, Prof. Dr. Jörg Berdux und Prof. Dr. Wolfgang Weitz für ihr tägliches Engagement für Lehre und Studenten.
-
-Der Bundesrepublik Deutschland für das Aufstiegsstipendium.
-
-\section*{Widmung}
-
-Ich widme diese Bachelor-Thesis meiner Frau Tanja die mich ermutigt hat, mit dem Studium zu beginnen.
-
-\pagebreak
+\input{parts/about.tex}
 
 \input{parts/abstract.tex}
 
-\pagebreak
-
-\tableofcontents
-
-\pagebreak
+\input{parts/toc.tex}
 
 \setcounter{page}{1}
 \pagenumbering{arabic}
 
 \input{parts/definition.tex}
 
-\pagebreak
-
 \input{parts/problem.tex}
 
-\pagebreak
-
 \input{parts/personas.tex}
-
-\pagebreak
 
 \input{parts/konzeption.tex}
 
 \input{parts/implementierung.tex}
 
 \input{parts/fazit.tex}
-
-\pagebreak
 
 \bibliography{parts/bibliothek}
 
