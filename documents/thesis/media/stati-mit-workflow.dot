@@ -1,0 +1,34 @@
+digraph G {
+concentrate=True
+rankdir=LR
+fontname=Arial
+fontcolor=gray50
+
+labelloc=top
+labelfloat=True
+
+node [ fontname=Arial shape=none ]
+edge [ fontsize=10 fontname=Arial color=lemonchiffon4 fontcolor=royalblue4 arrowsize=0.6 ]
+
+Neu 
+Leer
+Befuellt [ label="Befüllt" ]
+Geprueft [ label="Geprüft" ]
+Public [ label="Veröffentlicht" ]
+
+# Ablauf
+edge [ color=chartreuse3 fontcolor=chartreuse4 headport=n tailport=n ]
+Neu -> Leer [ label="Definieren" ]
+Leer -> Befuellt [ label="Schreiben" ]
+Befuellt -> Korrigiert [ label="Rechtschreib-\nkontrolle" ]
+Korrigiert -> Geprueft [ label="Qualitäts-\nkontrolle" ]
+Geprueft -> Freigegeben [ label="Freigabe" color=darkgoldenrod2 fontcolor=goldenrod4 ]
+Freigegeben -> Public [ label="Veröffentlichung" ]
+
+# QS
+edge [ labeldistance=2 color=firebrick2 fontcolor=firebrick4 headport=s tailport=s weight=0.1 ]
+Leer -> Neu [ label="Form\nfalsch" ]
+Befuellt -> Leer [ label="Inhalt\nfalsch" ]
+Geprueft -> Korrigiert [ label="Inhalt\nfalsch"  ]
+Korrigiert -> Befuellt [ label="Rechtschreib-\nfehler"  ]
+}

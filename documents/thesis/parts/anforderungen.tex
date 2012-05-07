@@ -1,90 +1,6 @@
 \section{Anforderungen}\label{l:anforderungen}
 
-Aus den Ausführungen in der Analyse des Problems in Abschnitt~\ref{l:problemanalyse}~(S.~\pageref{l:problemanalyse}~ff.), der Beschreibung der Personas in Abschnitt~\ref{l:personas}~(S.~\pageref{l:personas}~ff.) und der Konzeption der Anwendung in Abschnitt~\ref{l:konzeption}~(S.~\pageref{l:konzeption}~ff.) sich funktionale und nicht-funktionale Anforderungen an die Anwendung ableiten, die in den Abschnitten \ref{l:funktionale-anforderungen} bzw. \ref{l:nicht-funktionale-anforderungen} beschrieben werden. Die Anforderungen beziehen sich dabei in erster Linie auf die browserbasierte Web-Anwendung und den Webservice. Den vorangegangenen Überlegungen zur Anwendung liegt ein Dömänenmodell zugrunde, dass für die Erfassung der Anforderung zuerst in Abschnitt~\ref{l:domänenmodell} beschrieben wird.
-
-\subsection{Domänenmodell}\label{l:domänenmodell}
-
-Das Dömänenmodell beschreibt die einzelnen logischen Objekte innerhalb der Anwendung, mit deren Hilfe alle Operationen abgebildet werden. 
-
-Die Beschreibung der einzelnen Modelle ist in einzelne Abschnitte aufgeteilt. Die aus einer kurzen Beschreibung des Modells und dessen Feldern bestehen. Optionale Felder haben als Standardwert \texttt{NULL}.
-
-\subsubsection{Projekt}\label{model:projekt}
-
-Projekte bildet den Rahmen für alle Texte eines einzelnen Produktes.
-
-\begin{tabular}{@{}l l l}
-\hline
-Name&\texttt{Text}&\\
-Beschreibung&\texttt{Text}&optional\\
-\hline
-\end{tabular}
-
-\subsubsection{Gruppe}\label{model:gruppe}
-
-Gruppen dienen zur hierarchischen Organisation der Texte innerhalb des Projektes. Gruppen können weitere Gruppen und Texte enthalten. Eine Gruppe ohne übergeordnete Gruppe befindet sich auf der obersten Ebene. Es kann mehrere Gruppen auf der obersten Ebene geben.
-
-\begin{tabular}{@{}l l l}
-\hline
-übergeordnete Gruppe&\texttt{Gruppe \ref{model:gruppe}}&optional\\
-Beschreibung&\texttt{Text}&optional\\
-\hline
-\end{tabular}
-\subsubsection{Textbaustein}\label{model:textbaustein}
-
-Beschreibt einen einzelnen Textbaustein.
-
-\begin{tabular}{@{}l l l}
-\hline
-Identifier&\texttt{Text}&kann automatisch erzeugt werden, projektweit einmalig\\
-übergeordnete Gruppe&\texttt{Gruppe \ref{model:gruppe}}&\\
-Status&\texttt{Status \ref{model:status}}&Standard: \typoquotes{neu}\\
-Inhalt&\texttt{Text}&optional\\
-\hline
-\end{tabular}
-
-\subsubsection{Benutzer}\label{model:benutzer}
-
-Repräsentiert einen Benutzer des Systems
-
-\begin{tabular}{@{}l l l}
-\hline
-E-Mail-Adresse&\texttt{Text}&systemweit einmalig\\
-Passwort&\texttt{Text}&\\
-Passwort-Zurücksetzen-Schlüssel&\texttt{Text}\\
-Name&\texttt{Text}&optional\\
-Organisation&\texttt{Text}&optional\\
-Telefon&\texttt{Text}&optional\\
-Profilfoto&\texttt{Datei}&optional\\
-\hline
-\end{tabular}
-
-\subsubsection{Projektmitarbeiter}\label{model:projektmitarbeiter}
-
-Gestattet einem Benutzer die Mitarbeit an einem Projekt und legt dabei fest, welche Rechte dem Benutzer für das Projekt zustehen.
-
-\begin{tabular}{@{}l l l}
-\hline
-Benutzer&\texttt{Benutzer \ref{model:benutzer}}&\\
-Projekt&\texttt{Projekt \ref{model:projekt}}&\\
-Rollen&\texttt{Rolle[] \ref{model:rolle}}&\\
-\hline
-\end{tabular}
-
-\subsubsection{Status}\label{model:status}
-
-Beschreibt die verschiedenen Zustände eines Textbausteins.
-
-\begin{enumerate}\itemsep -5pt
-\item \texttt{Neu}
-\end{enumerate}
-
-\subsubsection{Rolle}\label{model:rolle}
-
-Beschreibt die verschiedenen Rollen innerhalb der Anwendung. Die Rechte der Rollen sind durch die Zuordnung von Benutzern zu Projekten durch den Projektmitarbeiter immer an das jeweilige Projekt gebunden.
-
-\begin{enumerate}\itemsep -5pt
-\item \texttt{Administrator}, hat alle Rechte 
-\end{enumerate}
+Aus den Ausführungen in der Analyse des Problems in Abschnitt~\ref{l:problemanalyse}~(S.~\pageref{l:problemanalyse}~ff.), der Beschreibung der Personas in Abschnitt~\ref{l:personas}~(S.~\pageref{l:personas}~ff.) und der Konzeption der Anwendung in Abschnitt~\ref{l:konzeption}~(S.~\pageref{l:konzeption}~ff.) sich funktionale und nicht-funktionale Anforderungen an die Anwendung ableiten, die in den Abschnitten \ref{l:funktionale-anforderungen} bzw. \ref{l:nicht-funktionale-anforderungen} beschrieben werden. Die Anforderungen beziehen sich dabei in erster Linie auf die browserbasierte Web-Anwendung und den Webservice. 
 
 \subsection{Funktionale Anforderungen}\label{l:funktionale-anforderungen}
 
@@ -100,77 +16,85 @@ Ein Nutzer muss sich mit Hilfe seiner E-Mail-Adresse ein Benutzerkonto im System
 
 \subsubsection{Definition von Projekten}\label{anforderung:definition-projekt}
 
-Es muss möglich sein, Projekte anzulegen. Projekte bildet den Rahmen für alle Texte eines einzelnen Produktes. Jeder Benutzer kann neue Projekte anlegen. Der Benutzer eines Projektes, der das Projekt angelegt hat, wird in diesem Projekt die Rolle \typoquotes{Administrator} zugewiesen.
+Es muss möglich sein, Projekte anzulegen und zu bearbeiten. Projekte bildet den Rahmen für alle Texte eines einzelnen Produktes. Jeder Benutzer kann neue Projekte anlegen. Beim Anlegen eines Projektes wird auch mindestens eine Sprache angelegt, in der die Texte erstellt werden sollen. Es können weitere Sprachen hinzugefügt werden.
 
 \textsf{Quelle:} Basisanforderung
 
-\textsf{Domänenobjekte:} \texttt{Projekt \ref{model:projekt}}
+\textsf{Domänenobjekte:} \texttt{Projekt \ref{model:projekt}},  \texttt{Sprache \ref{model:sprache}}
 
-\subsubsection{Definition der Projektstruktur}\label{anforderung:definition-projektstruktur}
+\subsubsection{Definition der Projektstruktur}
 
-Es muss möglich sein, Gruppen anzulegen. Die hierarchische Projektstruktur wird innerhalb eines Projektes mit Hilfe von Gruppen definiert.
+Es muss möglich sein, Gruppen anzulegen. Die hierarchische Projektstruktur wird innerhalb eines Projektes mit Hilfe von Gruppen definiert. 
 
 \textsf{Quelle:} Basisanforderung
 
 \textsf{Domänenobjekte:} \texttt{Gruppe \ref{model:gruppe}}
 
-\subsubsection{Definition von Textbausteinen}\label{anforderung:definition-textbaustein}
+\subsubsection{Definition von Textbausteinen}
 
-Grundlage für die Verwendung eines Textbausteines im Projekt ist dessen Definition. Bei der Definition eines Textbausteines wird dieser innerhalb des Projektes erzeugt und in dessen Struktur eingeordnet. Zur Definition muss ein Identifier angegeben werden, der innerhalb des Projektes einmalig ist. Wird kein Identifier angegeben, wird dieser vom System automatisch erzeugt. Zusätzlich ist die Einordnung des Textbausteines innerhalb der Struktur erforderlich.
+Grundlage für die Verwendung eines Textbausteines im Projekt ist dessen Definition. Es muss möglich sein, Textbausteines innerhalb des Projektes zu erzeugt und in dessen Struktur einzuordnet. Dabei muss ein Identifier angegeben werden, der innerhalb des Projektes einmalig ist. Wird kein Identifier angegeben, wird dieser vom System automatisch erzeugt. Zusätzlich ist die Einordnung des Textbausteines innerhalb der Struktur erforderlich. Nach der Definition eines Textbausteines ist dessen Status \texttt{Leer}.
 
 \textsf{Quelle:} Basisanforderung
 
 \textsf{Domänenobjekte:} \texttt{Textbaustein \ref{model:textbaustein}}
 
-\subsubsection{Befüllen von Textbausteinen}\label{anforderung:befüllen-textbaustein}.
+\subsubsection{Befüllen von Textbausteinen}
 
-\begin{samepage}
-In Abschnitt~\ref{l:workflow} wurde gezeigt, welche Operationen Mitarbeiter in Projekten ausführen, in denen Informations- und Kommunikationsmedien erstellt werden:
+Es muss möglich sein den Inhalt eines Testbausteines anzugeben. Hierzu wird Text zu einem Textbaustein in einer der Projektsprachen eingegeben. Ist bereits ein Inhalt vorhanden, wird eine neue Version angelegt. Nach der Definition eines Textbausteines ist dessen Status \texttt{Befüllt}.
 
-\begin{itemize}\itemsep -5pt
-\item Definition
-\item Befüllung
-\item Korrektur
-\item Kontrolle
-\item Freigabe
-\item Veröffentlichung
-\end{itemize}
-\end{samepage}
+\textsf{Quelle:} Basisanforderung
 
-\begin{samepage}
-und dass diese Operation Eigenschaften von Texten manipulieren, die sich in drei Bereiche unterteilen lassen:
+\textsf{Domänenobjekte:} \texttt{Textbaustein \ref{model:textbaustein}}
 
-\begin{itemize}\itemsep -5pt
-\item Inhalt
-\item Attribute, namentlich Identifier, Klasse, Textlänge und Position
-\item Status
-\end{itemize}
-\end{samepage}
+\subsubsection{Befüllen von Textbausteinen}
 
-Die Anwendung muss also geeignete Funktionen anbieten, die mindestesn diese Operationen ermöglichen.
+Es muss möglich sein den Inhalt eines Testbausteines anzugeben. Hierzu wird Text zu einem Textbaustein in einer der Projektsprachen eingegeben. Ist bereits ein Inhalt vorhanden, wird eine neue Version angelegt. Nach der Definition eines Textbausteines ist dessen Status \texttt{Befüllt}.
+
+\textsf{Quelle:} Basisanforderung
+
+\textsf{Domänenobjekte:} \texttt{Textbaustein \ref{model:textbaustein}}
 
 \TODO
 
+\subsubsection{Korrigieren von Textbausteinen}
+
+\subsubsection{Prüfen von Textbausteinen}
+
+\subsubsection{Freigeben von Textbausteinen}
+
+\subsubsection{Veröffentlichen von Textbausteinen}
+
+\subsubsection{Gleichzeitiges Bearbeiten von Textbausteinen}
+
+Es soll möglich sein, dass alle  Mitarbeiter gleichzeitig an den Texten eines Produktes arbeiten.
+
+\subsubsection{Festlegung eines Workflows auf Basis des Status}
+
+Abbildung~\ref{chart:statimitworkflow}~(S.~\pageref{chart:statimitworkflow}) zeigt die Abfolge mit Korrekturschleifen. Die Abfolge kann in beide Richtungen erfolgen und auch mehrere Stati überspringen.
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[width=\textwidth]{media/stati-mit-workflow.pdf}
+\end{center}
+\caption{Ablauf von Statusänderungen}
+\label{chart:statimitworkflow}
+\end{figure}
+
+\subsubsection{Definieren von Textklassen}
+
 \paragraph{Typ} Überschrift, Untertitel, Bild-Beschreibung, Fließtext.
 
-\paragraph{Gleichzeitiges Bearbeiten von Texten} Es soll möglich sein, dass alle  Mitarbeiter gleichzeitig an den Texten eines Produktes arbeiten.
+\subsubsection{Definieren von Textlängebeschränkungen}
 
+\subsubsection{Definieren von Positionen im Produkt}
 
-Aufteilen der Texte in einzelne Bausteine um diese eindeutig identifizieren zu können. Dies verhindert Copy\&Paste-Fehler (vgl. S.~\pageref{p:serielles-konzept}).
-
-\label{l:hierarchien} Hierarchien sind aber in allen Produkten vorhanden und ein natürlicher Weg, Informationen zu gliedern. 
-
-Fallback-Texte
+\subsubsection{Schnittstellen}
 
 \paragraph{Schnittstellen}
 
 Anforderungen, Umfang, Ausprägung für Import-, Export- und Benachrichtigungsschnittstellen
 
 Anbindung via CMIS http://en.wikipedia.org/wiki/Content\_Management\_Interoperability\_Services
-
-Export eines Text-Booklets für die Rechtschreibkontrolle. Identifier mit ausgeben, um Texte dann schnell finden zu können. Hier könnte man auch einen QR-Code drucken, dann kann man mit einer mobilen App den Text direkt ändern.
-
-Anbinden von Bilddatenbanken um projektspezifische Texte/Untertitel für Bilder zu definieren. Abgrenzung zu Video-Untertitel!
 
 \subsection{Nicht-Funktionale Anforderungen}\label{l:nicht-funktionale-anforderungen}
 

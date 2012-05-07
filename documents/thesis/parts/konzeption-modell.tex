@@ -1,0 +1,103 @@
+\subsection{Domänenmodell}\label{l:domänenmodell}
+
+Aus den vorangegangenen Überlegungen zur Anwendung und zum Workflow lässt sich ein Domänenmodell extrahieren, die einzelnen logischen Objekte innerhalb der Anwendung beschreibt, mit deren Hilfe alle Operationen abgebildet werden.
+
+Die Beschreibung der einzelnen Modelle ist in einzelne Abschnitte aufgeteilt. Die aus einer kurzen Beschreibung des Modells und dessen Feldern bestehen. Optionale Felder haben als Standardwert \texttt{NULL}.
+
+\subsubsection{Projekt}\label{model:projekt}
+
+Projekte bildet den Rahmen für alle Texte eines einzelnen Produktes.
+
+\begin{tabular}{@{}l l l}
+\hline
+Name&\texttt{Text}&\\
+Beschreibung&\texttt{Text}&optional\\
+\hline
+\end{tabular}
+
+\subsubsection{Sprache}\label{model:sprache}
+
+Die Texte jedes Projekts liegen in einer oder mehreren Sprachen vor.
+
+\begin{tabular}{@{}l l l}
+\hline
+Name&\texttt{Text}&\\
+Projekt&\texttt{Projekt \ref{model:projekt}}&\\
+Beschreibung&\texttt{Text}&optional\\
+\hline
+\end{tabular}
+
+\subsubsection{Gruppe}\label{model:gruppe}
+
+Gruppen dienen zur hierarchischen Organisation der Texte innerhalb des Projektes. Gruppen können weitere Gruppen und Texte enthalten. Eine Gruppe ohne übergeordnete Gruppe befindet sich auf der obersten Ebene. Es kann mehrere Gruppen auf der obersten Ebene geben.
+
+\begin{tabular}{@{}l l l}
+\hline
+übergeordnete Gruppe&\texttt{Gruppe \ref{model:gruppe}}&optional\\
+Beschreibung&\texttt{Text}&optional\\
+\hline
+\end{tabular}
+\subsubsection{Textbaustein}\label{model:textbaustein}
+
+Beschreibt einen einzelnen Textbaustein.
+
+\begin{tabular}{@{}l l l}
+\hline
+Identifier&\texttt{Text}&kann automatisch erzeugt werden, projektweit einmalig\\
+übergeordnete Gruppe&\texttt{Gruppe \ref{model:gruppe}}&\\
+Sprache&\texttt{Sprache \ref{model:sprache}}&\\
+Version&\texttt{int}&\\
+Status&\texttt{Status \ref{model:status}}&Standard: \typoquotes{neu}\\
+Inhalt&\texttt{Text}&optional\\
+\hline
+\end{tabular}
+
+\subsubsection{Benutzer}\label{model:benutzer}
+
+Repräsentiert einen Benutzer des Systems
+
+\begin{tabular}{@{}l l l}
+\hline
+E-Mail-Adresse&\texttt{Text}&systemweit einmalig\\
+Passwort&\texttt{Text}&\\
+Passwort-Zurücksetzen-Schlüssel&\texttt{Text}\\
+Name&\texttt{Text}&optional\\
+Organisation&\texttt{Text}&optional\\
+Telefon&\texttt{Text}&optional\\
+Profilfoto&\texttt{Datei}&optional\\
+\hline
+\end{tabular}
+
+\subsubsection{Projektmitarbeiter}\label{model:projektmitarbeiter}
+
+Gestattet einem Benutzer die Mitarbeit an einem Projekt und legt dabei fest, welche Rechte dem Benutzer für das Projekt zustehen.
+
+\begin{tabular}{@{}l l l}
+\hline
+Benutzer&\texttt{Benutzer \ref{model:benutzer}}&\\
+Projekt&\texttt{Projekt \ref{model:projekt}}&\\
+% Rollen&\texttt{Rolle[] \ref{model:rolle}}&\\
+\hline
+\end{tabular}
+
+\subsubsection{Status}\label{model:status}
+
+Beschreibt die verschiedenen Zustände eines Textbausteins.
+
+\begin{enumerate}\itemsep -5pt
+\item \texttt{Neu}, Textbaustein erzeugt
+\item \texttt{Leer}, Textbaustein definiert
+\item \texttt{Befüllt}, Textbaustein mit Inhalt befüllt
+\item \texttt{Korrigiert}, Orthografie geprüft
+\item \texttt{Geprüft}, Inhalt geprüft (Qualitätsicherung)
+\item \texttt{Freigegeben}, durch Kunden freigegeben
+\item \texttt{Veröffentlicht}, in Produkt übernommen
+\end{enumerate}
+
+\subsubsection{Rolle}\label{model:rolle}
+
+Beschreibt die verschiedenen Rollen innerhalb der Anwendung. Die Rechte der Rollen sind durch die Zuordnung von Benutzern zu Projekten durch den Projektmitarbeiter immer an das jeweilige Projekt gebunden.
+
+\begin{enumerate}\itemsep -5pt
+\item \texttt{Administrator}, hat alle Rechte 
+\end{enumerate}
