@@ -1,8 +1,128 @@
 \section{Anforderungen}\label{l:anforderungen}
 
-Aus den Ausführungen in der Analyse des Problems in Abschnitt~\ref{l:problemanalyse}~(S.~\pageref{l:problemanalyse}~ff.), der Beschreibung der Personas in Abschnitt~\ref{l:personas}~(S.~\pageref{l:personas}~ff.) und der Analyse des Workflows der in Projekten typischerweise abläuft lassen sich funktionale Anforderungen an die Anwendung ableiten, die in diesem Abschnitt beschrieben werden. 
+Aus den Ausführungen in der Analyse des Problems in Abschnitt~\ref{l:problemanalyse}~(S.~\pageref{l:problemanalyse}~ff.), der Beschreibung der Personas in Abschnitt~\ref{l:personas}~(S.~\pageref{l:personas}~ff.) und der Konzeption der Anwendung in Abschnitt~\ref{l:konzeption}~(S.~\pageref{l:konzeption}~ff.) sich funktionale und nicht-funktionale Anforderungen an die Anwendung ableiten, die in den Abschnitten \ref{l:funktionale-anforderungen} bzw. \ref{l:nicht-funktionale-anforderungen} beschrieben werden. Die Anforderungen beziehen sich dabei in erster Linie auf die browserbasierte Web-Anwendung und den Webservice. Den vorangegangenen Überlegungen zur Anwendung liegt ein Dömänenmodell zugrunde, dass für die Erfassung der Anforderung zuerst in Abschnitt~\ref{l:domänenmodell} beschrieben wird.
 
-\subsection{Funktionale Anforderungen}
+\subsection{Domänenmodell}\label{l:domänenmodell}
+
+Das Dömänenmodell beschreibt die einzelnen logischen Objekte innerhalb der Anwendung, mit deren Hilfe alle Operationen abgebildet werden. 
+
+Die Beschreibung der einzelnen Modelle ist in einzelne Abschnitte aufgeteilt. Die aus einer kurzen Beschreibung des Modells und dessen Feldern bestehen. Optionale Felder haben als Standardwert \texttt{NULL}.
+
+\subsubsection{Projekt}\label{model:projekt}
+
+Projekte bildet den Rahmen für alle Texte eines einzelnen Produktes.
+
+\begin{tabular}{@{}l l l}
+\hline
+Name&\texttt{Text}&\\
+Beschreibung&\texttt{Text}&optional\\
+\hline
+\end{tabular}
+
+\subsubsection{Gruppe}\label{model:gruppe}
+
+Gruppen dienen zur hierarchischen Organisation der Texte innerhalb des Projektes. Gruppen können weitere Gruppen und Texte enthalten. Eine Gruppe ohne übergeordnete Gruppe befindet sich auf der obersten Ebene. Es kann mehrere Gruppen auf der obersten Ebene geben.
+
+\begin{tabular}{@{}l l l}
+\hline
+übergeordnete Gruppe&\texttt{Gruppe \ref{model:gruppe}}&optional\\
+Beschreibung&\texttt{Text}&optional\\
+\hline
+\end{tabular}
+\subsubsection{Textbaustein}\label{model:textbaustein}
+
+Beschreibt einen einzelnen Textbaustein.
+
+\begin{tabular}{@{}l l l}
+\hline
+Identifier&\texttt{Text}&kann automatisch erzeugt werden, projektweit einmalig\\
+übergeordnete Gruppe&\texttt{Gruppe \ref{model:gruppe}}&\\
+Status&\texttt{Status \ref{model:status}}&Standard: \typoquotes{neu}\\
+Inhalt&\texttt{Text}&optional\\
+\hline
+\end{tabular}
+
+\subsubsection{Benutzer}\label{model:benutzer}
+
+Repräsentiert einen Benutzer des Systems
+
+\begin{tabular}{@{}l l l}
+\hline
+E-Mail-Adresse&\texttt{Text}&systemweit einmalig\\
+Passwort&\texttt{Text}&\\
+Passwort-Zurücksetzen-Schlüssel&\texttt{Text}\\
+Name&\texttt{Text}&optional\\
+Organisation&\texttt{Text}&optional\\
+Telefon&\texttt{Text}&optional\\
+Profilfoto&\texttt{Datei}&optional\\
+\hline
+\end{tabular}
+
+\subsubsection{Projektmitarbeiter}\label{model:projektmitarbeiter}
+
+Gestattet einem Benutzer die Mitarbeit an einem Projekt und legt dabei fest, welche Rechte dem Benutzer für das Projekt zustehen.
+
+\begin{tabular}{@{}l l l}
+\hline
+Benutzer&\texttt{Benutzer \ref{model:benutzer}}&\\
+Projekt&\texttt{Projekt \ref{model:projekt}}&\\
+Rollen&\texttt{Rolle[] \ref{model:rolle}}&\\
+\hline
+\end{tabular}
+
+\subsubsection{Status}\label{model:status}
+
+Beschreibt die verschiedenen Zustände eines Textbausteins.
+
+\begin{enumerate}\itemsep -5pt
+\item \texttt{Neu}
+\end{enumerate}
+
+\subsubsection{Rolle}\label{model:rolle}
+
+Beschreibt die verschiedenen Rollen innerhalb der Anwendung. Die Rechte der Rollen sind durch die Zuordnung von Benutzern zu Projekten durch den Projektmitarbeiter immer an das jeweilige Projekt gebunden.
+
+\begin{enumerate}\itemsep -5pt
+\item \texttt{Administrator}, hat alle Rechte 
+\end{enumerate}
+
+\subsection{Funktionale Anforderungen}\label{l:funktionale-anforderungen}
+
+Zur Beschreibung der Anwendung wurde ein vereinfachtes strukturiertes Format nach \cite[S.151~ff.]{schienmann2002kontinuierliches} gewählt, das wie folgt aufgebaut ist: Der \emph{Identifier} einer Anforderung ist die Abschnittsnummer, z.B. \ref{anforderung:registrierung},  die \emph{Kurzbeschreibung} ist der Abschnittstitel. In dem Abschnitt wird die \emph{Zielsetzung} der Anforderung dann beschrieben. Die \emph{Quelle} gibt die Herkunft bzw. den Anforderungssteller an und unter \emph{Domänenobjekte} sind die betroffenen Geschäftsobjekte aufgelistet. Die optionalen \emph{Anmerkungen} listen zusätzliche Bemerkungen und Klarstellungen
+
+\subsubsection{Benutzerkonto}\label{anforderung:registrierung}
+
+Ein Nutzer muss sich mit Hilfe seiner E-Mail-Adresse ein Benutzerkonto im System anlegen können. Hierzu gibt er seine E-Mail-Adresse an. Das System generiert ein Passwort und versendet dieses an die angegebene E-Mail-Adresse. Anschließend kann sich der Benutzer mit diesem Passwort einloggen. Nach dem ersten Login wird er gebeten sein Profil zu vervollständigen. Hat der Nutzer sein Passwort vergessen, kann er im Login-Bereich der Anwendung ein neues Passwort anfordern. Dazu muss er seine E-Mail-Adresse angeben. Wird diese E-Mail-Adresse gefunden, wird ein Passwort-Zurücksetzen-Schlüssel erzeugt und per E-Mail an die Adresse versandt. Ein Link in dieser E-Mail öffnet die Anwendung diesem Schlüssel. Passt der übergebene Schlüssel zum gespeicherten Schlüssel wird ein neues Passwort erzeugt und dem Nutzer per E-Mail zugesendet.
+
+\textsf{Quelle:} Basisanforderung
+
+\textsf{Domänenobjekte:} \texttt{Benutzer \ref{model:benutzer}}
+
+\subsubsection{Definition von Projekten}\label{anforderung:definition-projekt}
+
+Es muss möglich sein, Projekte anzulegen. Projekte bildet den Rahmen für alle Texte eines einzelnen Produktes. Jeder Benutzer kann neue Projekte anlegen. Der Benutzer eines Projektes, der das Projekt angelegt hat, wird in diesem Projekt die Rolle \typoquotes{Administrator} zugewiesen.
+
+\textsf{Quelle:} Basisanforderung
+
+\textsf{Domänenobjekte:} \texttt{Projekt \ref{model:projekt}}
+
+\subsubsection{Definition der Projektstruktur}\label{anforderung:definition-projektstruktur}
+
+Es muss möglich sein, Gruppen anzulegen. Die hierarchische Projektstruktur wird innerhalb eines Projektes mit Hilfe von Gruppen definiert.
+
+\textsf{Quelle:} Basisanforderung
+
+\textsf{Domänenobjekte:} \texttt{Gruppe \ref{model:gruppe}}
+
+\subsubsection{Definition von Textbausteinen}\label{anforderung:definition-textbaustein}
+
+Grundlage für die Verwendung eines Textbausteines im Projekt ist dessen Definition. Bei der Definition eines Textbausteines wird dieser innerhalb des Projektes erzeugt und in dessen Struktur eingeordnet. Zur Definition muss ein Identifier angegeben werden, der innerhalb des Projektes einmalig ist. Wird kein Identifier angegeben, wird dieser vom System automatisch erzeugt. Zusätzlich ist die Einordnung des Textbausteines innerhalb der Struktur erforderlich.
+
+\textsf{Quelle:} Basisanforderung
+
+\textsf{Domänenobjekte:} \texttt{Textbaustein \ref{model:textbaustein}}
+
+\subsubsection{Befüllen von Textbausteinen}\label{anforderung:befüllen-textbaustein}.
 
 \begin{samepage}
 In Abschnitt~\ref{l:workflow} wurde gezeigt, welche Operationen Mitarbeiter in Projekten ausführen, in denen Informations- und Kommunikationsmedien erstellt werden:
@@ -52,7 +172,7 @@ Export eines Text-Booklets für die Rechtschreibkontrolle. Identifier mit ausgeb
 
 Anbinden von Bilddatenbanken um projektspezifische Texte/Untertitel für Bilder zu definieren. Abgrenzung zu Video-Untertitel!
 
-\subsection{Nicht-Funktionale Anforderungen}
+\subsection{Nicht-Funktionale Anforderungen}\label{l:nicht-funktionale-anforderungen}
 
 \begin{itemize}
 \item Zuverlässigkeit (Systemreife, Wiederherstellbarkeit, Fehlertoleranz)
