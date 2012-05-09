@@ -1,15 +1,10 @@
-\section{Entwurf}\label{l:entwurf}
+\section{Entwurf des zentralen Systems}\label{l:entwurf}
 
-Diese vier Leitlinien repräsentieren die Grundgedanken bei der Entwicklung von der Anwendung:
+Im vorigen Abschnitt~\ref{l:konzeption}~(S.\pageref{l:konzeption}~ff.) wurde eine Anwendung konzipiert, die das gesamte Spektrum der Anforderungen abdeckt, die in den vorangegangenen Abschnitten beschrieben wurden. Der zentrale Bestandteil ist der Server, mit dem verschiedene GUIs über Schnittstellen kommunzieren. In diesem Abschnitt werden in Abschnitt~\ref{l:entwurf-server}~(S.\pageref{l:entwurf-server}) die wichtigsten Komponenten des Server beschrieben. Eines der wichtigsten GUIs, mit der alle Mitarbeiter arbeiten, ist das browserbasierte Interface, das in Abschnitt~\ref{l:entwurf-gui}~(S.\pageref{l:entwurf-gui}) beschrieben wird. Zunächst wird jedoch in Abschnitt~\ref{l:domänenmodell} das Domänenmodell vorgestellt, das allen Teilen der Anwendung zu grunde liegt.
 
-\begin{itemize}
-\item{Das wichtigste zuerst: Die aktuelle Aufgabe soll immer im Fokus der Darstellung liegen.}
-\item{Schnell zum Ziel: Alle Aufgaben müssen leicht und umkompliziert durchführbar sein.}
-\item{Nicht nerven: Ständige Benachrichtigungen lenken ab und müssen deswegen so gestaltet sein, dass diese sich nach den Präferenzen des Nutzers richten.}
-\item{Hilfe nur einen Klick entfernt: Das Hilfesystem muss kontextsensitiv verfügbar sein und ist eine Kernfunktion der Anwendung}
-\end{itemize}
+\input{parts/domaenenmodell.tex}
 
-\subsection{Komponenten}
+\subsection{Server}\label{l:entwurf-server}
 
 \subsubsection{Core}
 
@@ -23,7 +18,16 @@ Diese vier Leitlinien repräsentieren die Grundgedanken bei der Entwicklung von 
 
 \subsubsection{Push-Export}
 
-\subsection{Browserbasierte GUI}
+\subsection{Entwurf einer browserbasierten GUI}\label{l:entwurf-gui}
+
+Diese vier Leitlinien repräsentieren die Grundgedanken bei der Entwicklung von der Anwendung:
+
+\begin{itemize}
+\item{Das wichtigste zuerst: Die aktuelle Aufgabe soll immer im Fokus der Darstellung liegen.}
+\item{Schnell zum Ziel: Alle Aufgaben müssen leicht und umkompliziert durchführbar sein.}
+\item{Nicht nerven: Ständige Benachrichtigungen lenken ab und müssen deswegen so gestaltet sein, dass diese sich nach den Präferenzen des Nutzers richten.}
+\item{Hilfe nur einen Klick entfernt: Das Hilfesystem muss kontextsensitiv verfügbar sein und ist eine Kernfunktion der Anwendung}
+\end{itemize}
 
 Anforderungen, Grundsätze, Usability, Aufbau, Wireframes
 

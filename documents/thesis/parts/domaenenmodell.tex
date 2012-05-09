@@ -1,10 +1,10 @@
-\section{Domänenmodell}\label{l:domänenmodell}
+\subsection{Domänenmodell}\label{l:domänenmodell}
 
 Aus den vorangegangenen Überlegungen zur Anwendung und zum Workflow lässt sich ein Domänenmodell extrahieren, die einzelnen logischen Objekte innerhalb der Anwendung beschreibt, mit deren Hilfe alle Operationen abgebildet werden.
 
 Die Beschreibung der einzelnen Modelle ist in einzelne Abschnitte aufgeteilt. Die aus einer kurzen Beschreibung des Modells und dessen Feldern bestehen. Optionale Felder haben als Standardwert \texttt{NULL}.
 
-\subsection{Projekt}\label{model:projekt}
+\subsubsection{Projekt}\label{model:projekt}
 
 Projekte bildet den Rahmen für alle Texte eines einzelnen Produktes.
 
@@ -15,7 +15,7 @@ Beschreibung&\texttt{Text}&optional\\
 \hline
 \end{tabular}
 
-\subsection{Sprache}\label{model:sprache}
+\subsubsection{Sprache}\label{model:sprache}
 
 Die Texte jedes Projekts liegen in einer oder mehreren Sprachen vor.
 
@@ -27,7 +27,7 @@ Beschreibung&\texttt{Text}&optional\\
 \hline
 \end{tabular}
 
-\subsection{Gruppe}\label{model:gruppe}
+\subsubsection{Gruppe}\label{model:gruppe}
 
 Gruppen dienen zur hierarchischen Organisation der Texte innerhalb des Projektes. Gruppen können weitere Gruppen und Texte enthalten. Eine Gruppe ohne übergeordnete Gruppe befindet sich auf der obersten Ebene. Es kann mehrere Gruppen auf der obersten Ebene geben.
 
@@ -37,7 +37,7 @@ Gruppen dienen zur hierarchischen Organisation der Texte innerhalb des Projektes
 Beschreibung&\texttt{Text}&optional\\
 \hline
 \end{tabular}
-\subsection{Textbaustein}\label{model:textbaustein}
+\subsubsection{Textbaustein}\label{model:textbaustein}
 
 Beschreibt einen einzelnen Textbaustein.
 
@@ -52,7 +52,7 @@ Inhalt&\texttt{Text}&optional\\
 \hline
 \end{tabular}
 
-\subsection{Benutzer}\label{model:benutzer}
+\subsubsection{Benutzer}\label{model:benutzer}
 
 Repräsentiert einen Benutzer des Systems
 
@@ -68,7 +68,7 @@ Profilfoto&\texttt{Datei}&optional\\
 \hline
 \end{tabular}
 
-\subsection{Projektmitarbeiter}\label{model:projektmitarbeiter}
+\subsubsection{Projektmitarbeiter}\label{model:projektmitarbeiter}
 
 Gestattet einem Benutzer die Mitarbeit an einem Projekt und legt dabei fest, welche Rechte dem Benutzer für das Projekt zustehen.
 
@@ -80,7 +80,7 @@ Projekt&\texttt{Projekt \ref{model:projekt}}&\\
 \hline
 \end{tabular}
 
-\subsection{Status}\label{model:status}
+\subsubsection{Status}\label{model:status}
 
 Beschreibt die verschiedenen Zustände eines Textbausteins.
 
@@ -94,12 +94,10 @@ Beschreibt die verschiedenen Zustände eines Textbausteins.
 \item \texttt{Veröffentlicht}, in Produkt übernommen
 \end{enumerate}
 
-\subsection{Rolle}\label{model:rolle}
+\subsubsection{Rolle}\label{model:rolle}
 
 Beschreibt die verschiedenen Rollen innerhalb der Anwendung. Die Rechte der Rollen sind durch die Zuordnung von Benutzern zu Projekten durch den Projektmitarbeiter immer an das jeweilige Projekt gebunden.
 
 \begin{enumerate}\itemsep -5pt
 \item \texttt{Administrator}, hat alle Rechte 
 \end{enumerate}
-
-\pagebreak

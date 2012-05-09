@@ -1,0 +1,62 @@
+digraph G {
+rankdir=BT
+
+node [ shape=folder ]
+edge [ dir=none ]
+
+di [ label="DI-Containers" shape=box ]
+
+subgraph cluster4 {
+  label="Job-Server"
+  JobServerConnection [ shape=box ]
+  Jobs -> JobServerConnection
+}
+jobserver [ shape=circle label="Job-Server" ]
+jobserver -> JobServerConnection
+
+subgraph cluster3 {
+  label="I/O"
+  edge [ arrowhead=onormal dir=forward ]
+  node [ shape=rect ]
+  PushExport -> Jobs
+  Benachrichtigung -> Jobs
+  PullExport [ label="Pull-Export" ]
+}
+
+subgraph cluster5 {
+  label="Persistenz"
+  orm [ label="Object\nRelational\nMapper" shape=box ]
+}
+RDBMS [ shape=circle ]
+RDBMS -> orm
+
+
+subgraph cluster6 {
+  label=Core
+  RequestHandler [ label="Request-\nHandler" shape=box ]
+  RequestHandler -> Controller
+  orm -> Models
+  Controller -> Models
+  di -> JobServerConnection
+  di -> orm
+  di -> Controller
+  di -> PullExport
+}
+
+subgraph cluster1 {
+  label="Job-Server"
+
+}
+
+subgraph cluster2 {
+  label="GUI"
+  shape=tab
+  RequestHandlerGUI [ label="Request-\nHandler" shape=box ]
+  RequestHandlerGUI -> RequestHandler [ label="REST, JSON" ]
+  RequestHandlerGUI -> GuiController
+  GuiController -> GuiViews
+  GuiModels -> GuiViews
+  GuiModels -> GuiController
+}
+
+}
