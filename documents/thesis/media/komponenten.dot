@@ -2,33 +2,32 @@ digraph G {
 rankdir=TB
 
 edge [ arrowhead=onormal dir=forward fontsize=10 ]
-
 node [ style=filled fillcolor="#5abbe6" ]
 
 subgraph user {
-  rank=same
-  ruser [ style=invis ]
-  user [ style=filled label="Benutzer" penwidth=0 ]
+  rank=same 
+  ruser [ label="Anwender" shape=none style=solid ]
+  user [ style=filled label="User" penwidth=0 ]
 }
 
 
 subgraph c1 {
   rank=same
   r1 [ label="Externe\nTools" shape=none style=solid ]
-  PlugIns [ shape=component label="Plug-Ins" ]
+  PlugIns [ shape=component label="Plug-Ins,\nApps, …" ]
 }
 
 node [ fillcolor="#feefb3" ]
 
 subgraph c2 {
   rank=same
-  r2 [ style=invis ]
+  r2 [ label="Browser-GUI" shape=none style=solid ]
   GuiViews [ label="Views" shape=folder ]
 }
 
 subgraph c3 {
   rank=same
-  r3 [ label="Browser-GUI" shape=none style=solid ]
+  r3 [ style=invis ]
   GuiController [ label=Controller shape=folder ]
   GuiModels [ label=Models shape=folder ]
 }
@@ -43,13 +42,13 @@ node [ fillcolor="#cccccc" penwidth=1 ]
 
 subgraph c5 {
   rank=same
-  r5 [ style=invis ]
-  Shell [ shape=component label="Cronjobs,\nShell, CLI" ]
+  r5 [ label="Server" shape=none style=solid ]
+  Shell [ shape=component label="Cronjobs,\nCLI, …" ]
 }
 
 subgraph c6 {
   rank=same
-  r6 [ label="Server" shape=none style=solid ]
+  r6 [ style=invis ]
   API [ shape=component ]
 }
 
@@ -57,13 +56,19 @@ subgraph c7 {
   rank=same
   r7 [ style=invis ]
   Controller [ shape=folder ]
-  di [ label="DI-Container" shape=component ]
   Models [ shape=folder ]
+}
+
+subgraph c75 {
+  rank=same
+  r75 [ style=invis ]
+  di [ label="DI-Container" shape=component ]
 }
 
 subgraph c8 {
   rank=same
   r8 [ style=invis ]
+
   IO [ label="Import/Export &\nBenachrichtigung" shape=folder ]
   Jobs [ shape=folder ]
   Persistenz [ shape=folder ]
@@ -74,7 +79,7 @@ subgraph c8 {
 subgraph c9 {
   rank=same
   r9 [ style=invis ]
-  orm [ label="Object\nRelational\nMapper" shape=component ]
+  orm [ label="ORM" shape=component ]
 }
 
 node [ fillcolor="#AC9573" ]
@@ -91,16 +96,21 @@ subgraph extern {
 
 # Reihenfolge der Schichten erzwingen
 edge [ style=invis ]
-ruser -> r1 -> r2 -> r3 -> r4 -> r5 -> r6 -> r7 -> r8 -> r9 -> extern
+ruser -> r1 -> r2 -> r3 -> r4 -> r5 -> r6 -> r7 -> r75 -> r8 -> r9 -> extern
 
 edge [ style=solid dir=none arrowhead=none ]
 
-di -> Persistenz
 di -> Controller
+
+edge [ tailport=none ]
+
+di -> Persistenz
 di -> IO
 di -> Jobs
 di -> Workflow
 di -> ServiceAdapter
+
+edge [ headport=none tailport=none ]
 
 API -> Controller
 Persistenz -> Models
@@ -115,9 +125,9 @@ GuiModels -> GuiController
 Persistenz -> orm
 
 edge [ color="#AC9573" style=dashed arrowhead=normal arrowtail=normal fontcolor="#AC9573" ]
-jobserver -> Jobs
+jobserver -> Jobs [ label=" Proprietäre\nProtokolle" ]
 RDBMS -> orm
-IO -> iosub [ label=" Proprietäre\nProtokolle" ]
+IO -> iosub
 ServiceAdapter -> Services
 
 edge [ arrowhead=normal dir=both color="#5abbe6" fontcolor="#5abbe6" ]

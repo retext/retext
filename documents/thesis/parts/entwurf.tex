@@ -1,18 +1,20 @@
 \section{Entwurf des zentralen Systems}\label{l:entwurf}
 
-Im vorigen Abschnitt~\ref{l:konzeption}~(S.\pageref{l:konzeption}~ff.) wurde eine Anwendung konzipiert, die das gesamte Spektrum der Anforderungen abdeckt, die in den vorangegangenen Abschnitten beschrieben wurden. Der zentrale Bestandteil ist der Server, mit dem verschiedene GUIs über Schnittstellen kommunzieren. In diesem Abschnitt werden in Abschnitt~\ref{l:entwurf-server}~(S.\pageref{l:entwurf-server}) die wichtigsten Komponenten des Server beschrieben. Eine der wichtigsten GUIs, mit der alle Mitarbeiter arbeiten, ist das browserbasierte Interface, das in Abschnitt~\ref{l:entwurf-gui}~(S.\pageref{l:entwurf-gui}) beschrieben wird. Abschließend wird in Abschnitt~\ref{l:domänenmodell} das Domänenmodell vorgestellt, das allen Teilen der Anwendung zu grunde liegt.
-
-\subsection{Server}\label{l:entwurf-server}
-
-In Abbildung~\ref{chart:komponenten}~(S.\pageref{chart:komponenten}) finden sich die Komponenten des Servers grau eingefärbt.
-
 \begin{figure}[htb]
 \begin{center}
-\includegraphics[width=0.7\textwidth]{media/komponenten.pdf}
+\includegraphics[width=0.6\textwidth]{media/komponenten.pdf}
 \end{center}
 \caption{Komponententen des zentralen Systems}
 \label{chart:komponenten}
 \end{figure}
+
+Im vorigen Abschnitt~\ref{l:konzeption}~(S.\pageref{l:konzeption}~ff.) wurde eine Anwendung konzipiert, die das gesamte Spektrum der Anforderungen abdeckt, die in den vorangegangenen Abschnitten beschrieben wurden. In diesem Abschnitt werden die Komponenten beschrieben, die zur Erfüllung der wichtigsten Anforderungen benötigt werden. 
+
+Abbildung~\ref{chart:komponenten} liefert einen Überblick über die in den folgenden Abschnitten beschriebenen Komponenten des Systems. \emph{Blau} eingezeichnet sind der Endanwender und externe Benutzer-Werkzeuge wie z.B. Plug-Ins und Software von Drittanbietern. \emph{Gelb} eingezeichnet sind die Komponenten des browserbasierten GUI. \emph{Grau} eingezeichnet sind die Komponenten des Servers. \emph{Braun} eingezeichnet sind (aus sicht des Servers) externe Dienste. \emph{Gestrichelte Linien} zeigen Kommunikationsverbindung zwischen Komponenten über Schnittstellen. \emph{Durchgezogene Linien} zeigen Verbindungungen innerhalb eines Systems. Der zentrale Bestandteil der Anwemdung ist der Server, mit dem verschiedene GUIs über Schnittstellen kommunzieren. In Abschnitt~\ref{l:entwurf-server}~(S.\pageref{l:entwurf-server}) werden die wichtigsten Komponenten des Servers beschrieben. Das wichtigsten GUI ist das browserbasierte Interface, da hiermit alle Mitarbeiter arbeiten, welches in Abschnitt~\ref{l:entwurf-gui}~(S.\pageref{l:entwurf-gui}) beschrieben wird. Abschließend wird in Abschnitt~\ref{l:domänenmodell}~(S.\pageref{l:domänenmodell}) das Domänenmodell vorgestellt, das allen Teilen der Anwendung zu grunde liegt.
+
+\subsection{Server}\label{l:entwurf-server}
+
+In Abbildung~\ref{chart:komponenten}~(S.\pageref{chart:komponenten}) finden sich die Komponenten des Servers grau eingefärbt.
 
 \subsubsection{Core}
 
