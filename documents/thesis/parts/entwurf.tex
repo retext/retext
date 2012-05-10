@@ -10,34 +10,47 @@
 
 Im vorigen Abschnitt~\ref{l:konzeption}~(S.\pageref{l:konzeption}~ff.) wurde eine Anwendung konzipiert, die das gesamte Spektrum der Anforderungen abdeckt, die in den vorangegangenen Abschnitten beschrieben wurden. In diesem Abschnitt werden die Komponenten beschrieben, die zur Erfüllung der wichtigsten Anforderungen benötigt werden. 
 
-Abbildung~\ref{chart:komponenten} liefert einen Überblick über die in den folgenden Abschnitten beschriebenen Komponenten des Systems. \emph{Blau} eingezeichnet sind der Endanwender und externe Benutzer-Werkzeuge wie z.B. Plug-Ins und Software von Drittanbietern. \emph{Gelb} eingezeichnet sind die Komponenten des browserbasierten GUI. \emph{Grau} eingezeichnet sind die Komponenten des Servers. \emph{Braun} eingezeichnet sind (aus sicht des Servers) externe Dienste. \emph{Gestrichelte Linien} zeigen Kommunikationsverbindung zwischen Komponenten über Schnittstellen. \emph{Durchgezogene Linien} zeigen Verbindungungen innerhalb eines Systems. Der zentrale Bestandteil der Anwemdung ist der Server, mit dem verschiedene GUIs über Schnittstellen kommunzieren. In Abschnitt~\ref{l:entwurf-server}~(S.\pageref{l:entwurf-server}) werden die wichtigsten Komponenten des Servers beschrieben. Das wichtigsten GUI ist das browserbasierte Interface, da hiermit alle Mitarbeiter arbeiten, welches in Abschnitt~\ref{l:entwurf-gui}~(S.\pageref{l:entwurf-gui}) beschrieben wird. Abschließend wird in Abschnitt~\ref{l:domänenmodell}~(S.\pageref{l:domänenmodell}) das Domänenmodell vorgestellt, das allen Teilen der Anwendung zu grunde liegt.
+Abbildung~\ref{chart:komponenten} liefert einen Überblick über die in den folgenden Abschnitten beschriebenen Komponenten des Systems. \emph{Blau} eingezeichnet sind der Endanwender und externe Benutzer-Werkzeuge wie z.B. Plug-Ins und Software von Drittanbietern. \emph{Gelb} eingezeichnet sind die Komponenten des browserbasierten GUI. \emph{Grau} eingezeichnet sind die Komponenten des Servers. \emph{Braun} eingezeichnet sind (aus Sicht des Servers) externe Dienste, die durch diesen angebunden werden. \emph{Gestrichelte Linien} zeigen Kommunikationsverbindung zwischen Komponenten über Schnittstellen. \emph{Durchgezogene Linien} zeigen Verbindungungen innerhalb eines Systems. 
 
-\subsection{Server}\label{l:entwurf-server}
+Der zentrale Bestandteil der Anwendung ist der Server, mit dem verschiedene GUIs über Schnittstellen kommunzieren. Das wichtigsten GUI ist das browserbasierte Interface, da hiermit alle Mitarbeiter arbeiten, welches in Abschnitt~\ref{l:entwurf-gui}~(S.\pageref{l:entwurf-gui}) beschrieben wird. In Abschnitt~\ref{l:entwurf-server}~(S.\pageref{l:entwurf-server}) werden die wichtigsten Komponenten des Servers beschrieben. Abschließend wird in Abschnitt~\ref{l:domänenmodell}~(S.\pageref{l:domänenmodell}) das Domänenmodell vorgestellt, das allen Teilen der Anwendung zu grunde liegt.
 
-In Abbildung~\ref{chart:komponenten}~(S.\pageref{chart:komponenten}) finden sich die Komponenten des Servers grau eingefärbt.
+\subsection{Entwurf eines browserbasierten GUI}\label{l:entwurf-gui}
 
-\subsubsection{Core}
+Das browserbasierte GUI der Anwendung ist der wichtigste Zugang zum System, da es von allen Mitarbeiter zu irgendeinem Zeitpunkt verwendet wird. Die Zeit, die der Einzelne damit verbringt kann sich je nach Rolle stark unterscheiden. Neben den sehr unterschiedlichen Anforderungen and das GUI sind die Benutzer auch technisch sehr unterschiedlich stark versiert, wie in den Personas in Abschnitt~\ref{l:personas}~(S.\pageref{l:personas}~ff.) gezeigt wurde. Diesen Umständen muss bei der Gestaltung eines GUI Rechnung getragen werden. In Anlehnung an \cite{nielsen} wurden für den Entwurf der browserbasierten GUI folgende Leitlinien gewählt:
 
-\subsubsection{Persistenz}
-
-\subsubsection{Schnittstellen}
-
-\subsubsection{Benachrichtigung}
-
-\subsubsection{Pull-Export}
-
-\subsubsection{Push-Export}
-
-\subsection{Entwurf einer browserbasierten GUI}\label{l:entwurf-gui}
-
-Diese vier Leitlinien repräsentieren die Grundgedanken bei der Entwicklung von der Anwendung:
-
-\begin{itemize}
+\begin{enumerate}\itemsep -5pt
 \item{Das wichtigste zuerst: Die aktuelle Aufgabe soll immer im Fokus der Darstellung liegen.}
 \item{Schnell zum Ziel: Alle Aufgaben müssen leicht und umkompliziert durchführbar sein.}
-\item{Nicht nerven: Ständige Benachrichtigungen lenken ab und müssen deswegen so gestaltet sein, dass diese sich nach den Präferenzen des Nutzers richten.}
+\item{Nicht ablenken: Veränderungen in der Darstellung, z.B. durch Benachrichtigungen, lenken ab und müssen deswegen so gestaltet sein, dass diese sich nach den Präferenzen des Nutzers richten.}
 \item{Hilfe nur einen Klick entfernt: Das Hilfesystem muss kontextsensitiv verfügbar sein und ist eine Kernfunktion der Anwendung}
-\end{itemize}
+\end{enumerate}
+
+Da die Anwendung von allen Benutzern gerne verwendet werden soll und vor allem die Usability und die Zeitersparnis ein wichtiger Punkt sind, wie man auch skeptische Mitarbeiter überzeugen kann, mit ihren alten Gewohnheiten zu brechen, ist die Beachtung dieser Grundsätze essentiell. Funktionalitäten, die nur von wenigen gebraucht werden, sollten, wenn überhaupt, optional einblendbar sein. Die Konzeption des Systems ermöglicht es leicht, zusätzliche Anwendungen für besondere Benutzergruppen zu schaffen, z.B. Plug-Ins für die speziellen Werkzeuge einzelner Mitarbeiter. Für diese \typoquotes{Power-User} ist dieser Weg meistens der bessere Weg.
+
+Anhand der Personas lässt sich ermitteln, wer und in welchem Umfang das browserbasiert GUI verwenden wird. Tabelle~\ref{table:webgui-usage-by-persona}~(S.\pageref{table:webgui-usage-by-persona}) zeigt dies in der Übersicht.
+
+\TODO Tabelle!
+
+\begin{table}
+\begin{center}
+\begin{tabular}{@{}l c c c c c c c}
+& \textbf{Eva} & \textbf{Lotte} & \textbf{Torsten} &  \textbf{Jorinde} & \textbf{Jan} & \textbf{Arthur} & \textbf{Markus}\\
+{\small Einfluss auf} & {\small Konz.} & {\small Des.} & {\small Texter} & {\small Übersetz.} & {\small Prod.} & {\small Projektl.} & {\small Kunde}\\
+\hline\\[-1.5ex]
+Konzept & \HarveyFull & \HarveyQuarter & \HarveyEmpty & \HarveyEmpty & \HarveyQuarter & \HarveyHalf & \HarveyThreeQuarters \\
+Design & \HarveyQuarter & \HarveyFull & \HarveyEmpty & \HarveyEmpty & \HarveyQuarter & \HarveyQuarter & \HarveyThreeQuarters \\
+Text & \HarveyHalf & \HarveyQuarter & \HarveyFull & \HarveyQuarter & \HarveyQuarter & \HarveyQuarter & \HarveyHalf \\
+Übersetzung & \HarveyEmpty & \HarveyEmpty & \HarveyHalf & \HarveyFull & \HarveyQuarter & \HarveyQuarter & \HarveyHalf \\
+Produktion & \HarveyHalf & \HarveyHalf & \HarveyEmpty & \HarveyEmpty & \HarveyFull & \HarveyHalf & \HarveyFull \\
+\end{tabular}
+\caption{Umfang und Haufigkeit der Benutzung des browserbasierten GUIs}
+\label{table:webgui-usage-by-persona}
+\end{center}
+\end{table}
+
+\subsubsection{Wireframes}
+
+
 
 Anforderungen, Grundsätze, Usability, Aufbau, Wireframes
 
@@ -45,6 +58,31 @@ Bei Kontroll-Aufgaben (Lektorat, QS) unterbrechungsfreies Arbeiten ermöglichen 
 
 Die GUI muss deutlich einfacher zu bedienen sein, als z.B. Word oder Publishing-Systeme, sonst wird sie nicht von Kunden eingesetzt.
 
-\subsubsection{Wireframes}
+\subsection{Anbindung an den Server, Komponenten}
+
+
+\subsection{Entwurf des Anwendungsservers}\label{l:entwurf-server}
+
+In Abbildung~\ref{chart:komponenten}~(S.\pageref{chart:komponenten}) finden sich die Komponenten des Servers grau eingefärbt.
+
+\subsubsection{API, Cronjobs, CLI, …}
+
+\subsubsection{Controller}
+
+\subsubsection{Models}
+
+\subsubsection{Dependency-Injection-Container}
+
+\subsubsection{Workflow}
+
+\subsubsection{Service-Adapter}
+
+\subsubsection{Persistenz, ORM}
+
+\subsubsection{Jobs}
+
+\subsubsection{Import/Export \& Benachrichtigung}
+
+
 
 \input{parts/domaenenmodell.tex}
