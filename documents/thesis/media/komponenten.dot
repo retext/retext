@@ -1,8 +1,7 @@
 digraph G {
 rankdir=TB
 
-edge [ arrowhead=onormal dir=forward ]
-clusterrank=none
+edge [ arrowhead=onormal dir=forward fontsize=10 ]
 
 node [ style=filled fillcolor="#5abbe6" ]
 
@@ -16,7 +15,7 @@ subgraph user {
 subgraph c1 {
   rank=same
   r1 [ label="Externe\nTools" shape=none style=solid ]
-  PlugIns [ shape=component ]
+  PlugIns [ shape=component label="Plug-Ins" ]
 }
 
 node [ fillcolor="#feefb3" ]
@@ -37,7 +36,7 @@ subgraph c3 {
 subgraph c4 {
   rank=same
   r4 [ style=invis ]
-  RequestHandlerGUI [ label="Request-\nHandler" shape=component ]
+  ApiAdapter [ label="API-\nAdapter" shape=component ]
 }
 
 node [ fillcolor="#cccccc" penwidth=1 ]
@@ -45,13 +44,13 @@ node [ fillcolor="#cccccc" penwidth=1 ]
 subgraph c5 {
   rank=same
   r5 [ style=invis ]
-  Shell [ shape=component label="Cronjobs,\nShell, …" ]
+  Shell [ shape=component label="Cronjobs,\nShell, CLI" ]
 }
 
 subgraph c6 {
   rank=same
   r6 [ label="Server" shape=none style=solid ]
-  RequestHandler [ label="API" shape=component ]
+  API [ shape=component ]
 }
 
 subgraph c7 {
@@ -82,7 +81,7 @@ node [ fillcolor="#AC9573" ]
 
 subgraph extern {
   rank=same
-  extern [ label="Extern" shape=none style=solid ]
+  extern [ label="Externe\nSysteme" shape=none style=solid ]
   RDBMS [ shape=component ]
   jobserver [ shape=component label="Job-Server" ]
   iosub [ shape=component label="I/O-Systeme\nLokal & Remote" ]
@@ -103,22 +102,22 @@ di -> Jobs
 di -> Workflow
 di -> ServiceAdapter
 
-jobserver -> Jobs
-
-RDBMS -> orm
-
-RequestHandler -> Controller
+API -> Controller
 Persistenz -> Models
 Controller -> Models
 Jobs -> Models
 IO -> Models
 
-GuiController -> RequestHandlerGUI
+GuiController -> ApiAdapter
 GuiController -> GuiViews
 GuiModels -> GuiViews
 GuiModels -> GuiController
 Persistenz -> orm
-IO -> iosub
+
+edge [ color="#AC9573" style=dashed arrowhead=normal arrowtail=normal fontcolor="#AC9573" ]
+jobserver -> Jobs
+RDBMS -> orm
+IO -> iosub [ label=" Proprietäre\nProtokolle" ]
 ServiceAdapter -> Services
 
 edge [ arrowhead=normal dir=both color="#5abbe6" fontcolor="#5abbe6" ]
@@ -127,8 +126,10 @@ user -> PlugIns
 user -> GuiViews [ label=" Interaktion" ]
 
 edge [ color="#66cd00" fontcolor="#66cd00" ]
-RequestHandlerGUI -> RequestHandler [ label=" REST\nJSON" ]
-PlugIns -> RequestHandler
-Shell -> RequestHandler
+ApiAdapter -> API [ label=" REST\nJSON" ]
+PlugIns -> API
+Shell -> API
+
+
 
 }
