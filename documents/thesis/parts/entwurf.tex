@@ -27,39 +27,48 @@ Das browserbasierte GUI der Anwendung ist der wichtigste Zugang zum System, da e
 
 Da die Anwendung von allen Benutzern gerne verwendet werden soll und vor allem die Usability und die Zeitersparnis ein wichtiger Punkt sind, wie man auch skeptische Mitarbeiter überzeugen kann, mit ihren alten Gewohnheiten zu brechen, ist die Beachtung dieser Grundsätze essentiell. Funktionalitäten, die nur von wenigen gebraucht werden, sollten, wenn überhaupt, optional einblendbar sein. Die Konzeption des Systems ermöglicht es leicht, zusätzliche Anwendungen für besondere Benutzergruppen zu schaffen, z.B. Plug-Ins für die speziellen Werkzeuge einzelner Mitarbeiter. Für diese \typoquotes{Power-User} ist dieser Weg meistens der bessere Weg.
 
-Anhand der Personas lässt sich ermitteln, wer und in welchem Umfang das browserbasiert GUI verwenden wird. Tabelle~\ref{table:webgui-usage-by-persona}~(S.\pageref{table:webgui-usage-by-persona}) zeigt dies in der Übersicht.
-
-\TODO Tabelle!
-
 \begin{table}
 \begin{center}
 \begin{tabular}{@{}l c c c c c c c}
 & \textbf{Eva} & \textbf{Lotte} & \textbf{Torsten} &  \textbf{Jorinde} & \textbf{Jan} & \textbf{Arthur} & \textbf{Markus}\\
-{\small Einfluss auf} & {\small Konz.} & {\small Des.} & {\small Texter} & {\small Übersetz.} & {\small Prod.} & {\small Projektl.} & {\small Kunde}\\
+{\small Operation (vgl.~\ref{l:workflow})} & {\small Konz.} & {\small Des.} & {\small Texter} & {\small Übersetz.} & {\small Prod.} & {\small Projektl.} & {\small Kunde}\\
 \hline\\[-1.5ex]
-Konzept & \HarveyFull & \HarveyQuarter & \HarveyEmpty & \HarveyEmpty & \HarveyQuarter & \HarveyHalf & \HarveyThreeQuarters \\
-Design & \HarveyQuarter & \HarveyFull & \HarveyEmpty & \HarveyEmpty & \HarveyQuarter & \HarveyQuarter & \HarveyThreeQuarters \\
-Text & \HarveyHalf & \HarveyQuarter & \HarveyFull & \HarveyQuarter & \HarveyQuarter & \HarveyQuarter & \HarveyHalf \\
-Übersetzung & \HarveyEmpty & \HarveyEmpty & \HarveyHalf & \HarveyFull & \HarveyQuarter & \HarveyQuarter & \HarveyHalf \\
-Produktion & \HarveyHalf & \HarveyHalf & \HarveyEmpty & \HarveyEmpty & \HarveyFull & \HarveyHalf & \HarveyFull \\
+Definieren         & \HarveyFull      & \HarveyQuarter   & \HarveyEmpty    & \HarveyEmpty    & \HarveyEmpty   & \HarveyEmpty     & \HarveyEmpty \\
+Schreiben          & \HarveyQuarter   & \HarveyEmpty     & \HarveyFull     & \HarveyFull     & \HarveyEmpty   & \HarveyEmpty     & \HarveyEmpty \\
+Korrektur          & \HarveyEmpty     & \HarveyEmpty     & \HarveyHalf     & \HarveyHalf     & \HarveyEmpty   & \HarveyQuarter   & \HarveyQuarter \\
+Qualitätskontrolle & \HarveyQuarter   & \HarveyEmpty     & \HarveyEmpty    & \HarveyEmpty    & \HarveyEmpty   & \HarveyFull      & \HarveyHalf \\
+Freigabe           & \HarveyEmpty     & \HarveyEmpty     & \HarveyEmpty    & \HarveyEmpty    & \HarveyEmpty   & \HarveyQuarter   & \HarveyQuarter \\
+Veröffentlichung   & \HarveyEmpty     & \HarveyEmpty     & \HarveyEmpty    & \HarveyEmpty    & \HarveyQuarter & \HarveyEmpty     & \HarveyEmpty \\
 \end{tabular}
-\caption{Umfang und Haufigkeit der Benutzung des browserbasierten GUIs}
+\caption{Umfang und Haufigkeit der Benutzung des browserbasierten GUIs bezogen auf die durchgeführten Operation}
 \label{table:webgui-usage-by-persona}
 \end{center}
 \end{table}
 
-\subsubsection{Wireframes}
+Anhand der Personas lässt sich ermitteln, wer und in welchem Umfang das browserbasiert GUI verwenden wird. Tabelle~\ref{table:webgui-usage-by-persona}~(S.\pageref{table:webgui-usage-by-persona}) zeigt in der Übersicht, welche Operationen besonders bei der Entwicklung des GUIs beachtet werden müssen. Besonders viel Zeit werden von Konzeptern und von den Mitarbeiter, die die Inhalte erstellen, kontrollieren und freigeben im GUI verbracht, da diese Tätigkeiten bezogen auf die einzelnen Texte des Produktes sehr arbeitsintensiv sind.
 
+\subsubsection{Aufbau des GUIs}
 
+\begin{center}
+\includegraphics[width=\textwidth]{media/GUIAufbau.pdf}
+\captionof{figure}{Aufbau des browserbasierten GUIs}\label{chart:gui-aufbau}
+\end{center}
 
-Anforderungen, Grundsätze, Usability, Aufbau, Wireframes
+Abbildung~\ref{chart:gui-aufbau}~(S.\pageref{chart:gui-aufbau}) zeigt den Grundaufbau des GUIs. Zentraler Bereich ist die Darstellung der \emph{aktuellen Operation} \ball{1} mit den zugehörigen \emph{Kontext-Informationen} \ball{2}. Auf der linke Seite findet sich eine Spalte über die im Projekt navigiert werden kann \ball{3}. Um den Fokus auf die aktuelle Aufgaben zu verbessern sind die Kontext-Information und die Projektspalte ausblendbar \ball{4}. Das gesamte Layout passt sich flexibel an verschiedene Bildschirmgrößen und -formate an, zusätzlich kann die Position der Kontext-Information an die eigenen Vorlieben angepasst werden \ball{5}.
+
+Die Projekt-Spalte \ball{3} bietet direkten Zugang zu allen Teilen des aktiven Projekts. Die Projektstruktur wird mit einem Navigationsbaum dargestellt, über den direkt zu den jeweiligen Abschnitten gesprungen werden kann. Über das Suchfeld lässen sich die Einträge im Baum filtern. In der Spalte befindet sich oben zur Orientierung der Names des aktiven Projektes. Über das ausklappbare Projektmenü gelangt man Teilen der Anwendung, die nicht direkt über die Texte erreichbar sind, z.B. Projektauswahl, Mitarbeiterverwaltung, Export. Über das ausklappbare Benutzermenü kann man sich ausloggen, sein Profil bearbeiten und persönliche Einstellungen anpassen.
+
+\subsubsection{Definieren des Produktes und der Texte}
+
+\subsubsection{Texte erstellen}
+
+\subsubsection{Übersetzung erstellen}
+
+\subsubsection{Korrektur, Qualitätskontrolle, Freigabe}
 
 Bei Kontroll-Aufgaben (Lektorat, QS) unterbrechungsfreies Arbeiten ermöglichen (Infinite-Scroll).
 
-Die GUI muss deutlich einfacher zu bedienen sein, als z.B. Word oder Publishing-Systeme, sonst wird sie nicht von Kunden eingesetzt.
-
 \subsection{Anbindung an den Server, Komponenten}
-
 
 \subsection{Entwurf des Anwendungsservers}\label{l:entwurf-server}
 
