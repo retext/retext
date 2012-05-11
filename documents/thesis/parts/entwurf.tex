@@ -65,9 +65,9 @@ Die Projekt-Spalte \ball{3} bietet direkten Zugang zu allen Teilen des aktiven P
 \captionof{figure}{GUI zum Bearbeiten der Produktstruktur}\label{chart:gui-produktstruktur}
 \end{center}
 
-Abbildung~\ref{chart:gui-produktstruktur} zeigt die Darstellung des GUIs zur Bearbeitung der Produktstruktur. Über die Breadcrumb-Navigation \ball{1}, die die aktuelle Position in der Projekthierarchie zeigt, ist eine Orientierung auch ohne das eingeklappte Projektmenü möglich. Im Inhaltsbereich \ball{2} werden die auf der aktuellen Ebene befindlichen Inhalts-Elemente, Textbausteine und Container, angezeigt. Die Darstellung erfolgt in eine kompakten Weise, die einen schnellen Überblick über die Inhalte bietet ohne viel Scrollen zu müssen. Die einzelnen Inhalts-Elemente können mit Drag\&Drop in ihrere Reihenfolge angepasst werden. Über das Suchfeld \ball{3} können die angezeigten Elemente gefiltert werden. Über eine Schaltfläche \ball{4} können neue Inhalts-Elemente erstellt werden. Zusatzinformationen wie die Anzahl der Kommentare, Status werden zur leichteren Übersicht mit Hilfe von Icons dargestellt \ball{5}. Diese Zusatzinformationen können auch verwendet werden, um die Inhalte auf der Seite zu filtern, z.B. um nur die Element anzuzeigen, für die noch die Inhalte fehlen \ball{6}. Durch Klick auf einen Container \ball{7} gelangt man eine Ebene tiefer, in diesen Conatiner hinein. Das Icon gibt die Anzahl der untergeordneten Element an. In der Spalte für die Kontext-Information \ball{8} werden Detailinformation zum aktuell ausgewählten Element dargestellt, die an die eingestellten Ansichts-Art angepasst sind.
+Abbildung~\ref{chart:gui-produktstruktur} zeigt die Darstellung des GUIs zur Bearbeitung der Produktstruktur. Über die Breadcrumb-Navigation \ball{1}, die die aktuelle Position in der Projekthierarchie zeigt, ist eine Orientierung auch ohne das eingeklappte Projektmenü möglich. Über eine Schaltfläche lassen sich alle Container aber der aktuellen Hierarchiebene aufklappen, so ist können umfangreiche Änderungen an vielen Elementen gleichzeitig vorgenommen werden, ohne dass man sich durch die verschiedenen Ebenen \typoquotes{hangeln} muss. Im Inhaltsbereich \ball{2} werden die auf der aktuellen Ebene befindlichen Inhalts-Elemente, Textbausteine und Container, angezeigt. Die Darstellung erfolgt in eine kompakten Weise, die einen schnellen Überblick über die Inhalte bietet ohne viel Scrollen zu müssen. Die einzelnen Inhalts-Elemente können mit Drag\&Drop in ihrere Reihenfolge angepasst werden. Über das Suchfeld \ball{3} können die angezeigten Elemente gefiltert werden. Über eine Schaltfläche \ball{4} können neue Inhalts-Elemente erstellt werden. Zusatzinformationen wie der Typ, der Status, Kommentare oder ähnliche können auch verwendet werden, um die Inhalte auf der Seite zu filtern, z.B. um nur die Element anzuzeigen, für die noch die Inhalte fehlen \ball{5}. Durch Klick auf einen Container \ball{6} gelangt man eine Ebene tiefer, in diesen Conatiner hinein. Das Icon gibt die Anzahl der untergeordneten Element an. In der Spalte für die Kontext-Information \ball{7} werden Detailinformation zum aktuell ausgewählten Element dargestellt, die an die eingestellten Ansichts-Art angepasst sind. Hier findet sich auch die Bearbeitungshistorie und die Kommentare zu den Inhalts-Elementen.
 
-Über eine Schaltfläche \ball{9} kann zwischen den vier Ansichten (Definieren~\ref{l:gui-definition}, Texten~\ref{l:gui-texten}, Übersetzen~\ref{l:gui-uebersetzen} und Kontrolle~\ref{l:gui-qs}), die die Inhaltselemente manipulieren, gewechselt werden.
+Über eine Schaltfläche \ball{8} kann zwischen den vier Ansichten (Definieren~\ref{l:gui-definition}, Texten~\ref{l:gui-texten}, Übersetzen~\ref{l:gui-uebersetzen} und Kontrolle~\ref{l:gui-qs}), die die Inhaltselemente manipulieren, gewechselt werden.
 
 \subsubsection{Texte erstellen}\label{l:gui-texten}
 
@@ -87,9 +87,14 @@ Abbildung~\ref{chart:gui-texten} zeigt die Darstellung des GUIs zur Bearbeitung 
 
 Abbildung~\ref{chart:gui-uebersetzen} zeigt die Darstellung des GUIs zur Übersetzung der Texte des Produktes. Hierzu wird der Inhalt des Textbausteines in der Original-Sprache angezeigt und darunter ein Eingabefeld, in dem die Übersetzung eingetragen wird \ball{1}. Über einen Filter-Dialog \ball{2} kann konfiguriert werden, welche Sprachen angezeigt werden sollen.
 
-\subsubsection{Korrektur, Qualitätskontrolle, Freigabe}\label{l:gui-qs}
+\subsubsection{Prüfen}\label{l:gui-qs}
 
-Bei Kontroll-Aufgaben (Lektorat, QS) unterbrechungsfreies Arbeiten ermöglichen (Infinite-Scroll).
+\begin{center}
+\includegraphics[width=0.95\textwidth]{media/GUIFreigabe.pdf}
+\captionof{figure}{GUI zum Überprüfen der Texte}\label{chart:gui-qs}
+\end{center}
+
+Abbildung~\ref{chart:gui-qs} zeigt die Darstellung des GUIs zur Kontrolle und Freigabe der Texte des Produktes. In dieser Ansicht werden die verschiedenen Stati der Textbausteine bearbeitet. Hierzu sind die Textbausteine mit ihren Übersetzungen dargestellt \ball{1}. Über die mit Icons markierten Schaltflächen \ball{2} lassen sich die einzelnen Stati direkt setzen. Von links nach rechts sind das: Korrigiert, Geprüft, Freigegeben und Veröffentlicht. Es wird jeweils zwischen \typoquotes{keine Angabe} (grau), \typoquotes{abgelehnt} (rot) und \typoquotes{in Ordnung} (grün) unterschieden. Hier wird auch die Anzahl der hinterlegten Kommentare angezeigt. Zum massenhaften bearbeiten von Stati können mehrere oder alle Elemente über die Checkboxen \ball{3} ausgewählt werden. Über die Status-Icons in der Kopfzeile kann dann der Status für alle ausgewählten Elemente gleichzeitig gesetzt werden.
 
 \subsection{Anbindung an den Server, Komponenten}
 
