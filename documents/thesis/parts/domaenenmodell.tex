@@ -7,33 +7,30 @@
 
 Aus den vorangegangenen Überlegungen zur Anwendung und zum Workflow lässt sich ein Domänenmodell extrahieren, die einzelnen logischen Objekte innerhalb der Anwendung beschreibt, mit deren Hilfe alle Operationen abgebildet werden. Abbildung~\ref{chart:domain} zeigt das Modell in der Übersicht.
 
-\subsubsection{Projekt}\label{model:projekt}
 
-Projekte bildet den Rahmen für alle Texte eines einzelnen Produktes.
+\textsf{\textbf{Attribut}}\\Beschreibt die Attribute eines Textbausteins.
 
-\subsubsection{Sprache}\label{model:sprache}
+\textsf{\textbf{Benutzer}}\\Repräsentiert einen Benutzer des Systems
 
-Die Texte jedes Projekts liegen in einer oder mehreren Sprachen vor.
+\textsf{\textbf{Container}}\\Containern dienen zur hierarchischen Organisation der Texte innerhalb des Projektes. Containern können weitere Container und Texte enthalten. Eine Container ohne übergeordneten Container befindet sich auf der obersten Ebene. Es kann mehrere Containern auf der obersten Ebene geben.
 
-\subsubsection{Container}\label{model:container}
+\textsf{\textbf{Gruppe}}\\Mitarbeiter können in Gruppen zusammengefasst werden. Dies erleichtert die Konfiguration des Workflows und der Rechte.
 
-Containern dienen zur hierarchischen Organisation der Texte innerhalb des Projektes. Containern können weitere Container und Texte enthalten. Eine Container ohne übergeordneten Container befindet sich auf der obersten Ebene. Es kann mehrere Containern auf der obersten Ebene geben.
+\textsf{\textbf{Kommentare}}\\Kommentare enthalten Hinweise und Fragen zu einzelnen Texten und Texbausteinen.
 
-\subsubsection{Textbaustein}\label{model:textbaustein}
+\textsf{\textbf{Kontext-Information}}\\Projektspezifische Kontext-Informationen lassen sich hinterlegen und Textbausteinen und Containern zuordnen.
 
-Beschreibt einen einzelnen Textbaustein.
+\textsf{\textbf{Projekt}}\\Projekte bildet den Rahmen für alle Texte eines einzelnen Produktes.
 
-\subsubsection{Version}\label{model:version}
+\textsf{\textbf{Projektmitarbeiter}}\\Gestattet einem Benutzer die Mitarbeit an einem Projekt und legt dabei fest, welche Rechte dem Benutzer für das Projekt zustehen.
 
-Beschreibt eine Version des Inhalts eines Textbausteins.
+\textsf{\textbf{Recht}}\\Beschreibt ein Recht, eine Operation auf einem Objekt auszuführen.
 
-\subsubsection{Attribut}\label{model:attribut}
+\textsf{\textbf{Rolle}}\\Beschreibt die verschiedenen Rollen innerhalb der Anwendung. Die Rechte der Rollen sind durch die Zuordnung von Benutzern zu Projekten durch den Projektmitarbeiter immer an das jeweilige Projekt gebunden.
 
-Beschreibt die Attribute eines Textbausteins.
+\textsf{\textbf{Sprache}}\\Die Texte jedes Projekts liegen in einer oder mehreren Sprachen vor.
 
-\subsubsection{Status}\label{model:status}
-
-Beschreibt die verschiedenen Zustände eines Textbausteins.
+\textsf{\textbf{Status}}\\Beschreibt die verschiedenen Zustände eines Textbausteins.
 
 \begin{enumerate}\itemsep -5pt
 \item \texttt{Neu}, Textbaustein erzeugt
@@ -45,51 +42,10 @@ Beschreibt die verschiedenen Zustände eines Textbausteins.
 \item \texttt{Veröffentlicht}, in Produkt übernommen
 \end{enumerate}
 
-\subsubsection{Statusänderung}\label{model:statuschange}
+\textsf{\textbf{Statusänderung}}\\Beschreibt eine Änderung eines Status durch einen Benutzer, z.B. durch Freigabe oder Überprüfung.
 
-Beschreibt eine Änderung eines Status durch einen Benutzer, z.B. durch Freigabe oder Überprüfung.
+\textsf{\textbf{Textbaustein}}\\Beschreibt einen einzelnen Textbaustein.
 
-\subsubsection{Benutzer}\label{model:benutzer}
+\textsf{\textbf{Version}}\\Beschreibt eine Version des Inhalts eines Textbausteins.
 
-Repräsentiert einen Benutzer des Systems
-
-\subsubsection{Projektmitarbeiter}\label{model:projektmitarbeiter}
-
-Gestattet einem Benutzer die Mitarbeit an einem Projekt und legt dabei fest, welche Rechte dem Benutzer für das Projekt zustehen.
-
-\subsubsection{Kontext-Information}\label{model:contextinfo}
-
-Projektspezifische Kontext-Informationen lassen sich hinterlegen und Textbausteinen und Containern zuordnen.
-
-\subsubsection{Kommentare}\label{model:notizen}
-
-Kommentare enthalten Hinweise und Fragen zu einzelnen Texten und Texbausteinen.
-
-\subsubsection{Workflow}\label{model:workflow}
-
-Beschreibt einen projektspezifischen Workflow.
-
-
-
-\subsubsection{Rolle}\label{model:rolle}
-
-Beschreibt die verschiedenen Rollen innerhalb der Anwendung. Die Rechte der Rollen sind durch die Zuordnung von Benutzern zu Projekten durch den Projektmitarbeiter immer an das jeweilige Projekt gebunden.
-
-\begin{enumerate}\itemsep -5pt
-\item \texttt{Administrator}, hat alle Rechte 
-\end{enumerate}
-
-\subsubsection{Recht}\label{model:recht}
-
-Beschreibt ein Recht, eine Operation auf einem Objekt auszuführen. Die Rechte sind:
-
-\begin{enumerate}\itemsep -5pt
-\item \texttt{Create}, Erstellen eines Objekts
-\item \texttt{Read}, Lesen eines Objekts
-\item \texttt{Update}, Modifizieren eines Objekts
-\item \texttt{Delete}, Löschen eines Objekts
-\end{enumerate}
-
-\subsubsection{Gruppe}\label{model:gruppe}
-
-Mitarbeiter können in Gruppen zusammengefasst werden. Dies erleichtert die Konfiguration des Workflows und der Rechte.
+\textsf{\textbf{Workflow}}\\Beschreibt einen projektspezifischen Workflow.
