@@ -27,13 +27,14 @@ Beschreibung&\texttt{Text}&optional\\
 \hline
 \end{tabular}
 
-\subsubsection{Gruppe}\label{model:gruppe}
+\subsubsection{Container}\label{model:container}
 
-Gruppen dienen zur hierarchischen Organisation der Texte innerhalb des Projektes. Gruppen können weitere Gruppen und Texte enthalten. Eine Gruppe ohne übergeordnete Gruppe befindet sich auf der obersten Ebene. Es kann mehrere Gruppen auf der obersten Ebene geben.
+Containern dienen zur hierarchischen Organisation der Texte innerhalb des Projektes. Containern können weitere Container und Texte enthalten. Eine Container ohne übergeordneten Container befindet sich auf der obersten Ebene. Es kann mehrere Containern auf der obersten Ebene geben.
 
 \begin{tabular}{@{}l l l}
 \hline
-übergeordnete Gruppe&\texttt{Gruppe \ref{model:gruppe}}&optional\\
+übergeordnete Container&\texttt{Container \ref{model:container}}&optional\\
+Reihenfolge&\texttt{int}&\\
 Beschreibung&\texttt{Text}&optional\\
 \hline
 \end{tabular}
@@ -44,7 +45,8 @@ Beschreibt einen einzelnen Textbaustein.
 \begin{tabular}{@{}l l l}
 \hline
 Identifier&\texttt{Text}&kann automatisch erzeugt werden, projektweit einmalig\\
-übergeordnete Gruppe&\texttt{Gruppe \ref{model:gruppe}}&\\
+übergeordneter Container&\texttt{Container \ref{model:container}}&\\
+Reihenfolge&\texttt{int}&\\
 Sprache&\texttt{Sprache \ref{model:sprache}}&\\
 Version&\texttt{int}&\\
 Status&\texttt{Status \ref{model:status}}&Standard: \typoquotes{neu}\\

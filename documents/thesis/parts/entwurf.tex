@@ -50,21 +50,30 @@ Anhand der Personas lässt sich ermitteln, wer und in welchem Umfang das browser
 \subsubsection{Aufbau des GUIs}
 
 \begin{center}
-\includegraphics[width=\textwidth]{media/GUIAufbau.pdf}
+\includegraphics[width=0.95\textwidth]{media/GUIAufbau.pdf}
 \captionof{figure}{Aufbau des browserbasierten GUIs}\label{chart:gui-aufbau}
 \end{center}
 
-Abbildung~\ref{chart:gui-aufbau}~(S.\pageref{chart:gui-aufbau}) zeigt den Grundaufbau des GUIs. Zentraler Bereich ist die Darstellung der \emph{aktuellen Operation} \ball{1} mit den zugehörigen \emph{Kontext-Informationen} \ball{2}. Auf der linke Seite findet sich eine Spalte über die im Projekt navigiert werden kann \ball{3}. Um den Fokus auf die aktuelle Aufgaben zu verbessern sind die Kontext-Information und die Projektspalte ausblendbar \ball{4}. Das gesamte Layout passt sich flexibel an verschiedene Bildschirmgrößen und -formate an, zusätzlich kann die Position der Kontext-Information an die eigenen Vorlieben angepasst werden \ball{5}.
+Abbildung~\ref{chart:gui-aufbau} zeigt den Grundaufbau des GUIs. Zentraler Bereich ist die Darstellung der \emph{aktuellen Operation} \ball{1} mit den zugehörigen \emph{Kontext-Informationen} \ball{2}. Auf der linke Seite findet sich eine Spalte über die im Projekt navigiert werden kann \ball{3}. Um den Fokus auf die aktuelle Aufgaben zu verbessern sind die Kontext-Information und die Projektspalte ausblendbar \ball{4}. Das gesamte Layout passt sich flexibel an verschiedene Bildschirmgrößen und -formate an, zusätzlich kann die Position der Kontext-Information an die eigenen Vorlieben angepasst werden \ball{5}.
 
 Die Projekt-Spalte \ball{3} bietet direkten Zugang zu allen Teilen des aktiven Projekts. Die Projektstruktur wird mit einem Navigationsbaum dargestellt, über den direkt zu den jeweiligen Abschnitten gesprungen werden kann. Über das Suchfeld lässen sich die Einträge im Baum filtern. In der Spalte befindet sich oben zur Orientierung der Names des aktiven Projektes. Über das ausklappbare Projektmenü gelangt man Teilen der Anwendung, die nicht direkt über die Texte erreichbar sind, z.B. Projektauswahl, Mitarbeiterverwaltung, Export. Über das ausklappbare Benutzermenü kann man sich ausloggen, sein Profil bearbeiten und persönliche Einstellungen anpassen.
 
-\subsubsection{Definieren des Produktes und der Texte}
+\subsubsection{Definieren des Produktes}\label{l:gui-definition}
 
-\subsubsection{Texte erstellen}
+\begin{center}
+\includegraphics[width=0.95\textwidth]{media/GUIProduktstruktur.pdf}
+\captionof{figure}{GUI zum Bearbeiten der Produktstruktur}\label{chart:gui-produktstruktur}
+\end{center}
 
-\subsubsection{Übersetzung erstellen}
+Abbildung~\ref{chart:gui-produktstruktur} zeigt die Darstellung des GUIs zur Bearbeitung der Produktstruktur. Über die Breadcrumb-Navigation \ball{1}, die die aktuelle Position in der Projekthierarchie zeigt, ist eine Orientierung auch ohne das eingeklappte Projektmenü möglich. Im Inhaltsbereich \ball{2} werden die auf der aktuellen Ebene befindlichen Inhalts-Elemente, Textbausteine und Container, angezeigt. Die Darstellung erfolgt in eine kompakten Weise, die einen schnellen Überblick über die Inhalte bietet ohne viel Scrollen zu müssen. Die einzelnen Inhalts-Elemente können mit Drag\&Drop in ihrere Reihenfolge angepasst werden. Über das Suchfeld \ball{3} können die angezeigten Elemente gefiltert werden. Über eine Schaltfläche \ball{4} können neue Inhalts-Elemente erstellt werden. Zusatzinformationen wie die Anzahl der Kommentare, Status werden zur leichteren Übersicht mit Hilfe von Icons dargestellt \ball{5}. Diese Zusatzinformationen können auch verwendet werden, um die Inhalte auf der Seite zu filtern, z.B. um nur die Element anzuzeigen, für die noch die Inhalte fehlen \ball{6}. Durch Klick auf einen Container \ball{7} gelangt man eine Ebene tiefer, in diesen Conatiner hinein. Das Icon gibt die Anzahl der untergeordneten Element an. In der Spalte für die Kontext-Information \ball{8} werden Detailinformation zum aktuell ausgewählten Element dargestellt, die and die eingestellten Ansichts-Art angepasst sind.
 
-\subsubsection{Korrektur, Qualitätskontrolle, Freigabe}
+Über eine Schaltfläche \ball{9} kann zwischen den vier Ansichten (Definieren~\ref{l:gui-definition}, Texten~\ref{l:gui-texten}, Übersetzen~\ref{l:gui-uebersetzen} und Kontrolle~\ref{l:gui-qs}), die die Inhaltselemente manipulieren, gewechselt werden.
+
+\subsubsection{Texte erstellen}\label{l:gui-texten}
+
+\subsubsection{Übersetzung erstellen}\label{l:gui-uebersetzen}
+
+\subsubsection{Korrektur, Qualitätskontrolle, Freigabe}\label{l:gui-qs}
 
 Bei Kontroll-Aufgaben (Lektorat, QS) unterbrechungsfreies Arbeiten ermöglichen (Infinite-Scroll).
 
