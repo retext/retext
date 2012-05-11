@@ -1,6 +1,11 @@
 \subsection{Domänenmodell}\label{l:domänenmodell}
 
-Aus den vorangegangenen Überlegungen zur Anwendung und zum Workflow lässt sich ein Domänenmodell extrahieren, die einzelnen logischen Objekte innerhalb der Anwendung beschreibt, mit deren Hilfe alle Operationen abgebildet werden.
+\begin{center}
+\includegraphics[width=\textwidth]{media/domain.pdf}
+\captionof{figure}{Domänenmodell}\label{chart:domain}
+\end{center}
+
+Aus den vorangegangenen Überlegungen zur Anwendung und zum Workflow lässt sich ein Domänenmodell extrahieren, die einzelnen logischen Objekte innerhalb der Anwendung beschreibt, mit deren Hilfe alle Operationen abgebildet werden. Abbildung~\ref{chart:domain} zeigt das Modell in der Übersicht.
 
 \subsubsection{Projekt}\label{model:projekt}
 
@@ -18,6 +23,28 @@ Containern dienen zur hierarchischen Organisation der Texte innerhalb des Projek
 
 Beschreibt einen einzelnen Textbaustein.
 
+\subsubsection{Version}\label{model:version}
+
+Beschreibt eine Version des Inhalts eines Textbausteins.
+
+\subsubsection{Attribut}\label{model:attribut}
+
+Beschreibt die Attribute eines Textbausteins.
+
+\subsubsection{Status}\label{model:status}
+
+Beschreibt die verschiedenen Zustände eines Textbausteins.
+
+\begin{enumerate}\itemsep -5pt
+\item \texttt{Neu}, Textbaustein erzeugt
+\item \texttt{Leer}, Textbaustein definiert
+\item \texttt{Befüllt}, Textbaustein mit Inhalt befüllt
+\item \texttt{Korrigiert}, Orthografie geprüft
+\item \texttt{Geprüft}, Inhalt geprüft (Qualitätsicherung)
+\item \texttt{Freigegeben}, durch Kunden freigegeben
+\item \texttt{Veröffentlicht}, in Produkt übernommen
+\end{enumerate}
+
 \subsubsection{Benutzer}\label{model:benutzer}
 
 Repräsentiert einen Benutzer des Systems
@@ -34,19 +61,11 @@ Projektspezifische Kontext-Informationen lassen sich hinterlegen und Textbaustei
 
 Kommentare enthalten Hinweise und Fragen zu einzelnen Texten und Texbausteinen.
 
-\subsubsection{Status}\label{model:status}
+\subsubsection{Workflow}\label{model:workflow}
 
-Beschreibt die verschiedenen Zustände eines Textbausteins.
+Beschreibt einen projektspezifischen Workflow.
 
-\begin{enumerate}\itemsep -5pt
-\item \texttt{Neu}, Textbaustein erzeugt
-\item \texttt{Leer}, Textbaustein definiert
-\item \texttt{Befüllt}, Textbaustein mit Inhalt befüllt
-\item \texttt{Korrigiert}, Orthografie geprüft
-\item \texttt{Geprüft}, Inhalt geprüft (Qualitätsicherung)
-\item \texttt{Freigegeben}, durch Kunden freigegeben
-\item \texttt{Veröffentlicht}, in Produkt übernommen
-\end{enumerate}
+
 
 \subsubsection{Rolle}\label{model:rolle}
 
@@ -56,7 +75,7 @@ Beschreibt die verschiedenen Rollen innerhalb der Anwendung. Die Rechte der Roll
 \item \texttt{Administrator}, hat alle Rechte 
 \end{enumerate}
 
-\subsection{Recht}\label{model:recht}
+\subsubsection{Recht}\label{model:recht}
 
 Beschreibt ein Recht, eine Operation auf einem Objekt auszuführen. Die Rechte sind:
 

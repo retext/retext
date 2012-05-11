@@ -1,0 +1,49 @@
+digraph G {
+
+graph [ rankdir=BT ]
+node [ shape=record fontsize=12 ]
+edge [ fontsize=10 ]
+
+Projekt [ label="{Projekt|}" ]
+Sprache [ label="{Sprache|+projekt\l}" ]
+Container [ label="{Container|+projekt\l+parentContainer\l}" ]
+Textbaustein [ label="{Textbaustein|+container\l+status\l+benutzer\l+version\l+sprache\l}" ]
+Benutzer [ label="{Benutzer|}" ]
+Projektmitarbeiter [ label="{Projektmitarbeiter|+projekt\l+rollen\l}" ]
+Kontext [ label="{Kontext-Information|+container\l+texbaustein\l}" ]
+Kommentar [ label="{Kommentar|+benutzer\l}" ]
+Status [ label="{Status|}" ]
+Rolle [ label="{Rolle|+rechte\l}" ]
+Recht [ label="{Recht|}" ]
+Gruppe [ label="{Gruppe|+projekt\l+mitglieder\l+rollen\l}" ]
+Version [ label="{Version|}" ]
+Workflow [ label="{Workflow|+projekt}" ]
+Attribut [ label="{Attribut|}" ]
+
+edge [ arrowhead=none color="#bbbbbb" ]
+
+Sprache -> Projekt [ taillabel="1..n" headlabel="1" ]
+Container -> Projekt [ taillabel="1..n" headlabel="1" ]
+Container -> Container [ taillabel="0..n" headlabel="1" ]
+Textbaustein -> Container [ taillabel="0..n" headlabel="1" ]
+Textbaustein -> Sprache [ taillabel="0..n" headlabel="1" ]
+Projektmitarbeiter -> Projekt  [ taillabel="1..n" headlabel="1" ]
+Attribut -> Textbaustein [ taillabel="0..n" headlabel="1" ]
+Projektmitarbeiter -> Gruppe [ taillabel="0..n" headlabel="1" ]
+Gruppe -> Projekt [ taillabel="0..n" headlabel="1" ]
+Status -> Textbaustein [ taillabel="1" headlabel="0..n" ]
+Benutzer -> Textbaustein [ taillabel="1" headlabel="0..n" ]
+Kontext -> Container [ taillabel="0..n" headlabel="1" ]
+Kontext -> Textbaustein [ taillabel="0..n" headlabel="1" ]
+Benutzer -> Kommentar [ taillabel="1" headlabel="0..n" ]
+Rolle -> Projektmitarbeiter  [ taillabel="m" headlabel="0..n" ]
+Rolle -> Gruppe [ taillabel="m" headlabel="0..n" ]
+Recht -> Rolle [ taillabel="m" headlabel="0..n" ]
+Workflow -> Projekt [ taillabel="0..n" headlabel="1" ]
+
+edge [ arrowhead=onormal color="#5abbe6" fontcolor="#5abbe6" ]
+Benutzer -> Projektmitarbeiter
+Kommentar -> Kontext
+Version -> Textbaustein
+
+}
