@@ -2,85 +2,33 @@
 
 Aus den vorangegangenen Überlegungen zur Anwendung und zum Workflow lässt sich ein Domänenmodell extrahieren, die einzelnen logischen Objekte innerhalb der Anwendung beschreibt, mit deren Hilfe alle Operationen abgebildet werden.
 
-Die Beschreibung der einzelnen Modelle ist in einzelne Abschnitte aufgeteilt. Die aus einer kurzen Beschreibung des Modells und dessen Feldern bestehen. Optionale Felder haben als Standardwert \texttt{NULL}.
-
 \subsubsection{Projekt}\label{model:projekt}
 
 Projekte bildet den Rahmen für alle Texte eines einzelnen Produktes.
-
-\begin{tabular}{@{}l l l}
-\hline
-Name&\texttt{Text}&\\
-Beschreibung&\texttt{Text}&optional\\
-\hline
-\end{tabular}
 
 \subsubsection{Sprache}\label{model:sprache}
 
 Die Texte jedes Projekts liegen in einer oder mehreren Sprachen vor.
 
-\begin{tabular}{@{}l l l}
-\hline
-Name&\texttt{Text}&\\
-Projekt&\texttt{Projekt \ref{model:projekt}}&\\
-Beschreibung&\texttt{Text}&optional\\
-\hline
-\end{tabular}
-
 \subsubsection{Container}\label{model:container}
 
 Containern dienen zur hierarchischen Organisation der Texte innerhalb des Projektes. Containern können weitere Container und Texte enthalten. Eine Container ohne übergeordneten Container befindet sich auf der obersten Ebene. Es kann mehrere Containern auf der obersten Ebene geben.
 
-\begin{tabular}{@{}l l l}
-\hline
-übergeordnete Container&\texttt{Container \ref{model:container}}&optional\\
-Reihenfolge&\texttt{int}&\\
-Beschreibung&\texttt{Text}&optional\\
-\hline
-\end{tabular}
 \subsubsection{Textbaustein}\label{model:textbaustein}
 
 Beschreibt einen einzelnen Textbaustein.
-
-\begin{tabular}{@{}l l l}
-\hline
-Identifier&\texttt{Text}&kann automatisch erzeugt werden, projektweit einmalig\\
-übergeordneter Container&\texttt{Container \ref{model:container}}&\\
-Reihenfolge&\texttt{int}&\\
-Sprache&\texttt{Sprache \ref{model:sprache}}&\\
-Version&\texttt{int}&\\
-Status&\texttt{Status \ref{model:status}}&Standard: \typoquotes{neu}\\
-Inhalt&\texttt{Text}&optional\\
-\hline
-\end{tabular}
 
 \subsubsection{Benutzer}\label{model:benutzer}
 
 Repräsentiert einen Benutzer des Systems
 
-\begin{tabular}{@{}l l l}
-\hline
-E-Mail-Adresse&\texttt{Text}&systemweit einmalig\\
-Passwort&\texttt{Text}&\\
-Passwort-Zurücksetzen-Schlüssel&\texttt{Text}\\
-Name&\texttt{Text}&optional\\
-Organisation&\texttt{Text}&optional\\
-Telefon&\texttt{Text}&optional\\
-Profilfoto&\texttt{Datei}&optional\\
-\hline
-\end{tabular}
-
 \subsubsection{Projektmitarbeiter}\label{model:projektmitarbeiter}
 
 Gestattet einem Benutzer die Mitarbeit an einem Projekt und legt dabei fest, welche Rechte dem Benutzer für das Projekt zustehen.
 
-\begin{tabular}{@{}l l l}
-\hline
-Benutzer&\texttt{Benutzer \ref{model:benutzer}}&\\
-Projekt&\texttt{Projekt \ref{model:projekt}}&\\
-% Rollen&\texttt{Rolle[] \ref{model:rolle}}&\\
-\hline
-\end{tabular}
+\subsubsection{Kontext-Information}\label{model:contextinfo}
+
+Projektspezifische Kontext-Informationen lassen sich hinterlegen und Textbausteinen und Containern zuordnen.
 
 \subsubsection{Status}\label{model:status}
 
@@ -103,3 +51,18 @@ Beschreibt die verschiedenen Rollen innerhalb der Anwendung. Die Rechte der Roll
 \begin{enumerate}\itemsep -5pt
 \item \texttt{Administrator}, hat alle Rechte 
 \end{enumerate}
+
+\subsection{Recht}\label{model:recht}
+
+Beschreibt ein Recht, eine Operation auf einem Objekt auszuführen. Die Rechte sind:
+
+\begin{enumerate}\itemsep -5pt
+\item \texttt{Create}, Erstellen eines Objekts
+\item \texttt{Read}, Lesen eines Objekts
+\item \texttt{Update}, Modifizieren eines Objekts
+\item \texttt{Delete}, Löschen eines Objekts
+\end{enumerate}
+
+\subsubsection{Gruppe}\label{model:gruppe}
+
+Mitarbeiter können in Gruppen zusammengefasst werden. Dies erleichtert die Konfiguration des Workflows und der Rechte.
