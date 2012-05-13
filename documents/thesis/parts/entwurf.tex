@@ -40,12 +40,16 @@ Qualitätskontrolle & \HarveyQuarter   & \HarveyEmpty     & \HarveyEmpty    & \H
 Freigabe           & \HarveyEmpty     & \HarveyEmpty     & \HarveyEmpty    & \HarveyEmpty    & \HarveyEmpty   & \HarveyQuarter   & \HarveyQuarter \\
 Veröffentlichung   & \HarveyEmpty     & \HarveyEmpty     & \HarveyEmpty    & \HarveyEmpty    & \HarveyQuarter & \HarveyEmpty     & \HarveyEmpty \\
 \end{tabular}
-\caption{Umfang und Haufigkeit der Benutzung des browserbasierten GUIs bezogen auf die durchgeführten Operation}
+\caption{Umfang und Häufigkeit der Benutzung des browserbasierten GUIs bezogen auf die durchgeführten Operation}
 \label{table:webgui-usage-by-persona}
 \end{center}
 \end{table}
 
 Anhand der Personas lässt sich ermitteln, wer und in welchem Umfang das browserbasiert GUI verwenden wird. Tabelle~\ref{table:webgui-usage-by-persona}~(S.\pageref{table:webgui-usage-by-persona}) zeigt in der Übersicht, welche Operationen besonders bei der Entwicklung des GUIs beachtet werden müssen. Besonders viel Zeit werden von Konzeptern und von den Mitarbeiter, die die Inhalte erstellen, kontrollieren und freigeben im GUI verbracht, da diese Tätigkeiten bezogen auf die einzelnen Texte des Produktes sehr arbeitsintensiv sind.
+
+\bigskip
+
+Die folgenden Wireframes zeigend dementsprechend die wichtigsten Ansichten des GUIs.
 
 \subsubsection{Aufbau des GUIs}
 
@@ -95,6 +99,17 @@ Abbildung~\ref{chart:gui-uebersetzen} zeigt die Darstellung des GUIs zur Überse
 \end{center}
 
 Abbildung~\ref{chart:gui-qs} zeigt die Darstellung des GUIs zur Kontrolle und Freigabe der Texte des Produktes. In dieser Ansicht werden die verschiedenen Stati der Textbausteine bearbeitet. Hierzu sind die Textbausteine mit ihren Übersetzungen dargestellt \ball{1}. Über die mit Icons markierten Schaltflächen \ball{2} lassen sich die einzelnen Stati direkt setzen. Von links nach rechts sind das: Korrigiert, Geprüft, Freigegeben und Veröffentlicht. Es wird jeweils zwischen \typoquotes{keine Angabe} (grau), \typoquotes{abgelehnt} (rot) und \typoquotes{in Ordnung} (grün) unterschieden. Hier wird auch die Anzahl der hinterlegten Kommentare angezeigt. Zum massenhaften bearbeiten von Stati können mehrere oder alle Elemente über die Checkboxen \ball{3} ausgewählt werden. Über die Status-Icons in der Kopfzeile kann dann der Status für alle ausgewählten Elemente gleichzeitig gesetzt werden.
+
+\subsubsection{Kontext-Informationen}\label{l:gui-kontext}
+
+\begin{center}
+\includegraphics[width=0.35\textwidth]{media/GUIKontext-Informationen.pdf}
+\captionof{figure}{Kontext-Informationen}\label{chart:gui-kontext}
+\end{center}
+
+Abbildung~\ref{chart:gui-kontext} zeigt die Darstellung des GUIs zur Anzeige und Bearbeitung der Kontext-Informationen. Der Inhalt der Ansicht ist an die jeweilige Operation angepasst.
+
+TODO: Domänenmodell: Favorit
 
 \subsection{Anbindung an den Server, Komponenten}
 
