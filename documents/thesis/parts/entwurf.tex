@@ -2,7 +2,7 @@
 
 \begin{figure}[htb]
 \begin{center}
-\includegraphics[width=0.6\textwidth]{media/komponenten.pdf}
+\includegraphics[width=0.75\textwidth]{media/komponenten.pdf}
 \end{center}
 \caption{Komponententen des zentralen Systems}
 \label{chart:komponenten}
@@ -125,25 +125,40 @@ Die in Abbildung~\ref{chart:komponenten}~(S.\pageref{chart:komponenten}) \emph{g
 
 \subsection{Entwurf des Anwendungsservers}\label{l:entwurf-server}
 
-In Abbildung~\ref{chart:komponenten}~(S.\pageref{chart:komponenten}) finden sich die Komponenten des Servers grau eingefärbt. 
+In diesem Abschnitt werden die in Abbildung~\ref{chart:komponenten}~(S.\pageref{chart:komponenten}) grau eingefärbten Komponenten des Servers beschrieben.
 
 \subsubsection{API, Cronjobs, CLI, …}
 
+In der API-Komponenten, die als REST-API implementiert ist, sind über eine Routing-Tabelle alle Controller registriert. Da das System mit einer vollständigen Abdeckung aller Operation durch API-Endpunkte implementiert ist, wird diese auch lokalen ausgeführten Scripten wie z.B. Cronjobs oder CLIs verwendet. Dies ermöglicht eine saubere Trennung, auch für administrative Aufgaben, und verhindert, dass Sonderfälle oder Workarounds für bestimmte Aufgaben kultiviert werden.
+
+\subsubsection{Dependency-Injection-Container}
+
+Der einzelnen Komponenten des Servers sind nach dem Prinzip der losen Kopplung verbunden (vgl.~\cite[S.62]{hn-web20}). Hierzu werden die einzelnen Komponenten als Services in einem Dependency-Injection-Container (DI-Container) registriert und von diesem instanziiert. Alle Komponenten können auf den DI-Container zugreifen und dort andere Komponenten anfordern. Der DI-Container übernimmt, wie der Name schon sagt, auch die Aufgabe Abhängigkeiten der einzelnen Komponenten bereitzustellen. Ein so aufgebautes System, bei dem konkrete Instanzen nicht mehr an der Stelle erzeugt werden, an der sie verwendet werden, sondern von außen \typoquotes{hereingereicht} werden, ist leicht zu modifizieren und vor allem leicht zu testen, da sich Abhängigkeiten für Tests leicht durch Mock-Objekte austauschen lassen (vgl.~\cite[Kap.2]{freeman2009growing}).
+
 \subsubsection{Controller}
+
+Zentrale Komponente bilden die Controller. Hier ist die Business-Logik der Anwendung implementiert. Die einzelnen Operationen sind in verschiedenen Controllern implementiert, so ist das System leicht erweiter- und wartbar. Die Controller werden von der API-Komponente entsprechende den Routen instanziiert, für die sie registriert sind. Controller haben über den DI-Container Zugriff auf alle Teile des Systems und erzeugen die Antwort auf eine Anfrage, die mit der API-Komponenten an den Client zurück geschickt wird.
 
 \subsubsection{Models}
 
-\subsubsection{Dependency-Injection-Container}
+Zu den Kern-Komponenten gehören auch die Models. Diese können ohne den DI-Container direkt von den jeweiligen Komponenten instanziiert werden, da sie reine Datenobjekt sind und werden Logik enthalten, noch Abhängigkeiten besitzen. Siehe hierzu auch das Domänenmodell auf Seite \pageref{l:domänenmodell}.
+
+\subsubsection{Persistenz, ORM}
+
+Mit dieser Komponente werden die innerhalb der Anwendung erzeugten Daten persistiert. Mithilfe eines Object-Relational-Mappers (ORM) werden die Domänendaten, die durch die Models ausgedrückt werden, in relationale Daten umgewandelt, sofern zur Datenspeicherung ein relationales Datenbanksystem (RDBMS) verwendet wird. Wird hier eine nicht-relationale Datenbank (NoSQL, Dokumentendatenbank) verwendet, kann der ORM entfallen. 
+
+\subsubsection{Import/Export \& Benachrichtigung}
+
+Diese Komponente ist für den Import von Daten aus verschiedenen Formaten in das interne Repräsentationsmodell und den umgekehrten Export zuständig. Hierbei gibt es synchrone Pull-Exporte, z.B. den Download eines Exports über die Schnittstelle und asynchrone Push-Exporte, z.B. den Upload auf einen FTP-Server.
+
+\subsubsection{Jobs}
 
 \subsubsection{Workflow}
 
 \subsubsection{Service-Adapter}
 
-\subsubsection{Persistenz, ORM}
 
-\subsubsection{Jobs}
 
-\subsubsection{Import/Export \& Benachrichtigung}
 
 
 
