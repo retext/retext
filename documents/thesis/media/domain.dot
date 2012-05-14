@@ -9,46 +9,69 @@ Sprache [ label="{Sprache|+projekt\l}" ]
 Container [ label="{Container|+projekt\l+parentContainer\l}" ]
 Textbaustein [ label="{Textbaustein|+container\l+status\l+benutzer\l+version\l+sprache\l}" ]
 Benutzer [ label="{Benutzer|}" ]
-Projektmitarbeiter [ label="{Projektmitarbeiter|+projekt\l+rollen\l}" ]
+Projektmitarbeiter [ label="{Projektmitarbeiter|+projekt\l+rollen[]\l}" ]
 Kontext [ label="{Kontext-Information|+container\l+texbaustein\l+sprache\l}" ]
 Kommentar [ label="{Kommentar|+benutzer\l}" ]
 Status [ label="{Status|}" ]
-StatusChange [ label="{Statusänderung|+benutzer\l+status\l+textbaustein\l}" ]
-Rolle [ label="{Rolle|+rechte\l}" ]
+StatusChange [ label="{Statusänderung|}" ]
+Rolle [ label="{Rolle|+projekt\l+rechte[]\l}" ]
 Recht [ label="{Recht|}" ]
-Gruppe [ label="{Gruppe|+projekt\l+mitglieder\l+rollen\l}" ]
+Gruppe [ label="{Gruppe|+projekt\l+mitglieder[]\l+rollen[]\l}" ]
 Version [ label="{Version|}" ]
 Workflow [ label="{Workflow|+projekt}" ]
 Attribut [ label="{Attribut|}" ]
+Datei [ label="{Datei|}" ]
+Notiz [ label="{Notiz|}" ]
 
-edge [ arrowhead=none color="#bbbbbb" ]
 
-Sprache -> Projekt [ taillabel="1..n" headlabel="1" ]
+# Association
+edge [ arrowhead=none color="#999999" ]
+
+# Aggregation
+# Aggregation can occur when a class is a collection or container of other classes, but where the contained classes do not have a strong life cycle dependency on the container—essentially, if the container is destroyed, its contents are not.
+# In UML, it is graphically represented as a hollow diamond shape on the containing class end of the tree with lines that connect contained classes to the containing class.
+edge [ arrowhead=odiamond ]
+Status -> Textbaustein [ taillabel="1" headlabel="0..n" ]
+Recht -> Rolle [ taillabel="m" headlabel="0..n" ]
+Benutzer -> Textbaustein [ taillabel="1" headlabel="0..n" ]
+Benutzer -> Kommentar [ taillabel="1" headlabel="0..n" ]
 Sprache -> Kontext [ taillabel="1" headlabel="0..n" ]
-Container -> Projekt [ taillabel="1..n" headlabel="1" ]
+Sprache -> Textbaustein [ taillabel="1" headlabel="0..n" ]
+Projektmitarbeiter -> Gruppe [ taillabel="0..n" headlabel="1" ]
+Rolle -> Gruppe [ taillabel="m" headlabel="0..n" ]
+Rolle -> Projektmitarbeiter  [ taillabel="m" headlabel="0..n" ]
+
+# Composition
+# Composition usually has a strong life cycle dependency between instances of the container class and instances of the contained class(es): If the container is destroyed, normally every instance that it contains is destroyed as well. 
+# The UML graphical representation of a composition relationship is a filled diamond shape on the containing class end of the tree of lines that connect contained class(es) to the containing class.
+edge [ arrowhead=diamond ]
+Attribut -> Textbaustein [ taillabel="0..n" headlabel="1" ]
 Container -> Container [ taillabel="0..n" headlabel="1" ]
 Textbaustein -> Container [ taillabel="0..n" headlabel="1" ]
-Textbaustein -> Sprache [ taillabel="0..n" headlabel="1" ]
-Projektmitarbeiter -> Projekt  [ taillabel="1..n" headlabel="1" ]
-Attribut -> Textbaustein [ taillabel="0..n" headlabel="1" ]
-Projektmitarbeiter -> Gruppe [ taillabel="0..n" headlabel="1" ]
-Gruppe -> Projekt [ taillabel="0..n" headlabel="1" ]
-Status -> Textbaustein [ taillabel="1" headlabel="0..n" ]
-Benutzer -> Textbaustein [ taillabel="1" headlabel="0..n" ]
 Kontext -> Container [ taillabel="0..n" headlabel="1" ]
 Kontext -> Textbaustein [ taillabel="0..n" headlabel="1" ]
-Benutzer -> Kommentar [ taillabel="1" headlabel="0..n" ]
-Rolle -> Projektmitarbeiter  [ taillabel="m" headlabel="0..n" ]
-Rolle -> Gruppe [ taillabel="m" headlabel="0..n" ]
-Recht -> Rolle [ taillabel="m" headlabel="0..n" ]
+Sprache -> Projekt [ taillabel="1..n" headlabel="1" ]
+Container -> Projekt [ taillabel="1..n" headlabel="1" ]
 Workflow -> Projekt [ taillabel="0..n" headlabel="1" ]
-Status -> StatusChange [ taillabel="1" headlabel="0..n" ]
-Benutzer -> StatusChange [ taillabel="1" headlabel="0..n" ]
-StatusChange -> Textbaustein  [ taillabel="1" headlabel="0..n" ]
+Projektmitarbeiter -> Projekt  [ taillabel="1..n" headlabel="1" ]
+Gruppe -> Projekt [ taillabel="0..n" headlabel="1" ]
+Rolle -> Projekt [ taillabel="0..n" headlabel="1" ]
+Kommentar -> Kommentar [ taillabel="0..n" headlabel="1" ]
 
-edge [ arrowhead=onormal color="#5abbe6" fontcolor="#5abbe6" weight=10 ]
+# Generalization
+node [ shape=point color="#5abbe6" ]
+KontextMerge
+
+edge [ arrowtail=none arrowhead=onormal color="#5abbe6" fontcolor="#5abbe6" weight=10 headport=s tailport=n ]
 Benutzer -> Projektmitarbeiter
-Kommentar -> Kontext
+KontextMerge -> Kontext
 Version -> Textbaustein
+StatusChange -> Version
+
+edge [ arrowhead=none ]
+Kommentar -> KontextMerge
+Datei -> KontextMerge
+Notiz -> KontextMerge
+
 
 }
