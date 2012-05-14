@@ -12,7 +12,7 @@ Im vorigen Abschnitt~\ref{l:konzeption}~(S.\pageref{l:konzeption}~ff.) wurde ein
 
 Abbildung~\ref{chart:komponenten} liefert einen Überblick über die in den folgenden Abschnitten beschriebenen Komponenten des Systems. \emph{Blau} eingezeichnet sind der Endanwender und externe Benutzer-Werkzeuge wie z.B. Plug-Ins und Software von Drittanbietern. \emph{Gelb} eingezeichnet sind die Komponenten des browserbasierten GUI. \emph{Grau} eingezeichnet sind die Komponenten des Servers. \emph{Braun} eingezeichnet sind (aus Sicht des Servers) externe Dienste, die durch diesen angebunden werden. \emph{Gestrichelte Linien} zeigen Kommunikationsverbindung zwischen Komponenten über Schnittstellen. \emph{Durchgezogene Linien} zeigen Verbindungungen innerhalb eines Systems. 
 
-Der zentrale Bestandteil der Anwendung ist der Server, mit dem verschiedene GUIs über Schnittstellen kommunzieren. Das wichtigsten GUI ist das browserbasierte Interface, da hiermit alle Mitarbeiter arbeiten, welches in Abschnitt~\ref{l:entwurf-gui}~(S.\pageref{l:entwurf-gui}) beschrieben wird. In Abschnitt~\ref{l:entwurf-server}~(S.\pageref{l:entwurf-server}) werden die wichtigsten Komponenten des Servers beschrieben. Abschließend wird in Abschnitt~\ref{l:domänenmodell}~(S.\pageref{l:domänenmodell}) das Domänenmodell vorgestellt, das allen Teilen der Anwendung zu grunde liegt.
+Der zentrale Bestandteil der Anwendung ist der Server, mit dem verschiedene GUIs über Schnittstellen kommunzieren. Das wichtigsten GUI ist das browserbasierte Interface, da hiermit alle Mitarbeiter arbeiten, dessen Gestaltung in Abschnitt~\ref{l:entwurf-gui}~(S.\pageref{l:entwurf-gui}) und Anbindung an den Server in Abschnitt~\ref{l:anbindung-gui}~(S.\pageref{l:anbindung-gui}) beschrieben wird. Abschnitt~\ref{l:entwurf-server}~(S.\pageref{l:entwurf-server}) beschreibt die Komponenten des Servers. Abschließend wird in Abschnitt~\ref{l:domänenmodell}~(S.\pageref{l:domänenmodell}) das Domänenmodell vorgestellt, das allen Teilen der Anwendung zu grunde liegt.
 
 \subsection{Entwurf eines browserbasierten GUI}\label{l:entwurf-gui}
 
@@ -119,11 +119,13 @@ Abbildung~\ref{chart:gui-kontext} zeigt die Darstellung des GUIs zur Anzeige und
 
 Über das Suchfeld \ball{2} lässt sich die aktuellen Ansicht filtern. In den Kontextinformation findet sich direkter Zugang zu Informationen und Operationen bezogen auf den aktuellen Inhalt. Die Inhalte lassen sich über Formulare \ball{3} direkt bearbeiten, Notizen und Dateien werden angezeigt \ball{4} und der Diksussion mithilfe der Kommentarfunktion ist möglich \ball{5}.
 
-\subsection{Anbindung an den Server, Komponenten}
+\subsection{Anbindung der GUI an den Server}\label{l:anbindung-gui}
+
+Die in Abbildung~\ref{chart:komponenten}~(S.\pageref{chart:komponenten}) \emph{gelb} eingezeichneten Komponenten zeigen den Aufbau eines browserbasierten GUIs. Mittlerweile ist es üblich, klassische Paradigmen aus der Softwarentwicklung auch in browserbasierten Anwendung zu verwenden. Dementsprechend wird die GUI in Form einer MVC-Anwendung implementiert. Die Kommunikation mit dem Server wird in einer eigenen Komponente, dem \emph{API-Adapter}, gekapselt, die über die REST-Schnittstelle JSON-Daten mit dem Server austauscht. Die Repräsentation der Domänendaten erfolgt dabei mithilfe von entsprechenden \emph{Models}, die durch die \emph{Controller} mit den \emph{Views} verbunden werden. Die Models sind nicht zwangsläufig mit den Models auf der Serverseite identisch sondern können Aggregationen sein, oder nur Teile der Daten abbilden, sie orientieren sich an der öffentlichen API des Servers, die nicht zwingenderweise die interenen Models 1:1 nach außen weiterreicht. Views sind einzelne Bestandteile einer Ansicht. So lassen sich individuelle Bereiche der Darstellung leicht aktualisieren, ohne die ganze Seite neu laden zu müssen -- in \cite[S.1--5 und S.65--72]{maccaw2011javascript} ist dieses Prinzip ausführlich erläutert.
 
 \subsection{Entwurf des Anwendungsservers}\label{l:entwurf-server}
 
-In Abbildung~\ref{chart:komponenten}~(S.\pageref{chart:komponenten}) finden sich die Komponenten des Servers grau eingefärbt.
+In Abbildung~\ref{chart:komponenten}~(S.\pageref{chart:komponenten}) finden sich die Komponenten des Servers grau eingefärbt. 
 
 \subsubsection{API, Cronjobs, CLI, …}
 
@@ -146,3 +148,5 @@ In Abbildung~\ref{chart:komponenten}~(S.\pageref{chart:komponenten}) finden sich
 
 
 \input{parts/domaenenmodell.tex}
+
+\pagebreak
