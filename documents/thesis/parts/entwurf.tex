@@ -8,7 +8,7 @@
 \label{chart:komponenten}
 \end{figure}
 
-Im vorigen Abschnitt \ref{l:konzeption} (S.\pageref{l:konzeption} ff.) wurde eine Anwendung konzipiert, die das gesamte Spektrum der Anforderungen abdeckt, die in den vorangegangenen Abschnitten beschrieben wurden. In diesem Abschnitt werden die Komponenten beschrieben, die zur Erfüllung der wichtigsten Anforderungen benötigt werden. 
+Im vorigen Kapitel \ref{l:konzeption} (S.\pageref{l:konzeption} ff.) wurde eine Anwendung konzipiert, die das gesamte Spektrum der Anforderungen abdeckt, die in den vorangegangenen Kapiteln beschrieben wurden. In diesem Kapitel werden die Komponenten beschrieben, die zur Erfüllung der wichtigsten Anforderungen benötigt werden. 
 
 Abbildung~\ref{chart:komponenten} liefert einen Überblick über die in den folgenden Abschnitten beschriebenen Komponenten des Systems. \emph{Blau} eingezeichnet sind der Endanwender und externe Benutzer-Werkzeuge wie z.B. Plug-Ins und Software von Drittanbietern. \emph{Gelb} eingezeichnet sind die Komponenten des browserbasierten GUI. \emph{Grau} eingezeichnet sind die Komponenten des Servers. \emph{Braun} eingezeichnet sind (aus Sicht des Servers) externe Dienste, die durch diesen angebunden werden. \emph{Gestrichelte Linien} zeigen Kommunikationsverbindung zwischen Komponenten über Schnittstellen. \emph{Durchgezogene Linien} zeigen Verbindungungen innerhalb eines Systems. 
 
@@ -16,7 +16,7 @@ Der zentrale Bestandteil der Anwendung ist der Server, mit dem verschiedene GUIs
 
 \subsection{Entwurf eines browserbasierten GUI}\label{l:entwurf-gui}
 
-Das browserbasierte GUI der Anwendung ist der wichtigste Zugang zum System, da es von allen Mitarbeiter zu irgendeinem Zeitpunkt verwendet wird. Die Zeit, die der Einzelne damit verbringt kann sich je nach Rolle stark unterscheiden. Neben den sehr unterschiedlichen Anforderungen and das GUI sind die Benutzer auch technisch sehr unterschiedlich stark versiert, wie in den Personas in Abschnitt \ref{l:personas} (S.\pageref{l:personas} ff.) gezeigt wurde. Diesen Umständen muss bei der Gestaltung eines GUI Rechnung getragen werden. In Anlehnung an \cite{nielsen} wurden für den Entwurf der browserbasierten GUI folgende Leitlinien gewählt:
+Das browserbasierte GUI der Anwendung ist der wichtigste Zugang zum System, da es von allen Mitarbeiter zu irgendeinem Zeitpunkt verwendet wird. Die Zeit, die der Einzelne damit verbringt kann sich je nach Rolle stark unterscheiden. Neben den sehr unterschiedlichen Anforderungen and das GUI sind die Benutzer auch technisch sehr unterschiedlich stark versiert, wie in den Personas in Kapitel \ref{l:personas} (S.\pageref{l:personas} ff.) gezeigt wurde. Diesen Umständen muss bei der Gestaltung eines GUI Rechnung getragen werden. In Anlehnung an \cite{nielsen} wurden für den Entwurf der browserbasierten GUI folgende Leitlinien gewählt:
 
 \begin{enumerate}\itemsep -5pt
 \item{Das wichtigste zuerst: Die aktuelle Aufgabe soll immer im Fokus der Darstellung liegen.}
@@ -186,6 +186,6 @@ Die vorgeschlagene Lösung wird anhand eines realen Projektgs auf ihre praxistau
 
 \subsection{Zusammenfassung}
 
-In diesem Abschnitt wurde das zentrale System der Anwendung, bestehend aus Server und browserbasierten GUI entworfen und beschrieben. Der Aufbau des Servers mithilfe einer lose gekoppelten Architektur ermöglich einfache Erweiterbarkeit und Wartung. Das browserbasierte GUI ist als JavaScript-MVC-Anwendung entworfen, die über eine REST-API mit dem Server kommuniziert. Die wichtigsten Ansichten des GUIs wurden mit Hilfe von Wireframes beschrieben. 
+In diesem Kapitel wurde das zentrale System der Anwendung, bestehend aus Server und browserbasierten GUI entworfen und beschrieben. Der Aufbau des Servers mithilfe einer lose gekoppelten Architektur ermöglich einfache Erweiterbarkeit und Wartung. Das browserbasierte GUI ist als JavaScript-MVC-Anwendung entworfen, die über eine REST-API mit dem Server kommuniziert. Die wichtigsten Ansichten des GUIs wurden mit Hilfe von Wireframes beschrieben. 
 
 \pagebreak
