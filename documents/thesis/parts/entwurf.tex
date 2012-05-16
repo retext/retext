@@ -170,12 +170,22 @@ In der Workflow-Komponente sind die Funktionen zur Definition und Ablaufsteuerun
 
 \input{parts/domaenenmodell.tex}
 
+\subsection{Implementierter Workflow}
+
+Innerhalb der Anwendung wird das Projekt angelegt und die dafür benötigten Textbausteine definiert. Hierbei können detaillierte Angaben zu deren Eigenschaften gemacht werden, z.B. über den Verwendungszweck oder die maximal Länge. Die einzelnen Textbausteine werden bei diesem Vorgang entsprechend dem Aufbau des Endproduktes in eine Reihenfolge gebracht und hierarchisch angeordnet. So wird eine leichte Orientierung und Zuordnung der Text zum Endprodukt möglich. 
+
+Nachdem die benötigten Textbausteine definiert wurden, werden diese durch Texter befüllt. Für Texter stellt die Anwendung Hilfsfunktionen zur Verfügung. Dazu zählen Informationen wie Zeichenlänge und Wortanzahl und Rechtschreibkorrektur mit Wörterbuch.
+
+Sobald die Texte hinterlegt wurden durchlaufen sie die Qualitätskontrolle durch andere Mitarbeiter des Projektes und anschließend den Freigabeprozess beim Kunden. Wurden die Texte freigegeben, können die zusammengestellten Texte in das Endprodukt übernommen werden. 
+
+Alle Vorgänge werden innerhalb der Anwendung protokolliert und sind so für jeden Beteiligten leicht nachvollziehbar. Aufgaben können automatisch aufgrund von Änderungen erzeugt werden, oder von Mitarbeiter angelegt werden. So wird sichergestellt, dass alle Projektmitarbeiter jederzeit über ihre Aufgaben bezüglich der Texte informiert sind, bei Änderungen die verantwortlichen Mitarbeiter informiert werden. Dadurch wird es möglich auch bei Korrekturen in letzter Minute diese Änderungen gezielt und transparent zu übernehmen.
+
+\subsection{Umsetzung am Beispiel des Studiengangsflyers}
+
+Die vorgeschlagene Lösung wird anhand eines realen Projektgs auf ihre praxistauglichkeit hin überprüft. Es handelt sich dabei um die einmal im Jahr erscheinende Informationsbröschüre des Studienganges Medieninformatik an der Hochschule RheinMain. Die Bröschure zu Beginn des Wintersemesters 2011/2012 einen Umfang von 28 Seiten zuzüglich Titel und Rückseite. In ihr findet sich das Grußwort des Studiengangsleiters, eine Kurzinfo über den Studiengang, das Studienprogramm mit Informationen zum Verlauf des Studiums, ein Terminkalender, Informationen zu Einrichtungen des Fachbereiches, eine Liste mit Personen im Fachbereich, sowie eine Umgebungskarte und ein Gebäudeplan. Die Broschüre wird von den Mitarbeitern des Fachbereiches selber erstellt.
+
 \subsection{Zusammenfassung}
 
 In diesem Abschnitt wurde das zentrale System der Anwendung, bestehend aus Server und browserbasierten GUI entworfen und beschrieben. Der Aufbau des Servers mithilfe einer lose gekoppelten Architektur ermöglich einfache Erweiterbarkeit und Wartung. Das browserbasierte GUI ist als JavaScript-MVC-Anwendung entworfen, die über eine REST-API mit dem Server kommuniziert. Die wichtigsten Ansichten des GUIs wurden mit Hilfe von Wireframes beschrieben. 
-
-\bigskip
-
-Im nächsten Abschnitt wird auf Basis dieses Entwurf ein Prototyp als Proof-of-Concept implementiert.
 
 \pagebreak
