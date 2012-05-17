@@ -4,3 +4,6 @@
 [submodule "friends/vendor/twig"]
 	path = friends/vendor/twig
 	url = git://github.com/fabpot/Twig.git
+[submodule "prototype/server"]
+	path = prototype/server
+	url = git://github.com/symfony/symfony-standard.git
