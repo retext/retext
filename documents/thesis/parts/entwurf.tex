@@ -8,15 +8,15 @@
 \label{chart:komponenten}
 \end{figure}
 
-Im vorigen Kapitel \ref{l:konzeption} (S.\pageref{l:konzeption} ff.) wurde eine Anwendung konzipiert, die das gesamte Spektrum der Anforderungen abdeckt, die in den vorangegangenen Kapiteln beschrieben wurden. In diesem Kapitel werden die Komponenten beschrieben, die zur Erfüllung der wichtigsten Anforderungen benötigt werden. 
+Im vorigen Kapitel \ref{l:konzeption} / S.\pageref{l:konzeption} wurde eine Anwendung konzipiert, die das gesamte Spektrum der Anforderungen abdeckt, die in den vorangegangenen Kapiteln beschrieben wurden. In diesem Kapitel werden die Komponenten beschrieben, die zur Erfüllung der wichtigsten Anforderungen benötigt werden.
 
 Abbildung~\ref{chart:komponenten} liefert einen Überblick über die in den folgenden Abschnitten beschriebenen Komponenten des Systems. \emph{Blau} eingezeichnet sind der Endanwender und externe Benutzer-Werkzeuge wie z.B. Plug-Ins und Software von Drittanbietern. \emph{Gelb} eingezeichnet sind die Komponenten des browserbasierten GUI. \emph{Grau} eingezeichnet sind die Komponenten des Servers. \emph{Braun} eingezeichnet sind (aus Sicht des Servers) externe Dienste, die durch diesen angebunden werden. \emph{Gestrichelte Linien} zeigen Kommunikationsverbindung zwischen Komponenten über Schnittstellen. \emph{Durchgezogene Linien} zeigen Verbindungungen innerhalb eines Systems. 
 
-Der zentrale Bestandteil der Anwendung ist der Server, mit dem verschiedene GUIs über Schnittstellen kommunzieren. Das wichtigsten GUI ist das browserbasierte Interface, da hiermit alle Mitarbeiter arbeiten, dessen Gestaltung in Abschnitt \ref{l:entwurf-gui} (S.\pageref{l:entwurf-gui}) und Anbindung an den Server in Abschnitt \ref{l:anbindung-gui} (S.\pageref{l:anbindung-gui}) beschrieben wird. Abschnitt \ref{l:entwurf-server} (S.\pageref{l:entwurf-server}) beschreibt die Komponenten des Servers. Abschließend wird in Abschnitt \ref{l:domänenmodell} (S.\pageref{l:domänenmodell}) das Domänenmodell vorgestellt, das allen Teilen der Anwendung zu grunde liegt.
+Der zentrale Bestandteil der Anwendung ist der Server, mit dem verschiedene GUIs über Schnittstellen kommunzieren. Das wichtigsten GUI ist das browserbasierte Interface, da hiermit alle Mitarbeiter arbeiten, dessen Gestaltung in Abschnitt \ref{l:entwurf-gui} / S.\pageref{l:entwurf-gui}) und Anbindung an den Server in Abschnitt \ref{l:anbindung-gui} / S.\pageref{l:anbindung-gui} beschrieben wird. Abschnitt \ref{l:entwurf-server} / S.\pageref{l:entwurf-server} beschreibt die Komponenten des Servers. Abschließend wird in Abschnitt \ref{l:domänenmodell} / S.\pageref{l:domänenmodell} das Domänenmodell vorgestellt, das allen Teilen der Anwendung zu grunde liegt.
 
 \subsection{Entwurf eines browserbasierten GUI}\label{l:entwurf-gui}
 
-Das browserbasierte GUI der Anwendung ist der wichtigste Zugang zum System, da es von allen Mitarbeiter zu irgendeinem Zeitpunkt verwendet wird. Die Zeit, die der Einzelne damit verbringt kann sich je nach Rolle stark unterscheiden. Neben den sehr unterschiedlichen Anforderungen and das GUI sind die Benutzer auch technisch sehr unterschiedlich stark versiert, wie in den Personas in Kapitel \ref{l:personas} (S.\pageref{l:personas} ff.) gezeigt wurde. Diesen Umständen muss bei der Gestaltung eines GUI Rechnung getragen werden. In Anlehnung an \cite{nielsen} wurden für den Entwurf der browserbasierten GUI folgende Leitlinien gewählt:
+Das browserbasierte GUI der Anwendung ist der wichtigste Zugang zum System, da es von allen Mitarbeiter zu irgendeinem Zeitpunkt verwendet wird. Die Zeit, die der Einzelne damit verbringt kann sich je nach Rolle stark unterscheiden. Neben den sehr unterschiedlichen Anforderungen and das GUI sind die Benutzer auch technisch sehr unterschiedlich stark versiert, wie in den Personas in Kapitel \ref{l:personas} / S.\pageref{l:personas} gezeigt wurde. Diesen Umständen muss bei der Gestaltung eines GUI Rechnung getragen werden. In Anlehnung an \cite{nielsen} wurden für den Entwurf der browserbasierten GUI folgende Leitlinien gewählt:
 
 \begin{enumerate}\itemsep -5pt
 \item{Das wichtigste zuerst: Die aktuelle Aufgabe soll immer im Fokus der Darstellung liegen.}
@@ -45,7 +45,7 @@ Veröffentlichung   & \HarveyEmpty     & \HarveyEmpty     & \HarveyEmpty    & \H
 \end{center}
 \end{table}
 
-Anhand der Personas lässt sich ermitteln, wer und in welchem Umfang das browserbasiert GUI verwenden wird. Tabelle \ref{table:webgui-usage-by-persona} (S.\pageref{table:webgui-usage-by-persona}) zeigt in der Übersicht, welche Operationen besonders bei der Entwicklung des GUIs beachtet werden müssen. Besonders viel Zeit werden von Konzeptern und von den Mitarbeiter, die die Inhalte erstellen, kontrollieren und freigeben im GUI verbracht, da diese Tätigkeiten bezogen auf die einzelnen Texte des Produktes sehr arbeitsintensiv sind.
+Anhand der Personas lässt sich ermitteln, wer und in welchem Umfang das browserbasiert GUI verwenden wird. Tabelle \ref{table:webgui-usage-by-persona} / S.\pageref{table:webgui-usage-by-persona} zeigt in der Übersicht, welche Operationen besonders bei der Entwicklung des GUIs beachtet werden müssen. Besonders viel Zeit werden von Konzeptern und von den Mitarbeiter, die die Inhalte erstellen, kontrollieren und freigeben im GUI verbracht, da diese Tätigkeiten bezogen auf die einzelnen Texte des Produktes sehr arbeitsintensiv sind.
 
 \bigskip
 
@@ -121,11 +121,11 @@ Abbildung~\ref{chart:gui-kontext} zeigt die Darstellung des GUIs zur Anzeige und
 
 \subsection{Anbindung der GUI an den Server}\label{l:anbindung-gui}
 
-Die in Abbildung~\ref{chart:komponenten} (S.\pageref{chart:komponenten}) \emph{gelb} eingezeichneten Komponenten zeigen den Aufbau eines browserbasierten GUIs. Mittlerweile ist es üblich, klassische Paradigmen aus der Softwarentwicklung auch in browserbasierten Anwendung zu verwenden. Dementsprechend wird die GUI in Form einer MVC-Anwendung implementiert. Die Kommunikation mit dem Server wird in einer eigenen Komponente, dem \emph{API-Adapter}, gekapselt, die über die REST-Schnitt"-stelle JSON-Daten mit dem Server austauscht. Die Repräsentation der Domänendaten erfolgt dabei mithilfe von entsprechenden \emph{Models}, die durch die \emph{Controller} mit den \emph{Views} verbunden werden. Die Models sind nicht zwangsläufig mit den Models auf der Serverseite identisch sondern können Aggregationen sein, oder nur Teile der Daten abbilden, sie orientieren sich an der öffentlichen API des Servers, die nicht zwingenderweise die interenen Models 1:1 nach außen weiterreicht. Views sind einzelne Bestandteile einer Ansicht. So lassen sich individuelle Bereiche der Darstellung leicht aktualisieren, ohne die ganze Seite neu laden zu müssen -- in \cite[S.1--5 und S.65--72]{maccaw2011javascript} ist dieses Prinzip ausführlich erläutert.
+Die in Abbildung~\ref{chart:komponenten} / S.\pageref{chart:komponenten} \emph{gelb} eingezeichneten Komponenten zeigen den Aufbau eines browserbasierten GUIs. Mittlerweile ist es üblich, klassische Paradigmen aus der Softwarentwicklung auch in browserbasierten Anwendung zu verwenden. Dementsprechend wird die GUI in Form einer MVC-Anwendung implementiert. Die Kommunikation mit dem Server wird in einer eigenen Komponente, dem \emph{API-Adapter}, gekapselt, die über die REST-Schnitt"-stelle JSON-Daten mit dem Server austauscht. Die Repräsentation der Domänendaten erfolgt dabei mithilfe von entsprechenden \emph{Models}, die durch die \emph{Controller} mit den \emph{Views} verbunden werden. Die Models sind nicht zwangsläufig mit den Models auf der Serverseite identisch sondern können Aggregationen sein, oder nur Teile der Daten abbilden, sie orientieren sich an der öffentlichen API des Servers, die nicht zwingenderweise die interenen Models 1:1 nach außen weiterreicht. Views sind einzelne Bestandteile einer Ansicht. So lassen sich individuelle Bereiche der Darstellung leicht aktualisieren, ohne die ganze Seite neu laden zu müssen -- in \cite[S.1--5 und S.65--72]{maccaw2011javascript} ist dieses Prinzip ausführlich erläutert.
 
 \subsection{Entwurf des Anwendungsservers}\label{l:entwurf-server}
 
-In diesem Abschnitt werden die in Abbildung~\ref{chart:komponenten} (S.\pageref{chart:komponenten}) grau eingefärbten Komponenten des Servers beschrieben.
+In diesem Abschnitt werden die in Abbildung~\ref{chart:komponenten} / S.\pageref{chart:komponenten} grau eingefärbten Komponenten des Servers beschrieben.
 
 \subsubsection{API, Cronjobs, CLI, …}
 
@@ -141,7 +141,7 @@ Zentrale Komponente bilden die Controller. Hier ist die Business-Logik der Anwen
 
 \subsubsection{Models}
 
-Zu den Kern-Komponenten gehören auch die Models. Diese können ohne den DI-Container direkt von den jeweiligen Komponenten instanziiert werden, da sie reine Datenobjekt sind und werden Logik enthalten, noch Abhängigkeiten besitzen. Siehe hierzu auch das Domänenmodell auf Seite \pageref{l:domänenmodell}.
+Zu den Kern-Komponenten gehören auch die Models. Diese können ohne den DI-Container direkt von den jeweiligen Komponenten instanziiert werden, da sie reine Datenobjekt sind und werden Logik enthalten, noch Abhängigkeiten besitzen. Siehe hierzu auch das Domänenmodell auf S.\pageref{l:domänenmodell}.
 
 \subsubsection{Persistenz, ORM}
 
