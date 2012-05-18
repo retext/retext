@@ -4,3 +4,9 @@
 [submodule "friends/vendor/twig"]
 	path = friends/vendor/twig
 	url = git://github.com/fabpot/Twig.git
+[submodule "prototype/webapp/vendor/backbone"]
+	path = prototype/webapp/vendor/backbone
+	url = https://github.com/documentcloud/backbone.git
+[submodule "prototype/webapp/vendor/bootstrap"]
+	path = prototype/webapp/vendor/bootstrap
+	url = https://github.com/twitter/bootstrap.git
