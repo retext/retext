@@ -37,18 +37,24 @@
         <mkdir dir="${basedir}/build/phpdox"/>
     </target>
 
-    <target name="composer" description="Install required dependencies via Composer">
+    <property name="composer.phar" value="${basedir}/composer.phar"/>
+    <available file="${composer.phar}" property="composer.phar.present"/>
+    <target name="installcomposer" description="Install Composer" unless="composer.phar.present">
         <exec executable="wget" failonerror="true">
+            <arg value="-q"/>
             <arg value="http://getcomposer.org/composer.phar"/>
             <arg value="-O"/>
-            <arg value="${basedir}/composer.phar"/>
+            <arg value="${composer.phar}"/>
         </exec>
+    </target>
+
+    <target name="composer" depends="installcomposer" description="Install required dependencies via Composer">
         <exec executable="php" failonerror="true">
-            <arg value="${basedir}/composer.phar"/>
+            <arg value="${composer.phar}"/>
             <arg value="install"/>
         </exec>
         <exec executable="php" failonerror="true">
-            <arg value="${basedir}/composer.phar"/>
+            <arg value="${composer.phar}"/>
             <arg value="update"/>
         </exec>
     </target>
