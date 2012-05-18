@@ -2,10 +2,10 @@
 
 <project name="name-of-project" default="build">
     <target name="build"
-            depends="composer,prepare,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpdox,phpunit,phpcb"/>
+            depends="setupsymfony,prepare,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpdox,phpunit,phpcb"/>
 
     <target name="build-parallel"
-            depends="composer,prepare,lint,tools-parallel,phpunit,phpcb"/>
+            depends="setupsymfony,prepare,lint,tools-parallel,phpunit,phpcb"/>
 
     <target name="tools-parallel" description="Run tools in parallel">
         <parallel threadCount="2">
@@ -46,13 +46,19 @@
             <arg value="-O"/>
             <arg value="${composer.phar}"/>
         </exec>
-    </target>
-
-    <target name="composer" depends="installcomposer" description="Install required dependencies via Composer">
         <exec executable="php" failonerror="true">
             <arg value="${composer.phar}"/>
             <arg value="install"/>
         </exec>
+    </target>
+
+    <property name="parameters.yml" value="${basedir}/app/config/parameters.yml"/>
+    <available file="${parameters.yml}" property="parameters.yml.present"/>
+    <target name="setupsymfony" depends="composer" description="Configure symfony" unless="parameters.yml.present">
+        <copy file="${parameters.yml}.dist" tofile="${parameters.yml}" />
+    </target>
+
+    <target name="composer" depends="installcomposer" description="Install required dependencies via Composer">
         <exec executable="php" failonerror="true">
             <arg value="${composer.phar}"/>
             <arg value="update"/>
