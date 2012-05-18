@@ -1,4 +1,4 @@
-# Internal routing configuration to handle ESI
-#_internal:
-#    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
-#    prefix:   /_internal
+RetextApiBundle:
+    resource: "@RetextApiBundle/Controller/"
+    type:     annotation
+    prefix:   /api
