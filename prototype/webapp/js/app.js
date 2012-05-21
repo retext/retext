@@ -1,6 +1,8 @@
 $(function () {
 
-    var RetextApp = {};
+    var RetextApp = {
+        apiUrlBase: window.location.protocol + '//' + window.location.host.replace(/^app\./, '') + '/api/'
+    };
 
     var MenuItemView = Backbone.View.extend({
         'tagName':'li',
@@ -17,12 +19,24 @@ $(function () {
         'initialize':function () {
             this.model.bind("change", this.render, this);
         },
+        'events':{
+            'click a':'linkClicked'
+        },
         'render':function () {
             $(this.el).empty();
             _.each(this.model.models, function (menuItem) {
                 $(this.el).append(new MenuItemView({'model':menuItem, 'className':menuItem.get('active') ? 'active' : ''}).render().el)
             }, this);
             return this;
+        },
+        'linkClicked':function (ev, ev2) {
+            if ($(ev.target).attr('href') == '#status') {
+                statusColl.fetch({
+                    success:function (messages) {
+                        RetextApp.pages['status'].render();
+                    }
+                });
+            }
         }
     });
 
@@ -45,12 +59,26 @@ $(function () {
     });
 
     var ApiStatusModel = Backbone.Model.extend();
+    var DefaultApiStatusModel = ApiStatusModel.extend({
+        'initialize':function () {
+            this.set('time', 'unknown');
+            this.set('version', 'unknown');
+        }
+    });
+    var ApiStatusCollection = Backbone.Collection.extend({
+        'url': RetextApp.apiUrlBase + 'status',
+        'model':ApiStatusModel
+    });
+
     RetextApp.StatusView = Backbone.View.extend({
         'el':$('#status'),
         'template':_.template($('#status_template').html()),
+        'initialize':function () {
+            this.model.bind("change", this.render, this);
+        },
         'render':function () {
             $(this.el).empty();
-            $(this.el).append(this.template(this.model.toJSON()));
+            $(this.el).append(this.template(this.model.at(0).toJSON()));
             return this;
         }
     });
@@ -60,12 +88,13 @@ $(function () {
     _.each(['login', 'register', 'about'], function (pageId) {
         RetextApp.pages[pageId] = new Backbone.View({'el':$('#' + pageId), 'id':pageId});
     });
-    RetextApp.pages['status'] = new RetextApp.StatusView({'id':'status', 'model':new ApiStatusModel({
-        'apiurl':'http://wurst.de/',
-        'apitime':new Date()
-    })});
-    RetextApp.pages['status'].render();
+
     RetextApp.MenuView = new MenuView({'model':RetextApp.menuItems});
+
+    var statusColl = new ApiStatusCollection();
+    RetextApp.pages['status'] = new RetextApp.StatusView({'id':'status', 'model':statusColl});
+    statusColl.add(new DefaultApiStatusModel());
+    RetextApp.pages['status'].render();
 
     $('#mainmenu').append(RetextApp.MenuView.render().el);
 

@@ -2,10 +2,10 @@
 
 <project name="name-of-project" default="build">
     <target name="build"
-            depends="setupsymfony,prepare,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpdox,phpunit,phpcb"/>
+            depends="composer,prepare,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpdox,phpunit,phpcb"/>
 
     <target name="build-parallel"
-            depends="setupsymfony,prepare,lint,tools-parallel,phpunit,phpcb"/>
+            depends="composer,prepare,lint,tools-parallel,phpunit,phpcb"/>
 
     <target name="tools-parallel" description="Run tools in parallel">
         <parallel threadCount="2">
@@ -39,7 +39,7 @@
 
     <property name="composer.phar" value="${basedir}/composer.phar"/>
     <available file="${composer.phar}" property="composer.phar.present"/>
-    <target name="installcomposer" description="Install Composer" unless="composer.phar.present">
+    <target name="installcomposer" depends="setupsymfony" description="Install Composer" unless="composer.phar.present">
         <exec executable="wget" failonerror="true">
             <arg value="-q"/>
             <arg value="http://getcomposer.org/composer.phar"/>
@@ -54,7 +54,7 @@
 
     <property name="parameters.yml" value="${basedir}/app/config/parameters.yml"/>
     <available file="${parameters.yml}" property="parameters.yml.present"/>
-    <target name="setupsymfony" depends="composer" description="Configure symfony" unless="parameters.yml.present">
+    <target name="setupsymfony" description="Configure symfony" unless="parameters.yml.present">
         <copy file="${parameters.yml}.dist" tofile="${parameters.yml}" />
     </target>
 

@@ -1,0 +1,19 @@
+<?php
+
+namespace Retext\ApiBundle\Tests\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+
+class StatusControllerTest extends WebTestCase
+{
+    public function testStatus()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/api/status');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertEquals("application/json", $client->getResponse()->headers->get('Content-Type'));
+        $response = json_decode($client->getResponse()->getContent());
+        $this->assertObjectHasAttribute('time', $response);
+    }
+}
