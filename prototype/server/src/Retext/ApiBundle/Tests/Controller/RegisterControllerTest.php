@@ -6,6 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class RegisterControllerTest extends WebTestCase
 {
+    /**
+     * @group integration
+     */
     public function testRegister()
     {
         $client = static::createClient();
@@ -16,16 +19,21 @@ class RegisterControllerTest extends WebTestCase
 
     /**
      * @depend testRegister
+     * @group integration
      */
     public function testLogin()
     {
         $client = static::createClient();
         $client->request('POST', '/api/login', array('email' => 'phpunit@retext.it', 'password' => 'phpunit@retext.it'));
         $this->assertEquals(204, $client->getResponse()->getStatusCode());
+        $cookies = $client->getResponse()->headers->getCookies();
+        $this->assertEquals(1, count($cookies));
+        $this->assertEquals('PHPSID', $cookies[0]->getName());
+        $this->assertTrue(32, $cookies[0]->getValue());
     }
 
     /**
-     * @depend testRegister
+     * @group integration
      */
     public function testBadLogin()
     {

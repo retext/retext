@@ -148,6 +148,8 @@
         <exec executable="phpunit" failonerror="true">
             <arg value="-c"/>
             <arg value="app/"/>
+            <arg value="--exclude-group"/>
+            <arg value="integration"/>
         </exec>
     </target>
 
