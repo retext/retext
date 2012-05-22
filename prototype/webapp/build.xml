@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="name-of-project" default="test">
+    <target name="test"
+            depends="casper"/>
+
+    <target name="clean" description="Cleanup build artifacts">
+        <delete dir="${basedir}/build"/>
+    </target>
+
+    <target name="prepare" depends="clean" description="Prepare for build">
+        <mkdir dir="${basedir}/build"/>
+    </target>
+
+    <target name="casper" depends="prepare" description="Run CasperJS tests">
+        <fail unless="phantomjs.bin">You must specifiy the location of phantomjs</fail>
+        <fail unless="casperjs.path">You must specifiy the location of casperjs</fail>
+        <fail unless="app.host">You must specifiy the app host</fail>
+        <exec executable="${phantomjs.bin}">
+            <arg value="${casperjs.path}/bin/bootstrap.js"/>
+            <arg value="--casper-path=${casperjs.path}"/>
+            <arg value="--cli"/>
+            <arg path="${basedir}/tests/app.js"/>
+            <arg value="--save=${basedir}/build/xunit.xml"/>
+            <arg value="--url=${app.host}"/>
+        </exec>
+    </target>
+
+</project>
