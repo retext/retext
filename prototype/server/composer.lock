@@ -118,14 +118,14 @@
         {
             "package": "symfony/symfony",
             "version": "dev-master",
-            "source-reference": "ea33d4d377bacd6804ab9c304dbbd70cfc5d2860"
+            "source-reference": "517ae43fe97506acd9fa8473959b7fbfc4373368",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
         },
         {
             "package": "symfony/symfony",
             "version": "dev-master",
-            "source-reference": "ea33d4d377bacd6804ab9c304dbbd70cfc5d2860",
-            "alias-pretty-version": "2.1.x-dev",
-            "alias-version": "2.1.9999999.9999999-dev"
+            "source-reference": "517ae43fe97506acd9fa8473959b7fbfc4373368"
         },
         {
             "package": "twig/extensions",
