@@ -12,7 +12,7 @@
         <mkdir dir="${basedir}/build"/>
     </target>
 
-    <target name="casper" depends="setupserver,prepare" description="Run CasperJS tests">
+    <target name="casper" depends="prepare" description="Run CasperJS tests">
         <fail unless="phantomjs.bin">You must specifiy the location of phantomjs</fail>
         <fail unless="casperjs.path">You must specifiy the location of casperjs</fail>
         <fail unless="app.host">You must specifiy the app host</fail>
@@ -26,7 +26,7 @@
         </exec>
     </target>
 
-    <target name="setupserver" description="inits the server">
+    <target name="setupserver" description="inits the server (would be run by root)">
         <fail unless="app.user">You must specifiy the webserver user</fail>
         <exec executable="sudo">
             <arg value="rm"/>
