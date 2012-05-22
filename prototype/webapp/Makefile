@@ -1,4 +1,4 @@
-all: bootstrap underscore backbone jquery
+all: bootstrap underscore backbone jquery require
 
 BOOTSTRAP_SRC=vendor/bootstrap
 BOOTSTRAP_TRG=assets/bootstrap
@@ -32,3 +32,7 @@ backbone:
 jquery:
 	cp vendor/jquery/jquery-1.7.2.js assets/jquery.js
 	uglifyjs -nc vendor/jquery/jquery-1.7.2.js > assets/jquery-min.js
+
+require:
+	cp vendor/require/require.js assets/require.js
+	uglifyjs -nc vendor/require/require.js > assets/require-min.js
