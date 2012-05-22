@@ -56,3 +56,14 @@ swiftmailer:
     username:  %mailer_user%
     password:  %mailer_password%
     spool:     { type: memory }
+
+doctrine_mongodb:
+    connections:
+        default:
+            server: mongodb://127.0.0.1:27017
+            options:
+                connect: true
+    default_database: retext
+    document_managers:
+        default:
+            auto_mapping: true

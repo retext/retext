@@ -3,7 +3,7 @@ define([
     'collections/menuitem'
 ], function (MenuItem, MenuItemCollection) {
     var pages = {};
-    _.each(['login', 'register', 'about'], function (pageId) {
+    _.each(['login', 'about'], function (pageId) {
         pages[pageId] = new Backbone.View({'el':$('#' + pageId), 'id':pageId});
     });
 
