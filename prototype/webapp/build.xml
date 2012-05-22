@@ -20,8 +20,11 @@
             <arg value="${casperjs.path}/bin/bootstrap.js"/>
             <arg value="--casper-path=${casperjs.path}"/>
             <arg value="--cli"/>
-            <arg path="${basedir}/tests/app.js"/>
-            <arg value="--save=${basedir}/build/xunit.xml"/>
+            <arg value="test"/>
+            <arg path="${basedir}/tests/"/>
+            <arg value="--xunit=${basedir}/build/xunit.xml"/>
+            <arg value="--direct" />
+            <arg value="--log-level=debug" />
             <arg value="--url=${app.host}"/>
         </exec>
     </target>

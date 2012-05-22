@@ -1,7 +1,3 @@
-var casper = require('casper').create({
-    logLevel:"debug"
-});
-
 casper.start(casper.cli.get('url'), function (self) {
     self.test.assertTitle('re:text – text workflow done right', 'Titel prüfen');
 });
@@ -17,6 +13,6 @@ casper.then(function (self) {
     });
 });
 
-casper.run(function () {
-    this.test.renderResults(true, 0, this.cli.get('save') || false);
+casper.run(function() {
+    casper.test.done();
 });
