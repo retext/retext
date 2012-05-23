@@ -11,7 +11,6 @@ define([
     _.each([
         ['login', 'Anmelden'],
         ['register', 'Registrieren'],
-        ['about', 'Über'],
         ['status', 'Status']
     ], function (menuItem) {
         menuItems.add(new MenuItem({'id':menuItem[0], 'label':menuItem[1]}));
