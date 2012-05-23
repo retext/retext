@@ -153,6 +153,13 @@
         </exec>
     </target>
 
+    <target name="integration" description="Run integration tests with PHPUnit">
+        <exec executable="phpunit" failonerror="true">
+            <arg value="-c"/>
+            <arg value="app/"/>
+        </exec>
+    </target>
+
     <target name="phpcb" description="Aggregate tool output with PHP_CodeBrowser">
         <exec executable="phpcb">
             <arg value="--log"/>

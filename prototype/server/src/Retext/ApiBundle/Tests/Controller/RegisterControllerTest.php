@@ -28,8 +28,8 @@ class RegisterControllerTest extends WebTestCase
         $this->assertEquals(204, $client->getResponse()->getStatusCode());
         $cookies = $client->getResponse()->headers->getCookies();
         $this->assertEquals(1, count($cookies));
-        $this->assertEquals('PHPSID', $cookies[0]->getName());
-        $this->assertTrue(32, $cookies[0]->getValue());
+        $this->assertEquals('MOCKSESSID', $cookies[0]->getName());
+        $this->assertFalse($cookies[0]->getValue() == "");
     }
 
     /**

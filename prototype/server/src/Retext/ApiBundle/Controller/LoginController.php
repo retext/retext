@@ -27,7 +27,6 @@ class LoginController extends Controller
         $response->headers->set('Access-Control-Allow-Origin', '*');
 
         if ($user && $user->getPassword() === $user->hashPassword($password, $user->getPassword())) {
-            session_start();
             $_SESSION['User'] = $user;
             $response->setStatusCode(204);
         } else {

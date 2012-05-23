@@ -28,12 +28,12 @@
         {
             "package": "doctrine/mongodb-odm-bundle",
             "version": "dev-master",
-            "source-reference": "e83bd0d310221e8325c8bff019a98991f1a1dae9"
+            "source-reference": "30211cc1eb2ec45d8028ac4663d00149a9abc913"
         },
         {
             "package": "doctrine/orm",
             "version": "2.2.x-dev",
-            "source-reference": "36cac855dce4ec50f12ecc3628cd41f7801a4f1d"
+            "source-reference": "1f9435de5c3739551d73e4706405987d4ead6d9b"
         },
         {
             "package": "jms/aop-bundle",
@@ -133,14 +133,14 @@
         {
             "package": "symfony/symfony",
             "version": "dev-master",
-            "source-reference": "1a1403f5998293cb9272167ac25a00561a07c656",
+            "source-reference": "b07fb3c459b78061d755df20ee3ad9461e5edec4",
             "alias-pretty-version": "2.1.x-dev",
             "alias-version": "2.1.9999999.9999999-dev"
         },
         {
             "package": "symfony/symfony",
             "version": "dev-master",
-            "source-reference": "1a1403f5998293cb9272167ac25a00561a07c656"
+            "source-reference": "b07fb3c459b78061d755df20ee3ad9461e5edec4"
         },
         {
             "package": "twig/extensions",
@@ -150,12 +150,12 @@
         {
             "package": "twig/twig",
             "version": "dev-master",
-            "source-reference": "0fa26d642994630b2ec19c090149fa56ce84c789"
+            "source-reference": "573a36097146b319e5fb36546a0377c7440bbfe3"
         },
         {
             "package": "twig/twig",
             "version": "dev-master",
-            "source-reference": "0fa26d642994630b2ec19c090149fa56ce84c789",
+            "source-reference": "573a36097146b319e5fb36546a0377c7440bbfe3",
             "alias-pretty-version": "1.8.x-dev",
             "alias-version": "1.8.9999999.9999999-dev"
         }
