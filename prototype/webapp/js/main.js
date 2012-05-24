@@ -4,9 +4,13 @@ require.config({
 
 require([
     'views/app',
-    'router'
-], function (AppView, Router) {
-    var appView = new AppView();
+    'router',
+    'vm',
+    'models/user'
+], function (AppView, Router, Vm, User) {
+    var user = new User();
+    var appView = new AppView(user);
     appView.render();
-    Router.initialize({appView:appView});
+    new Router(appView, Vm, user);
+    Backbone.history.start();
 });

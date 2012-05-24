@@ -13,7 +13,7 @@ define([
         },
         submitForm:function (ev) {
             ev.preventDefault();
-            this.model.set('name', this.$($(this.el).find('input')).attr('value'));
+            this.model.set({'name': this.$($(this.el).find('input')).attr('value')});
             if (this.model.isValid()) {
                 var form = $($(this.el).find('form'));
                 form.parent().prepend('<div class="well" id="register-progress"><p>Lege Projekt an…</p><div class="progress progress-striped active"><div class="bar" style="width: 50%;"></div></div></div>');

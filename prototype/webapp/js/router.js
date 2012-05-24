@@ -1,56 +1,41 @@
 define([
-    'vm'
-], function (Vm) {
+], function () {
     var AppRouter = Backbone.Router.extend({
         routes:{
             "":"home",
+            "login":"login",
+            "logout":"logout",
             "*page":"showPage"
         },
         home:function () {
-            this.showPage("login");
+            this.navigate("login");
+        },
+        logout: function() {
+            this.user.set('authenticated', false);
+            this.navigate("login");
+        },
+        login: function() {
+            this.showPage('login');
         },
         showPage:function (pageId) {
-            _.each(Vm.pages, function (page) {
+            _.each(this.vm.pages, function (page) {
                 if (page.id == pageId) {
                     $(page.el).show();
                 } else {
                     $(page.el).hide();
                 }
             });
-            _.each(Vm.menuGroups.models, function (menuGroup) {
+            _.each(this.vm.menuGroups.models, function (menuGroup) {
                 _.each(menuGroup.models, function (menuItem) {
-                    menuItem.set('active', menuItem.get('id') == pageId);
+                    menuItem.set({active: menuItem.get('id') == pageId});
                 });
             });
+        },
+        initialize: function (appView, vm, user) {
+            this.appView = appView;
+            this.vm = vm;
+            this.user = user;
         }
     });
-
-    var initialize = function (options) {
-        var appView = options.appView;
-        var router = new AppRouter(options);
-
-        router.on('', function () {
-            this.showPage("login");
-        });
-
-        router.on('*page', function (pageId) {
-            _.each(Vm.pages, function (page) {
-                if (page.id == pageId) {
-                    $(page.el).show();
-                } else {
-                    $(page.el).hide();
-                }
-            });
-            _.each(Vm.menuGroups.models, function (menuGroup) {
-                _.each(menuGroup.children.models, function (menuItem) {
-                    menuItem.set('active', menuItem.get('id') == pageId);
-                });
-            });
-        });
-
-        Backbone.history.start();
-    };
-    return {
-        initialize:initialize
-    };
+    return AppRouter;
 });
