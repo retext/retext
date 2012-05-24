@@ -18,10 +18,10 @@ define([
             var leftMenuItems = new MenuItemCollection();
             var projectMenuItem = new MenuItem({id:'projects', label:'Projekte', 'children':[new MenuItem({id:'project-new', label:'Neues Projekt…'})]});
             leftMenuItems.add(projectMenuItem);
-            leftMenuItems.add(new MenuItem({id:'register', label:'Registrieren'}));
             leftMenuItems.add(new MenuItem({id:'status', label:'Status'}));
 
             var rightMenuItems = new MenuItemCollection();
+            rightMenuItems.add(new MenuItem({id:'register', label:'Registrieren'}));
             rightMenuItems.add(new MenuItem({id:'login', label:'Anmelden', 'icon':'icon-user icon-white'}));
             rightMenuItems.add(new MenuItem({id:'logout', label:'Abmelden', 'icon':'icon-eject icon-white'}));
 
