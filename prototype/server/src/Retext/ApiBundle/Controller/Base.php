@@ -24,6 +24,19 @@ abstract class Base extends Controller
     }
 
     /**
+     * @param mixed|null $data
+     * @return \Retext\ApiBundle\ApiResponse
+     */
+    public function createListResponse($data = null)
+    {
+        $items = array();
+        if ($data instanceof \Iterator) {
+            foreach ($data as $d) $items[] = $d;
+        }
+        return $this->createResponse($items);
+    }
+
+    /**
      * @return \Symfony\Component\HttpKernel\Exception\HttpException
      */
     public function createForbiddenException()

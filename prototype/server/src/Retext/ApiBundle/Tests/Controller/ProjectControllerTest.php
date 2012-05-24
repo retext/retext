@@ -36,6 +36,13 @@ class ProjectControllerTest extends WebTestCase
         $project = json_decode($this->client->getResponse()->getContent());
         $this->assertObjectHasAttribute('name', $project);
         $this->assertEquals('Test-Project äöß', $project->name);
+
+        $this->client->request('GET', '/api/project');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $projects = json_decode($this->client->getResponse()->getContent());
+        $this->assertEquals(1, count($projects));
+        $this->assertObjectHasAttribute('name', $projects[0]);
+        $this->assertEquals('Test-Project äöß', $projects[0]->name);
     }
 
 }

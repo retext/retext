@@ -42,4 +42,23 @@ class ProjectController extends Base
         if (!$project) throw $this->createNotFoundException();
         return $this->createResponse($project);
     }
+
+
+    /**
+     * @Route("/project", requirements={"_method":"GET"})
+     */
+    public function listProjectAction()
+    {
+        $this->ensureLoggedIn();
+
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $projects = $dm->getRepository('RetextApiBundle:Project')
+            ->createQueryBuilder()
+            ->hydrate(false)
+            ->field('owner.$id')->equals(new \MongoId($this->getUser()->getId()))
+            ->getQuery()
+            ->execute();
+
+        return $this->createListResponse($projects);
+    }
 }
