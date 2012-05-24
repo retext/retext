@@ -6,16 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller,
 Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-class DummyController extends Controller
+class DummyController extends Base
 {
     /**
      * @Route("/hello/{name}")
      */
     public function helloAction($name)
     {
-        $response = new Response($this->container->get('serializer')->serialize(array('name' => $name), 'json'));
-        $response->headers->set('Content-Type', 'application/json');
-        $response->headers->set('Access-Control-Allow-Origin', '*');
-        return $response;
+        return $this->createResponse(array('name' => $name));
     }
 }

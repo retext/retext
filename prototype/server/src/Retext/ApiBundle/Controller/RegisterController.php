@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller,
 Symfony\Component\HttpFoundation\Response, Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-class RegisterController extends Controller
+class RegisterController extends Base
 {
     /**
      * @Route("/user", requirements={"_method":"PUT"})
@@ -24,12 +24,6 @@ class RegisterController extends Controller
         $dm->persist($user);
         $dm->flush();
 
-        $response = new Response();
-        $response->headers->set('Content-Type', 'application/json');
-        $response->headers->set('Access-Control-Allow-Origin', '*');
-        $response->headers->set('Location', '/api/user/' . $user->getId());
-        $response->setStatusCode(201);
-
-        return $response;
+        return $this->createResponse()->setStatusCode(201)->addHeader('Location', '/api/user/' . $user->getId());
     }
 }
