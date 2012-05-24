@@ -1,24 +1,31 @@
 define([
-    'models/menuitem',
-    'collections/menuitem'
-], function (MenuItem, MenuItemCollection) {
+    'models/menu/group',
+    'collections/menu/group',
+    'models/menu/item',
+    'collections/menu/item'
+], function (MenuGroup, MenuGroupCollection, MenuItem, MenuItemCollection) {
     var pages = {};
     _.each(['login', 'about'], function (pageId) {
         pages[pageId] = new Backbone.View({'el':$('#' + pageId), 'id':pageId});
     });
 
-    var menuItems = new MenuItemCollection();
+    var leftMenuItems = new MenuItemCollection();
     var projectMenuItem = new MenuItem({'id':'projects', 'label':'Projekte', 'children': [new MenuItem({'id':'project-new', 'label':'Neues Projekt…'})]});
-    menuItems.add(projectMenuItem);
-    _.each([
-        ['login', 'Anmelden'],
-        ['register', 'Registrieren'],
-        ['status', 'Status'],
-    ], function (menuItem) {
-        menuItems.add(new MenuItem({'id':menuItem[0], 'label':menuItem[1]}));
-    });
+    leftMenuItems.add(projectMenuItem);
+    leftMenuItems.add(new MenuItem({'id':'register', 'label':'Registrieren'}));
+    leftMenuItems.add(new MenuItem({'id':'status', 'label':'Status'}));
+
+    var rightMenuItems = new MenuItemCollection();
+    rightMenuItems.add(new MenuItem({'id':'login', 'label':'Anmelden', 'align': 'right', 'icon': 'icon-user icon-white'}));
+
+    var leftGroup = new MenuGroup({'children': leftMenuItems});
+    var rightGroup = new MenuGroup({'align': 'right', 'children': rightMenuItems});
+    var menuGroups = new MenuGroupCollection();
+    menuGroups.add(leftGroup);
+    menuGroups.add(rightGroup);
+
     return {
         pages:pages,
-        menuItems:menuItems
+        menuGroups:menuGroups
     };
 });

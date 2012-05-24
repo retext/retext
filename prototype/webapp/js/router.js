@@ -17,8 +17,10 @@ define([
                     $(page.el).hide();
                 }
             });
-            _.each(Vm.menuItems.models, function (menuItem) {
-                menuItem.set('active', menuItem.get('id') == pageId);
+            _.each(Vm.menuGroups.models, function (menuGroup) {
+                _.each(menuGroup.models, function (menuItem) {
+                    menuItem.set('active', menuItem.get('id') == pageId);
+                });
             });
         }
     });
@@ -39,8 +41,10 @@ define([
                     $(page.el).hide();
                 }
             });
-            _.each(Vm.menuItems.models, function (menuItem) {
-                menuItem.set('active', menuItem.get('id') == pageId);
+            _.each(Vm.menuGroups.models, function (menuGroup) {
+                _.each(menuGroup.children.models, function (menuItem) {
+                    menuItem.set('active', menuItem.get('id') == pageId);
+                });
             });
         });
 

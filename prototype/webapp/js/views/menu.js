@@ -1,10 +1,8 @@
 define([
     'vm',
-    'views/menuitem'
-], function (Vm, MenuItemView) {
+    'views/menu/group'
+], function (Vm, MenuGroupView) {
     var MenuView = Backbone.View.extend({
-        'tagName':'ul',
-        'className':'nav',
         'initialize':function () {
             this.model.bind("change", this.render, this);
         },
@@ -13,8 +11,8 @@ define([
         },
         'render':function () {
             $(this.el).empty();
-            _.each(this.model.models, function (menuItem) {
-                $(this.el).append(new MenuItemView({'model':menuItem, 'className':menuItem.get('active') ? 'active' : ''}).render().el)
+            _.each(this.model.models, function (menuGroup) {
+                $(this.el).append(new MenuGroupView({'model':menuGroup}).render().el)
             }, this);
             return this;
         },

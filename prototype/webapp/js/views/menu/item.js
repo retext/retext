@@ -15,6 +15,15 @@ define([
             } else {
                 el.append(_.template('<a href="#<%= id %>"><%= label %></a>', this.model.toJSON()));
             }
+
+            var icon = this.model.get('icon');
+            if (icon) {
+                el.find('a:first').prepend('<i class="' + icon + '"></i> ');
+            }
+
+            var active = this.model.get('active');
+            if (active) el.addClass('active');
+
             return this;
         }
     });
