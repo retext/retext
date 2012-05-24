@@ -153,7 +153,15 @@
         </exec>
     </target>
 
+    <available file="${basedir}/mongodb/mongod.pid" property="mongod.pid.present"/>
     <target name="integration" description="Run integration tests with PHPUnit">
+        <fail unless="mongod.pid.present">Mongod is not running</fail>
+        <exec executable="app/console">
+            <arg value="doctrine:mongodb:schema:drop"/>
+        </exec>
+        <exec executable="app/console">
+            <arg value="doctrine:mongodb:schema:create"/>
+        </exec>
         <exec executable="phpunit" failonerror="true">
             <arg value="-c"/>
             <arg value="app/"/>
