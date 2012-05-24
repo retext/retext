@@ -3,6 +3,7 @@
 namespace Retext\ApiBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use JMS\SerializerBundle\Annotation as SerializerBundle;
 
 /**
  * @MongoDB\Document
@@ -22,6 +23,7 @@ class User
 
     /**
      * @MongoDB\String
+     * @SerializerBundle\Exclude
      */
     protected $password;
 

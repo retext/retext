@@ -28,10 +28,40 @@ class LoginController extends Controller
 
         if ($user && $user->getPassword() === $user->hashPassword($password, $user->getPassword())) {
             $_SESSION['User'] = $user;
+            $response->setContent($this->container->get('serializer')->serialize($user, 'json'));
+            $response->setStatusCode(200);
+        } else {
+            $response->setStatusCode(403);
+        }
+        return $response;
+    }
+
+    /**
+     * @Route("/auth", requirements={"_method":"GET"})
+     */
+    public function authAction()
+    {
+        $response = new Response();
+        $response->headers->set('Content-Type', 'application/json');
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        if (isset($_SESSION['User'])) {
             $response->setStatusCode(204);
         } else {
             $response->setStatusCode(403);
         }
+        return $response;
+    }
+
+    /**
+     * @Route("/logout", requirements={"_method":"POST"})
+     */
+    public function logoutAction()
+    {
+        $response = new Response();
+        $response->headers->set('Content-Type', 'application/json');
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        unset($_SESSION['User']);
+        $response->setStatusCode(204);
         return $response;
     }
 }
