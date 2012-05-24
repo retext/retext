@@ -36,7 +36,7 @@ abstract class Base extends Controller
     public function createListResponse($data = null)
     {
         $items = array();
-        if ($data instanceof \Iterator) {
+        if ($data instanceof \Iterator || is_array($data)) {
             foreach ($data as $d) $items[] = $d;
         }
         return $this->createResponse($items);

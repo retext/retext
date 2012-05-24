@@ -3,10 +3,12 @@
 namespace Retext\ApiBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Doctrine\ORM\Mapping as Doctrine;
 use JMS\SerializerBundle\Annotation as SerializerBundle;
 
 /**
  * @MongoDB\Document
+ * @Doctrine\HasLifecycleCallbacks
  */
 class Project
 {
@@ -75,5 +77,14 @@ class Project
     public function getOwner()
     {
         return $this->owner;
+    }
+
+    /**
+     * @MongoDB\PrePersist
+     * @MongoDB\PreUpdate
+     */
+    public function validate()
+    {
+        if (empty($this->name)) throw new ValidationException('name', 'empty');
     }
 }

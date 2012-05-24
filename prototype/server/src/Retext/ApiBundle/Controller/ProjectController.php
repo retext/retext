@@ -19,7 +19,12 @@ class ProjectController extends Base
 
         $project = new Project();
         $project->setOwner($this->getUser());
-        $project->setName($request->get('name'));
+        if ($request->headers->get('Content-Type') == 'application/json') {
+            $data = json_decode($request->getContent());
+            $project->setName($data->name);
+        } else {
+            $project->setName($request->get('name'));
+        }
 
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $dm->persist($project);
@@ -56,9 +61,14 @@ class ProjectController extends Base
             ->createQueryBuilder()
             ->hydrate(false)
             ->field('owner.$id')->equals(new \MongoId($this->getUser()->getId()))
+            ->select('_id', 'name')
             ->getQuery()
             ->execute();
 
-        return $this->createListResponse($projects);
+        $ps = array();
+        foreach($projects as $project) {
+            $ps[] = array('id' => (string)$project['_id'], 'name' => $project['name']);
+        }
+        return $this->createListResponse($ps);
     }
 }

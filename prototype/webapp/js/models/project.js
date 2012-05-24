@@ -4,6 +4,7 @@ define([
     var Project = Backbone.Model.extend({
         urlRoot: Remote.apiUrlBase + 'project',
         defaults:{
+            id:null,
             name:null
         },
         validate:function (attrs) {

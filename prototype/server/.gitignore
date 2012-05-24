@@ -8,3 +8,4 @@ composer.phar
 cache.properties
 app/config/parameters.yml
 mongodb
+web/app
