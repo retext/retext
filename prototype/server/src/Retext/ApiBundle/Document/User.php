@@ -12,6 +12,7 @@ class User
 {
     /**
      * @MongoDB\Id
+     * @var $id
      */
     protected $id;
 

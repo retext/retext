@@ -23,10 +23,10 @@ class LoginController extends Base
             ->findOneByEmail($email);
 
         if ($user && $user->getPassword() === $user->hashPassword($password, $user->getPassword())) {
-            $_SESSION['User'] = $user;
+            $this->getRequest()->getSession()->set('User', $user);
             return $this->createResponse($user);
         }
-        return $this->createResponse()->setStatusCode(403);
+        throw $this->createForbiddenException();
     }
 
     /**
@@ -34,10 +34,10 @@ class LoginController extends Base
      */
     public function authAction()
     {
-        if (isset($_SESSION['User'])) {
+        if ($this->getRequest()->getSession()->has('User')) {
             return $this->createResponse()->setStatusCode(204);
         }
-        return $this->createResponse()->setStatusCode(403);
+        throw $this->createForbiddenException();
     }
 
     /**
@@ -45,7 +45,7 @@ class LoginController extends Base
      */
     public function logoutAction()
     {
-        unset($_SESSION['User']);
+        $this->getRequest()->getSession()->remove('User');
         return $this->createResponse()->setStatusCode(204);
     }
 }

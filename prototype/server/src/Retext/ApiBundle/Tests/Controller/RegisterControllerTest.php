@@ -8,6 +8,7 @@ class RegisterControllerTest extends WebTestCase
 {
     /**
      * @group integration
+     * @group firstrun
      */
     public function testRegister()
     {
@@ -20,6 +21,7 @@ class RegisterControllerTest extends WebTestCase
     /**
      * @depend testRegister
      * @group integration
+     * @group firstrun
      */
     public function testLogin()
     {
@@ -38,6 +40,7 @@ class RegisterControllerTest extends WebTestCase
 
     /**
      * @group integration
+     * @group firstrun
      */
     public function testBadLogin()
     {
@@ -49,6 +52,7 @@ class RegisterControllerTest extends WebTestCase
     /**
      * @depend testLogin
      * @group integration
+     * @group firstrun
      */
     public function testAuthStatus()
     {
@@ -65,6 +69,7 @@ class RegisterControllerTest extends WebTestCase
     /**
      * @depend testLogin
      * @group integration
+     * @group firstrun
      */
     public function testLogout()
     {
