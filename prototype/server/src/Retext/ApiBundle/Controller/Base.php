@@ -8,6 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller,
 Symfony\Component\HttpFoundation\Response,
 Symfony\Component\HttpKernel\Exception\HttpException;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
 abstract class Base extends Controller
 {
     /**
@@ -61,4 +63,11 @@ abstract class Base extends Controller
         return $this->getRequest()->getSession()->get('User');
     }
 
+    /**
+     * @Route("/user", requirements={"_method":"OPTIONS"})
+     */
+    public function httpOptionsAction()
+    {
+        return $this->createResponse()->setStatusCode(200)->addHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')->addHeader('Access-Control-Max-Age', '604800');
+    }
 }

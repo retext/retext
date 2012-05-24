@@ -4,7 +4,9 @@ define([
         defaults:{
             active:false,
             children: [],
-            icon:false
+            icon:false,
+            authOnly:false,
+            anonOnly:false
         }
     });
     return MenuItem;

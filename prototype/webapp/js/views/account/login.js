@@ -24,8 +24,9 @@ define([
                     },
                     'success': function()
                     {
-                        form.parent().prepend('<div class="alert alert-success">Toll! Danke für deine Registrierung. Bitte überprüfe dein Postfach um die Registrierung abzuschließen.</div>');
+                        form.parent().prepend('<div class="alert alert-success">Hallo!</div>');
                         form.hide();
+                        $('#login-progress').remove();
                         model.set('authenticated', true);
                     }
                 });

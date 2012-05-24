@@ -8,11 +8,11 @@ define([
             "*page":"showPage"
         },
         home:function () {
-            this.navigate("login");
+            this.showPage('login');
         },
         logout: function() {
             this.user.set('authenticated', false);
-            this.navigate("login");
+            window.location.href = '/';
         },
         login: function() {
             this.showPage('login');
@@ -26,8 +26,13 @@ define([
                 }
             });
             _.each(this.vm.menuGroups.models, function (menuGroup) {
-                _.each(menuGroup.models, function (menuItem) {
-                    menuItem.set({active: menuItem.get('id') == pageId});
+                _.each(menuGroup.get('children').models, function (menuItem) {
+                    menuItem.set({active: menuItem.get('id')== pageId});
+                    _.each(menuItem.get('children').models, function(menuChild) {
+                        if (menuChild.get('id')== pageId) {
+                            menuItem.set({active: true});
+                        }
+                    });
                 });
             });
         },

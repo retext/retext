@@ -3,11 +3,15 @@ define([
 ], function (MenuItemView) {
     var MenuGroupView = Backbone.View.extend({
         'tagName':'ul',
-        'className': 'nav',
+        'className':'nav',
+        initialize:function () {
+            this.model.get('children').bind("change", this.render, this);
+        },
         'render':function () {
             var el = $(this.el);
-            _.each(this.model.get('children').models, function(menuItem) {
-                el.append(new MenuItemView({'model': menuItem}).render().el);
+            el.empty();
+            _.each(this.model.get('children').models, function (menuItem) {
+                el.append(new MenuItemView({'model':menuItem}).render().el);
             });
 
             var align = this.model.get('align');

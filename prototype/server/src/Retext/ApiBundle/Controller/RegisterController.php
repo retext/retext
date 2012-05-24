@@ -18,6 +18,7 @@ class RegisterController extends Base
         $email = $request->get('email');
         $user = new User();
         $user->setEmail($email);
+        // TODO: generate Passwords
         $user->setPassword($email);
 
         $dm = $this->get('doctrine.odm.mongodb.document_manager');

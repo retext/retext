@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class StatusController extends Base
 {
     /**
-     * @Route("/status")
+     * @Route("/status", requirements={"_method":"GET"})
      */
     public function statusAction()
     {

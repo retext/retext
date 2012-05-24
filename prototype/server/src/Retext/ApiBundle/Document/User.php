@@ -2,11 +2,14 @@
 
 namespace Retext\ApiBundle\Document;
 
+use Retext\ApiBundle\Exception\ValidationException;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Doctrine\ORM\Mapping as Doctrine;
 use JMS\SerializerBundle\Annotation as SerializerBundle;
 
 /**
  * @MongoDB\Document
+ * @Doctrine\HasLifecycleCallbacks
  */
 class User
 {
@@ -99,5 +102,15 @@ class User
     public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * @MongoDB\PrePersist
+     * @MongoDB\PreUpdate
+     */
+    public function validate()
+    {
+        if (filter_var($this->email, FILTER_VALIDATE_EMAIL) === false) throw new ValidationException('email', 'invalid_format');
+        if (strlen($this->password) < 8) throw new ValidationException('password', 'too_short');
     }
 }
