@@ -10,8 +10,7 @@ define([
             this.button = $($(this.el).find('button'));
         },
         'events':{
-            'submit form':'submitForm',
-            'keyup input':'changeForm'
+            'submit form':'submitForm'
         },
         submitForm:function (ev) {
             ev.preventDefault();
@@ -34,14 +33,6 @@ define([
                         form.hide();
                     }
                 });
-            }
-        },
-        changeForm:function (ev) {
-            this.model.set('email', this.inp.attr('value'));
-            if (this.model.isValid()) {
-                this.button.removeAttr('disabled');
-            } else {
-                this.button.attr('disabled', 'disabled');
             }
         }
     });

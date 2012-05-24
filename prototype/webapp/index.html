@@ -33,8 +33,6 @@
                 <a class="brand" href="#">re:text</a>
 
                 <div class="nav-collapse" id="mainmenu"></div>
-                <script type="text/template" id="mainmenuitem_template"><a href="#<%= id %>"><%= label %></a></script>
-                <!--/.nav-collapse -->
             </div>
         </div>
     </div>
@@ -57,7 +55,7 @@
                     <form id="login-form" method="POST" action="" class="well form-inline">
                         <input type="email" name="email" placeholder="name@domain.de" required>
                         <input type="password" name="password" placeholder="Passwort" required>
-                        <button type="submit" class="btn btn-primary" disabled>Anmelden</button>
+                        <button type="submit" class="btn btn-primary">Anmelden</button>
                         <br>
                         <a href="#register">Passwort vergessen?</a>
                     </form>
@@ -78,29 +76,47 @@
                 <div class="span8">
                     <form id="register-form" method="POST" action="" class="well form-inline">
                         <input type="email" name="email" placeholder="name@domain.de" required>
-                        <button type="submit" class="btn btn-primary" disabled>Registrieren</button>
+                        <button type="submit" class="btn btn-primary">Registrieren</button>
                     </form>
                 </div>
             </div>
+        </div>
 
-            <div class="row-fluid" id="status"></div>
-            <script type="text/template" id="status_template">
+
+        <div class="row-fluid" id="status"></div>
+        <script type="text/template" id="status_template">
+            <div class="span4">
+                <h1>Status</h1>
+
+                <p>Hier finden sich Statusinformationen zum System.</p>
+            </div>
+            <div class="span8">
+                <h2>API</h2>
+                <dl>
+                    <dt>Server-Zeit</dt>
+                    <dd id="api-server-time"><%= time %></dd>
+                    <dt>Version</dt>
+                    <dd id="api-server-version"><%= version %></dd>
+                </dl>
+            </div>
+        </script>
+
+        <div class="row-fluid" id="project-new">
+            <div class="row-fluid">
+                <div class="span12">
+                    <h1>Neues Projekt…</h1>
+                </div>
+            </div>
+            <div class="row-fluid">
                 <div class="span4">
-                    <h1>Status</h1>
-
-                    <p>Hier finden sich Statusinformationen zum System.</p>
+                    <p>Hier kannst Du ein neues Projekt anlegen.</p>
                 </div>
                 <div class="span8">
-                    <h2>API</h2>
-                    <dl>
-                        <dt>Server-Zeit</dt>
-                        <dd id="api-server-time"><%= time %></dd>
-                        <dt>Version</dt>
-                        <dd id="api-server-version"><%= version %></dd>
-                    </dl>
+                    <form id="project-new-form" method="POST" action="" class="well form-inline">
+                        <input type="text" name="name" id="project-new-name" required placeholder="Name"> <button type="submit" class="btn btn-primary"><i class="icon-plus icon-white"></i> Projekt anlegen</button>
+                    </form>
                 </div>
-            </script>
-
+            </div>
         </div>
 
     </div>
