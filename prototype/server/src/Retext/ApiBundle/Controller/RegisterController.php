@@ -11,7 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class RegisterController extends Base
 {
     /**
-     * @Route("/user", requirements={"_method":"PUT"})
+     * @Route("/user", requirements={"_method":"POST"})
      */
     public function registerAction(Request $request)
     {

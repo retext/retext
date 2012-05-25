@@ -81,7 +81,7 @@ abstract class Base extends Controller
     {
         $request = $this->getRequest();
         if (!in_array('application/json', $request->getAcceptableContentTypes())) throw $this->createException(406, 'Not Acceptable | You must accept application/json');
-        if ((int)$request->headers->get('Content-Length') > 0) if ($request->getContentType() != 'application/json') throw $this->createException(400, 'Bad Request | Content-Type must be application/json');
+        if ((int)$request->headers->get('Content-Length') > 0) if ($request->getContentType() != 'json') throw $this->createException(400, 'Bad Request | Content-Type must be application/json');
     }
 
     /**

@@ -11,8 +11,9 @@ define([
             this.showPage('login');
         },
         logout: function() {
+            // TODO send logout to server
             this.user.set('authenticated', false);
-            window.location.href = '/';
+            window.location.href = '/app/';
         },
         login: function() {
             this.showPage('login');
