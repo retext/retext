@@ -1,16 +1,17 @@
 require.config({
-    urlArgs:"bust=" + (new Date()).getTime()
+    urlArgs:"bust=" + (new Date()).getTime(),
+    paths:{
+        text:'../assets/require',
+        templates:'../templates'
+    }
 });
 
 require([
     'views/app',
-    'router',
-    'vm',
-    'models/user'
-], function (AppView, Router, Vm, User) {
-    var user = new User();
-    var appView = new AppView(user);
+    'router'
+], function (AppView, Router) {
+    var appView = new AppView();
     appView.render();
-    new Router(appView, Vm, user);
+    new Router(appView);
     Backbone.history.start();
 });

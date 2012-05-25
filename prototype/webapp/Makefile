@@ -35,4 +35,5 @@ jquery:
 
 require:
 	cp vendor/require/require.js assets/require.js
+	cat vendor/require/text.js >> assets/require.js
 	uglifyjs -nc vendor/require/require.js > assets/require-min.js

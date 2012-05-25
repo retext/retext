@@ -1,46 +1,28 @@
 define([
-], function () {
+    "events",
+    "vm"
+], function (Events, Vm) {
     var AppRouter = Backbone.Router.extend({
         routes:{
             "":"home",
-            "login":"login",
             "logout":"logout",
             "*page":"showPage"
         },
         home:function () {
             this.showPage('login');
         },
-        logout: function() {
-            // TODO send logout to server
-            this.user.set('authenticated', false);
+        logout:function () {
+            Events.trigger('userLogoff');
             window.location.href = '/app/';
         },
-        login: function() {
-            this.showPage('login');
-        },
         showPage:function (pageId) {
-            _.each(this.vm.pages, function (page) {
-                if (page.id == pageId) {
-                    $(page.el).show();
-                } else {
-                    $(page.el).hide();
-                }
-            });
-            _.each(this.vm.menuGroups.models, function (menuGroup) {
-                _.each(menuGroup.get('children').models, function (menuItem) {
-                    menuItem.set({active: menuItem.get('id')== pageId});
-                    _.each(menuItem.get('children').models, function(menuChild) {
-                        if (menuChild.get('id')== pageId) {
-                            menuItem.set({active: true});
-                        }
-                    });
-                });
+            var appView = this.appView;
+            require(['views/page/' + pageId], function (PageView) {
+                Vm.create(appView, pageId, PageView, {});
             });
         },
-        initialize: function (appView, vm, user) {
+        initialize:function (appView) {
             this.appView = appView;
-            this.vm = vm;
-            this.user = user;
         }
     });
     return AppRouter;

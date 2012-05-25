@@ -1,14 +1,11 @@
 define([
+    'views/page/base',
     'models/project',
-    'collections/project',
-    'views/project/list'
-], function (ProjectModel, ProjectCollection, ProjectListView) {
-    var ProjectNewView = Backbone.View.extend({
-        'el':$('#project-new'),
+    'text!templates/page/project/new.html'
+], function (PageViewBase, ProjectModel, PageProjectNewTemplate) {
+    var ProjectNewView = PageViewBase.extend({
         'initialize':function () {
             this.model = new ProjectModel();
-            this.projectList = new ProjectCollection();
-            $($(this.el).find('form')).after(new ProjectListView({model: this.projectList}).render().el);
         },
         'events':{
             'submit form':'submitForm'
@@ -17,7 +14,6 @@ define([
             ev.preventDefault();
             var form = $($(this.el).find('form'));
             form.parent().prepend('<div class="well" id="project-new-progress"><p>Lege Projekt an…</p><div class="progress progress-striped active"><div class="bar" style="width: 50%;"></div></div></div>');
-            var projectList = this.projectList;
             this.model.save({name: form.find('input[name=name]').attr('value')}, {
                     error:function () {
                         form.parent().prepend('<div class="alert alert-error"><a class="close" data-dismiss="alert" href="#">&times;</a><strong>Oops.</strong> Irgendwas ist schief gelaufen.</div>');
@@ -25,10 +21,13 @@ define([
                     },
                     success:function (data) {
                         $('#project-new-progress').remove();
-                        projectList.fetch();
                     }
                 }
             );
+        },
+        render:function () {
+            $(this.el).html(PageProjectNewTemplate);
+            return this;
         }
     });
     return ProjectNewView;

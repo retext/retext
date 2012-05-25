@@ -1,10 +1,15 @@
 define([
-    'remote'
-], function (Remote) {
-    var LoginView = Backbone.View.extend({
-        'el':$('#login'),
-        'events':{
+    'views/page/base',
+    'events',
+    'models/user',
+    'text!templates/page/login.html'
+], function (PageViewBase, Events, UserModel, LoginPageTemplate) {
+    var LoginView = PageViewBase.extend({
+        events:{
             'submit form':'submitForm'
+        },
+        initialize:function () {
+            this.model = new UserModel();
         },
         submitForm:function (ev) {
             ev.preventDefault();
@@ -27,10 +32,15 @@ define([
                         form.hide();
                         $('#login-progress').remove();
                         model.set('authenticated', true);
+                        Events.trigger('userLogon');
                     }
                 }
             );
             $(".alert").alert('close');
+        },
+        render:function () {
+            $(this.el).html(LoginPageTemplate);
+            return this;
         }
     });
     return LoginView;

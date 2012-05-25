@@ -1,12 +1,11 @@
 define([
+    'views/page/base',
     'models/register',
-], function (RegisterModel) {
-    var RegisterView = Backbone.View.extend({
-        el:$('#register'),
+    'text!templates/page/register.html'
+], function (PageViewBase, RegisterModel, RegisterPageTemplate) {
+    var RegisterView = PageViewBase.extend({
         initialize:function () {
             this.model = new RegisterModel();
-            this.inp = $($(this.el).find('input'));
-            this.button = $($(this.el).find('button'));
         },
         events:{
             'submit form':'submitForm'
@@ -32,6 +31,10 @@ define([
                     }
                 }
             );
+        },
+        render:function () {
+            $(this.el).html(RegisterPageTemplate);
+            return this;
         }
     });
     return RegisterView;

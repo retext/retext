@@ -1,11 +1,12 @@
 define([
+    'events',
     'views/menu/item'
-], function (MenuItemView) {
+], function (Events, MenuItemView) {
     var MenuGroupView = Backbone.View.extend({
         'tagName':'ul',
         'className':'nav',
         initialize:function () {
-            this.model.get('children').bind("change", this.render, this);
+            Events.on('userAuthChange', this.userAuthChange, this);
         },
         'render':function () {
             var el = $(this.el);
@@ -21,6 +22,12 @@ define([
             }
 
             return this;
+        },
+        clean:function () {
+            Events.off('userAuthChange', this.userAuthChange);
+        },
+        userAuthChange:function () {
+            this.render();
         }
     });
     return MenuGroupView;

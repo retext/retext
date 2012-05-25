@@ -1,0 +1,23 @@
+<div class="row-fluid">
+    <div class="span12">
+        <h1>Deine Projekte</h1>
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span4">
+        <p>Hier findest Du deine Projekte.</p>
+        <ul>
+            <% _.each(projects, function(project) { %>
+            <li data-id="<%= project.id %>"><%= project.name %></li>
+            <% }); %>
+        </ul>
+
+    </div>
+    <div class="span8">
+        <dl>
+            <dt>Name</dt>
+            <dd>##name##</dd>
+        </dl>
+        <p><a class="btn" href="#/project/##id##">auswählen</a></p>
+    </div>
+</div>
