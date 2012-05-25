@@ -15,7 +15,7 @@ class RegisterControllerTest extends WebTestCase
         $client = static::createClient();
         $client->request('PUT', '/api/user', array('email' => 'phpunit@retext.it'));
         $this->assertEquals(201, $client->getResponse()->getStatusCode());
-        $this->assertNotEmpty($client->getResponse()->headers->get('Location'));
+        $this->assertNotEmpty($client->getResponse()->getHeader('Location'));
     }
 
     /**
@@ -32,7 +32,7 @@ class RegisterControllerTest extends WebTestCase
         $this->assertObjectHasAttribute('email', $response);
         $this->assertObjectNotHasAttribute('password', $response);
         $this->assertEquals('phpunit@retext.it', $response->email);
-        $cookies = $client->getResponse()->headers->getCookies();
+        $cookies = $client->getResponse()->getHeaderCookies();
         $this->assertEquals(1, count($cookies));
         $this->assertEquals('MOCKSESSID', $cookies[0]->getName());
         $this->assertFalse($cookies[0]->getValue() == "");
@@ -60,7 +60,7 @@ class RegisterControllerTest extends WebTestCase
         $client->request('POST', '/api/login', array('email' => 'phpunit@retext.it', 'password' => 'phpunit@retext.it'));
         $client->request('GET', '/api/auth');
         $this->assertEquals(204, $client->getResponse()->getStatusCode());
-        $cookies = $client->getResponse()->headers->getCookies();
+        $cookies = $client->getResponse()->getHeaderCookies();
         $this->assertEquals(1, count($cookies));
         $this->assertEquals('MOCKSESSID', $cookies[0]->getName());
         $this->assertFalse($cookies[0]->getValue() == "");

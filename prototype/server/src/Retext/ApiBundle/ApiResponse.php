@@ -11,4 +11,14 @@ class ApiResponse extends Response
         $this->headers->set($name, $value);
         return $this;
     }
+
+    public function getHeader($key, $first = true)
+    {
+        return $this->headers->get($key, null, $first);
+    }
+
+    public function getHeaderCookies()
+    {
+        return $this->headers->getCookies();
+    }
 }

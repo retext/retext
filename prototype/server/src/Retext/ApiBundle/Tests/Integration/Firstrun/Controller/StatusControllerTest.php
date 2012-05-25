@@ -12,7 +12,7 @@ class StatusControllerTest extends WebTestCase
         $client->request('GET', '/api/status');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertEquals("application/json", $client->getResponse()->headers->get('Content-Type'));
+        $this->assertEquals("application/json", $client->getResponse()->getHeader('Content-Type'));
         $response = json_decode($client->getResponse()->getContent());
         $this->assertObjectHasAttribute('time', $response);
     }
