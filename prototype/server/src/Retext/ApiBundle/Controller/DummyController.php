@@ -13,6 +13,7 @@ class DummyController extends Base
      */
     public function helloAction($name)
     {
+        $this->ensureRequest();
         return $this->createResponse(array('name' => $name));
     }
 }

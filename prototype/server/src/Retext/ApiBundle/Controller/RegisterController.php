@@ -15,7 +15,7 @@ class RegisterController extends Base
      */
     public function registerAction(Request $request)
     {
-        $email = $request->get('email');
+        $email = $this->getFromRequest('email');
         $user = new User();
         $user->setEmail($email);
         // TODO: generate Passwords

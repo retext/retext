@@ -19,12 +19,7 @@ class ProjectController extends Base
 
         $project = new Project();
         $project->setOwner($this->getUser());
-        if ($request->headers->get('Content-Type') == 'application/json') {
-            $data = json_decode($request->getContent());
-            $project->setName($data->name);
-        } else {
-            $project->setName($request->get('name'));
-        }
+        $project->setName($this->getFromRequest('name'));
 
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $dm->persist($project);
@@ -39,6 +34,7 @@ class ProjectController extends Base
     public function getProjectAction($id)
     {
         $this->ensureLoggedIn();
+        $this->ensureRequest();
 
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $project = $dm->getRepository('RetextApiBundle:Project')
@@ -55,6 +51,7 @@ class ProjectController extends Base
     public function listProjectAction()
     {
         $this->ensureLoggedIn();
+        $this->ensureRequest();
 
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $projects = $dm->getRepository('RetextApiBundle:Project')

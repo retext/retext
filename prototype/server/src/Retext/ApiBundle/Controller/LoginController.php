@@ -15,12 +15,10 @@ class LoginController extends Base
      */
     public function loginAction(Request $request)
     {
-        $email = $request->get('email');
-        $password = $request->get('password');
-
+        list($email, $password) = $this->getFromRequest('email', 'password');
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $user = $dm->getRepository('RetextApiBundle:User')
-            ->findOneByEmail($email);
+            ->findOneByEmail($this->getFromRequest('email'));
 
         if ($user && $user->getPassword() === $user->hashPassword($password, $user->getPassword())) {
             $this->getRequest()->getSession()->set('User', $user);

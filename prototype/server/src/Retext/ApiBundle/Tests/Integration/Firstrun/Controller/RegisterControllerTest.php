@@ -13,7 +13,7 @@ class RegisterControllerTest extends WebTestCase
     public function testRegister()
     {
         $client = static::createClient();
-        $client->request('PUT', '/api/user', array('email' => 'phpunit@retext.it'));
+        $client->request('PUT', '/api/user', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('email' => 'phpunit@retext.it')));
         $this->assertEquals(201, $client->getResponse()->getStatusCode());
         $this->assertNotEmpty($client->getResponse()->getHeader('Location'));
     }
@@ -26,7 +26,7 @@ class RegisterControllerTest extends WebTestCase
     public function testLogin()
     {
         $client = static::createClient();
-        $client->request('POST', '/api/login', array('email' => 'phpunit@retext.it', 'password' => 'phpunit@retext.it'));
+        $client->request('POST', '/api/login', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('email' => 'phpunit@retext.it', 'password' => 'phpunit@retext.it')));
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $response = json_decode($client->getResponse()->getContent());
         $this->assertObjectHasAttribute('email', $response);
@@ -45,7 +45,7 @@ class RegisterControllerTest extends WebTestCase
     public function testBadLogin()
     {
         $client = static::createClient();
-        $client->request('POST', '/api/login', array('email' => 'phpunit@retext.it', 'password' => 'invalid'));
+        $client->request('POST', '/api/login', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('email' => 'phpunit@retext.it', 'password' => 'invalid')));
         $this->assertEquals(403, $client->getResponse()->getStatusCode());
     }
 
@@ -57,7 +57,7 @@ class RegisterControllerTest extends WebTestCase
     public function testAuthStatus()
     {
         $client = static::createClient();
-        $client->request('POST', '/api/login', array('email' => 'phpunit@retext.it', 'password' => 'phpunit@retext.it'));
+        $client->request('POST', '/api/login', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('email' => 'phpunit@retext.it', 'password' => 'phpunit@retext.it')));
         $client->request('GET', '/api/auth');
         $this->assertEquals(204, $client->getResponse()->getStatusCode());
         $cookies = $client->getResponse()->getHeaderCookies();
@@ -74,7 +74,7 @@ class RegisterControllerTest extends WebTestCase
     public function testLogout()
     {
         $client = static::createClient();
-        $client->request('POST', '/api/login', array('email' => 'phpunit@retext.it', 'password' => 'phpunit@retext.it'));
+        $client->request('POST', '/api/login', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('email' => 'phpunit@retext.it', 'password' => 'phpunit@retext.it')));
         $client->request('POST', '/api/logout');
         $this->assertEquals(204, $client->getResponse()->getStatusCode());
         $client->request('GET', '/api/auth');

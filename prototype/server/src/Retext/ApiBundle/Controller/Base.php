@@ -19,12 +19,14 @@ abstract class Base extends Controller
     public function createResponse($data = null)
     {
         $response = new ApiResponse();
-        $response->addHeader('Content-Type', 'application/json')
+        $response->addHeader('Content-Type', 'application/json');
+        /* CORS stuff
             ->addHeader('Access-Control-Allow-Origin', $this->getRequest()->headers->get('Origin'))
             ->addHeader('Access-Control-Allow-Credentials', 'true')
             ->addHeader('Access-Control-Max-Age', '604800')
             ->addHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS')
             ->addHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
+        */
         if ($data !== null) $response->setContent($this->container->get('serializer')->serialize($data, 'json'));
         return $response;
     }
@@ -45,9 +47,17 @@ abstract class Base extends Controller
     /**
      * @return \Symfony\Component\HttpKernel\Exception\HttpException
      */
+    public function createException($code, $message)
+    {
+        return new HttpException($code, $message, null, array('Content-Type' => 'application/json'));
+    }
+
+    /**
+     * @return \Symfony\Component\HttpKernel\Exception\HttpException
+     */
     public function createForbiddenException()
     {
-        return new HttpException(403, 'Forbidden', null, array('Content-Type' => 'application/json', 'Access-Control-Allow-Origin' => '*'));
+        return $this->createException(403, 'Forbidden');
     }
 
     /**
@@ -65,5 +75,37 @@ abstract class Base extends Controller
     {
         $this->ensureLoggedIn();
         return $this->getRequest()->getSession()->get('User');
+    }
+
+    public function ensureRequest()
+    {
+        $request = $this->getRequest();
+        if (!in_array('application/json', $request->getAcceptableContentTypes())) throw $this->createException(406, 'Not Acceptable | You must accept application/json');
+        if ((int)$request->headers->get('Content-Length') > 0) if ($request->getContentType() != 'application/json') throw $this->createException(400, 'Bad Request | Content-Type must be application/json');
+    }
+
+    /**
+     * @param $key
+     * @return array|string
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     */
+    public function getFromRequest()
+    {
+        $this->ensureRequest();
+        $request = $this->getRequest();
+        $data = json_decode($request->getContent());
+        $args = func_get_args();
+        $getKey = function($key) use($data)
+        {
+            if (!property_exists($data, $key)) throw $this->createException(400, 'Bad Request | Missing input: ' . $key);
+            return $data->$key;
+        };
+        if (count($args) == 1) {
+            return $getKey($args[0]);
+        } else {
+            $return = array();
+            foreach ($args as $key) $return[] = $getKey($key);
+            return $return;
+        }
     }
 }
