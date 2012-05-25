@@ -1,6 +1,6 @@
 <?php
 
-namespace Retext\ApiBundle\Tests\Document;
+namespace Retext\ApiBundle\Tests\Unit\Document;
 
 use Retext\ApiBundle\Document\User;
 

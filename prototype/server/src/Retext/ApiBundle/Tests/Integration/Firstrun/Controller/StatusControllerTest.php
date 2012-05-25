@@ -1,6 +1,6 @@
 <?php
 
-namespace Retext\ApiBundle\Tests\Controller;
+namespace Retext\ApiBundle\Tests\Integration\Firstrun\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

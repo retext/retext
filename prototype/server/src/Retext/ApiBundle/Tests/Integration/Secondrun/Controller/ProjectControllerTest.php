@@ -1,6 +1,6 @@
 <?php
 
-namespace Retext\ApiBundle\Tests\Controller;
+namespace Retext\ApiBundle\Tests\Integration\Secondrun\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -18,9 +18,9 @@ class ProjectControllerTest extends WebTestCase
     }
 
     /**
-     * @depend Retext\ApiBundle\Tests\Controller\RegisterController::testRegister
-     * @group integration
+     * @depend Retext\ApiBundle\Tests\Integration\Controller\RegisterController::testRegister
      * @group secondrun
+     * @group integration
      */
     public function testCreateProject()
     {
