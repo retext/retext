@@ -10,7 +10,7 @@ define([
                 views[name].clean();
             }
         }
-        var view = new View(options);
+        var view = new View(_.isUndefined(options) ? {} : options);
         views[name] = view;
         if (typeof context.children === 'undefined') {
             context.children = {};
