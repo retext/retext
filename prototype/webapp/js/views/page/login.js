@@ -26,6 +26,7 @@ define([
                         form.parent().prepend('<div class="alert alert-error"><a class="close" data-dismiss="alert" href="#">&times;</a><strong>Oops.</strong> Irgendwas ist schief gelaufen.</div>');
                         $('#login-progress').remove();
                         model.set('authenticated', false);
+                        Events.trigger('userLogoff');
                     },
                     success:function () {
                         form.parent().prepend('<div class="alert alert-success">Hallo!</div>');

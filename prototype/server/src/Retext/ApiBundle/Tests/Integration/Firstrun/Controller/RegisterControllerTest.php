@@ -13,7 +13,7 @@ class RegisterControllerTest extends WebTestCase
     public function testRegister()
     {
         $client = static::createClient();
-        $client->request('PUT', '/api/user', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('email' => 'phpunit@retext.it')));
+        $client->request('POST', '/api/user', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('email' => 'phpunit@retext.it')));
         $this->assertEquals(201, $client->getResponse()->getStatusCode());
         $this->assertNotEmpty($client->getResponse()->getHeader('Location'));
     }
@@ -59,11 +59,14 @@ class RegisterControllerTest extends WebTestCase
         $client = static::createClient();
         $client->request('POST', '/api/login', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('email' => 'phpunit@retext.it', 'password' => 'phpunit@retext.it')));
         $client->request('GET', '/api/auth');
-        $this->assertEquals(204, $client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $cookies = $client->getResponse()->getHeaderCookies();
         $this->assertEquals(1, count($cookies));
         $this->assertEquals('MOCKSESSID', $cookies[0]->getName());
         $this->assertFalse($cookies[0]->getValue() == "");
+        $response = json_decode($client->getResponse()->getContent());
+        $this->assertObjectHasAttribute('authorized', $response);
+        $this->assertTrue($response->authorized);
     }
 
     /**
@@ -78,6 +81,10 @@ class RegisterControllerTest extends WebTestCase
         $client->request('POST', '/api/logout');
         $this->assertEquals(204, $client->getResponse()->getStatusCode());
         $client->request('GET', '/api/auth');
-        $this->assertEquals(403, $client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $cookies = $client->getResponse()->getHeaderCookies();
+        $response = json_decode($client->getResponse()->getContent());
+        $this->assertObjectHasAttribute('authorized', $response);
+        $this->assertFalse($response->authorized);
     }
 }

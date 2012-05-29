@@ -11,7 +11,8 @@ require([
     'router'
 ], function (AppView, Router) {
     var appView = new AppView();
-    appView.render();
     new Router(appView);
+    appView.render();
     Backbone.history.start();
+    appView.complete();
 });

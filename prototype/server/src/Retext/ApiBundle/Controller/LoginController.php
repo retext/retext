@@ -32,10 +32,7 @@ class LoginController extends Base
      */
     public function authAction()
     {
-        if ($this->getRequest()->getSession()->has('User')) {
-            return $this->createResponse()->setStatusCode(204);
-        }
-        throw $this->createForbiddenException();
+        return $this->createResponse(array('authorized' => $this->getRequest()->getSession()->has('User')));
     }
 
     /**

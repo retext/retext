@@ -1,13 +1,15 @@
 define([
     'events',
     'vm',
-    'views/menu'
-], function (Events, Vm, MenuView) {
+    'views/menu',
+    'models/auth'
+], function (Events, Vm, MenuView, Auth) {
     var AppView = Backbone.View.extend({
         el:$('#app'),
         initialize:function () {
             Events.on('userLogon', this.userLogon, this);
             Events.on('userLogoff', this.userLogoff, this);
+            Events.on('all', this.logEvents, this);
         },
         render:function () {
             Vm.create(this, 'mainmenu', MenuView);
@@ -19,6 +21,24 @@ define([
         userLogoff:function () {
             $(document.body).data('authenticated', false);
             Events.trigger('userAuthChange');
+        },
+        // Check if already authorized
+        complete:function () {
+            var authorized = new Auth();
+            authorized.fetch(
+                {
+                    success:function (model, response) {
+                        if (model.get('authorized')) {
+                            Events.trigger('userLogon');
+                        }
+                    }
+                });
+        },
+        // Log all events
+        logEvents:function (eventName) {
+            if (typeof console !== 'undefined') {
+                console.log('Event: ' + eventName);
+            }
         }
     });
     return AppView;
