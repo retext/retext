@@ -1,8 +1,9 @@
 define([
+    'events',
     'views/page/base',
     'models/project',
     'text!templates/page/project/new.html'
-], function (PageViewBase, ProjectModel, PageProjectNewTemplate) {
+], function (Events, PageViewBase, ProjectModel, PageProjectNewTemplate) {
     var ProjectNewView = PageViewBase.extend({
         'initialize':function () {
             this.model = new ProjectModel();
@@ -19,8 +20,9 @@ define([
                         form.parent().prepend('<div class="alert alert-error"><a class="close" data-dismiss="alert" href="#">&times;</a><strong>Oops.</strong> Irgendwas ist schief gelaufen.</div>');
                         $('#project-new-progress').remove();
                     },
-                    success:function (data) {
+                    success:function (model, request) {
                         $('#project-new-progress').remove();
+                        Events.trigger('navigate', 'project/' + model.id, {trigger: true});
                     }
                 }
             );
