@@ -1,67 +1,123 @@
-<div class="span3 gui-closeable" data-openspan="3" data-openbutton="#openleft" id="project-left">
-    <div class="row-fluid">
-        <div class="span10">
-            <h1><%= project.name %></h1>
-        </div>
-        <div class="span2">
-            <a class="btn btn-small gui-close"><i class="icon-backward"></i></a>
-        </div>
-    </div>
+<div class="row-fluid">
+    <div class="span3 gui-closeable" data-openspan="3" data-openbutton="#openleft" id="project-left">
 
-    <br>
-
-    <div class="row-fluid">
-        <div class="span6">
-            <div class="btn-group">
-                <button class="btn"><i class="icon-wrench"></i></button>
-                <button class="btn dropdown-toggle" data-toggle="dropdown">
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Projekt-Einstellungen</a></li>
-                </ul>
+        <div class="row-fluid">
+            <div class="span5">
+                <div class="btn-group">
+                    <button class="btn"><i class="icon-wrench"></i></button>
+                    <button class="btn dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Projekt-Einstellungen</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="span5">
+                <div class="btn-group">
+                    <button class="btn"><i class="icon-user"></i></button>
+                    <button class="btn dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Freigabe</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="span2">
+                <a class="btn btn-small gui-close"><i class="icon-backward"></i></a>
             </div>
         </div>
-        <div class="span6">
-            <div class="btn-group">
-                <button class="btn"><i class="icon-user"></i></button>
-                <button class="btn dropdown-toggle" data-toggle="dropdown">
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Freigabe</a></li>
+
+        <hr>
+
+        <form class="form-inline">
+            <input type="text" class="input-medium search-query" placeholder="Elemente durchsuchen">
+            <button type="submit" class="btn"><i class="icon-search"></i></button>
+        </form>
+
+        <br>
+
+    </div>
+    <div class="span5" data-openspan="5" data-currentspan="5" id="project-main">
+
+        <div class="row-fluid">
+            <div class="span6">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="#project/<%= project.id %>"><%= project.name %></a> <span class="divider">/</span>
+                    </li>
                 </ul>
             </div>
+            <div class="span6">
+
+                <div class="row-fluid">
+
+                    <div class="span6">
+
+                        <button class="btn btn-small"><i class="icon-folder-open"></i> Alle ausklappen</button>
+
+                    </div>
+                    <div class="span6">
+
+                        <div class="btn-group">
+                            <button class="btn"><i class="icon-list-alt"></i> Definieren</button>
+                            <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#"><i class="icon-pencil"></i> Schreiben</a></li>
+                                <li><a href="#"><i class="icon-random"></i> Übersetzen</a></li>
+                                <li><a href="#"><i class="icon-check"></i> Prüfen</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
+
+        <hr>
+
+        <form class="form-inline">
+            <input type="text" class="input-medium search-query" placeholder="Elemente durchsuchen">
+            <button type="submit" class="btn"><i class="icon-search"></i></button>
+            <button type="submit" class="btn"><i class="icon-filter"></i></button>
+        </form>
+
+        <a class="btn btn-primary"><i class="icon-plus icon-white"></i> Element erstellen</a>
     </div>
-
-    <hr>
-
-    <form class="form-inline">
-        <input type="text" class="input-medium search-query" placeholder="Elemente durchsuchen">
-        <button type="submit" class="btn"><i class="icon-search"></i></button>
-    </form>
-
-    <br>
-
-    <a class="btn btn-primary"><i class="icon-plus icon-white"></i> Element erstellen</a>
-
-</div>
-<div class="span5" data-openspan="5" data-currentspan="5" id="project-main">
-    <ul class="breadcrumb">
-        <li>
-            <a href="#project/<%= project.id %>"><%= project.name %></a> <span class="divider">/</span>
-        </li>
-    </ul>
-    <hr>
-</div>
-<div class="span4 gui-closeable" data-openspan="4" data-openbutton="#openright" id="project-right">
-    <div class="row-fluid">
-        <div class="span2">
-            <a class="btn btn-small gui-close"><i class="icon-forward"></i></a>
+    <div class="span4 gui-closeable" data-openspan="4" data-openbutton="#openright" id="project-right">
+        <div class="row-fluid">
+            <div class="span2"><a class="btn btn-small gui-close"><i class="icon-forward"></i></a></div>
+            <div class="span2">
+                <button class="btn"><i class="icon-star"></i></button>
+            </div>
+            <div class="span2">
+                <button class="btn"><i class="icon-time"></i></button>
+            </div>
+            <div class="span2">
+                <button class="btn"><i class="icon-file"></i></button>
+            </div>
+            <div class="span2">
+                <button class="btn"><i class="icon-comment"></i></button>
+            </div>
+            <div class="span2">
+                <button class="btn"><i class="icon-folder-open"></i></button>
+            </div>
         </div>
-        <div class="span10">
-            <h2>Kontext-Infos</h2>
+
+        <hr>
+
+        <div class="row-fluid">
+            <div class="span12">
+                <form class="form-inline">
+                    <input type="text" class="input-medium search-query" placeholder="Elemente durchsuchen">
+                    <button type="submit" class="btn"><i class="icon-search"></i></button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
