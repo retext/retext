@@ -2,7 +2,7 @@ define([
     'events',
     'views/page/base',
     'models/project',
-    'text!templates/page/project/new.html'
+    'text!templates/page/projects/new.html'
 ], function (Events, PageViewBase, ProjectModel, PageProjectNewTemplate) {
     var ProjectNewView = PageViewBase.extend({
         'initialize':function () {

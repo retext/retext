@@ -9,7 +9,8 @@ define([
         },
         routes:{
             "":"home",
-            "project/list/:id":"listProject",
+            "projects/list/:id":"listProject",
+            "project/:id":"project",
             "*page":"showPage"
         },
         home:function () {
@@ -22,7 +23,10 @@ define([
             });
         },
         listProject:function (projectId) {
-            this.showPage('project/list', {projectId:projectId});
+            this.showPage('projects/list', {projectId:projectId});
+        },
+        project:function (id) {
+            this.showPage('project', {id:id});
         }
     });
     return AppRouter;

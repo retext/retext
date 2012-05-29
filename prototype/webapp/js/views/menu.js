@@ -13,7 +13,7 @@ define([
             this.model.bind("change", this.render, this);
 
             var leftMenuItems = new MenuItemCollection();
-            var projectMenuItem = new MenuItem({id:'projects', label:'Projekte', children:[new MenuItem({id:'project/new', label:'Neu…'}), new MenuItem({id:'project/list', label:'Meine Projekte'})], authOnly:true});
+            var projectMenuItem = new MenuItem({id:'projects', label:'Projekte', children:[new MenuItem({id:'projects/new', label:'Neu…'}), new MenuItem({id:'projects/list', label:'Meine Projekte'})], authOnly:true});
             leftMenuItems.add(new MenuItem({id:'dashboard', label:'Dashboard', authOnly: true}));
             leftMenuItems.add(projectMenuItem);
             leftMenuItems.add(new MenuItem({id:'status', label:'Status'}));

@@ -22,7 +22,7 @@ define([
         if (typeof views[name].complete === 'function') {
             views[name].complete();
         }
-        Events.trigger('viewCreated');
+        Events.trigger('viewCreated:' + name);
         // Save for undelegate on removal
         if (typeof el2view[view.el] !== 'undefined') {
             el2view[view.el].undelegateEvents();
