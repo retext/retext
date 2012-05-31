@@ -22,6 +22,7 @@ class Container extends Base
     /**
      * @MongoDB\ReferenceOne(targetDocument="Retext\ApiBundle\Document\Project", cascade={"persist"})
      * @MongoDB\Index(order="asc")
+     * @SerializerBundle\Exclude
      * @var \Retext\ApiBundle\Document\Project $project
      */
     private $project;
@@ -142,5 +143,17 @@ class Container extends Base
     public function getOrder()
     {
         return $this->order;
+    }
+
+    /**
+     * Gibt die URL (Subject) dieses Dokumentes zurück
+     *
+     * @return string
+     * @SerializerBundle\PreSerialize
+     */
+    public function getSubject()
+    {
+        $this->subject = $this->getProject()->getSubject() . '/' . strtolower($this->getContextName()) . '/' . $this->getId();
+        return $this->subject;
     }
 }

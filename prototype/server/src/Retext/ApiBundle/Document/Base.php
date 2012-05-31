@@ -41,7 +41,12 @@ class Base implements LinkedData
         return $this->subject;
     }
 
-    private function getContextName()
+    /**
+     * Generische Methode zum erzeugen des Context-Namens
+     *
+     * @return string
+     */
+    protected function getContextName()
     {
         $parts = explode('\\', get_class($this));
         return array_pop($parts);

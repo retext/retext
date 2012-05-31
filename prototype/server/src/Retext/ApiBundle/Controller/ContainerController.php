@@ -63,15 +63,15 @@ class ContainerController extends Base
     }
 
     /**
-     * @Route("/container/{id}", requirements={"_method":"PUT"})
+     * @Route("/project/{project_id}/container/{container_id}", requirements={"_method":"PUT"})
      */
-    public function updateContainerAction($id)
+    public function updateContainerAction($project_id, $container_id)
     {
         $this->ensureLoggedIn();
 
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $container = $dm->getRepository('RetextApiBundle:Container')
-            ->findOneBy(array('id' => $id));
+            ->findOneBy(array('id' => $container_id));
 
         // TODO: Check update permissions
         $container->setName($this->getFromRequest(RequestParamater::create('name')->makeOptional()->defaultsTo($container->getName())));
@@ -83,7 +83,7 @@ class ContainerController extends Base
             $dm->getRepository('RetextApiBundle:Container')
                 ->createQueryBuilder()
                 ->findAndUpdate()
-                ->field('project.$id')->equals(new \MongoId($container->getProject()->getId()))
+                ->field('project.$id')->equals(new \MongoId($project_id))
                 ->field('order')->lte($newOrder)->inc(1)
                 ->getQuery()
                 ->execute();
@@ -96,15 +96,15 @@ class ContainerController extends Base
     }
 
     /**
-     * @Route("/container/{id}", requirements={"_method":"GET"})
+     * @Route("/project/{project_id}/container/{container_id}", requirements={"_method":"GET"})
      */
-    public function getContainerAction($id)
+    public function getContainerAction($project_id, $container_id)
     {
         $this->ensureLoggedIn();
 
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $container = $dm->getRepository('RetextApiBundle:Container')
-            ->findOneBy(array('id' => $id));
+            ->findOneBy(array('id' => $container_id, 'project.$id' => new \MongoId($project_id)));
 
         return $this->createResponse($container);
     }
