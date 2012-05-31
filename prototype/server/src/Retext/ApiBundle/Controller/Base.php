@@ -2,7 +2,9 @@
 
 namespace Retext\ApiBundle\Controller;
 
-use Retext\ApiBundle\ApiResponse;
+use Retext\ApiBundle\ApiResponse,
+Retext\ApiBundle\RequestParamater,
+Retext\ApiBundle\Document\LinkedData;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller,
 Symfony\Component\HttpFoundation\Response,
@@ -27,7 +29,9 @@ abstract class Base extends Controller
             ->addHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS')
             ->addHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
         */
-        if ($data !== null) $response->setContent($this->container->get('serializer')->serialize($data, 'json'));
+        if ($data !== null) {
+            $response->setContent($this->container->get('serializer')->serialize($data, 'json'));
+        }
         return $response;
     }
 
@@ -94,11 +98,26 @@ abstract class Base extends Controller
         $this->ensureRequest();
         $request = $this->getRequest();
         $data = json_decode($request->getContent());
+        if ($data === null) $data = new \stdClass();
         $args = func_get_args();
         $getKey = function($key) use($data)
         {
-            if (!property_exists($data, $key)) throw $this->createException(400, 'Bad Request | Missing input: ' . $key);
-            return $data->$key;
+            if (!($key instanceof RequestParamater)) {
+                /** @var \Retext\ApiBundle\RequestParamater $key  */
+                $key = RequestParamater::create($key);
+            }
+            if (!property_exists($data, $key->getName())) {
+                if ($key->isRequired()) {
+                    throw $this->createException(400, 'Bad Request | Missing input: ' . $key);
+                }
+                return $key->getDefaultValue();
+            }
+            switch ($key->getFormat()) {
+                case RequestParamater::FORMAT_INTEGER;
+                    return (int)$data->{$key->getName()};
+                default:
+                    return $data->{$key->getName()};
+            }
         };
         if (count($args) == 1) {
             return $getKey($args[0]);

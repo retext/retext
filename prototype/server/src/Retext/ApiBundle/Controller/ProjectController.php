@@ -2,7 +2,7 @@
 
 namespace Retext\ApiBundle\Controller;
 
-use Retext\ApiBundle\Document\Project;
+use Retext\ApiBundle\RequestParamater, Retext\ApiBundle\Document\Project;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller,
 Symfony\Component\HttpFoundation\Response, Symfony\Component\HttpFoundation\Request;
@@ -25,7 +25,7 @@ class ProjectController extends Base
         $dm->persist($project);
         $dm->flush();
 
-        return $this->createResponse($project)->setStatusCode(201)->addHeader('Location', '/api/project/' . $project->getId());
+        return $this->createResponse($project)->setStatusCode(201)->addHeader('Location', $project->getSubject());
     }
 
     /**
@@ -56,16 +56,9 @@ class ProjectController extends Base
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $projects = $dm->getRepository('RetextApiBundle:Project')
             ->createQueryBuilder()
-            ->hydrate(false)
             ->field('owner.$id')->equals(new \MongoId($this->getUser()->getId()))
-            ->select('_id', 'name')
             ->getQuery()
             ->execute();
-
-        $ps = array();
-        foreach($projects as $project) {
-            $ps[] = array('id' => (string)$project['_id'], 'name' => $project['name']);
-        }
-        return $this->createListResponse($ps);
+        return $this->createListResponse($projects);
     }
 }

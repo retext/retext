@@ -19,7 +19,7 @@ class RegisterControllerTest extends WebTestCase
     }
 
     /**
-     * @depend testRegister
+     * @depends testRegister
      * @group integration
      * @group firstrun
      */
@@ -50,7 +50,7 @@ class RegisterControllerTest extends WebTestCase
     }
 
     /**
-     * @depend testLogin
+     * @depends testLogin
      * @group integration
      * @group firstrun
      */
@@ -70,7 +70,7 @@ class RegisterControllerTest extends WebTestCase
     }
 
     /**
-     * @depend testLogin
+     * @depends testLogin
      * @group integration
      * @group firstrun
      */

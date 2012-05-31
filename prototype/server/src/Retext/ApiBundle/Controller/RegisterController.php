@@ -25,6 +25,6 @@ class RegisterController extends Base
         $dm->persist($user);
         $dm->flush();
 
-        return $this->createResponse()->setStatusCode(201)->addHeader('Location', '/api/user/' . $user->getId());
+        return $this->createResponse()->setStatusCode(201)->addHeader('Location', $user->getSubject());
     }
 }

@@ -11,7 +11,7 @@ use JMS\SerializerBundle\Annotation as SerializerBundle;
  * @MongoDB\Document
  * @Doctrine\HasLifecycleCallbacks
  */
-class User
+class User extends Base
 {
     /**
      * @MongoDB\Id
@@ -21,7 +21,7 @@ class User
 
     /**
      * @MongoDB\String
-     * @MongoDB\Index(unique=true, order="asc")
+     * @MongoDB\UniqueIndex(order="asc")
      */
     protected $email;
 

@@ -2,6 +2,7 @@
 
 namespace Retext\ApiBundle\Document;
 
+use Retext\ApiBundle\Exception\ValidationException;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Doctrine\ORM\Mapping as Doctrine;
 use JMS\SerializerBundle\Annotation as SerializerBundle;
@@ -10,7 +11,7 @@ use JMS\SerializerBundle\Annotation as SerializerBundle;
  * @MongoDB\Document
  * @Doctrine\HasLifecycleCallbacks
  */
-class Project
+class Project extends Base
 {
     /**
      * @MongoDB\Id
@@ -86,5 +87,6 @@ class Project
     public function validate()
     {
         if (empty($this->name)) throw new ValidationException('name', 'empty');
+        if (empty($this->owner)) throw new ValidationException('owner', 'empty');
     }
 }

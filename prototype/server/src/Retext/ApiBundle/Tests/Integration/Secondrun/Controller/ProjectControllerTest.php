@@ -18,7 +18,6 @@ class ProjectControllerTest extends WebTestCase
     }
 
     /**
-     * @depend Retext\ApiBundle\Tests\Integration\Controller\RegisterController::testRegister
      * @group secondrun
      * @group integration
      */
@@ -28,10 +27,15 @@ class ProjectControllerTest extends WebTestCase
         $this->assertEquals(201, $this->client->getResponse()->getStatusCode());
         $this->assertNotEmpty($this->client->getResponse()->getHeader('Location'));
         $project = json_decode($this->client->getResponse()->getContent());
+        $this->assertObjectHasAttribute('@context', $project);
+        $this->assertEquals('http://jsonld.retext.it/Project', $project->{'@context'});
+        $this->assertObjectHasAttribute('@subject', $project);
+        $this->assertNotNull($project->{'@subject'});
+        $this->assertEquals($this->client->getResponse()->getHeader('Location'), $project->{'@subject'});
         $this->assertObjectHasAttribute('name', $project);
         $this->assertEquals('Test-Project äöß', $project->name);
 
-        $this->client->request('GET', $this->client->getResponse()->getHeader('Location'), array(), array(), array('HTTP_ACCEPT' => 'application/json'));
+        $this->client->request('GET', $project->{'@subject'}, array(), array(), array('HTTP_ACCEPT' => 'application/json'));
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $project = json_decode($this->client->getResponse()->getContent());
         $this->assertObjectHasAttribute('name', $project);
@@ -40,7 +44,9 @@ class ProjectControllerTest extends WebTestCase
         $this->client->request('GET', '/api/project', array(), array(), array('HTTP_ACCEPT' => 'application/json'));
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $projects = json_decode($this->client->getResponse()->getContent());
+        $this->assertInternalType('array', $projects);
         $this->assertEquals(1, count($projects));
+
         $this->assertObjectHasAttribute('name', $projects[0]);
         $this->assertEquals('Test-Project äöß', $projects[0]->name);
     }

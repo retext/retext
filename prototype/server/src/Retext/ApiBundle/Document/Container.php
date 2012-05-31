@@ -1,0 +1,146 @@
+<?php
+
+namespace Retext\ApiBundle\Document;
+
+use Retext\ApiBundle\Exception\ValidationException;
+use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Doctrine\ORM\Mapping as Doctrine;
+use JMS\SerializerBundle\Annotation as SerializerBundle;
+
+/**
+ * @MongoDB\Document
+ * @Doctrine\HasLifecycleCallbacks
+ */
+class Container extends Base
+{
+    /**
+     * @MongoDB\Id
+     * @var string $id
+     */
+    protected $id;
+
+    /**
+     * @MongoDB\ReferenceOne(targetDocument="Retext\ApiBundle\Document\Project", cascade={"persist"})
+     * @MongoDB\Index(order="asc")
+     * @var \Retext\ApiBundle\Document\Project $project
+     */
+    private $project;
+
+    /**
+     * @MongoDB\String
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * @MongoDB\Int
+     * @var int
+     */
+    protected $order = 1;
+
+    /**
+     * @MongoDB\ReferenceOne(targetDocument="Retext\ApiBundle\Document\Container", cascade={"persist"})
+     * @MongoDB\Index(order="asc")
+     * @var \Retext\ApiBundle\Document\Container $parent
+     */
+    private $parent;
+
+    /**
+     * Get id
+     *
+     * @return string $id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param \Retext\ApiBundle\Document\Container $parent
+     */
+    public function setParent(\Retext\ApiBundle\Document\Container $parent)
+    {
+        $this->parent = $parent;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return \Retext\ApiBundle\Document\Container $parent
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * Set project
+     *
+     * @param \Retext\ApiBundle\Document\Project $project
+     */
+    public function setProject(\Retext\ApiBundle\Document\Project $project)
+    {
+        $this->project = $project;
+    }
+
+    /**
+     * Get project
+     *
+     * @return \Retext\ApiBundle\Document\Project $project
+     */
+    public function getProject()
+    {
+        return $this->project;
+    }
+
+    /**
+     * @MongoDB\PrePersist
+     * @MongoDB\PreUpdate
+     */
+    public function validate()
+    {
+        if (empty($this->project)) throw new ValidationException('project', 'empty');
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string $name
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set order
+     *
+     * @param int $order
+     */
+    public function setOrder($order)
+    {
+        $this->order = $order;
+    }
+
+    /**
+     * Get order
+     *
+     * @return int $order
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
+}
