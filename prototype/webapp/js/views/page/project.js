@@ -6,8 +6,7 @@ define([
     var View = PageViewBase.extend({
         template:_.template(ViewTemplate),
         events:{
-            'click a.gui-close':'closeCol',
-            'click a.gui-open':'openCol'
+            'click a.gui-toggle':'toggleCol'
         },
         initialize:function (options) {
             this.model = new ProjectModel({id:options.id});
@@ -15,40 +14,56 @@ define([
             this.model.bind("reset", this.render, this);
         },
         render:function () {
-            $(this.el).html(this.template({project: this.model.toJSON()}));
-            $('#openleft').css({position:'absolute', top:'60px', left:0, display:'none'});
-            $('#openright').css({position:'absolute', top:'60px', right:0, display:'none'});
+            $(this.el).html(this.template({project:this.model.toJSON()}));
+            $('#toggleleft').css({position:'absolute', top:'25%', left:0});
+            $('#toggleright').css({position:'absolute', top:'25%', right:0});
+            this.hiddenDiv = $('#hiddendiv');
             return this;
         },
         complete:function () {
             this.model.fetch();
         },
-        closeCol:function (ev) {
+        toggleCol:function (ev) {
             var a = $(ev.target).closest('a');
-            var div = $(a.closest('div.gui-closeable'));
+            var closeIcon = a.data('closeicon');
+            var openIcon = a.data('openicon');
+            var icon = a.children('i:first');
+
+            if (icon.hasClass(closeIcon)) {
+                icon.removeClass(closeIcon);
+                icon.addClass(openIcon);
+                this.closeCol(a);
+            } else {
+                icon.removeClass(openIcon);
+                icon.addClass(closeIcon);
+                this.openCol(a);
+            }
+        },
+        closeCol:function (a) {
+            var div = $(a.data('col'));
+            div.detach();
+            a.data('div', div);
             var span = parseInt(div.data('openspan'), 10);
-            div.hide();
             var main = $('#project-main');
             main.removeClass('span' + main.data('currentspan'));
             var mainSpan = parseInt(main.data('currentspan'), 10) + span;
             main.data('currentspan', mainSpan);
             main.addClass('span' + mainSpan);
-            $(div.data('openbutton')).css({display:'block'});
         },
-        openCol:function (ev) {
-            var a = $(ev.target).closest('a');
-            a.css({display:'none'});
-
-            var div = $(a.data('opencol'));
+        openCol:function (a) {
+            var div = a.data('div');
             var span = parseInt(div.data('openspan'), 10);
-
             var main = $('#project-main');
             main.removeClass('span' + main.data('currentspan'));
             var mainSpan = parseInt(main.data('currentspan'), 10) - span;
             main.data('currentspan', mainSpan);
             main.addClass('span' + mainSpan);
 
-            div.show();
+            if (div.data('align') == 'left') {
+                $(this.el).find('div.gui-cols:first').prepend(div);
+            } else {
+                $(this.el).find('div.gui-cols:first').append(div);
+            }
         }
     });
     return View;

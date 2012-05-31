@@ -1,8 +1,8 @@
-<div class="row-fluid">
-    <div class="span3 gui-closeable" data-openspan="3" data-openbutton="#openleft" id="project-left">
+<div class="row-fluid gui-cols">
+    <div class="span2 gui-closeable" data-openspan="2" id="project-left" data-align="left">
 
         <div class="row-fluid">
-            <div class="span5">
+            <div class="span6">
                 <div class="btn-group">
                     <button class="btn"><i class="icon-wrench"></i></button>
                     <button class="btn dropdown-toggle" data-toggle="dropdown">
@@ -13,7 +13,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="span5">
+            <div class="span6">
                 <div class="btn-group">
                     <button class="btn"><i class="icon-user"></i></button>
                     <button class="btn dropdown-toggle" data-toggle="dropdown">
@@ -23,9 +23,6 @@
                         <li><a href="#">Freigabe</a></li>
                     </ul>
                 </div>
-            </div>
-            <div class="span2">
-                <a class="btn btn-small gui-close"><i class="icon-backward"></i></a>
             </div>
         </div>
 
@@ -39,7 +36,7 @@
         <br>
 
     </div>
-    <div class="span5" data-openspan="5" data-currentspan="5" id="project-main">
+    <div class="span7" data-openspan="7" data-currentspan="7" id="project-main">
 
         <div class="row-fluid">
             <div class="span6">
@@ -89,9 +86,9 @@
 
         <a class="btn btn-primary"><i class="icon-plus icon-white"></i> Element erstellen</a>
     </div>
-    <div class="span4 gui-closeable" data-openspan="4" data-openbutton="#openright" id="project-right">
+    <div class="span3 gui-closeable" data-openspan="3" data-align="right" id="project-right">
         <div class="row-fluid">
-            <div class="span2"><a class="btn btn-small gui-close"><i class="icon-forward"></i></a></div>
+            <div class="span2"></div>
             <div class="span2">
                 <button class="btn"><i class="icon-star"></i></button>
             </div>
@@ -121,5 +118,7 @@
         </div>
     </div>
 </div>
-<a class="btn btn-small gui-open" id="openleft" data-opencol="#project-left"><i class="icon-forward"></i></a>
-<a class="btn btn-small gui-open" id="openright" data-opencol="#project-right"><i class="icon-backward"></i></a>
+<a class="btn btn-small gui-toggle" id="toggleleft" data-col="#project-left" data-closeicon="icon-backward" data-openicon="icon-forward"><i
+        class="icon-backward"></i></a>
+<a class="btn btn-small gui-toggle" id="toggleright" data-col="#project-right" data-closeicon="icon-forward" data-openicon="icon-backward"><i
+        class="icon-forward"></i></a>
