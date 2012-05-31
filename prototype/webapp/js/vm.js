@@ -24,10 +24,11 @@ define([
         }
         Events.trigger('viewCreated:' + name);
         // Save for undelegate on removal
-        if (typeof el2view[view.el] !== 'undefined') {
-            el2view[view.el].undelegateEvents();
+        var viewHash = view.el.id == "" ? view.el.tagName + '.' + view.el.className : '#' + view.el.id;
+        if (typeof el2view[viewHash] !== 'undefined') {
+            el2view[viewHash].undelegateEvents();
         }
-        el2view[view.el] = view;
+        el2view[viewHash] = view;
         return view;
     }
     return {

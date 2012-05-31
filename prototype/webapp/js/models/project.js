@@ -9,7 +9,7 @@ define([
         },
         validate:function (attrs) {
             if (!attrs.hasOwnProperty('name')) return 'missing_name';
-            if (attrs.name.length < 1) return 'name_invalid';
+            if (attrs.name == null || attrs.name.length < 1) return 'name_invalid';
         }
     });
     return Project;

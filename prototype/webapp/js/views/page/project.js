@@ -1,8 +1,12 @@
 define([
+    'vm',
     'views/page/base',
+    'views/modules/container/list',
+    'views/modules/project/breadcrumb',
     'text!templates/page/project.html',
-    'models/project'
-], function (PageViewBase, ViewTemplate, ProjectModel) {
+    'models/project',
+    'models/container'
+], function (Vm, PageViewBase, ContainerListView, BreadCrumbModule, ViewTemplate, ProjectModel, ContainerModel) {
     var View = PageViewBase.extend({
         template:_.template(ViewTemplate),
         events:{
@@ -10,18 +14,18 @@ define([
         },
         initialize:function (options) {
             this.model = new ProjectModel({id:options.id});
-            this.model.bind("change", this.render, this);
-            this.model.bind("reset", this.render, this);
         },
         render:function () {
             $(this.el).html(this.template({project:this.model.toJSON()}));
             $('#toggleleft').css({position:'absolute', top:'25%', left:0});
             $('#toggleright').css({position:'absolute', top:'25%', right:0});
             this.hiddenDiv = $('#hiddendiv');
+            Vm.create(this, 'current-container', ContainerListView, {el:$('#gui-current-container'), project:this.model});
+            Vm.create(this, 'breadcrumb', BreadCrumbModule, {el:$('#gui-project-breadcrumb'), model:this.model});
             return this;
         },
         complete:function () {
-            this.model.fetch();
+            this.model.fetch(); // Will trigger update an subviews
         },
         toggleCol:function (ev) {
             var a = $(ev.target).closest('a');

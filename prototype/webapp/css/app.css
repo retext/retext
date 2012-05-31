@@ -1,0 +1,18 @@
+.gui-container {
+    border-radius: 10px;
+    background-color: #f0f0f0;
+    border: 3px solid #ccc;
+    margin: 0.5em 0 0.5em 0;
+    padding: 1em;
+    text-align: center;
+    color: #aaa;
+}
+.gui-container.selected {
+    background-color: #fefefe;
+    border-color: #F38630;
+    color: #333;
+}
+
+.gui-container .order { font-weight: bold; font-size: 1.75em; color: #999; }
+.gui-container .name {  }
+.gui-container .childcount { float: right; }
