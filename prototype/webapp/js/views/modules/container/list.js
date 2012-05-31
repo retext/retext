@@ -11,13 +11,16 @@ define([
             'click div.gui-container':'selectContainer'
         },
         initialize:function (options) {
+            _.extend(this, Backbone.Events);
             this.project = options.project;
             this.model = new ContainerCollection({project:this.project});
+            // TODO: Hier nicht bei einem Update eines Models die ganze Liste aktualisieren.
             this.model.bind("change", this.render, this);
             this.model.bind("reset", this.render, this);
             this.model.bind("add", this.render, this);
         },
         render:function () {
+            // TODO: Für jeden Container eine eigene View erzeugen
             $(this.el).html(this.template({containers:this.model.toJSON()}));
             return this;
         },
@@ -35,9 +38,11 @@ define([
             });
         },
         selectContainer:function (ev) {
+            // TODO: Merken
             $('div.gui-container').removeClass('selected');
             var div = $($(ev.target).closest('div.gui-container'));
             div.addClass('selected');
+            this.trigger('containerSelected', this.model.get(div.data('id')));
         }
     });
     return View;

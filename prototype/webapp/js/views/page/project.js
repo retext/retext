@@ -3,10 +3,11 @@ define([
     'views/page/base',
     'views/modules/container/list',
     'views/modules/project/breadcrumb',
+    'views/forms/container',
     'text!templates/page/project.html',
     'models/project',
     'models/container'
-], function (Vm, PageViewBase, ContainerListView, BreadCrumbModule, ViewTemplate, ProjectModel, ContainerModel) {
+], function (Vm, PageViewBase, ContainerListView, BreadCrumbModule, ContainerForm, ViewTemplate, ProjectModel, ContainerModel) {
     var View = PageViewBase.extend({
         template:_.template(ViewTemplate),
         events:{
@@ -20,8 +21,13 @@ define([
             $('#toggleleft').css({position:'absolute', top:'25%', left:0});
             $('#toggleright').css({position:'absolute', top:'25%', right:0});
             this.hiddenDiv = $('#hiddendiv');
-            Vm.create(this, 'current-container', ContainerListView, {el:$('#gui-current-container'), project:this.model});
+            var containerList = Vm.create(this, 'current-container', ContainerListView, {el:$('#gui-current-container'), project:this.model});
             Vm.create(this, 'breadcrumb', BreadCrumbModule, {el:$('#gui-project-breadcrumb'), model:this.model});
+            var project = this.model;
+            containerList.on('containerSelected', function (model) {
+                model.urlRoot = project.url() + '/container';
+                Vm.create(this, 'current-element-form', ContainerForm, {el:$('#current-element-form'), model:model});
+            });
             return this;
         },
         complete:function () {

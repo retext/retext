@@ -12,7 +12,7 @@
 
         <% _.each(containers, function(container) { %>
         <div class="gui-container" data-order="<%= container.order %>" data-id="<%= container.id %>">
-            <span class="name"><% if(container.name == null) { %><em>Kein Name</em><% } else { %><%= container.name %><% } %></span>
+            <span class="name"><% if(container.name == null || container.name.length == 0) { %><em>Kein Name</em><% } else { %><%= container.name %><% } %></span>
             <% if(container.childcount > 0) { %>
             <span class="childcount">
                 <i class="icon-book"></i> <%= container.childcount %>
