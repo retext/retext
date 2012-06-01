@@ -22,7 +22,7 @@ define([
             $('#toggleright').css({position:'absolute', top:'25%', right:0});
             this.hiddenDiv = $('#hiddendiv');
             var containerList = Vm.create(this, 'current-container', ContainerListView, {el:$('#gui-current-container'), project:this.model});
-            Vm.create(this, 'breadcrumb', BreadCrumbModule, {el:$('#gui-project-breadcrumb'), model:this.model});
+            Vm.create(this, 'breadcrumb', BreadCrumbModule, {el:$(this.el).find('div.view-breadcrumb'), model:this.model});
             var project = this.model;
             containerList.on('containerSelected', function (model) {
                 model.urlRoot = project.url() + '/container';

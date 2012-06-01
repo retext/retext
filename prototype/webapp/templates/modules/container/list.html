@@ -7,22 +7,7 @@
 </div>
 
 <div class="row-fluid">
-
-    <div class="span12" id="gui-container-list">
-
-        <% _.each(containers, function(container) { %>
-        <div class="gui-container" data-order="<%= container.order %>" data-id="<%= container.id %>">
-            <span class="name"><% if(container.name == null || container.name.length == 0) { %><em>Kein Name</em><% } else { %><%= container.name %><% } %></span>
-            <% if(container.childcount > 0) { %>
-            <span class="childcount">
-                <i class="icon-book"></i> <%= container.childcount %>
-            </span>
-            <% } %>
-        </div>
-        <% }); %>
-
-    </div>
-
+    <div class="span12 view-containers"></div>
 </div>
 
 <div class="row-fluid">
