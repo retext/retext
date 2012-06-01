@@ -9,7 +9,13 @@ define([
         events:{
             'click button.act-new-container':'newContainer',
             'click div.gui-container':'selectContainer',
-            'click button.actn-delete':'deleteContainer'
+            'click button.actn-delete':'deleteContainer',
+            'drop div.gui-container':'dragDropEvent',
+            'dragenter div.gui-container':'dragEnterEvent',
+            'dragleave div.gui-container':'dragLeaveEvent',
+            'dragover div.gui-container':'dragOverEvent',
+            'dragstart div.gui-container':'dragStartEvent',
+            'dragend div.gui-container':'dragStopEvent'
         },
         initialize:function (options) {
             _.extend(this, Backbone.Events);
@@ -59,10 +65,37 @@ define([
             var div = $(ev.target).closest('div.gui-container');
             var selectedModel = this.model.get(div.data('id'));
             selectedModel.destroy({
-                success: function() {
+                success:function () {
                     div.remove();
                 }
             });
+        },
+        dragEnterEvent:function (ev) {
+            ev.preventDefault(); // Must be called to enable drop
+            var f = $(ev.target);
+            f.addClass('drag-over');
+        },
+        dragLeaveEvent:function (ev) {
+            ev.preventDefault(); // Must be called to enable drop
+            var f = $(ev.target);
+            f.removeClass('drag-over');
+        },
+        dragOverEvent:function (ev) {
+            ev.preventDefault(); // Must be called to enable drop
+        },
+        dragStartEvent:function (ev) {
+            var f = $(ev.target);
+            ev.dataTransfer.setData('text/plain', f.data('id'));
+            f.addClass('dragging');
+        },
+        dragStopEvent:function (ev) {
+            var f = $(ev.target);
+            f.removeClass('dragging');
+        },
+        dragDropEvent:function (ev) {
+            var f = $(ev.target);
+            f.removeClass('drag-over');
+            alert("Dropped: " + ev.dataTransfer.getData('text/plain'));
         }
     });
     return View;

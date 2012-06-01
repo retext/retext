@@ -27,3 +27,11 @@
     float: right;
 }
 
+.gui-container.dragging {
+    border-style: dashed;
+}
+.gui-container.drag-over {
+    border-style: dotted;
+}
+
+*[draggable] { cursor: move; }
