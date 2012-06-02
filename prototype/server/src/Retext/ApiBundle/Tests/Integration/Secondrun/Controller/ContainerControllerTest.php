@@ -30,6 +30,9 @@ class ContainerControllerTest extends WebTestCase
     {
         $this->client->request('POST', $this->project->{'@subject'} . '/container', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('name' => 'Container 1')));
         $this->client->request('POST', $this->project->{'@subject'} . '/container', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('name' => 'Container 2')));
+        $this->client->request('POST', $this->project->{'@subject'} . '/container', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('name' => 'Container 3')));
+        $this->client->request('POST', $this->project->{'@subject'} . '/container', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('name' => 'Container 4')));
+        $this->client->request('POST', $this->project->{'@subject'} . '/container', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('name' => 'Container 5')));
         $this->assertEquals(201, $this->client->getResponse()->getStatusCode());
         $this->assertNotEmpty($this->client->getResponse()->getHeader('Location'));
         $container = json_decode($this->client->getResponse()->getContent());
@@ -40,7 +43,7 @@ class ContainerControllerTest extends WebTestCase
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $container = json_decode($this->client->getResponse()->getContent());
         $this->assertInternalType('array', $container);
-        $this->assertEquals(2, count($container));
+        $this->assertEquals(5, count($container));
         foreach ($container as $k => $c) {
             $this->checkContainer($c);
             $this->assertEquals($k + 1, $c->order, 'Reihenfolge sollte ' . ($k + 1) . ' sein.');
@@ -94,18 +97,27 @@ class ContainerControllerTest extends WebTestCase
      * @depends testCreateContainer
      * @return object
      */
-    public function testFlipContainerOrder(array $container)
+    public function testContainerReOrder(array $container)
     {
-        $this->client->request('PUT', $container[1]->{'@subject'}, array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('order' => 1)));
+        $this->client->request('PUT', $container[1]->{'@subject'}, array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('order' => 3)));
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $c2 = json_decode($this->client->getResponse()->getContent());
         $this->checkContainer($c2);
-        $this->assertEquals(1, $c2->order);
+        $this->assertEquals(3, $c2->order);
 
-        $this->client->request('GET', $container[0]->{'@subject'}, array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'));
-        $c1 = json_decode($this->client->getResponse()->getContent());
-        $this->checkContainer($c1);
-        $this->assertEquals(2, $c1->order);
+        $newOrder = array(
+            0 => 1,
+            2 => 2,
+            1 => 3,
+            3 => 4,
+            4 => 5,
+        );
+
+        foreach ($newOrder as $k => $expextedOrder) {
+            $this->client->request('GET', $container[$k]->{'@subject'}, array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'));
+            $c = json_decode($this->client->getResponse()->getContent());
+            $this->checkContainer($c);
+            $this->assertEquals($expextedOrder, $c->order, 'Container ' . ($k + 1) . ' should have order ' . $expextedOrder);
+        }
     }
-
 }

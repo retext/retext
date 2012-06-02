@@ -30,8 +30,18 @@
 .gui-container.dragging {
     border-style: dashed;
 }
-.gui-container.drag-over {
-    border-style: dotted;
+
+.gui-droptarget {
+    display: none;
+    height: 1em;
+    border-radius: 10px;
+    border: 2px dotted #ccc;
 }
 
-*[draggable] { cursor: move; }
+.gui-droptarget.drag-over {
+    display: block;
+}
+
+*[draggable] {
+    cursor: move;
+}

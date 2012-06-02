@@ -43,6 +43,8 @@ class ContainerController extends Base
     }
 
     /**
+     * Gibt eine Liste mit den Containern auf der obersten Ebene eines Projektes zurück
+     *
      * @Route("/project/{id}/container", requirements={"_method":"GET"})
      */
     public function listContainerAction($id)
@@ -56,6 +58,7 @@ class ContainerController extends Base
         $container = $dm->getRepository('RetextApiBundle:Container')
             ->createQueryBuilder()
             ->field('project.$id')->equals(new \MongoId($project->getId()))
+            ->sort('order', 'asc')
             ->getQuery()
             ->execute();
 
@@ -84,11 +87,12 @@ class ContainerController extends Base
                 ->createQueryBuilder()
                 ->findAndUpdate()
                 ->field('project.$id')->equals(new \MongoId($project_id))
-                ->field('order')->lte($newOrder)->inc(1)
+                ->field('order')->equals($newOrder)->set($container->getOrder())
                 ->getQuery()
                 ->execute();
             $container->setOrder($newOrder);
         }
+
         $dm->persist($container);
         $dm->flush();
 

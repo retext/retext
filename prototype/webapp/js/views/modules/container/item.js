@@ -17,7 +17,6 @@ define([
                 el.removeClass('selected');
             }
             el.data({order:this.model.get('order'), id:this.model.get('id')});
-            el.attr('draggable', 'true');
             return this;
         }
     });

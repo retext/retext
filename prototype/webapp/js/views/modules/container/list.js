@@ -10,12 +10,12 @@ define([
             'click button.act-new-container':'newContainer',
             'click div.gui-container':'selectContainer',
             'click button.actn-delete':'deleteContainer',
-            'drop div.gui-container':'dragDropEvent',
+            'dragstart div.gui-container':'dragStartEvent',
+            'dragend div.gui-container':'dragStopEvent',
             'dragenter div.gui-container':'dragEnterEvent',
             'dragleave div.gui-container':'dragLeaveEvent',
             'dragover div.gui-container':'dragOverEvent',
-            'dragstart div.gui-container':'dragStartEvent',
-            'dragend div.gui-container':'dragStopEvent'
+            'drop div.gui-container':'dragDropEvent'
         },
         initialize:function (options) {
             _.extend(this, Backbone.Events);
@@ -38,7 +38,10 @@ define([
             }, this);
         },
         renderItem:function (container) {
-            this.list.append(new ContainerItemView({model:container}).render().el);
+            var containerView = new ContainerItemView({model:container}).render();
+            $(containerView.el).attr('draggable', 'true');
+            this.list.append(containerView.el);
+            this.list.append('<div class="gui-droptarget" data-order="' + container.get('order') + '"></div>');
         },
         complete:function () {
             this.model.fetch();
@@ -70,19 +73,6 @@ define([
                 }
             });
         },
-        dragEnterEvent:function (ev) {
-            ev.preventDefault(); // Must be called to enable drop
-            var f = $(ev.target);
-            f.addClass('drag-over');
-        },
-        dragLeaveEvent:function (ev) {
-            ev.preventDefault(); // Must be called to enable drop
-            var f = $(ev.target);
-            f.removeClass('drag-over');
-        },
-        dragOverEvent:function (ev) {
-            ev.preventDefault(); // Must be called to enable drop
-        },
         dragStartEvent:function (ev) {
             var f = $(ev.target);
             ev.dataTransfer.setData('text/plain', f.data('id'));
@@ -92,10 +82,32 @@ define([
             var f = $(ev.target);
             f.removeClass('dragging');
         },
-        dragDropEvent:function (ev) {
+        dragEnterEvent:function (ev) {
+            ev.preventDefault(); // Must be called to enable drop
+            var f = $(ev.target);
+            f.addClass('drag-over');
+            f.next('div.gui-droptarget').addClass('drag-over');
+        },
+        dragLeaveEvent:function (ev) {
+            ev.preventDefault(); // Must be called to enable drop
             var f = $(ev.target);
             f.removeClass('drag-over');
-            alert("Dropped: " + ev.dataTransfer.getData('text/plain'));
+            f.next('div.gui-droptarget').removeClass('drag-over');
+        },
+        dragOverEvent:function (ev) {
+            ev.preventDefault(); // Must be called to enable drop
+        },
+        dragDropEvent:function (ev) {
+            var f = $(ev.target);
+            f.next('div.gui-droptarget').removeClass('drag-over');
+            var collection = this.model;
+            var newOrder = collection.get(f.data('id')).get('order') + 1;
+            var draggedContainer = collection.get(ev.dataTransfer.getData('text/plain'));
+            draggedContainer.save({order:newOrder}, {
+                success:function () {
+                    collection.fetch();
+                }
+            });
         }
     });
     return View;
