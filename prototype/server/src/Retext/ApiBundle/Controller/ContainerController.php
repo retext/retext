@@ -21,11 +21,11 @@ class ContainerController extends Base
 
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $project = $dm->getRepository('RetextApiBundle:Project')
-            ->findOneBy(array('owner.$id' => new \MongoId($this->getUser()->getId()), 'id' => $id));
+            ->findOneBy(array('owner' => new \MongoId($this->getUser()->getId()), 'id' => $id));
 
         $numContainer = $dm->getRepository('RetextApiBundle:Container')
             ->createQueryBuilder()
-            ->field('project.$id')->equals(new \MongoId($project->getId()))
+            ->field('project')->equals(new \MongoId($project->getId()))
             ->field('parent')->equals(null)
             ->count()
             ->getQuery()
@@ -53,15 +53,15 @@ class ContainerController extends Base
 
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $project = $dm->getRepository('RetextApiBundle:Project')
-            ->findOneBy(array('owner.$id' => new \MongoId($this->getUser()->getId()), 'id' => $id));
+            ->findOneBy(array('owner' => new \MongoId($this->getUser()->getId()), 'id' => $id));
 
         $query = $dm->getRepository('RetextApiBundle:Container')
             ->createQueryBuilder()
-            ->field('project.$id')->equals(new \MongoId($project->getId()))
+            ->field('project')->equals(new \MongoId($project->getId()))
             ->field('deletedAt')->exists(false)
             ->sort('order', 'asc')
             ->getQuery();
-	    $container = $query->execute();
+        $container = $query->execute();
 
         return $this->createListResponse($container);
     }
@@ -87,7 +87,7 @@ class ContainerController extends Base
             $dm->getRepository('RetextApiBundle:Container')
                 ->createQueryBuilder()
                 ->findAndUpdate()
-                ->field('project.$id')->equals(new \MongoId($project_id))
+                ->field('project')->equals(new \MongoId($project_id))
                 ->field('order')->equals($newOrder)->set($container->getOrder())
                 ->getQuery()
                 ->execute();
@@ -109,7 +109,7 @@ class ContainerController extends Base
 
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $container = $dm->getRepository('RetextApiBundle:Container')
-            ->findOneBy(array('id' => $container_id, 'project.$id' => new \MongoId($project_id)));
+            ->findOneBy(array('id' => $container_id, 'project' => new \MongoId($project_id)));
 
         $response = $this->createResponse($container);
         if ($container === null) {
@@ -126,7 +126,6 @@ class ContainerController extends Base
     public function deleteContainerAction($project_id, $container_id)
     {
         $this->ensureLoggedIn();
-
 
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $container = $dm->getRepository('RetextApiBundle:Container')

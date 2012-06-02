@@ -25,7 +25,7 @@ class Project extends Base
     protected $name;
 
     /**
-     * @MongoDB\ReferenceOne(targetDocument="Retext\ApiBundle\Document\User", cascade={"persist"})
+     * @MongoDB\ReferenceOne(targetDocument="Retext\ApiBundle\Document\User", cascade={"persist"}, simple=true)
      * @MongoDB\Index(order="asc")
      */
     private $owner;

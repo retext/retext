@@ -38,7 +38,7 @@ class ProjectController extends Base
 
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $project = $dm->getRepository('RetextApiBundle:Project')
-            ->findOneBy(array('owner.$id' => new \MongoId($this->getUser()->getId()), 'id' => $id));
+            ->findOneBy(array('owner' => new \MongoId($this->getUser()->getId()), 'id' => $id));
 
         if (!$project) throw $this->createNotFoundException();
         return $this->createResponse($project);
@@ -56,7 +56,7 @@ class ProjectController extends Base
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $projects = $dm->getRepository('RetextApiBundle:Project')
             ->createQueryBuilder()
-            ->field('owner.$id')->equals(new \MongoId($this->getUser()->getId()))
+            ->field('owner')->equals(new \MongoId($this->getUser()->getId()))
             ->getQuery()
             ->execute();
         return $this->createListResponse($projects);

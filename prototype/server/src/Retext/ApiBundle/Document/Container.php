@@ -20,7 +20,7 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
     protected $id;
 
     /**
-     * @MongoDB\ReferenceOne(targetDocument="Retext\ApiBundle\Document\Project", cascade={"persist"})
+     * @MongoDB\ReferenceOne(targetDocument="Retext\ApiBundle\Document\Project", cascade={"persist"}, simple=true)
      * @MongoDB\Index(order="asc")
      * @SerializerBundle\Exclude
      * @var \Retext\ApiBundle\Document\Project $project
@@ -40,7 +40,7 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
     protected $order = 1;
 
     /**
-     * @MongoDB\ReferenceOne(targetDocument="Retext\ApiBundle\Document\Container", cascade={"persist"})
+     * @MongoDB\ReferenceOne(targetDocument="Retext\ApiBundle\Document\Container", cascade={"persist"}, simple=true)
      * @MongoDB\Index(order="asc")
      * @var \Retext\ApiBundle\Document\Container $parent
      */
