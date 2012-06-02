@@ -119,5 +119,35 @@ class ContainerControllerTest extends WebTestCase
             $this->checkContainer($c);
             $this->assertEquals($expextedOrder, $c->order, 'Container ' . ($k + 1) . ' should have order ' . $expextedOrder);
         }
+
+        return $container;
+    }
+
+
+    /**
+     * @group secondrun
+     * @group integration
+     * @depends testContainerReOrder
+     * @return object
+     */
+    public function testContainerDelete(array $container)
+    {
+        $this->client->request('DELETE', $container[2]->{'@subject'}, array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'));
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $this->client->request('GET', $container[2]->{'@subject'}, array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'));
+        $this->assertEquals(410, $this->client->getResponse()->getStatusCode());
+
+        $projectUrl = function() use($container)
+        {
+            $parts = explode('/', $container[2]->{'@subject'});
+            return join('/', array_slice($parts, 0, 5));
+        };
+
+        $this->client->request('GET', $projectUrl(), array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'));
+        $containerList = json_decode($this->client->getResponse()->getContent());
+        $this->assertEquals(4, count($containerList), 'There should be only 4 containers now.');
+
     }
 }

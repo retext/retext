@@ -11,7 +11,7 @@ use JMS\SerializerBundle\Annotation as SerializerBundle;
  * @MongoDB\Document
  * @Doctrine\HasLifecycleCallbacks
  */
-class Container extends Base
+class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteable
 {
     /**
      * @MongoDB\Id
@@ -45,6 +45,13 @@ class Container extends Base
      * @var \Retext\ApiBundle\Document\Container $parent
      */
     private $parent;
+
+    /**
+     * @MongoDB\Date
+     * @MongoDB\Index(order="asc")
+     * @var \DateTime|null
+     */
+    private $deletedAt = null;
 
     /**
      * Get id
@@ -155,5 +162,25 @@ class Container extends Base
     {
         $this->subject = $this->getProject()->getSubject() . '/' . strtolower($this->getContextName()) . '/' . $this->getId();
         return $this->subject;
+    }
+
+    /**
+     * Gets the date that this object was deleted at.
+     *
+     * @return \DateTime $deletedAt
+     */
+    public function getDeletedAt()
+    {
+        return $this->deletedAt;
+    }
+
+    /**
+     * Set deletedAt
+     *
+     * @param \DateTime $deletedAt
+     */
+    public function setDeletedAt(\DateTime $deletedAt)
+    {
+        $this->deletedAt = $deletedAt;
     }
 }

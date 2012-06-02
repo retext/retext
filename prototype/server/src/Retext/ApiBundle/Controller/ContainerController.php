@@ -55,12 +55,13 @@ class ContainerController extends Base
         $project = $dm->getRepository('RetextApiBundle:Project')
             ->findOneBy(array('owner.$id' => new \MongoId($this->getUser()->getId()), 'id' => $id));
 
-        $container = $dm->getRepository('RetextApiBundle:Container')
+        $query = $dm->getRepository('RetextApiBundle:Container')
             ->createQueryBuilder()
             ->field('project.$id')->equals(new \MongoId($project->getId()))
+            ->field('deletedAt')->exists(false)
             ->sort('order', 'asc')
-            ->getQuery()
-            ->execute();
+            ->getQuery();
+	    $container = $query->execute();
 
         return $this->createListResponse($container);
     }
@@ -110,6 +111,32 @@ class ContainerController extends Base
         $container = $dm->getRepository('RetextApiBundle:Container')
             ->findOneBy(array('id' => $container_id, 'project.$id' => new \MongoId($project_id)));
 
-        return $this->createResponse($container);
+        $response = $this->createResponse($container);
+        if ($container === null) {
+            $response->setStatusCode(400);
+        } else if ($container->getDeletedAt() !== null) {
+            $response->setStatusCode(410);
+        }
+        return $response;
+    }
+
+    /**
+     * @Route("/project/{project_id}/container/{container_id}", requirements={"_method":"DELETE"})
+     */
+    public function deleteContainerAction($project_id, $container_id)
+    {
+        $this->ensureLoggedIn();
+
+
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $container = $dm->getRepository('RetextApiBundle:Container')
+            ->findOneBy(array('id' => $container_id));
+
+        // TODO: Check delete permissions
+        $sdm = $this->get('doctrine.odm.mongodb.soft_delete.manager');
+        $sdm->delete($container);
+        $sdm->flush();
+
+        return $this->createResponse();
     }
 }

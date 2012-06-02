@@ -49,6 +49,9 @@ doctrine:
         auto_generate_proxy_classes: %kernel.debug%
         auto_mapping: true
 
+doctrine_mongodb_softdelete:
+    deleted_field_name: deletedAt
+
 # Swiftmailer Configuration
 swiftmailer:
     transport: %mailer_transport%
