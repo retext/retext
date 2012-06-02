@@ -24,7 +24,11 @@
 }
 
 .gui-container .meta {
+    display: none;
     float: right;
+}
+.gui-container:hover .meta {
+    display: block;
 }
 
 .gui-container.dragging {
