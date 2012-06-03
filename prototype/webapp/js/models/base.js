@@ -3,7 +3,7 @@ define([
 ], function (RelationModel) {
     var BaseModel = Backbone.Model.extend({
         getRelation:function (context, list) {
-            if (typeof list == 'undefined') list = false;
+            if (_.isUndefined(list)) list = false;
             var rel = new RelationModel();
             if (!_.has(this.attributes, '@relations')) {
                 console.error('No @relations in ', this.attributes);

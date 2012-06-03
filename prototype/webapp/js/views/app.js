@@ -36,7 +36,7 @@ define([
         },
         // Log all events
         logEvents:function (eventName) {
-            if (typeof console !== 'undefined') {
+            if (!_.isUndefined(console) && _.isFunction(console.log)) {
                 console.log('Event: ' + eventName);
             }
         }
