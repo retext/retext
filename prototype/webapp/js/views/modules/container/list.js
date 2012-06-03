@@ -18,10 +18,8 @@ define([
             'drop div.gui-container':'dragDropEvent'
         },
         initialize:function (options) {
+            this.newContainerModel = options.newContainerModel;
             _.extend(this, Backbone.Events);
-            this.project = options.project;
-            this.model = new ContainerCollection();
-            this.model.url = options.project.url() + '/container';
             this.model.bind("reset", this.renderList, this);
             this.model.bind("add", this.renderItem, this);
         },
@@ -47,10 +45,9 @@ define([
             this.model.fetch();
         },
         newContainer:function () {
-            var container = new ContainerModel();
-            container.urlRoot = this.project.url() + '/container';
             var containers = this.model;
-            container.save({}, {
+            var newContainerModel = this.newContainerModel.clone();
+            newContainerModel.save({}, {
                 success:function (model, request) {
                     containers.add(model);
                 }

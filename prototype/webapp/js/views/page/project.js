@@ -6,8 +6,9 @@ define([
     'views/forms/container',
     'text!templates/page/project.html',
     'models/project',
-    'models/container'
-], function (Vm, PageViewBase, ContainerListView, BreadCrumbModule, ContainerForm, ViewTemplate, ProjectModel, ContainerModel) {
+    'models/container',
+    'collections/container'
+], function (Vm, PageViewBase, ContainerListView, BreadCrumbModule, ContainerForm, ViewTemplate, ProjectModel, ContainerModel, ContainerCollection) {
     var View = PageViewBase.extend({
         template:_.template(ViewTemplate),
         events:{
@@ -15,20 +16,25 @@ define([
         },
         initialize:function (options) {
             this.model = new ProjectModel({id:options.id});
+            this.model.bind('change', this.projectFetched, this);
         },
         render:function () {
             $(this.el).html(this.template({project:this.model.toJSON()}));
             $('#toggleleft').css({position:'absolute', top:'25%', left:0});
             $('#toggleright').css({position:'absolute', top:'25%', right:0});
             this.hiddenDiv = $('#hiddendiv');
-            var containerList = Vm.create(this, 'current-container', ContainerListView, {el:$('#gui-current-container'), project:this.model});
+            return this;
+        },
+        projectFetched:function () {
+            var containersCollection = new ContainerCollection();
+            containersCollection.url = this.model.getRelation('http://jsonld.retext.it/Container', true).get('href');
+            var newContainerModel = new ContainerModel({project: this.model.get('id')});
+            var containerList = Vm.create(this, 'current-container', ContainerListView, {el:$('#gui-current-container'), model:containersCollection, newContainerModel: newContainerModel});
             Vm.create(this, 'breadcrumb', BreadCrumbModule, {el:$(this.el).find('div.view-breadcrumb'), model:this.model});
             var project = this.model;
             containerList.on('containerSelected', function (model) {
-                model.urlRoot = project.url() + '/container';
                 Vm.create(this, 'current-element-form', ContainerForm, {el:$('#current-element-form'), model:model});
             });
-            return this;
         },
         complete:function () {
             this.model.fetch(); // Will trigger update an subviews
