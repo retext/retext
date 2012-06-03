@@ -60,6 +60,9 @@ class ContainerControllerTest extends WebTestCase
         $this->assertObjectHasAttribute('@subject', $container);
         $this->assertNotNull($container->{'@subject'});
         // $this->assertObjectNotHasAttribute('parent', $container);
+        $this->assertObjectHasAttribute('project', $container);
+        $this->assertNotNull($container->project);
+        $this->assertInternalType('string', $container->project);
     }
 
     /**

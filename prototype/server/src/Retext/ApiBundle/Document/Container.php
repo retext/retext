@@ -22,8 +22,8 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
     /**
      * @MongoDB\ReferenceOne(targetDocument="Retext\ApiBundle\Document\Project", cascade={"persist"}, simple=true)
      * @MongoDB\Index(order="asc")
-     * @SerializerBundle\Exclude
      * @var \Retext\ApiBundle\Document\Project $project
+     * @SerializerBundle\Accessor(getter="getProjectId")
      */
     private $project;
 
@@ -101,6 +101,16 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
     public function getProject()
     {
         return $this->project;
+    }
+
+    /**
+     * Get project id
+     *
+     * @return string
+     */
+    public function getProjectId()
+    {
+        return $this->project->getId();
     }
 
     /**
