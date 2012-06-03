@@ -2,7 +2,6 @@
 
 namespace Retext\ApiBundle\Document;
 
-
 interface LinkedData
 {
     /**
@@ -20,4 +19,11 @@ interface LinkedData
      * @return string
      */
     function getSubject();
+
+    /**
+     * Gibt die Namen der verknüpften Dokumente zurück
+     *
+     * @return DocumentRelation[]|null
+     */
+    function getRelatedDocuments();
 }

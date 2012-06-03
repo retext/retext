@@ -97,28 +97,50 @@ abstract class Base extends Controller
     {
         $this->ensureRequest();
         $request = $this->getRequest();
-        $data = json_decode($request->getContent());
-        if ($data === null) $data = new \stdClass();
-        $args = func_get_args();
-        $getKey = function($key) use($data)
+
+        if ($request->getMethod() === 'GET') {
+            $hasKey = function(RequestParamater $key) use($request)
+            {
+                return $request->query->has($key->getName());
+            };
+            $getKeyValue = function(RequestParamater $key) use($request)
+            {
+                return $request->query->get($key->getName());
+            };
+        } else {
+            $data = json_decode($request->getContent());
+            if ($data === null) $data = new \stdClass();
+            $hasKey = function(RequestParamater $key) use($data)
+            {
+                return property_exists($data, $key->getName());
+            };
+            $getKeyValue = function(RequestParamater $key) use($data)
+            {
+                return $data->{$key->getName()};
+            };
+        }
+
+        $getKey = function($key) use($hasKey, $getKeyValue)
         {
             if (!($key instanceof RequestParamater)) {
                 /** @var \Retext\ApiBundle\RequestParamater $key  */
                 $key = RequestParamater::create($key);
             }
-            if (!property_exists($data, $key->getName())) {
+            if (!$hasKey($key)) {
                 if ($key->isRequired()) {
-                    throw $this->createException(400, 'Bad Request | Missing input: ' . $key);
+                    throw $this->createException(400, 'Bad Request | Missing input: ' . $key->getName());
                 }
                 return $key->getDefaultValue();
             }
             switch ($key->getFormat()) {
                 case RequestParamater::FORMAT_INTEGER;
-                    return (int)$data->{$key->getName()};
+                    return (int)$getKeyValue($key);
                 default:
-                    return $data->{$key->getName()};
+                    return $getKeyValue($key);
             }
         };
+
+        $args = func_get_args();
         if (count($args) == 1) {
             return $getKey($args[0]);
         } else {
@@ -126,5 +148,6 @@ abstract class Base extends Controller
             foreach ($args as $key) $return[] = $getKey($key);
             return $return;
         }
+
     }
 }

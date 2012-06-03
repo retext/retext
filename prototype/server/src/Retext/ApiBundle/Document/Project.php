@@ -89,4 +89,18 @@ class Project extends Base
         if (empty($this->name)) throw new ValidationException('name', 'empty');
         if (empty($this->owner)) throw new ValidationException('owner', 'empty');
     }
+
+    /**
+     * Gibt die Namen der verknüpften Dokumente zurück
+     *
+     * @return DocumentRelation[]|null
+     */
+    public function getRelatedDocuments()
+    {
+        $container = new Container();
+        $container->setProject($this);
+        return array(
+            DocumentRelation::create($container)->setHref($container->getSubject() . '?project=' . $this->getId())->setList(true)
+        );
+    }
 }

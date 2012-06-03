@@ -28,18 +28,19 @@ class ContainerControllerTest extends WebTestCase
      */
     public function testCreateContainer()
     {
-        $this->client->request('POST', $this->project->{'@subject'} . '/container', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('name' => 'Container 1')));
-        $this->client->request('POST', $this->project->{'@subject'} . '/container', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('name' => 'Container 2')));
-        $this->client->request('POST', $this->project->{'@subject'} . '/container', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('name' => 'Container 3')));
-        $this->client->request('POST', $this->project->{'@subject'} . '/container', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('name' => 'Container 4')));
-        $this->client->request('POST', $this->project->{'@subject'} . '/container', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('name' => 'Container 5')));
+        $this->client->request('POST', '/api/container', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('project' => $this->project->id, 'name' => 'Container 1')));
+        $this->client->request('POST', '/api/container', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('project' => $this->project->id, 'name' => 'Container 2')));
+        $this->client->request('POST', '/api/container', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('project' => $this->project->id, 'name' => 'Container 3')));
+        $this->client->request('POST', '/api/container', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('project' => $this->project->id, 'name' => 'Container 4')));
+        $this->client->request('POST', '/api/container', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('project' => $this->project->id, 'name' => 'Container 5')));
         $this->assertEquals(201, $this->client->getResponse()->getStatusCode());
         $this->assertNotEmpty($this->client->getResponse()->getHeader('Location'));
         $container = json_decode($this->client->getResponse()->getContent());
         $this->assertEquals($this->client->getResponse()->getHeader('Location'), $container->{'@subject'});
         $this->checkContainer($container);
 
-        $this->client->request('GET', $this->project->{'@subject'} . '/container', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'));
+        $this->client->request('GET', $this->getRelationHref($this->project, 'http://jsonld.retext.it/Container', true), array(), array(), array('HTTP_ACCEPT' => 'application/json'));
+
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $container = json_decode($this->client->getResponse()->getContent());
         $this->assertInternalType('array', $container);
@@ -69,7 +70,7 @@ class ContainerControllerTest extends WebTestCase
      */
     public function testCreateContainerWithoutName()
     {
-        $this->client->request('POST', $this->project->{'@subject'} . '/container', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'));
+        $this->client->request('POST', '/api/container', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('project' => $this->project->id)));
         $this->assertEquals(201, $this->client->getResponse()->getStatusCode());
         $container = json_decode($this->client->getResponse()->getContent());
         $this->checkContainer($container);
@@ -114,7 +115,7 @@ class ContainerControllerTest extends WebTestCase
         );
 
         foreach ($newOrder as $k => $expextedOrder) {
-            $this->client->request('GET', $container[$k]->{'@subject'}, array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'));
+            $this->client->request('GET', $container[$k]->{'@subject'}, array(), array(), array('HTTP_ACCEPT' => 'application/json'));
             $c = json_decode($this->client->getResponse()->getContent());
             $this->checkContainer($c);
             $this->assertEquals($expextedOrder, $c->order, 'Container ' . ($k + 1) . ' should have order ' . $expextedOrder);
@@ -136,18 +137,35 @@ class ContainerControllerTest extends WebTestCase
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-        $this->client->request('GET', $container[2]->{'@subject'}, array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'));
+        $this->client->request('GET', $container[2]->{'@subject'}, array(), array(), array('HTTP_ACCEPT' => 'application/json'));
         $this->assertEquals(410, $this->client->getResponse()->getStatusCode());
 
-        $projectUrl = function() use($container)
-        {
-            $parts = explode('/', $container[2]->{'@subject'});
-            return join('/', array_slice($parts, 0, 5));
-        };
+        $project = $this->fetchRelation($container[2], 'http://jsonld.retext.it/Project');
 
-        $this->client->request('GET', $projectUrl(), array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'));
+        $this->client->request('GET', $this->getRelationHref($project, 'http://jsonld.retext.it/Container', true), array(), array(), array('HTTP_ACCEPT' => 'application/json'));
         $containerList = json_decode($this->client->getResponse()->getContent());
         $this->assertEquals(4, count($containerList), 'There should be only 4 containers now.');
 
+    }
+
+    private function getRelationHref($object, $context, $list = false)
+    {
+        if (!property_exists($object, '@relations')) $this->fail('No @relations in ' . print_r($object, true));
+        foreach ($object->{'@relations'} as $relation) {
+            if ($relation->relatedcontext == $context && $relation->list === $list) return $relation->href;
+        }
+        $this->fail('Could not find relation ' . $context . ' (list=' . var_export($list, true) . ' in ' . print_r($object, true));
+    }
+
+    /**
+     * @param object $object
+     * @param string $context
+     * @return object
+     */
+    private function fetchRelation($object, $context)
+    {
+        $this->client->request('GET', $this->getRelationHref($object, $context), array(), array(), array('HTTP_ACCEPT' => 'application/json'));
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        return json_decode($this->client->getResponse()->getContent());
     }
 }

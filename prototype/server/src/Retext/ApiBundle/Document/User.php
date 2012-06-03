@@ -113,4 +113,14 @@ class User extends Base
         if (filter_var($this->email, FILTER_VALIDATE_EMAIL) === false) throw new ValidationException('email', 'invalid_format');
         if (strlen($this->password) < 8) throw new ValidationException('password', 'too_short');
     }
+
+    /**
+     * Gibt die Namen der verknüpften Dokumente zurück
+     *
+     * @return DocumentRelation[]|null
+     */
+    function getRelatedDocuments()
+    {
+        return null;
+    }
 }

@@ -13,15 +13,15 @@ class ContainerController extends Base
     /**
      * Legt einen neuen Container unterhalb eines Projektes an
      *
-     * @Route("/project/{id}/container", requirements={"_method":"POST"})
+     * @Route("/container", requirements={"_method":"POST"})
      */
-    public function createContainerAction($id)
+    public function createContainerAction()
     {
         $this->ensureLoggedIn();
 
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $project = $dm->getRepository('RetextApiBundle:Project')
-            ->findOneBy(array('owner' => new \MongoId($this->getUser()->getId()), 'id' => $id));
+            ->findOneBy(array('owner' => new \MongoId($this->getUser()->getId()), 'id' => $this->getFromRequest(RequestParamater::create('project'))));
 
         $numContainer = $dm->getRepository('RetextApiBundle:Container')
             ->createQueryBuilder()
@@ -45,15 +45,15 @@ class ContainerController extends Base
     /**
      * Gibt eine Liste mit den Containern auf der obersten Ebene eines Projektes zurück
      *
-     * @Route("/project/{id}/container", requirements={"_method":"GET"})
+     * @Route("/container", requirements={"_method":"GET"})
      */
-    public function listContainerAction($id)
+    public function listContainerAction()
     {
         $this->ensureLoggedIn();
 
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $project = $dm->getRepository('RetextApiBundle:Project')
-            ->findOneBy(array('owner' => new \MongoId($this->getUser()->getId()), 'id' => $id));
+            ->findOneBy(array('owner' => new \MongoId($this->getUser()->getId()), 'id' => $this->getFromRequest(RequestParamater::create('project'))));
 
         $query = $dm->getRepository('RetextApiBundle:Container')
             ->createQueryBuilder()
@@ -67,9 +67,9 @@ class ContainerController extends Base
     }
 
     /**
-     * @Route("/project/{project_id}/container/{container_id}", requirements={"_method":"PUT"})
+     * @Route("/container/{container_id}", requirements={"_method":"PUT"})
      */
-    public function updateContainerAction($project_id, $container_id)
+    public function updateContainerAction($container_id)
     {
         $this->ensureLoggedIn();
 
@@ -87,7 +87,7 @@ class ContainerController extends Base
             $dm->getRepository('RetextApiBundle:Container')
                 ->createQueryBuilder()
                 ->findAndUpdate()
-                ->field('project')->equals(new \MongoId($project_id))
+                ->field('project')->equals($container->getProject()->getId())
                 ->field('order')->equals($newOrder)->set($container->getOrder())
                 ->getQuery()
                 ->execute();
@@ -101,15 +101,15 @@ class ContainerController extends Base
     }
 
     /**
-     * @Route("/project/{project_id}/container/{container_id}", requirements={"_method":"GET"})
+     * @Route("/container/{container_id}", requirements={"_method":"GET"})
      */
-    public function getContainerAction($project_id, $container_id)
+    public function getContainerAction($container_id)
     {
         $this->ensureLoggedIn();
 
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $container = $dm->getRepository('RetextApiBundle:Container')
-            ->findOneBy(array('id' => $container_id, 'project' => new \MongoId($project_id)));
+            ->findOneById($container_id);
 
         $response = $this->createResponse($container);
         if ($container === null) {
@@ -121,9 +121,9 @@ class ContainerController extends Base
     }
 
     /**
-     * @Route("/project/{project_id}/container/{container_id}", requirements={"_method":"DELETE"})
+     * @Route("/container/{container_id}", requirements={"_method":"DELETE"})
      */
-    public function deleteContainerAction($project_id, $container_id)
+    public function deleteContainerAction($container_id)
     {
         $this->ensureLoggedIn();
 

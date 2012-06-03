@@ -153,18 +153,6 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
     }
 
     /**
-     * Gibt die URL (Subject) dieses Dokumentes zurück
-     *
-     * @return string
-     * @SerializerBundle\PreSerialize
-     */
-    public function getSubject()
-    {
-        $this->subject = $this->getProject()->getSubject() . '/' . strtolower($this->getContextName()) . '/' . $this->getId();
-        return $this->subject;
-    }
-
-    /**
      * Gets the date that this object was deleted at.
      *
      * @return \DateTime $deletedAt
@@ -182,5 +170,17 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
     public function setDeletedAt(\DateTime $deletedAt)
     {
         $this->deletedAt = $deletedAt;
+    }
+
+    /**
+     * Gibt die Namen der verknüpften Dokumente zurück
+     *
+     * @return DocumentRelation
+     */
+    public function getRelatedDocuments()
+    {
+        return array(
+            DocumentRelation::create($this->getProject())
+        );
     }
 }

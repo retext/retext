@@ -10,7 +10,7 @@ class RequestParamater
     /**
      * @var bool
      */
-    private $required = false;
+    private $required = true;
 
     /**
      * @var string
