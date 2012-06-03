@@ -1,9 +1,11 @@
 define([
-    'remote'
-], function (Remote) {
-    var Container = Backbone.Model.extend({
+    'remote',
+    'models/base'
+], function (Remote, BaseModel) {
+    var Container = BaseModel.extend({
         urlRoot:Remote.apiUrlBase + 'container',
         defaults:{
+            '@relations':[],
             id:null,
             project:null,
             name:null,

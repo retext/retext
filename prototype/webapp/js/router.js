@@ -10,7 +10,8 @@ define([
         routes:{
             "":"home",
             "projects/list/:id":"listProject",
-            "project/:id":"project",
+            "project/:projectId/:parentContainerId":"project",
+            "project/:projectId":"project",
             "*page":"showPage"
         },
         home:function () {
@@ -25,8 +26,10 @@ define([
         listProject:function (projectId) {
             this.showPage('projects/list', {projectId:projectId});
         },
-        project:function (id) {
-            this.showPage('project', {id:id});
+        project:function (projectId, parentContainerId) {
+            var opts = {id:projectId};
+            if (!_.isUndefined(parentContainerId)) opts.parentContainerId = parentContainerId;
+            this.showPage('project', opts);
         }
     });
     return AppRouter;
