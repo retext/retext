@@ -59,9 +59,18 @@ abstract class Base extends Controller
     /**
      * @return \Symfony\Component\HttpKernel\Exception\HttpException
      */
-    public function createForbiddenException()
+    public function createForbiddenException($message = null)
     {
-        return $this->createException(403, 'Forbidden');
+        return $this->createException(403, $message == null ? 'Forbidden' : $message);
+    }
+
+
+    /**
+     * @return \Symfony\Component\HttpKernel\Exception\HttpException
+     */
+    public function createGoneException($message = null)
+    {
+        return $this->createException(410, $message == null ? 'Gone' : $message);
     }
 
     /**

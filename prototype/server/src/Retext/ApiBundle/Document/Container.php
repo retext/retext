@@ -43,6 +43,7 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
      * @MongoDB\ReferenceOne(targetDocument="Retext\ApiBundle\Document\Container", cascade={"persist"}, simple=true)
      * @MongoDB\Index(order="asc")
      * @var \Retext\ApiBundle\Document\Container $parent
+     * @SerializerBundle\Accessor(getter="getParentId")
      */
     private $parent;
 
@@ -81,6 +82,16 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
     public function getParent()
     {
         return $this->parent;
+    }
+
+    /**
+     * Get parent id
+     *
+     * @return string
+     */
+    public function getParentId()
+    {
+        return $this->parent == null ? null : $this->parent->getId();
     }
 
     /**
@@ -189,8 +200,10 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
      */
     public function getRelatedDocuments()
     {
+        $container = new Container();
         return array(
-            DocumentRelation::create($this->getProject())
+            DocumentRelation::create($this->getProject()),
+            DocumentRelation::create($container)->setHref($container->getSubject() . '?parent=' . $this->getId())->setList(true)
         );
     }
 }
