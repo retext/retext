@@ -39,6 +39,17 @@ class ContainerController extends Base
         $dm->persist($container);
         $dm->flush();
 
+        if ($parent !== null) {
+            $dm->getRepository('RetextApiBundle:Container')
+                ->createQueryBuilder()
+                ->findAndUpdate()
+                ->field('id')->equals(new \MongoId($parent->getId()))
+                ->update()
+                ->field('childcount')->inc(1)
+                ->getQuery()
+                ->execute();
+        }
+
         return $this->createResponse($container)->setStatusCode(201)->addHeader('Location', $container->getSubject());
     }
 
@@ -112,7 +123,9 @@ class ContainerController extends Base
                 ->findAndUpdate()
                 ->field('project')->equals($container->getProject()->getId())
                 ->field('parent')->equals($container->getParent() !== null ? $container->getParent()->getId() : null)
-                ->field('order')->equals($newOrder)->set($container->getOrder())
+                ->field('order')->equals($newOrder)
+                ->update()
+                ->field('order')->set($container->getOrder())
                 ->getQuery()
                 ->execute();
             $container->setOrder($newOrder);
@@ -148,6 +161,18 @@ class ContainerController extends Base
         $sdm = $this->get('doctrine.odm.mongodb.soft_delete.manager');
         $sdm->delete($container);
         $sdm->flush();
+
+        if ($container->getParent() !== null) {
+            $dm = $this->get('doctrine.odm.mongodb.document_manager');
+            $dm->getRepository('RetextApiBundle:Container')
+                ->createQueryBuilder()
+                ->findAndUpdate()
+                ->field('id')->equals(new \MongoId($container->getParent()->getId()))
+                ->update()
+                ->field('childcount')->inc(-1)
+                ->getQuery()
+                ->execute();
+        }
 
         return $this->createResponse();
     }

@@ -182,6 +182,7 @@ class ContainerControllerTest extends Base
         $this->assertInternalType('array', $rootLevel);
         $this->assertEquals(1, count($rootLevel));
         $this->assertEquals('root', $rootLevel[0]->name);
+        $this->assertEquals(2, $rootLevel[0]->childcount);
 
         // Prüfe Level 1
         $this->client->request('GET', $this->getRelationHref($rootLevel[0], 'http://jsonld.retext.it/Container', true), array(), array(), array('HTTP_ACCEPT' => 'application/json'));
@@ -189,7 +190,9 @@ class ContainerControllerTest extends Base
         $this->assertInternalType('array', $rootChilds);
         $this->assertEquals(2, count($rootChilds));
         $this->assertEquals('1.1', $rootChilds[0]->name);
+        $this->assertEquals(2, $rootChilds[0]->childcount);
         $this->assertEquals('1.2', $rootChilds[1]->name);
+        $this->assertEquals(0, $rootChilds[1]->childcount);
 
         // Prüfe Level 2
         $this->client->request('GET', $this->getRelationHref($rootChilds[0], 'http://jsonld.retext.it/Container', true), array(), array(), array('HTTP_ACCEPT' => 'application/json'));
@@ -198,6 +201,8 @@ class ContainerControllerTest extends Base
         $this->assertEquals(2, count($l1childs));
         $this->assertEquals('1.1.1', $l1childs[0]->name);
         $this->assertEquals('1.1.2', $l1childs[1]->name);
+        $this->assertEquals(0, $l1childs[0]->childcount);
+        $this->assertEquals(0, $l1childs[1]->childcount);
 
         $this->client->request('GET', $this->getRelationHref($rootChilds[1], 'http://jsonld.retext.it/Container', true), array(), array(), array('HTTP_ACCEPT' => 'application/json'));
         $l2childs = json_decode($this->client->getResponse()->getContent());

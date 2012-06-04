@@ -17,7 +17,7 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
      * @MongoDB\Id
      * @var string $id
      */
-    protected $id;
+    private $id;
 
     /**
      * @MongoDB\ReferenceOne(targetDocument="Retext\ApiBundle\Document\Project", cascade={"persist"}, simple=true)
@@ -31,13 +31,13 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
      * @MongoDB\String
      * @var string
      */
-    protected $name;
+    private $name;
 
     /**
      * @MongoDB\Int
      * @var int
      */
-    protected $order = 1;
+    private $order = 1;
 
     /**
      * @MongoDB\ReferenceOne(targetDocument="Retext\ApiBundle\Document\Container", cascade={"persist"}, simple=true)
@@ -46,6 +46,12 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
      * @SerializerBundle\Accessor(getter="getParentId")
      */
     private $parent;
+
+    /**
+     * @MongoDB\Int
+     * @var int
+     */
+    private $childcount = 0;
 
     /**
      * @MongoDB\Date
@@ -209,5 +215,25 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
             DocumentRelation::create($text)->setHref($text->getSubject() . '?parent=' . $this->getId())->setList(true),
             DocumentRelation::create($breadcrumb)->setHref($this->getSubject() . '/breadcrumb')->setList(true),
         );
+    }
+
+    /**
+     * Set childcount
+     *
+     * @param int $childcount
+     */
+    public function setChildcount($childcount)
+    {
+        $this->childcount = $childcount;
+    }
+
+    /**
+     * Get childcount
+     *
+     * @return int $childcount
+     */
+    public function getChildcount()
+    {
+        return $this->childcount;
     }
 }

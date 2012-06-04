@@ -115,7 +115,9 @@ class TextController extends Base
                 ->findAndUpdate()
                 ->field('project')->equals($text->getProject()->getId())
                 ->field('container')->equals($text->getContainer()->getId())
-                ->field('order')->equals($newOrder)->set($text->getOrder())
+                ->field('order')->equals($newOrder)
+                ->update()
+                ->field('order')->set($text->getOrder())
                 ->getQuery()
                 ->execute();
             $text->setOrder($newOrder);
