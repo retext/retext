@@ -7,9 +7,10 @@ define([
     'text!templates/page/project.html',
     'models/project',
     'models/container',
+    'models/text',
     'collections/container',
     'collections/breadcrumb'
-], function (Vm, PageViewBase, ContainerListView, BreadCrumbModule, ContainerForm, ViewTemplate, ProjectModel, ContainerModel, ContainerCollection, BreadcrumbCollection) {
+], function (Vm, PageViewBase, ContainerListView, BreadCrumbModule, ContainerForm, ViewTemplate, ProjectModel, ContainerModel, TextModel, ContainerCollection, BreadcrumbCollection) {
     var View = PageViewBase.extend({
             template:_.template(ViewTemplate),
             events:{
@@ -19,11 +20,13 @@ define([
                 this.model = new ProjectModel({id:options.id});
                 if (_.has(options, "parentContainerId")) {
                     this.parentContainer = new ContainerModel({id:options.parentContainerId});
-                    this.newContainerModel = new ContainerModel({parent:options.parentContainerId});
+                    this.newContainerModel = new ContainerModel({container:options.parentContainerId});
+                    this.newTextModel = new TextModel({container:options.parentContainerId});
                     this.parentContainer.bind('change', this.parentContainerFetched, this);
                 } else {
                     this.parentContainer = this.model;
                     this.newContainerModel = new ContainerModel({project:this.model.get('id')});
+                    this.newTextModel = null;
                 }
 
                 this.parentContainer.bind('change', this.parentContainerFetched, this);
@@ -38,7 +41,7 @@ define([
             parentContainerFetched:function () {
                 var containersCollection = new ContainerCollection();
                 containersCollection.url = this.parentContainer.getRelation('http://jsonld.retext.it/Container', true).get('href');
-                var containerList = Vm.create(this, 'current-container', ContainerListView, {el:$('#gui-current-container'), model:containersCollection, newContainerModel:this.newContainerModel});
+                var containerList = Vm.create(this, 'current-container', ContainerListView, {el:$('#gui-current-container'), model:containersCollection, newContainerModel:this.newContainerModel, newTextModel: this.newTextModel});
                 var breadcrumbCollection = new BreadcrumbCollection();
                 breadcrumbCollection.url = this.parentContainer.getRelation('http://jsonld.retext.it/Breadcrumb', true).get('href');
                 Vm.create(this, 'breadcrumb', BreadCrumbModule, {el:$(this.el).find('div.view-breadcrumb'), model:breadcrumbCollection, project:this.model});

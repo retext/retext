@@ -1,11 +1,12 @@
 .gui-container {
-    border-radius: 10px;
-    background-color: #f0f0f0;
-    border: 3px solid #ccc;
+    border-radius: 2px;
+    background-color: #E8F6FF;
+    border: 1px dashed #535353;
     margin: 0.5em 0 0.5em 0;
     padding: 1em;
+    color: #797979;
     text-align: center;
-    color: #aaa;
+    position: relative;
 }
 
 .gui-container.selected {
@@ -21,14 +22,26 @@
 }
 
 .gui-container .name {
+
+}
+
+.gui-container .meta, .gui-container .info {
+    position: absolute;
+    right: 1%;
+    top: 20%;
+    line-height: 2em;
 }
 
 .gui-container .meta {
     display: none;
-    float: right;
 }
+
 .gui-container:hover .meta {
     display: block;
+}
+
+.gui-container:hover .info {
+    display: none;
 }
 
 .gui-container.dragging {
@@ -38,14 +51,10 @@
 .gui-droptarget {
     display: none;
     height: 1em;
-    border-radius: 10px;
-    border: 2px dotted #ccc;
+    border-radius: 2px;
+    border: 1px dashed #535353;
 }
 
 .gui-droptarget.drag-over {
     display: block;
-}
-
-*[draggable] {
-    cursor: move;
 }

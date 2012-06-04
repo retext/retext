@@ -8,6 +8,7 @@ define([
     var View = PageViewBase.extend({
         events:{
             'click button.act-new-container':'newContainer',
+            'click button.act-new-text':'newText',
             'click div.gui-container':'selectContainer',
             'click button.actn-delete':'deleteContainer',
             'dragstart div.gui-container':'dragStartEvent',
@@ -19,6 +20,7 @@ define([
         },
         initialize:function (options) {
             this.newContainerModel = options.newContainerModel;
+            this.newTextModel = options.newTextModel;
             _.extend(this, Backbone.Events);
             this.model.bind("reset", this.renderList, this);
             this.model.bind("add", this.renderItem, this);
@@ -27,6 +29,11 @@ define([
             var el = $(this.el);
             el.html(ViewTemplate);
             this.list = el.find('div.view-containers');
+            if (_.isNull(this.newTextModel)) {
+                el.find('button.act-new-text').attr('disabled', 'true');
+            } else {
+                el.find('button.act-new-text').removeAttr('disabled');
+            }
             return this;
         },
         renderList:function () {
@@ -48,7 +55,16 @@ define([
             var containers = this.model;
             var newContainerModel = this.newContainerModel.clone();
             newContainerModel.save({}, {
-                success:function (model, request) {
+                success:function (model) {
+                    containers.add(model);
+                }
+            });
+        },
+        newText:function () {
+            var containers = this.model;
+            var newTextModel = this.newTextModel.clone();
+            newTextModel.save({}, {
+                success:function (model) {
                     containers.add(model);
                 }
             });

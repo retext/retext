@@ -2,18 +2,19 @@ define([
     'remote',
     'models/base'
 ], function (Remote, BaseModel) {
-    var Container = BaseModel.extend({
-        urlRoot:Remote.apiUrlBase + 'container',
+    var Text = BaseModel.extend({
+        urlRoot:Remote.apiUrlBase + 'text',
         defaults:{
             '@relations':[],
             id:null,
             project:null,
+            container:null,
             name:null,
-            parent:null,
-            childcount:0
+            order:1,
+            type:null
         },
         validate:function (attrs) {
         }
     });
-    return Container;
+    return Text;
 });

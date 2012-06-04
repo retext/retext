@@ -10,6 +10,7 @@ define([
             project:null,
             name:null,
             parent:null,
+            order:1,
             childcount:0
         },
         validate:function (attrs) {
