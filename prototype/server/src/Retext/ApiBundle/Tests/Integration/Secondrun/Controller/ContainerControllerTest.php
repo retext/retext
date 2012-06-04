@@ -231,4 +231,26 @@ class ContainerControllerTest extends WebTestCase
         $this->assertEquals(0, count($l2childs));
     }
 
+    /**
+     * @group secondrun
+     * @group integration
+     */
+    public function testBreadCrumb()
+    {
+        // Create root
+        $this->client->request('POST', '/api/container', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('project' => $this->project->id, 'name' => 'Ebene 1')));
+        $root = json_decode($this->client->getResponse()->getContent());
+        $this->client->request('POST', '/api/container', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('parent' => $root->id, 'name' => 'Ebene 2')));
+        $l1 = json_decode($this->client->getResponse()->getContent());
+        $this->client->request('POST', '/api/container', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('parent' => $l1->id, 'name' => 'Ebene 3')));
+        $l2 = json_decode($this->client->getResponse()->getContent());
+        $this->client->request('GET', $this->getRelationHref($l2, 'http://jsonld.retext.it/Breadcrumb', true), array(), array(), array('HTTP_ACCEPT' => 'application/json'));
+        $breadcrumb = json_decode($this->client->getResponse()->getContent());
+        $this->assertInternalType('array', $breadcrumb);
+        $this->assertEquals(3, count($breadcrumb));
+        $this->assertEquals('Ebene 1', $breadcrumb[0]->name);
+        $this->assertEquals('Ebene 2', $breadcrumb[1]->name);
+        $this->assertEquals('Ebene 3', $breadcrumb[2]->name);
+    }
+
 }

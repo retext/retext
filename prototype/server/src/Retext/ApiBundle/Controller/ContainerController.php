@@ -190,4 +190,18 @@ class ContainerController extends Base
 
         return $this->createResponse();
     }
+
+    /**
+     * @Route("/container/{container_id}/breadcrumb", requirements={"_method":"GET"})
+     */
+    public function getContainerBreadcrumbAction($container_id)
+    {
+        $this->ensureLoggedIn();
+        $breadcrumb = array();
+        $container = $this->getContainer($container_id);
+        array_unshift($breadcrumb, $container);
+        while ($container = $container->getParent()) array_unshift($breadcrumb, $container);
+        $response = $this->createResponse($breadcrumb);
+        return $response;
+    }
 }

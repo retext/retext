@@ -21,6 +21,14 @@ interface LinkedData
     function getSubject();
 
     /**
+     * Gibt die ID dieses Dokumentes zurück
+     *
+     * @abstract
+     * @return string
+     */
+    function getId();
+
+    /**
      * Gibt die Namen der verknüpften Dokumente zurück
      *
      * @return DocumentRelation[]|null

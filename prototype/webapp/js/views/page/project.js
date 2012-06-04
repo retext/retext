@@ -7,8 +7,9 @@ define([
     'text!templates/page/project.html',
     'models/project',
     'models/container',
-    'collections/container'
-], function (Vm, PageViewBase, ContainerListView, BreadCrumbModule, ContainerForm, ViewTemplate, ProjectModel, ContainerModel, ContainerCollection) {
+    'collections/container',
+    'collections/breadcrumb'
+], function (Vm, PageViewBase, ContainerListView, BreadCrumbModule, ContainerForm, ViewTemplate, ProjectModel, ContainerModel, ContainerCollection, BreadcrumbCollection) {
     var View = PageViewBase.extend({
             template:_.template(ViewTemplate),
             events:{
@@ -38,7 +39,9 @@ define([
                 var containersCollection = new ContainerCollection();
                 containersCollection.url = this.parentContainer.getRelation('http://jsonld.retext.it/Container', true).get('href');
                 var containerList = Vm.create(this, 'current-container', ContainerListView, {el:$('#gui-current-container'), model:containersCollection, newContainerModel:this.newContainerModel});
-                Vm.create(this, 'breadcrumb', BreadCrumbModule, {el:$(this.el).find('div.view-breadcrumb'), model:this.model});
+                var breadcrumbCollection = new BreadcrumbCollection();
+                breadcrumbCollection.url = this.parentContainer.getRelation('http://jsonld.retext.it/Breadcrumb', true).get('href');
+                Vm.create(this, 'breadcrumb', BreadCrumbModule, {el:$(this.el).find('div.view-breadcrumb'), model:breadcrumbCollection, project:this.model});
                 var project = this.model;
                 containerList.on('containerSelected', function (model) {
                     Vm.create(this, 'current-element-form', ContainerForm, {el:$('#current-element-form'), model:model});

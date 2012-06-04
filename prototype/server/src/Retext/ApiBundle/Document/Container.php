@@ -201,9 +201,11 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
     public function getRelatedDocuments()
     {
         $container = new Container();
+        $breadcrumb = new Breadcrumb();
         return array(
             DocumentRelation::create($this->getProject()),
-            DocumentRelation::create($container)->setHref($container->getSubject() . '?parent=' . $this->getId())->setList(true)
+            DocumentRelation::create($container)->setHref($container->getSubject() . '?parent=' . $this->getId())->setList(true),
+            DocumentRelation::create($breadcrumb)->setHref($this->getSubject() . '/breadcrumb')->setList(true),
         );
     }
 }
