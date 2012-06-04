@@ -4,18 +4,13 @@ namespace Retext\ApiBundle\Tests\Integration\Secondrun\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class ContainerControllerTest extends WebTestCase
+class ContainerControllerTest extends Base
 {
-    /**
-     * @var \Symfony\Bundle\FrameworkBundle\Client
-     */
-    private $client;
-
     private $project;
 
     public function setUp()
     {
-        $this->client = static::createClient();
+        parent::setUp();
         $this->client->request('POST', '/api/user', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('email' => 'phpunit+container@retext.it')));
         $this->client->request('POST', '/api/login', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('email' => 'phpunit+container@retext.it', 'password' => 'phpunit+container@retext.it')));
         $this->client->request('POST', '/api/project', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('name' => 'Container-Test-Project')));
@@ -149,27 +144,6 @@ class ContainerControllerTest extends WebTestCase
         $containerList = json_decode($this->client->getResponse()->getContent());
         $this->assertEquals(4, count($containerList), 'There should be only 4 containers now.');
 
-    }
-
-    private function getRelationHref($object, $context, $list = false)
-    {
-        if (!property_exists($object, '@relations')) $this->fail('No @relations in ' . print_r($object, true));
-        foreach ($object->{'@relations'} as $relation) {
-            if ($relation->relatedcontext == $context && $relation->list === $list) return $relation->href;
-        }
-        $this->fail('Could not find relation ' . $context . ' (list=' . var_export($list, true) . ' in ' . print_r($object, true));
-    }
-
-    /**
-     * @param object $object
-     * @param string $context
-     * @return object
-     */
-    private function fetchRelation($object, $context)
-    {
-        $this->client->request('GET', $this->getRelationHref($object, $context), array(), array(), array('HTTP_ACCEPT' => 'application/json'));
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-        return json_decode($this->client->getResponse()->getContent());
     }
 
     /**

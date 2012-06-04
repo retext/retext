@@ -11,7 +11,7 @@ use JMS\SerializerBundle\Annotation as SerializerBundle;
  * @MongoDB\Document
  * @Doctrine\HasLifecycleCallbacks
  */
-class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteable
+class Text extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteable
 {
     /**
      * @MongoDB\Id
@@ -28,6 +28,14 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
     private $project;
 
     /**
+     * @MongoDB\ReferenceOne(targetDocument="Retext\ApiBundle\Document\TextType", cascade={"persist"}, simple=true)
+     * @MongoDB\Index(order="asc")
+     * @var \Retext\ApiBundle\Document\TextType $type
+     * @SerializerBundle\Accessor(getter="getTypeId")
+     */
+    private $type;
+
+    /**
      * @MongoDB\String
      * @var string
      */
@@ -42,10 +50,10 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
     /**
      * @MongoDB\ReferenceOne(targetDocument="Retext\ApiBundle\Document\Container", cascade={"persist"}, simple=true)
      * @MongoDB\Index(order="asc")
-     * @var \Retext\ApiBundle\Document\Container $parent
-     * @SerializerBundle\Accessor(getter="getParentId")
+     * @var \Retext\ApiBundle\Document\Container $container
+     * @SerializerBundle\Accessor(getter="getContainerId")
      */
-    private $parent;
+    private $container;
 
     /**
      * @MongoDB\Date
@@ -65,33 +73,33 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
     }
 
     /**
-     * Set parent
+     * Set container
      *
-     * @param \Retext\ApiBundle\Document\Container $parent
+     * @param \Retext\ApiBundle\Document\Container $container
      */
-    public function setParent(\Retext\ApiBundle\Document\Container $parent)
+    public function setContainer(\Retext\ApiBundle\Document\Container $container)
     {
-        $this->parent = $parent;
+        $this->container = $container;
     }
 
     /**
-     * Get parent
+     * Get container
      *
-     * @return \Retext\ApiBundle\Document\Container $parent
+     * @return \Retext\ApiBundle\Document\Container $container
      */
-    public function getParent()
+    public function getContainer()
     {
-        return $this->parent;
+        return $this->container;
     }
 
     /**
-     * Get parent id
+     * Get container id
      *
      * @return string
      */
-    public function getParentId()
+    public function getContainerId()
     {
-        return $this->parent == null ? null : $this->parent->getId();
+        return $this->container == null ? null : $this->container->getId();
     }
 
     /**
@@ -122,6 +130,36 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
     public function getProjectId()
     {
         return $this->project->getId();
+    }
+
+    /**
+     * Set type
+     *
+     * @param \Retext\ApiBundle\Document\TextType $type
+     */
+    public function setType(\Retext\ApiBundle\Document\TextType $type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * Get type
+     *
+     * @return \Retext\ApiBundle\Document\TextType $type
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Get type id
+     *
+     * @return string
+     */
+    public function getTypeId()
+    {
+        return $this->type->getId();
     }
 
     /**
@@ -200,14 +238,10 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
      */
     public function getRelatedDocuments()
     {
-        $container = new Container();
-        $text = new Text();
-        $breadcrumb = new Breadcrumb();
         return array(
             DocumentRelation::create($this->getProject()),
-            DocumentRelation::create($container)->setHref($container->getSubject() . '?parent=' . $this->getId())->setList(true),
-            DocumentRelation::create($text)->setHref($text->getSubject() . '?parent=' . $this->getId())->setList(true),
-            DocumentRelation::create($breadcrumb)->setHref($this->getSubject() . '/breadcrumb')->setList(true),
+            DocumentRelation::create($this->getContainer()),
+            DocumentRelation::create($this->getType())
         );
     }
 }

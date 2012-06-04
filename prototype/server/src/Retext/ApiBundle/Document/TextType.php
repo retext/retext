@@ -9,9 +9,10 @@ use JMS\SerializerBundle\Annotation as SerializerBundle;
 
 /**
  * @MongoDB\Document
+ * @MongoDB\UniqueIndex(keys={"project"="asc", "name"="asc"})
  * @Doctrine\HasLifecycleCallbacks
  */
-class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteable
+class TextType extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteable
 {
     /**
      * @MongoDB\Id
@@ -29,23 +30,10 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
 
     /**
      * @MongoDB\String
+     * @MongoDB\Index(order="asc")
      * @var string
      */
     protected $name;
-
-    /**
-     * @MongoDB\Int
-     * @var int
-     */
-    protected $order = 1;
-
-    /**
-     * @MongoDB\ReferenceOne(targetDocument="Retext\ApiBundle\Document\Container", cascade={"persist"}, simple=true)
-     * @MongoDB\Index(order="asc")
-     * @var \Retext\ApiBundle\Document\Container $parent
-     * @SerializerBundle\Accessor(getter="getParentId")
-     */
-    private $parent;
 
     /**
      * @MongoDB\Date
@@ -62,36 +50,6 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set parent
-     *
-     * @param \Retext\ApiBundle\Document\Container $parent
-     */
-    public function setParent(\Retext\ApiBundle\Document\Container $parent)
-    {
-        $this->parent = $parent;
-    }
-
-    /**
-     * Get parent
-     *
-     * @return \Retext\ApiBundle\Document\Container $parent
-     */
-    public function getParent()
-    {
-        return $this->parent;
-    }
-
-    /**
-     * Get parent id
-     *
-     * @return string
-     */
-    public function getParentId()
-    {
-        return $this->parent == null ? null : $this->parent->getId();
     }
 
     /**
@@ -154,26 +112,6 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
     }
 
     /**
-     * Set order
-     *
-     * @param int $order
-     */
-    public function setOrder($order)
-    {
-        $this->order = $order;
-    }
-
-    /**
-     * Get order
-     *
-     * @return int $order
-     */
-    public function getOrder()
-    {
-        return $this->order;
-    }
-
-    /**
      * Gets the date that this object was deleted at.
      *
      * @return \DateTime $deletedAt
@@ -200,14 +138,8 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
      */
     public function getRelatedDocuments()
     {
-        $container = new Container();
-        $text = new Text();
-        $breadcrumb = new Breadcrumb();
         return array(
             DocumentRelation::create($this->getProject()),
-            DocumentRelation::create($container)->setHref($container->getSubject() . '?parent=' . $this->getId())->setList(true),
-            DocumentRelation::create($text)->setHref($text->getSubject() . '?parent=' . $this->getId())->setList(true),
-            DocumentRelation::create($breadcrumb)->setHref($this->getSubject() . '/breadcrumb')->setList(true),
         );
     }
 }

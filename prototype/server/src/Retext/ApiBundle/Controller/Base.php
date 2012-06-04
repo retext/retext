@@ -159,4 +159,64 @@ abstract class Base extends Controller
         }
 
     }
+
+    /**
+     * @param string $project_id
+     * @return \Retext\ApiBundle\Document\Project
+     */
+    protected function getProject($project_id)
+    {
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $project = $dm->getRepository('RetextApiBundle:Project')
+            ->createQueryBuilder()
+            ->field('id')->equals(new \MongoId($project_id))
+            ->field('owner')->equals(new \MongoId($this->getUser()->getId()))
+            ->getQuery()
+            ->getSingleResult();
+        if ($project === null)
+            throw $this->createNotFoundException('Project ' . $project_id . ' not found.');
+        if ($project->getDeletedAt() !== null)
+            throw $this->createGoneException('Project ' . $project_id . ' has been deleted.');
+        return $project;
+    }
+
+    /**
+     * @param string $container_id
+     * @return \Retext\ApiBundle\Document\Container
+     */
+    protected function getContainer($container_id)
+    {
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $container = $dm->getRepository('RetextApiBundle:Container')
+            ->createQueryBuilder()
+            ->field('id')->equals(new \MongoId($container_id))
+            ->getQuery()
+            ->getSingleResult();
+
+        if ($container === null)
+            throw $this->createNotFoundException('Container ' . $container_id . ' not found.');
+        if ($container->getDeletedAt() !== null)
+            throw $this->createGoneException('Container ' . $container_id . ' has been deleted.');
+        return $container;
+    }
+
+    /**
+     * @param string $text_id
+     * @return \Retext\ApiBundle\Document\Text
+     */
+    protected function getText($text_id)
+    {
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $text = $dm->getRepository('RetextApiBundle:Text')
+            ->createQueryBuilder()
+            ->field('id')->equals(new \MongoId($text_id))
+            ->getQuery()
+            ->getSingleResult();
+
+        if ($text === null)
+            throw $this->createNotFoundException('Text ' . $text_id . ' not found.');
+        if ($text->getDeletedAt() !== null)
+            throw $this->createGoneException('Text ' . $text_id . ' has been deleted.');
+        return $text;
+    }
 }

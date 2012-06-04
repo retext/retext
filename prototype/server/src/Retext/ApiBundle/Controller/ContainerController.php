@@ -111,6 +111,7 @@ class ContainerController extends Base
                 ->createQueryBuilder()
                 ->findAndUpdate()
                 ->field('project')->equals($container->getProject()->getId())
+                ->field('parent')->equals($container->getParent() !== null ? $container->getParent()->getId() : null)
                 ->field('order')->equals($newOrder)->set($container->getOrder())
                 ->getQuery()
                 ->execute();
@@ -121,46 +122,6 @@ class ContainerController extends Base
         $dm->flush();
 
         return $this->createResponse($container);
-    }
-
-    /**
-     * @param string $container_id
-     * @return \Retext\ApiBundle\Document\Container
-     */
-    protected function getContainer($container_id)
-    {
-        $dm = $this->get('doctrine.odm.mongodb.document_manager');
-        $container = $dm->getRepository('RetextApiBundle:Container')
-            ->createQueryBuilder()
-            ->field('id')->equals(new \MongoId($container_id))
-            ->getQuery()
-            ->getSingleResult();
-
-        if ($container === null)
-            throw $this->createNotFoundException('Container ' . $container_id . ' not found.');
-        if ($container->getDeletedAt() !== null)
-            throw $this->createGoneException('Container ' . $container_id . ' has been deleted.');
-        return $container;
-    }
-
-    /**
-     * @param string $project_id
-     * @return \Retext\ApiBundle\Document\Project
-     */
-    protected function getProject($project_id)
-    {
-        $dm = $this->get('doctrine.odm.mongodb.document_manager');
-        $project = $dm->getRepository('RetextApiBundle:Project')
-            ->createQueryBuilder()
-            ->field('id')->equals(new \MongoId($project_id))
-            ->field('owner')->equals(new \MongoId($this->getUser()->getId()))
-            ->getQuery()
-            ->getSingleResult();
-        if ($project === null)
-            throw $this->createNotFoundException('Project ' . $project_id . ' not found.');
-        if ($project->getDeletedAt() !== null)
-            throw $this->createGoneException('Project ' . $project_id . ' has been deleted.');
-        return $project;
     }
 
     /**
