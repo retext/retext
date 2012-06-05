@@ -7,7 +7,8 @@ define([
         defaults:{
             '@relations':[],
             id:null,
-            name:null
+            name:null,
+            rootContainer:null
         },
         validate:function (attrs) {
             if (!attrs.hasOwnProperty('name')) return 'missing_name';

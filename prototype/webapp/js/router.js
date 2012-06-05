@@ -11,7 +11,6 @@ define([
             "":"home",
             "projects/list/:id":"listProject",
             "project/:projectId/:parentContainerId":"project",
-            "project/:projectId":"project",
             "*page":"showPage"
         },
         home:function () {
@@ -27,8 +26,7 @@ define([
             this.showPage('projects/list', {projectId:projectId});
         },
         project:function (projectId, parentContainerId) {
-            var opts = {id:projectId};
-            if (!_.isUndefined(parentContainerId)) opts.parentContainerId = parentContainerId;
+            var opts = {id:projectId, parentContainerId:parentContainerId};
             this.showPage('project', opts);
         }
     });

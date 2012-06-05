@@ -1,6 +1,6 @@
 <ul class="breadcrumb">
     <li>
-        <a href="#project/<%= project.id %>"><%= project.name %></a> <% if (breadcrumbs.length > 0) { %><span
+        <a href="#project/<%= project.id %>/<%= project.rootContainer %>"><%= project.name %></a> <% if (breadcrumbs.length > 0) { %><span
             class="divider">/</span><% }; %>
     </li>
     <% _.each(breadcrumbs, function(breadcrumb, idx) { %>

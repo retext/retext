@@ -11,7 +11,7 @@ define([
             name:null,
             parent:null,
             order:1,
-            childcount:0
+            childCount:0
         },
         validate:function (attrs) {
         }

@@ -29,11 +29,6 @@ define([
             var el = $(this.el);
             el.html(ViewTemplate);
             this.list = el.find('div.view-containers');
-            if (_.isNull(this.newTextModel)) {
-                el.find('button.act-new-text').attr('disabled', 'true');
-            } else {
-                el.find('button.act-new-text').removeAttr('disabled');
-            }
             return this;
         },
         renderList:function () {

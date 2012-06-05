@@ -1,7 +1,7 @@
 <span class="name"><% if(container.name == null || container.name.length == 0) { %><em>Kein Name</em><% } else { %><%= container.name %><% } %></span>
 <div class="info">
-    <% if(container.childcount > 0) { %>
-    <span class="btn btn-small childcount"><i class="icon-folder-close"></i> <%= container.childcount %></span>
+    <% if(container.childCount > 0) { %>
+    <span class="btn btn-small childCount"><i class="icon-folder-close"></i> <%= container.childCount %></span>
     <% } %>
 </div>
 <div class="meta">
@@ -9,5 +9,5 @@
     |
     <button class="btn btn-small actn-drag"><i class="icon-move"></i></button>
     <a href="#project/<%= container.project %>/<%= container.id %>" class="btn btn-small actn-open"><i
-            class="icon-folder-open"></i> <% if(container.childcount > 0) { %><%= container.childcount %><% } %></a>
+            class="icon-folder-open"></i> <% if(container.childCount > 0) { %><%= container.childCount %><% } %></a>
 </div>
