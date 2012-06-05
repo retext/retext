@@ -22,33 +22,24 @@ class ContainerController extends Base
         list($parent, $project) = $this->getProjectAndParent();
 
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
-        $numContainer = $dm->getRepository('RetextApiBundle:Container')
-            ->createQueryBuilder()
-            ->field('project')->equals(new \MongoId($project->getId()))
-            ->field('parent')->equals($parent == null ? null : new \MongoId($parent->getId()))
-            ->count()
-            ->getQuery()
-            ->execute();
 
         $container = new Container();
         $container->setProject($project);
-        if ($parent !== null) $container->setParent($parent);
+        $container->setParent($parent);
         $container->setName($this->getFromRequest(RequestParamater::create('name')->makeOptional()->defaultsTo(null)));
-        $container->setOrder($numContainer + 1);
 
         $dm->persist($container);
         $dm->flush();
 
-        if ($parent !== null) {
-            $dm->getRepository('RetextApiBundle:Container')
-                ->createQueryBuilder()
-                ->findAndUpdate()
-                ->field('id')->equals(new \MongoId($parent->getId()))
-                ->update()
-                ->field('childcount')->inc(1)
-                ->getQuery()
-                ->execute();
-        }
+        $dm->getRepository('RetextApiBundle:Container')
+            ->createQueryBuilder()
+            ->findAndUpdate()
+            ->field('id')->equals(new \MongoId($parent->getId()))
+            ->update()
+            ->field('childCount')->inc(1)
+            ->field('childOrder')->push($container->getId())
+            ->getQuery()
+            ->execute();
 
         return $this->createResponse($container)->setStatusCode(201)->addHeader('Location', $container->getSubject());
     }
@@ -83,11 +74,10 @@ class ContainerController extends Base
             ->field('project')->equals(new \MongoId($project->getId()))
             ->field('parent')->equals($parent == null ? null : new \MongoId($parent->getId()))
             ->field('deletedAt')->exists(false)
-            ->sort('order', 'asc')
             ->getQuery();
         $container = $query->execute();
 
-        return $this->createListResponse($container);
+        return $this->createListResponse($container, $parent->getChildOrder());
     }
 
     /**
@@ -102,23 +92,7 @@ class ContainerController extends Base
 
         // TODO: Check update permissions
         $container->setName($this->getFromRequest(RequestParamater::create('name')->makeOptional()->defaultsTo($container->getName())));
-
-        // Updating order?
-        $newOrder = $this->getFromRequest(RequestParamater::create('order')->makeOptional()->makeInteger()->defaultsTo($container->getOrder()));
-        if ($newOrder != $container->getOrder()) {
-            // Make room for new order
-            $dm->getRepository('RetextApiBundle:Container')
-                ->createQueryBuilder()
-                ->findAndUpdate()
-                ->field('project')->equals($container->getProject()->getId())
-                ->field('parent')->equals($container->getParent() !== null ? $container->getParent()->getId() : null)
-                ->field('order')->equals($newOrder)
-                ->update()
-                ->field('order')->set($container->getOrder())
-                ->getQuery()
-                ->execute();
-            $container->setOrder($newOrder);
-        }
+        $container->setChildOrder($this->getFromRequest(RequestParamater::create('childOrder')->makeOptional()->makeList()->defaultsTo($container->getChildOrder())));
 
         $dm->persist($container);
         $dm->flush();
@@ -152,17 +126,16 @@ class ContainerController extends Base
         $sdm->delete($container);
         $sdm->flush();
 
-        if ($container->getParent() !== null) {
-            $dm = $this->get('doctrine.odm.mongodb.document_manager');
-            $dm->getRepository('RetextApiBundle:Container')
-                ->createQueryBuilder()
-                ->findAndUpdate()
-                ->field('id')->equals(new \MongoId($container->getParent()->getId()))
-                ->update()
-                ->field('childcount')->inc(-1)
-                ->getQuery()
-                ->execute();
-        }
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $dm->getRepository('RetextApiBundle:Container')
+            ->createQueryBuilder()
+            ->findAndUpdate()
+            ->field('id')->equals(new \MongoId($container->getParent()->getId()))
+            ->update()
+            ->field('childCount')->inc(-1)
+            ->field('childOrder')->pull($container->getParent()->getId())
+            ->getQuery()
+            ->execute();
 
         return $this->createResponse();
     }

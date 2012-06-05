@@ -6,6 +6,7 @@ class RequestParamater
 {
     const FORMAT_STRING = 1;
     const FORMAT_INTEGER = 2;
+    const FORMAT_LIST = 3;
 
     /**
      * @var bool
@@ -91,6 +92,15 @@ class RequestParamater
     public function makeInteger()
     {
         $this->format = self::FORMAT_INTEGER;
+        return $this;
+    }
+
+    /**
+     * @return \Retext\ApiBundle\RequestParamater
+     */
+    public function makeList()
+    {
+        $this->format = self::FORMAT_LIST;
         return $this;
     }
 

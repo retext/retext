@@ -34,12 +34,6 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
     private $name;
 
     /**
-     * @MongoDB\Int
-     * @var int
-     */
-    private $order = 1;
-
-    /**
      * @MongoDB\ReferenceOne(targetDocument="Retext\ApiBundle\Document\Container", cascade={"persist"}, simple=true)
      * @MongoDB\Index(order="asc")
      * @var \Retext\ApiBundle\Document\Container $parent
@@ -57,8 +51,16 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
     /**
      * @MongoDB\Int
      * @var int
+     * @SerializerBundle\SerializedName("childCount")
      */
-    private $childcount = 0;
+    private $childCount = 0;
+
+    /**
+     * @MongoDB\Hash
+     * @var array
+     * @SerializerBundle\Exclude
+     */
+    private $childOrder = array();
 
     /**
      * @MongoDB\Date
@@ -167,26 +169,6 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
     }
 
     /**
-     * Set order
-     *
-     * @param int $order
-     */
-    public function setOrder($order)
-    {
-        $this->order = $order;
-    }
-
-    /**
-     * Get order
-     *
-     * @return int $order
-     */
-    public function getOrder()
-    {
-        return $this->order;
-    }
-
-    /**
      * Gets the date that this object was deleted at.
      *
      * @return \DateTime $deletedAt
@@ -253,22 +235,42 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
     }
 
     /**
-     * Set childcount
+     * Set childCount
      *
-     * @param int $childcount
+     * @param int $childCount
      */
-    public function setChildcount($childcount)
+    public function setChildCount($childCount)
     {
-        $this->childcount = $childcount;
+        $this->childCount = $childCount;
     }
 
     /**
-     * Get childcount
+     * Get childCount
      *
-     * @return int $childcount
+     * @return int $childCount
      */
-    public function getChildcount()
+    public function getChildCount()
     {
-        return $this->childcount;
+        return $this->childCount;
+    }
+
+    /**
+     * Set childOrder
+     *
+     * @param array $childOrder
+     */
+    public function setChildOrder(array $childOrder)
+    {
+        $this->childOrder = $childOrder;
+    }
+
+    /**
+     * Get childOrder
+     *
+     * @return array $childOrder
+     */
+    public function getChildOrder()
+    {
+        return $this->childOrder;
     }
 }

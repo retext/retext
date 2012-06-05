@@ -42,12 +42,6 @@ class Text extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteab
     protected $name;
 
     /**
-     * @MongoDB\Int
-     * @var int
-     */
-    protected $order = 1;
-
-    /**
      * @MongoDB\ReferenceOne(targetDocument="Retext\ApiBundle\Document\Container", cascade={"persist"}, simple=true)
      * @MongoDB\Index(order="asc")
      * @var \Retext\ApiBundle\Document\Container $container
@@ -189,26 +183,6 @@ class Text extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteab
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set order
-     *
-     * @param int $order
-     */
-    public function setOrder($order)
-    {
-        $this->order = $order;
-    }
-
-    /**
-     * Get order
-     *
-     * @return int $order
-     */
-    public function getOrder()
-    {
-        return $this->order;
     }
 
     /**

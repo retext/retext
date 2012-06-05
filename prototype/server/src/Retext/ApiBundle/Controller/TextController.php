@@ -48,7 +48,6 @@ class TextController extends Base
         $text->setProject($project);
         $text->setContainer($container);
         $text->setName($this->getFromRequest(RequestParamater::create('name')->makeOptional()->defaultsTo(null)));
-        $text->setOrder($numTexts + 1);
         $text->setType($type);
 
         $dm->persist($text);
@@ -69,31 +68,6 @@ class TextController extends Base
     }
 
     /**
-     * Gibt eine Liste mit den Texten auf der obersten Ebene eines Projektes zurück
-     *
-     * @Route("/text", requirements={"_method":"GET"})
-     */
-    public function listTextAction()
-    {
-        $this->ensureLoggedIn();
-
-        $dm = $this->get('doctrine.odm.mongodb.document_manager');
-
-        list($container, $project) = $this->getContainerAndProject();
-
-        $query = $dm->getRepository('RetextApiBundle:Text')
-            ->createQueryBuilder()
-            ->field('project')->equals(new \MongoId($project->getId()))
-            ->field('container')->equals(new \MongoId($container->getId()))
-            ->field('deletedAt')->exists(false)
-            ->sort('order', 'asc')
-            ->getQuery();
-        $text = $query->execute();
-
-        return $this->createListResponse($text);
-    }
-
-    /**
      * @Route("/text/{text_id}", requirements={"_method":"PUT"})
      */
     public function updateTextAction($text_id)
@@ -105,23 +79,6 @@ class TextController extends Base
 
         // TODO: Check update permissions
         $text->setName($this->getFromRequest(RequestParamater::create('name')->makeOptional()->defaultsTo($text->getName())));
-
-        // Updating order?
-        $newOrder = $this->getFromRequest(RequestParamater::create('order')->makeOptional()->makeInteger()->defaultsTo($text->getOrder()));
-        if ($newOrder != $text->getOrder()) {
-            // Make room for new order
-            $dm->getRepository('RetextApiBundle:Text')
-                ->createQueryBuilder()
-                ->findAndUpdate()
-                ->field('project')->equals($text->getProject()->getId())
-                ->field('container')->equals($text->getContainer()->getId())
-                ->field('order')->equals($newOrder)
-                ->update()
-                ->field('order')->set($text->getOrder())
-                ->getQuery()
-                ->execute();
-            $text->setOrder($newOrder);
-        }
 
         $dm->persist($text);
         $dm->flush();

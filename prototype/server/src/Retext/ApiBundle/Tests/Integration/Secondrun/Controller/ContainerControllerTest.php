@@ -123,34 +123,42 @@ class ContainerControllerTest extends Base
     /**
      * @group secondrun
      * @group integration
-     * @depends testCreateContainer
      * @return object
      */
-    public function testContainerReOrder($args)
+    public function testContainerReOrder()
     {
-        list ($root, $container) = $args;
-        $this->client->request('PUT', $container[1]->{'@subject'}, array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('order' => 3)));
+        // Create tree
+        $this->client->request('POST', '/api/project', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('name' => 'ReOrder-Test-Project')));
+        $project = json_decode($this->client->getResponse()->getContent());
+        $this->client->request('GET', $this->getRelationHref($project, 'http://jsonld.retext.it/Container', false, 'http://jsonld.retext.it/ontology/root'), array(), array(), array('HTTP_ACCEPT' => 'application/json'));
+        $root = json_decode($this->client->getResponse()->getContent());
+        $this->client->request('POST', '/api/container', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('parent' => $root->id, 'name' => 'A')));
+        $a = json_decode($this->client->getResponse()->getContent());
+        $this->client->request('POST', '/api/container', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('parent' => $root->id, 'name' => 'B')));
+        $b = json_decode($this->client->getResponse()->getContent());
+        $this->client->request('POST', '/api/container', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('parent' => $root->id, 'name' => 'C')));
+        $c = json_decode($this->client->getResponse()->getContent());
+        $this->client->request('POST', '/api/container', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('parent' => $root->id, 'name' => 'D')));
+        $d = json_decode($this->client->getResponse()->getContent());
+        $this->client->request('POST', '/api/container', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('parent' => $root->id, 'name' => 'E')));
+        $e = json_decode($this->client->getResponse()->getContent());
+
+
+        $this->client->request('PUT', $root->{'@subject'}, array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('childOrder' => array(
+            $a->id, $c->id, $b->id, $d->id, $e->id
+        ))));
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-        $c2 = json_decode($this->client->getResponse()->getContent());
-        $this->checkContainer($c2);
-        $this->assertEquals(3, $c2->order);
 
-        $newOrder = array(
-            0 => 1,
-            2 => 2,
-            1 => 3,
-            3 => 4,
-            4 => 5,
-        );
+        $this->client->request('GET', $this->getRelationHref($root, 'http://jsonld.retext.it/Container', true, 'http://jsonld.retext.it/ontology/child'), array(), array(), array('HTTP_ACCEPT' => 'application/json'));
+        $containers = json_decode($this->client->getResponse()->getContent());
 
-        foreach ($newOrder as $k => $expextedOrder) {
-            $this->client->request('GET', $container[$k]->{'@subject'}, array(), array(), array('HTTP_ACCEPT' => 'application/json'));
-            $c = json_decode($this->client->getResponse()->getContent());
-            $this->checkContainer($c);
-            $this->assertEquals($expextedOrder, $c->order, 'Container ' . ($k + 1) . ' should have order ' . $expextedOrder);
-        }
+        $this->assertEquals('A', $containers[0]->name);
+        $this->assertEquals('C', $containers[1]->name);
+        $this->assertEquals('B', $containers[2]->name);
+        $this->assertEquals('D', $containers[3]->name);
+        $this->assertEquals('E', $containers[4]->name);
 
-        return array($root, $container);
+        return array($root, $containers);
     }
 
 
@@ -162,11 +170,11 @@ class ContainerControllerTest extends Base
      */
     public function testContainerDelete($args)
     {
-        list ($root, $container) = $args;
-        $this->client->request('DELETE', $container[2]->{'@subject'}, array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'));
+        list ($root, $containers) = $args;
+        $this->client->request('DELETE', $containers[2]->{'@subject'}, array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'));
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-        $this->client->request('GET', $container[2]->{'@subject'}, array(), array(), array('HTTP_ACCEPT' => 'application/json'));
+        $this->client->request('GET', $containers[2]->{'@subject'}, array(), array(), array('HTTP_ACCEPT' => 'application/json'));
         $this->assertEquals(410, $this->client->getResponse()->getStatusCode());
 
         $this->client->request('GET', $this->getRelationHref($root, 'http://jsonld.retext.it/Container', true), array(), array(), array('HTTP_ACCEPT' => 'application/json'));
@@ -212,7 +220,7 @@ class ContainerControllerTest extends Base
         $this->client->request('GET', $this->getRelationHref($project, 'http://jsonld.retext.it/Container', false, 'http://jsonld.retext.it/ontology/root'), array(), array(), array('HTTP_ACCEPT' => 'application/json'));
         $root = json_decode($this->client->getResponse()->getContent());
         $this->assertInternalType('object', $root);
-        $this->assertEquals(2, $root->childcount);
+        $this->assertEquals(2, $root->childCount);
 
         // Prüfe Level 1
         $this->client->request('GET', $this->getRelationHref($root, 'http://jsonld.retext.it/Container', true), array(), array(), array('HTTP_ACCEPT' => 'application/json'));
@@ -220,9 +228,9 @@ class ContainerControllerTest extends Base
         $this->assertInternalType('array', $rootChilds);
         $this->assertEquals(2, count($rootChilds));
         $this->assertEquals('1.1', $rootChilds[0]->name);
-        $this->assertEquals(2, $rootChilds[0]->childcount);
+        $this->assertEquals(2, $rootChilds[0]->childCount);
         $this->assertEquals('1.2', $rootChilds[1]->name);
-        $this->assertEquals(0, $rootChilds[1]->childcount);
+        $this->assertEquals(0, $rootChilds[1]->childCount);
 
         // Prüfe Level 2
         $this->client->request('GET', $this->getRelationHref($rootChilds[0], 'http://jsonld.retext.it/Container', true), array(), array(), array('HTTP_ACCEPT' => 'application/json'));
@@ -231,8 +239,8 @@ class ContainerControllerTest extends Base
         $this->assertEquals(2, count($l1childs));
         $this->assertEquals('1.1.1', $l1childs[0]->name);
         $this->assertEquals('1.1.2', $l1childs[1]->name);
-        $this->assertEquals(0, $l1childs[0]->childcount);
-        $this->assertEquals(0, $l1childs[1]->childcount);
+        $this->assertEquals(0, $l1childs[0]->childCount);
+        $this->assertEquals(0, $l1childs[1]->childCount);
 
         $this->client->request('GET', $this->getRelationHref($rootChilds[1], 'http://jsonld.retext.it/Container', true), array(), array(), array('HTTP_ACCEPT' => 'application/json'));
         $l2childs = json_decode($this->client->getResponse()->getContent());

@@ -37,13 +37,23 @@ abstract class Base extends Controller
 
     /**
      * @param mixed|null $data
+     * @param mixed|null $order list of ids in the order the items should appear in the list
      * @return \Retext\ApiBundle\ApiResponse
      */
-    public function createListResponse($data = null)
+    public function createListResponse($data = null, $order = null)
     {
-        $items = array();
         if ($data instanceof \Iterator || is_array($data)) {
-            foreach ($data as $d) $items[] = $d;
+            $items = array();
+            $itemPos = array();
+            $orderItems = $order !== null;
+            if ($orderItems) $idPos = array_flip($order);
+            foreach ($data as $d) {
+                $items[] = $d;
+                if ($orderItems && $d instanceof \Retext\ApiBundle\Document\LinkedData) $itemPos[] = $idPos[$d->getId()];
+            }
+            if ($orderItems) array_multisort($itemPos, SORT_ASC, $items);
+        } else {
+            $items = array($data);
         }
         return $this->createResponse($items);
     }
@@ -104,7 +114,7 @@ abstract class Base extends Controller
      */
     public function getFromRequest()
     {
-        $this->ensureRequest();
+        //$this->ensureRequest();
         $request = $this->getRequest();
 
         if ($request->getMethod() === 'GET') {
@@ -144,6 +154,10 @@ abstract class Base extends Controller
             switch ($key->getFormat()) {
                 case RequestParamater::FORMAT_INTEGER;
                     return (int)$getKeyValue($key);
+                case RequestParamater::FORMAT_LIST:
+                    $data = $getKeyValue($key);
+                    if (!is_array($data)) throw $this->createException(400, 'Bad Request | input ' . $key->getName() . ' must be list');
+                    return $data;
                 default:
                     return $getKeyValue($key);
             }

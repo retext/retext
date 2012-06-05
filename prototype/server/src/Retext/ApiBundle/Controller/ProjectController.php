@@ -13,7 +13,7 @@ class ProjectController extends Base
     /**
      * @Route("/project", requirements={"_method":"POST"})
      */
-    public function createProjectAction(Request $request)
+    public function createProjectAction()
     {
         $this->ensureLoggedIn();
 
