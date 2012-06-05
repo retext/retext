@@ -1,10 +1,7 @@
 define([
-    'views/page/base',
-    'models/container',
-    'text!templates/forms/container.html'
-], function (PageViewBase, FormModel, FormTemplate) {
+    'views/page/base'
+], function (PageViewBase) {
     var FormView = PageViewBase.extend({
-        template:_.template(FormTemplate),
         events:{
             'click button.gui-save':'save',
             'click button.gui-delete':'delete'
@@ -29,6 +26,7 @@ define([
                     data[name] = inp.attr('value');
                 }
             });
+            model.url = model.get('@subject');
             model.save(data, {
                 success:function (updatedModel) {
                     model.set(updatedModel.attributes);

@@ -1,16 +1,15 @@
 define([
     'remote',
-    'models/base'
-], function (Remote, BaseModel) {
-    var Text = BaseModel.extend({
+    'models/element'
+], function (Remote, ElementModel) {
+    var Text = ElementModel.extend({
         urlRoot:Remote.apiUrlBase + 'text',
         defaults:{
             '@relations':[],
             id:null,
             project:null,
-            container:null,
+            parent:null,
             name:null,
-            order:1,
             type:null
         },
         validate:function (attrs) {

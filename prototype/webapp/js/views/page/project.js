@@ -1,16 +1,17 @@
 define([
     'vm',
     'views/page/base',
-    'views/modules/container/list',
+    'views/modules/element/list',
     'views/modules/project/breadcrumb',
     'views/forms/container',
+    'views/forms/text',
     'text!templates/page/project.html',
     'models/project',
     'models/container',
     'models/text',
-    'collections/container',
+    'collections/element',
     'collections/breadcrumb'
-], function (Vm, PageViewBase, ContainerListView, BreadCrumbModule, ContainerForm, ViewTemplate, ProjectModel, ContainerModel, TextModel, ContainerCollection, BreadcrumbCollection) {
+], function (Vm, PageViewBase, ElementListView, BreadCrumbModule, ContainerForm, TextForm, ViewTemplate, ProjectModel, ContainerModel, TextModel, ElementCollection, BreadcrumbCollection) {
     var View = PageViewBase.extend({
             template:_.template(ViewTemplate),
             events:{
@@ -32,15 +33,19 @@ define([
                 return this;
             },
             parentContainerFetched:function () {
-                var containersCollection = new ContainerCollection();
-                containersCollection.url = this.parentContainer.getRelation('http://jsonld.retext.it/Element', true).get('href');
-                var containerList = Vm.create(this, 'current-container', ContainerListView, {el:$('#gui-current-container'), model:containersCollection, newContainerModel:this.newContainerModel, newTextModel:this.newTextModel});
+                var elementCollection = new ElementCollection();
+                elementCollection.url = this.parentContainer.getRelation('http://jsonld.retext.it/Element', true).get('href');
+                var containerList = Vm.create(this, 'current-container', ElementListView, {el:$('#gui-current-container'), model:elementCollection, newContainerModel:this.newContainerModel, newTextModel:this.newTextModel});
                 var breadcrumbCollection = new BreadcrumbCollection();
                 breadcrumbCollection.url = this.parentContainer.getRelation('http://jsonld.retext.it/Breadcrumb', true).get('href');
                 Vm.create(this, 'breadcrumb', BreadCrumbModule, {el:$(this.el).find('div.view-breadcrumb'), model:breadcrumbCollection, project:this.model});
                 var project = this.model;
-                containerList.on('containerSelected', function (model) {
-                    Vm.create(this, 'current-element-form', ContainerForm, {el:$('#current-element-form'), model:model});
+                containerList.on('elementSelected', function (model) {
+                    if (model.get('@context') == 'http://jsonld.retext.it/Container') {
+                        Vm.create(this, 'current-element-form', ContainerForm, {el:$('#current-element-form'), model:model});
+                    } else {
+                        Vm.create(this, 'current-element-form', TextForm, {el:$('#current-element-form'), model:model});
+                    }
                 });
             },
             complete:function () {

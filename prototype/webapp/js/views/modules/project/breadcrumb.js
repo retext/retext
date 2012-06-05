@@ -11,7 +11,6 @@ define([
             this.model.bind("reset", this.render, this);
         },
         render:function () {
-            console.log(this.model.toJSON());
             var el = $(this.el).html(this.template({project:this.project.toJSON(), breadcrumbs:this.model.toJSON()}));
             return this;
         },

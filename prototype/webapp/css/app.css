@@ -1,7 +1,4 @@
-.gui-container {
-    border-radius: 2px;
-    background-color: #E8F6FF;
-    border: 1px dashed #535353;
+.gui-element {
     margin: 0.5em 0 0.5em 0;
     padding: 1em;
     color: #797979;
@@ -9,42 +6,32 @@
     position: relative;
 }
 
-.gui-container.selected {
-    background-color: #fefefe;
-    border-color: #F38630;
-    color: #333;
-}
-
-.gui-container .order {
-    font-weight: bold;
-    font-size: 1.75em;
-    color: #999;
-}
-
-.gui-container .name {
-
-}
-
-.gui-container .meta, .gui-container .info {
+.gui-element .meta, .gui-element .info {
     position: absolute;
     right: 1%;
     top: 20%;
     line-height: 2em;
 }
 
-.gui-container .meta {
+.gui-element.selected {
+    background-color: #fefefe;
+    border-color: #F38630;
+    color: #333;
+}
+
+.gui-element .meta {
     display: none;
 }
 
-.gui-container:hover .meta {
+.gui-element:hover .meta {
     display: block;
 }
 
-.gui-container:hover .info {
+.gui-element:hover .info {
     display: none;
 }
 
-.gui-container.dragging {
+.gui-element.dragging {
     border-style: dashed;
 }
 
@@ -57,4 +44,20 @@
 
 .gui-droptarget.drag-over {
     display: block;
+}
+
+/* Container */
+
+.gui-container {
+    border-radius: 2px;
+    background-color: #E8F6FF;
+    border: 1px dashed #535353;
+}
+
+/* Text */
+
+.gui-text {
+    border-radius: 10px;
+    background-color: #F0F0F0;
+    border: 3px solid #999;
 }

@@ -1,10 +1,10 @@
 define([
-    'views/modules/element/item',
-    'text!templates/modules/element/text.html'
-], function (ItemView, ViewTemplate) {
-    var View = ItemView.extend({
+    'views/modules/element/element',
+    'text!templates/modules/element/container.html'
+], function (ElementView, ViewTemplate) {
+    var View = ElementView.extend({
         template:_.template(ViewTemplate),
-        className:'gui-element gui-text'
+        className:'gui-element gui-container'
     });
     return View;
 });
