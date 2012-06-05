@@ -1,0 +1,13 @@
+<span class="name"><% if(element.name == null || element.name.length == 0) { %><em>Kein Name</em><% } else { %><%= element.name %><% } %></span>
+<div class="info">
+    <% if(element.childCount > 0) { %>
+    <span class="btn btn-small childCount"><i class="icon-folder-close"></i> <%= element.childCount %></span>
+    <% } %>
+</div>
+<div class="meta">
+    <button class="btn btn-small btn-danger actn-delete"><i class="icon-trash icon-white"></i></button>
+    |
+    <button class="btn btn-small actn-drag"><i class="icon-move"></i></button>
+    <a href="#project/<%= element.project %>/<%= element.id %>" class="btn btn-small actn-open"><i
+            class="icon-folder-open"></i> <% if(element.childCount > 0) { %><%= element.childCount %><% } %></a>
+</div>
