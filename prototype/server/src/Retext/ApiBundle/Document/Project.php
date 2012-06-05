@@ -31,6 +31,15 @@ class Project extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDelet
     private $owner;
 
     /**
+     * @MongoDB\ReferenceOne(targetDocument="Retext\ApiBundle\Document\Container", cascade={"persist"}, simple=true)
+     * @MongoDB\Index(order="asc")
+     * @SerializerBundle\SerializedName("rootContainer")
+     * @SerializerBundle\Accessor(getter="getRootContainerId")
+     * @var \Retext\ApiBundle\Document\Container
+     */
+    private $rootContainer;
+
+    /**
      * @MongoDB\Date
      * @MongoDB\Index(order="asc")
      * @var \DateTime|null
@@ -40,7 +49,7 @@ class Project extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDelet
     /**
      * Get id
      *
-     * @return id $id
+     * @return string $id
      */
     public function getId()
     {
@@ -118,16 +127,45 @@ class Project extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDelet
     }
 
     /**
+     * Set rootContainer
+     *
+     * @param \Retext\ApiBundle\Document\Container $rootContainer
+     */
+    public function setRootContainer(\Retext\ApiBundle\Document\Container $rootContainer)
+    {
+        $this->rootContainer = $rootContainer;
+    }
+
+    /**
+     * Get rootContainer
+     *
+     * @return \Retext\ApiBundle\Document\Container $rootContainer
+     */
+    public function getRootContainer()
+    {
+        return $this->rootContainer;
+    }
+
+    /**
+     * Get rootContainer id
+     *
+     * @return string
+     */
+    public function getRootContainerId()
+    {
+        return $this->rootContainer->getId();
+    }
+
+    /**
      * Gibt die Namen der verknüpften Dokumente zurück
      *
      * @return DocumentRelation[]|null
      */
     public function getRelatedDocuments()
     {
-        $container = new Container();
-        $container->setProject($this);
+        $rootContainer = $this->getRootContainer();
         return array(
-            DocumentRelation::create($container)->setHref($container->getSubject() . '?project=' . $this->getId())->setList(true)
+            DocumentRelation::create($rootContainer)->setHref($rootContainer->getSubject())->setRole('http://jsonld.retext.it/ontology/root')
         );
     }
 }

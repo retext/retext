@@ -54,25 +54,14 @@ class ContainerController extends Base
     }
 
     /**
-     * Gibt das Projekt und den Eltern-Container zurück. Wird parent angegeben, wird das Projekt von dort übernommen.
-     * Wird parent nicht angegeben, wird das Projekt aus dem Request genommen.
+     * Gibt das Projekt und den Eltern-Container zurück.
      *
      * @return array
      */
     protected function getProjectAndParent()
     {
-        $projectId = null;
-        $parentId = $this->getFromRequest(RequestParamater::create('parent')->makeOptional());
-        $parent = null;
-        if ($parentId) {
-            $parent = $this->getContainer($parentId);
-        }
-        $project = null;
-        if ($parent) {
-            $project = $parent->getProject();
-        } else {
-            $project = $this->getProject($this->getFromRequest(RequestParamater::create('project')));
-        }
+        $parent = $this->getContainer($this->getFromRequest(RequestParamater::create('parent')));
+        $project = $parent->getProject();
         return array($parent, $project);
     }
 
@@ -156,6 +145,7 @@ class ContainerController extends Base
         $this->ensureLoggedIn();
 
         $container = $this->getContainer($container_id);
+        if ($container->isRootContainer()) throw $this->createForbiddenException('Cannot delete root container.');
 
         // TODO: Check delete permissions
         $sdm = $this->get('doctrine.odm.mongodb.soft_delete.manager');
@@ -186,7 +176,10 @@ class ContainerController extends Base
         $breadcrumb = array();
         $container = $this->getContainer($container_id);
         array_unshift($breadcrumb, $container);
-        while ($container = $container->getParent()) array_unshift($breadcrumb, $container);
+        while ($container = $container->getParent()) {
+            if ($container->isRootContainer()) break;
+            array_unshift($breadcrumb, $container);
+        }
         $response = $this->createResponse($breadcrumb);
         return $response;
     }

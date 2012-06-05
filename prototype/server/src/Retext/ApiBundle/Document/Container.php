@@ -48,6 +48,13 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
     private $parent;
 
     /**
+     * @MongoDB\Boolean
+     * @var bool
+     * @SerializerBundle\SerializedName("isRootContainer")
+     */
+    private $rootContainer = false;
+
+    /**
      * @MongoDB\Int
      * @var int
      */
@@ -200,6 +207,34 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
     }
 
     /**
+     * Set rootContainer
+     *
+     * @param boolean $rootContainer
+     */
+    public function setRootContainer($rootContainer)
+    {
+        $this->rootContainer = $rootContainer;
+    }
+
+    /**
+     * Get rootContainer
+     *
+     * @return boolean $rootContainer
+     */
+    public function getRootContainer()
+    {
+        return $this->rootContainer;
+    }
+
+    /**
+     * @return boolean $rootContainer
+     */
+    public function isRootContainer()
+    {
+        return $this->getRootContainer();
+    }
+
+    /**
      * Gibt die Namen der verknüpften Dokumente zurück
      *
      * @return DocumentRelation
@@ -211,7 +246,7 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
         $breadcrumb = new Breadcrumb();
         return array(
             DocumentRelation::create($this->getProject()),
-            DocumentRelation::create($container)->setHref($container->getSubject() . '?parent=' . $this->getId())->setList(true),
+            DocumentRelation::create($container)->setHref($container->getSubject() . '?parent=' . $this->getId())->setList(true)->setRole('http://jsonld.retext.it/ontology/child'),
             DocumentRelation::create($text)->setHref($text->getSubject() . '?parent=' . $this->getId())->setList(true),
             DocumentRelation::create($breadcrumb)->setHref($this->getSubject() . '/breadcrumb')->setList(true),
         );

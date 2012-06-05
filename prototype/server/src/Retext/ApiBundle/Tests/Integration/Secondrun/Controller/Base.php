@@ -16,13 +16,16 @@ abstract class Base extends WebTestCase
         $this->client = static::createClient();
     }
 
-    protected function getRelationHref($object, $context, $list = false)
+    protected function getRelationHref($object, $context, $list = false, $role = null)
     {
-        if (!property_exists($object, '@relations')) $this->fail('No @relations in ' . print_r($object, true));
+        if ($object === null || !property_exists($object, '@relations')) $this->fail('No @relations in ' . var_export($object, true));
         foreach ($object->{'@relations'} as $relation) {
-            if ($relation->relatedcontext == $context && $relation->list === $list) return $relation->href;
+            if ($relation->relatedcontext != $context) continue;
+            if ($relation->list !== $list) continue;
+            if ($role !== null && $role !== $relation->role) continue;
+            return $relation->href;
         }
-        $this->fail('Could not find relation ' . $context . ' (list=' . var_export($list, true) . ' in ' . print_r($object, true));
+        $this->fail('Could not find relation ' . $context . ' (list=' . var_export($list, true) . ', role=' . var_export($role, true) . ') in ' . var_export($object, true));
     }
 
     /**

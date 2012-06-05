@@ -2,7 +2,7 @@
 
 namespace Retext\ApiBundle\Controller;
 
-use Retext\ApiBundle\RequestParamater, Retext\ApiBundle\Document\Project;
+use Retext\ApiBundle\RequestParamater, Retext\ApiBundle\Document\Project, Retext\ApiBundle\Document\Container;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller,
 Symfony\Component\HttpFoundation\Response, Symfony\Component\HttpFoundation\Request;
@@ -23,6 +23,13 @@ class ProjectController extends Base
 
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $dm->persist($project);
+        $dm->flush();
+
+        $rootContainer = new Container();
+        $rootContainer->setRootContainer(true);
+        $rootContainer->setProject($project);
+        $project->setRootContainer($rootContainer);
+        $dm->persist($rootContainer);
         $dm->flush();
 
         return $this->createResponse($project)->setStatusCode(201)->addHeader('Location', $project->getSubject());
