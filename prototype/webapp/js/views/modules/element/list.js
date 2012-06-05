@@ -9,13 +9,13 @@ define([
             'click button.act-new-container':'newContainer',
             'click button.act-new-text':'newText',
             'click div.gui-element':'selectElement',
-            'click button.actn-delete':'deleteContainer',
-            'dragstart div.gui-container':'dragStartEvent',
-            'dragend div.gui-container':'dragStopEvent',
-            'dragenter div.gui-container':'dragEnterEvent',
-            'dragleave div.gui-container':'dragLeaveEvent',
-            'dragover div.gui-container':'dragOverEvent',
-            'drop div.gui-container':'dragDropEvent'
+            'click button.actn-delete':'deleteElement',
+            'dragstart div.gui-element':'dragStartEvent',
+            'dragend div.gui-element':'dragStopEvent',
+            'dragenter div.gui-element':'dragEnterEvent',
+            'dragleave div.gui-element':'dragLeaveEvent',
+            'dragover div.gui-element':'dragOverEvent',
+            'drop div.gui-element':'dragDropEvent'
         },
         initialize:function (options) {
             this.newContainerModel = options.newContainerModel;
@@ -73,51 +73,58 @@ define([
             selectedModel.set('selected', true);
             this.trigger('elementSelected', selectedModel);
         },
-        deleteContainer:function (ev) {
+        deleteElement:function (ev) {
             ev.stopPropagation();
-            var div = $(ev.target).closest('div.gui-container');
+            var div = $(ev.target).closest('div.gui-element');
             var selectedModel = this.model.get(div.data('id'));
+            selectedModel.url = selectedModel.get('@subject');
             selectedModel.destroy({
                 success:function () {
                     div.remove();
                 }
             });
         },
+        /* Drag&Drop */
         dragStartEvent:function (ev) {
-            var f = $(ev.target);
+            var f = $(ev.target).closest('div.gui-element');
             ev.dataTransfer.setData('text/plain', f.data('id'));
             f.addClass('dragging');
         },
         dragStopEvent:function (ev) {
-            var f = $(ev.target);
+            var f = $(ev.target).closest('div.gui-element');
             f.removeClass('dragging');
         },
         dragEnterEvent:function (ev) {
+            var f = $(ev.target).closest('div.gui-element');
+            if (f.hasClass('dragging')) return;
             ev.preventDefault(); // Must be called to enable drop
-            var f = $(ev.target);
+            f.after('<div class="gui-drop-preview"></div>');
             f.addClass('drag-over');
-            f.next('div.gui-droptarget').addClass('drag-over');
         },
         dragLeaveEvent:function (ev) {
             ev.preventDefault(); // Must be called to enable drop
-            var f = $(ev.target);
+            var f = $(ev.target).closest('div.gui-element');
             f.removeClass('drag-over');
-            f.next('div.gui-droptarget').removeClass('drag-over');
+            f.next('div.gui-drop-preview').remove();
         },
         dragOverEvent:function (ev) {
             ev.preventDefault(); // Must be called to enable drop
         },
         dragDropEvent:function (ev) {
-            var f = $(ev.target);
-            f.next('div.gui-droptarget').removeClass('drag-over');
-            var collection = this.model;
-            var newOrder = collection.get(f.data('id')).get('order') + 1;
-            var draggedContainer = collection.get(ev.dataTransfer.getData('text/plain'));
-            draggedContainer.save({order:newOrder}, {
-                success:function () {
-                    collection.fetch();
-                }
+            var f = $(ev.target).closest('div.gui-element');
+            if (f.hasClass('dragging')) return;
+            f.next('div.gui-drop-preview').remove();
+
+            var draggedId = ev.dataTransfer.getData('text/plain');
+            var dragged = _.filter($(this.el).find('div.gui-element'), function (element) {
+                return $(element).data('id') == draggedId;
             });
+            $(dragged).detach();
+            f.after(dragged);
+            var order = _.map($(this.el).find('div.gui-element'), function (element) {
+                return $(element).data('id');
+            });
+            this.trigger('elementsReordered', order);
         }
     });
     return View;

@@ -23,7 +23,6 @@ define([
                 this.newContainerModel = new ContainerModel({parent:options.parentContainerId});
                 this.newTextModel = new TextModel({parent:options.parentContainerId});
                 this.parentContainer.bind('change', this.parentContainerFetched, this);
-                this.parentContainer.bind('change', this.parentContainerFetched, this);
             },
             render:function () {
                 $(this.el).html(this.template({project:this.model.toJSON()}));
@@ -46,7 +45,10 @@ define([
                     } else {
                         Vm.create(this, 'current-element-form', TextForm, {el:$('#current-element-form'), model:model});
                     }
-                });
+                }, this);
+                containerList.on('elementsReordered', function (order) {
+                    this.parentContainer.save({childOrder:order}, {wait:true, silent: true});
+                }, this);
             },
             complete:function () {
                 this.model.fetch(); // Will trigger update an subviews

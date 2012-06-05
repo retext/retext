@@ -33,17 +33,17 @@
 
 .gui-element.dragging {
     border-style: dashed;
+    border-color: #C4C4C4;
+    background-color: whiteSmoke;
+    color: #A0A0A0;
 }
 
-.gui-droptarget {
-    display: none;
-    height: 1em;
+.gui-drop-preview {
+    height: 2em;
     border-radius: 2px;
-    border: 1px dashed #535353;
-}
-
-.gui-droptarget.drag-over {
-    display: block;
+    border: 2px dashed #5bba3d;
+    margin-bottom: 1em;
+    background-color: #b1fcaa;
 }
 
 /* Container */
@@ -51,7 +51,7 @@
 .gui-container {
     border-radius: 2px;
     background-color: #E8F6FF;
-    border: 1px dashed #535353;
+    border: 1px dotted #535353;
 }
 
 /* Text */
