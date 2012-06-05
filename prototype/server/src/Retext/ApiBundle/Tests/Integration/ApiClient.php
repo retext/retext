@@ -20,7 +20,7 @@ class ApiClient
         if ($method !== 'GET') $header['HTTP_CONTENT_TYPE'] = 'application/json';
         $this->client->request($method, $url, array(), array(), $header, json_encode($data));
         $responseBody = $this->client->getResponse()->getContent();
-        if ($expectedStatus !== $this->client->getResponse()->getStatusCode()) throw new \Exception(sprintf('Expected status %d, got %d', $expectedStatus, $this->client->getResponse()->getStatusCode()));
+        if ($expectedStatus !== $this->client->getResponse()->getStatusCode()) throw new \Exception(sprintf("Expected status %d, got %d.\n%s %s\n> %s", $expectedStatus, $this->client->getResponse()->getStatusCode(), $method, $url, json_encode($data)));
 
         if (empty($responseBody)) return null;
         $result = json_decode($responseBody);

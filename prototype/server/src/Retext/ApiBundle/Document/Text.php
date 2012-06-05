@@ -11,7 +11,7 @@ use JMS\SerializerBundle\Annotation as SerializerBundle;
  * @MongoDB\Document
  * @Doctrine\HasLifecycleCallbacks
  */
-class Text extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteable
+class Text extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteable, Element
 {
     /**
      * @MongoDB\Id
@@ -44,10 +44,10 @@ class Text extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteab
     /**
      * @MongoDB\ReferenceOne(targetDocument="Retext\ApiBundle\Document\Container", cascade={"persist"}, simple=true)
      * @MongoDB\Index(order="asc")
-     * @var \Retext\ApiBundle\Document\Container $container
-     * @SerializerBundle\Accessor(getter="getContainerId")
+     * @var \Retext\ApiBundle\Document\Container $parent
+     * @SerializerBundle\Accessor(getter="getParentId")
      */
-    private $container;
+    private $parent;
 
     /**
      * @MongoDB\Date
@@ -67,33 +67,33 @@ class Text extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteab
     }
 
     /**
-     * Set container
+     * Set parent
      *
-     * @param \Retext\ApiBundle\Document\Container $container
+     * @param \Retext\ApiBundle\Document\Container $parent
      */
-    public function setContainer(\Retext\ApiBundle\Document\Container $container)
+    public function setParent(\Retext\ApiBundle\Document\Container $parent)
     {
-        $this->container = $container;
+        $this->parent = $parent;
     }
 
     /**
-     * Get container
+     * Get parent
      *
-     * @return \Retext\ApiBundle\Document\Container $container
+     * @return \Retext\ApiBundle\Document\Container $parent
      */
-    public function getContainer()
+    public function getParent()
     {
-        return $this->container;
+        return $this->parent;
     }
 
     /**
-     * Get container id
+     * Get parent id
      *
      * @return string
      */
-    public function getContainerId()
+    public function getParentId()
     {
-        return $this->container == null ? null : $this->container->getId();
+        return $this->parent == null ? null : $this->parent->getId();
     }
 
     /**
@@ -213,9 +213,9 @@ class Text extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteab
     public function getRelatedDocuments()
     {
         return array(
-            DocumentRelation::create($this->getProject()),
-            DocumentRelation::create($this->getContainer()),
-            DocumentRelation::create($this->getType())
+            DocumentRelation::createFromDoc($this->getProject()),
+            DocumentRelation::createFromDoc($this->getParent()),
+            DocumentRelation::createFromDoc($this->getType())
         );
     }
 }

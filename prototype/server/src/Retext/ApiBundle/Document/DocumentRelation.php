@@ -37,20 +37,21 @@ class DocumentRelation
      * @static
      * @return DocumentRelation
      */
-    public static function create(Base $doc)
+    public static function createFromDoc(Base $doc)
     {
-        return new DocumentRelation($doc);
+        $rel = new DocumentRelation();
+        $rel->setRelatedcontext($doc->getContext());
+        $rel->setHref($doc->getSubject());
+        return $rel;
     }
 
     /**
-     * @param \Retext\ApiBundle\Document\Base $doc related document class
      * @static
      * @return DocumentRelation
      */
-    public function __construct(Base $doc)
+    public static function create()
     {
-        $this->setRelatedcontext($doc->getContext());
-        $this->setHref($doc->getSubject());
+        return new DocumentRelation();
     }
 
     /**

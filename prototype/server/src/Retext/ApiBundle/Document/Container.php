@@ -11,7 +11,7 @@ use JMS\SerializerBundle\Annotation as SerializerBundle;
  * @MongoDB\Document
  * @Doctrine\HasLifecycleCallbacks
  */
-class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteable
+class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteable, Element
 {
     /**
      * @MongoDB\Id
@@ -57,7 +57,7 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
 
     /**
      * @MongoDB\Hash
-     * @var array
+     * @var \Retext\ApiBundle\Document\Element[] $element
      * @SerializerBundle\Exclude
      */
     private $childOrder = array();
@@ -227,10 +227,11 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
         $text = new Text();
         $breadcrumb = new Breadcrumb();
         return array(
-            DocumentRelation::create($this->getProject()),
-            DocumentRelation::create($container)->setHref($container->getSubject() . '?parent=' . $this->getId())->setList(true)->setRole('http://jsonld.retext.it/ontology/child'),
-            DocumentRelation::create($text)->setHref($text->getSubject() . '?parent=' . $this->getId())->setList(true),
-            DocumentRelation::create($breadcrumb)->setHref($this->getSubject() . '/breadcrumb')->setList(true),
+            DocumentRelation::createFromDoc($this->getProject()),
+            DocumentRelation::createFromDoc($container)->setHref($container->getSubject() . '?parent=' . $this->getId())->setList(true)->setRole('http://jsonld.retext.it/ontology/child'),
+            DocumentRelation::createFromDoc($text)->setHref($text->getSubject() . '?parent=' . $this->getId())->setList(true),
+            DocumentRelation::createFromDoc($breadcrumb)->setHref($this->getSubject() . '/breadcrumb')->setList(true),
+            DocumentRelation::create()->setRelatedcontext('http://jsonld.retext.it/Element')->setList(true)->setRole('http://jsonld.retext.it/ontology/child')->setHref('/api/element?parent=' . $this->getId())
         );
     }
 

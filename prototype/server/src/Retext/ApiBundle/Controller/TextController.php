@@ -19,17 +19,10 @@ class TextController extends Base
     {
         $this->ensureLoggedIn();
 
-        list($container, $project) = $this->getContainerAndProject();
+        $parent = $this->getContainer($this->getFromRequest(RequestParamater::create('parent')));
+        $project = $parent->getProject();
 
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
-        $numTexts = $dm->getRepository('RetextApiBundle:Container')
-            ->createQueryBuilder()
-            ->field('project')->equals(new \MongoId($project->getId()))
-            ->field('container')->equals(new \MongoId($container->getId()))
-            ->count()
-            ->getQuery()
-            ->execute();
-
         $typeName = $this->getFromRequest(RequestParamater::create('type')->makeOptional()->defaultsTo('default'));
         $type = $dm->getRepository('RetextApiBundle:TextType')
             ->createQueryBuilder()
@@ -46,25 +39,16 @@ class TextController extends Base
 
         $text = new Text();
         $text->setProject($project);
-        $text->setContainer($container);
+        $text->setParent($parent);
         $text->setName($this->getFromRequest(RequestParamater::create('name')->makeOptional()->defaultsTo(null)));
         $text->setType($type);
 
         $dm->persist($text);
         $dm->flush();
 
-        return $this->createResponse($text)->setStatusCode(201)->addHeader('Location', $text->getSubject());
-    }
+        $this->addedChildElement($text);
 
-    /**
-     * Gibt das Projekt und den Container zurück.
-     *
-     * @return array
-     */
-    protected function getContainerAndProject()
-    {
-        $container = $this->getContainer($this->getFromRequest(RequestParamater::create('container')));
-        return array($container, $container->getProject());
+        return $this->createResponse($text)->setStatusCode(201)->addHeader('Location', $text->getSubject());
     }
 
     /**
@@ -110,6 +94,8 @@ class TextController extends Base
         $sdm = $this->get('doctrine.odm.mongodb.soft_delete.manager');
         $sdm->delete($text);
         $sdm->flush();
+
+        $this->removedChildElement($text);
 
         return $this->createResponse();
     }

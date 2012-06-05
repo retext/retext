@@ -22,12 +22,12 @@ class TextControllerTest extends Base
      */
     public function testCreateText()
     {
-        $hl = self::$client->CREATE('/api/text', array('container' => self::$project->rootContainer, 'name' => 'Dies ist eine Überschrift', 'type' => 'Überschrift'));
+        $hl = self::$client->CREATE('/api/text', array('parent' => self::$project->rootContainer, 'name' => 'Dies ist eine Überschrift', 'type' => 'Überschrift'));
         $this->checkText($hl);
-        $sl = self::$client->CREATE('/api/text', array('container' => self::$project->rootContainer, 'name' => 'Dies ist eine Unter-Überschrift', 'type' => 'Unter-Überschrift'));
+        $sl = self::$client->CREATE('/api/text', array('parent' => self::$project->rootContainer, 'name' => 'Dies ist eine Unter-Überschrift', 'type' => 'Unter-Überschrift'));
         $this->checkText($sl);
-        $text1 = self::$client->CREATE('/api/text', array('container' => self::$project->rootContainer, 'name' => 'Lorem Ipsum', 'type' => 'Fließtext'));
-        $text2 = self::$client->CREATE('/api/text', array('container' => self::$project->rootContainer, 'name' => 'Lorem Ipsum 2', 'type' => 'Fließtext'));
+        $text1 = self::$client->CREATE('/api/text', array('parent' => self::$project->rootContainer, 'name' => 'Lorem Ipsum', 'type' => 'Fließtext'));
+        $text2 = self::$client->CREATE('/api/text', array('parent' => self::$project->rootContainer, 'name' => 'Lorem Ipsum 2', 'type' => 'Fließtext'));
         $this->checkText($text1);
         $this->checkText($text2);
     }
@@ -41,9 +41,9 @@ class TextControllerTest extends Base
         $this->assertObjectHasAttribute('project', $text);
         $this->assertNotNull($text->project);
         $this->assertInternalType('string', $text->project);
-        $this->assertObjectHasAttribute('container', $text);
-        $this->assertNotNull($text->container);
-        $this->assertInternalType('string', $text->container);
+        $this->assertObjectHasAttribute('parent', $text);
+        $this->assertNotNull($text->parent);
+        $this->assertInternalType('string', $text->parent);
     }
 
 }

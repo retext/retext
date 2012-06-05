@@ -139,7 +139,7 @@ class TextType extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDele
     public function getRelatedDocuments()
     {
         return array(
-            DocumentRelation::create($this->getProject()),
+            DocumentRelation::createFromDoc($this->getProject()),
         );
     }
 }

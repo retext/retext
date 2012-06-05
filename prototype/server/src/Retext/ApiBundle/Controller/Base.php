@@ -4,7 +4,8 @@ namespace Retext\ApiBundle\Controller;
 
 use Retext\ApiBundle\ApiResponse,
 Retext\ApiBundle\RequestParamater,
-Retext\ApiBundle\Document\LinkedData;
+Retext\ApiBundle\Document\LinkedData,
+Retext\ApiBundle\Document\Element;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller,
 Symfony\Component\HttpFoundation\Response,
@@ -49,7 +50,7 @@ abstract class Base extends Controller
             if ($orderItems) $idPos = array_flip($order);
             foreach ($data as $d) {
                 $items[] = $d;
-                if ($orderItems && $d instanceof \Retext\ApiBundle\Document\LinkedData) $itemPos[] = $idPos[$d->getId()];
+                if ($orderItems && $d instanceof \Retext\ApiBundle\Document\Element) $itemPos[] = $idPos[$d->getId()];
             }
             if ($orderItems) array_multisort($itemPos, SORT_ASC, $items);
         } else {
@@ -233,4 +234,44 @@ abstract class Base extends Controller
             throw $this->createGoneException('Text ' . $text_id . ' has been deleted.');
         return $text;
     }
+
+    /**
+     * Aktualisiert das Eltern-Element von $element, wenn dieses gelöscht wird
+     *
+     * @param $element
+     */
+    protected function removedChildElement(Element $element)
+    {
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $dm->getRepository('RetextApiBundle:Container')
+            ->createQueryBuilder()
+            ->findAndUpdate()
+            ->field('id')->equals(new \MongoId($element->getParent()->getId()))
+            ->update()
+            ->field('childCount')->inc(-1)
+            ->field('childOrder')->pull($element->getId())
+            ->getQuery()
+            ->execute();
+    }
+
+    /**
+     * Aktualisiert das Eltern-Element von $element, wenn dieses hinzugefügt wird
+     *
+     * @param $element
+     */
+    protected function addedChildElement(Element $element)
+    {
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $dm->getRepository('RetextApiBundle:Container')
+            ->createQueryBuilder()
+            ->findAndUpdate()
+            ->field('id')->equals(new \MongoId($element->getParent()->getId()))
+            ->update()
+            ->field('childCount')->inc(1)
+            ->field('childOrder')->push($element->getId())
+            ->getQuery()
+            ->execute();
+    }
+
+
 }

@@ -31,15 +31,7 @@ class ContainerController extends Base
         $dm->persist($container);
         $dm->flush();
 
-        $dm->getRepository('RetextApiBundle:Container')
-            ->createQueryBuilder()
-            ->findAndUpdate()
-            ->field('id')->equals(new \MongoId($parent->getId()))
-            ->update()
-            ->field('childCount')->inc(1)
-            ->field('childOrder')->push($container->getId())
-            ->getQuery()
-            ->execute();
+        $this->addedChildElement($container);
 
         return $this->createResponse($container)->setStatusCode(201)->addHeader('Location', $container->getSubject());
     }
@@ -126,16 +118,7 @@ class ContainerController extends Base
         $sdm->delete($container);
         $sdm->flush();
 
-        $dm = $this->get('doctrine.odm.mongodb.document_manager');
-        $dm->getRepository('RetextApiBundle:Container')
-            ->createQueryBuilder()
-            ->findAndUpdate()
-            ->field('id')->equals(new \MongoId($container->getParent()->getId()))
-            ->update()
-            ->field('childCount')->inc(-1)
-            ->field('childOrder')->pull($container->getParent()->getId())
-            ->getQuery()
-            ->execute();
+        $this->removedChildElement($container);
 
         return $this->createResponse();
     }

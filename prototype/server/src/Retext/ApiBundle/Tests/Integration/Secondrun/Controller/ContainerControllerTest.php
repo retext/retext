@@ -56,7 +56,7 @@ class ContainerControllerTest extends Base
         $container = self::$client->CREATE('/api/container', array('parent' => $root->id, 'name' => 'Container 5'));
         $this->checkContainer($container);
 
-        $container = self::$client->GET($this->getRelationHref($root, 'http://jsonld.retext.it/Container', true));
+        $container = self::$client->GET($this->getRelationHref($root, 'http://jsonld.retext.it/Container', true, 'http://jsonld.retext.it/ontology/child'));
         $this->assertInternalType('array', $container);
         $this->assertEquals(5, count($container));
         foreach ($container as $k => $c) {
@@ -147,7 +147,7 @@ class ContainerControllerTest extends Base
         list ($root, $containers) = $args;
         self::$client->DELETE($containers[2]->{'@subject'});
         self::$client->doRequest('GET', $containers[2]->{'@subject'}, null, 410);
-        $containerList = self::$client->GET($this->getRelationHref($root, 'http://jsonld.retext.it/Container', true));
+        $containerList = self::$client->GET($this->getRelationHref($root, 'http://jsonld.retext.it/Container', true, 'http://jsonld.retext.it/ontology/child'));
         $this->assertEquals(4, count($containerList), 'There should be only 4 containers now.');
     }
 
@@ -183,7 +183,7 @@ class ContainerControllerTest extends Base
         $this->assertEquals(2, $root->childCount);
 
         // Prüfe Level 1
-        $rootChilds = self::$client->GET($this->getRelationHref($root, 'http://jsonld.retext.it/Container', true));
+        $rootChilds = self::$client->GET($this->getRelationHref($root, 'http://jsonld.retext.it/Container', true, 'http://jsonld.retext.it/ontology/child'));
         $this->assertInternalType('array', $rootChilds);
         $this->assertEquals(2, count($rootChilds));
         $this->assertEquals('1.1', $rootChilds[0]->name);
@@ -192,7 +192,7 @@ class ContainerControllerTest extends Base
         $this->assertEquals(0, $rootChilds[1]->childCount);
 
         // Prüfe Level 2
-        $l1childs = self::$client->GET($this->getRelationHref($rootChilds[0], 'http://jsonld.retext.it/Container', true));
+        $l1childs = self::$client->GET($this->getRelationHref($rootChilds[0], 'http://jsonld.retext.it/Container', true, 'http://jsonld.retext.it/ontology/child'));
         $this->assertInternalType('array', $l1childs);
         $this->assertEquals(2, count($l1childs));
         $this->assertEquals('1.1.1', $l1childs[0]->name);
@@ -200,7 +200,7 @@ class ContainerControllerTest extends Base
         $this->assertEquals(0, $l1childs[0]->childCount);
         $this->assertEquals(0, $l1childs[1]->childCount);
 
-        $l2childs = self::$client->GET($this->getRelationHref($rootChilds[1], 'http://jsonld.retext.it/Container', true));
+        $l2childs = self::$client->GET($this->getRelationHref($rootChilds[1], 'http://jsonld.retext.it/Container', true, 'http://jsonld.retext.it/ontology/child'));
         $this->assertInternalType('array', $l2childs);
         $this->assertEquals(0, count($l2childs));
     }
@@ -225,6 +225,33 @@ class ContainerControllerTest extends Base
         $this->assertEquals('Ebene 1', $breadcrumb[0]->name);
         $this->assertEquals('Ebene 2', $breadcrumb[1]->name);
         $this->assertEquals('Ebene 3', $breadcrumb[2]->name);
+    }
+
+    /**
+     * @group secondrun
+     * @group integration
+     */
+    public function testOrderWithMixedElements()
+    {
+        $project = self::$client->CREATE('/api/project', array('name' => 'Mixed-Order-Test-Project'));
+        $root = self::$client->GET($this->getRelationHref($project, 'http://jsonld.retext.it/Container', false, 'http://jsonld.retext.it/ontology/root'));
+        $header = self::$client->CREATE('/api/container', array('parent' => $root->id, 'name' => 'Header'));
+        $headline = self::$client->CREATE('/api/text', array('parent' => $root->id, 'name' => 'Headline'));
+        $footer = self::$client->CREATE('/api/container', array('parent' => $root->id, 'name' => 'Footer'));
+        $rootChilds = self::$client->GET($this->getRelationHref($root, 'http://jsonld.retext.it/Element', true, 'http://jsonld.retext.it/ontology/child'));
+        $this->assertInternalType('array', $rootChilds);
+        $this->assertEquals(3, count($rootChilds));
+        $this->assertEquals('Header', $rootChilds[0]->name);
+        $this->assertEquals('Headline', $rootChilds[1]->name);
+        $this->assertEquals('Footer', $rootChilds[2]->name);
+
+        self::$client->UPDATE($root->{'@subject'}, array('childOrder' => array(
+            $header->id, $footer->id, $headline->id
+        )));
+        $rootChilds = self::$client->GET($this->getRelationHref($root, 'http://jsonld.retext.it/Element', true, 'http://jsonld.retext.it/ontology/child'));
+        $this->assertEquals('Header', $rootChilds[0]->name);
+        $this->assertEquals('Footer', $rootChilds[1]->name);
+        $this->assertEquals('Headline', $rootChilds[2]->name);
     }
 
 }
