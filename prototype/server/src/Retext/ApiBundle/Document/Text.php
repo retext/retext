@@ -212,10 +212,12 @@ class Text extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteab
      */
     public function getRelatedDocuments()
     {
+        $types = new TextType();
         return array(
             DocumentRelation::createFromDoc($this->getProject()),
             DocumentRelation::createFromDoc($this->getParent()),
-            DocumentRelation::createFromDoc($this->getType())
+            DocumentRelation::createFromDoc($this->getType()),
+            DocumentRelation::createFromDoc($types)->setHref($types->getSubject() . '?project=' . $this->getProjectId())->setList(true),
         );
     }
 }

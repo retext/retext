@@ -32,6 +32,18 @@ class TextControllerTest extends Base
         $this->checkText($text2);
     }
 
+    /**
+     * @group secondrun
+     * @group integration
+     * @depends testCreateText
+     */
+    public function testTextTypes()
+    {
+        $textTypes = self::$client->GET($this->getRelationHref(self::$project, 'http://jsonld.retext.it/TextType', true));
+        $this->assertInternalType('array', $textTypes);
+        $this->assertEquals(3, count($textTypes));
+    }
+
     private function checkText(\stdClass $text)
     {
         $this->assertObjectHasAttribute('@context', $text);

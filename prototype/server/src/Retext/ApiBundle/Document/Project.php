@@ -2,7 +2,7 @@
 
 namespace Retext\ApiBundle\Document;
 
-use Retext\ApiBundle\Exception\ValidationException;
+use Retext\ApiBundle\Exception\ValidationException, Retext\ApiBundle\Document\TextType;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Doctrine\ORM\Mapping as Doctrine;
 use JMS\SerializerBundle\Annotation as SerializerBundle;
@@ -164,8 +164,10 @@ class Project extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDelet
     public function getRelatedDocuments()
     {
         $rootContainer = $this->getRootContainer();
+        $textType = new TextType();
         return array(
-            DocumentRelation::createFromDoc($rootContainer)->setHref($rootContainer->getSubject())->setRole('http://jsonld.retext.it/ontology/root')
+            DocumentRelation::createFromDoc($rootContainer)->setHref($rootContainer->getSubject())->setRole('http://jsonld.retext.it/ontology/root'),
+            DocumentRelation::createFromDoc($textType)->setHref($textType->getSubject() . '?project=' . $this->getId())->setList(true),
         );
     }
 }

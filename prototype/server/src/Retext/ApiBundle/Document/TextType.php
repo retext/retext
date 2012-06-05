@@ -36,6 +36,24 @@ class TextType extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDele
     protected $name;
 
     /**
+     * @MongoDB\String
+     * @var string
+     */
+    protected $description;
+
+    /**
+     * @MongoDB\Int
+     * @var int
+     */
+    protected $fontsize;
+
+    /**
+     * @MongoDB\String
+     * @var int
+     */
+    protected $fontname;
+
+    /**
      * @MongoDB\Date
      * @MongoDB\Index(order="asc")
      * @var \DateTime|null
@@ -141,5 +159,65 @@ class TextType extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDele
         return array(
             DocumentRelation::createFromDoc($this->getProject()),
         );
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string $description
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set fontsize
+     *
+     * @param int $fontsize
+     */
+    public function setFontsize($fontsize)
+    {
+        $this->fontsize = $fontsize;
+    }
+
+    /**
+     * Get fontsize
+     *
+     * @return int $fontsize
+     */
+    public function getFontsize()
+    {
+        return $this->fontsize;
+    }
+
+    /**
+     * Set fontname
+     *
+     * @param string $fontname
+     */
+    public function setFontname($fontname)
+    {
+        $this->fontname = $fontname;
+    }
+
+    /**
+     * Get fontname
+     *
+     * @return string $fontname
+     */
+    public function getFontname()
+    {
+        return $this->fontname;
     }
 }
