@@ -6,17 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class TextControllerTest extends Base
 {
-    private $project;
+    private static $project;
 
-    private $root;
-
-    public function setUp()
+    public static function setUpBeforeClass()
     {
-        parent::setUp();
-        $this->client->request('POST', '/api/user', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('email' => 'phpunit+text@retext.it')));
-        $this->client->request('POST', '/api/login', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('email' => 'phpunit+text@retext.it', 'password' => 'phpunit+text@retext.it')));
-        $this->client->request('POST', '/api/project', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('name' => 'Text-Test-Project')));
-        $this->project = json_decode($this->client->getResponse()->getContent());
+        parent::setUpBeforeClass();
+        self::$client->CREATE('/api/user', array('email' => 'phpunit+text@retext.it'));
+        self::$client->POST('/api/login', array('email' => 'phpunit+text@retext.it', 'password' => 'phpunit+text@retext.it'));
+        self::$project = self::$client->CREATE('/api/project', array('name' => 'Text-Test-Project'));
     }
 
     /**
@@ -25,19 +22,12 @@ class TextControllerTest extends Base
      */
     public function testCreateText()
     {
-        $this->client->request('POST', '/api/text', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('container' => $this->project->rootContainer, 'name' => 'Dies ist eine Überschrift', 'type' => 'Überschrift')));
-        $this->assertEquals(201, $this->client->getResponse()->getStatusCode());
-        $this->assertNotEmpty($this->client->getResponse()->getHeader('Location'));
-        $hl = json_decode($this->client->getResponse()->getContent());
-        $this->assertEquals($this->client->getResponse()->getHeader('Location'), $hl->{'@subject'});
+        $hl = self::$client->CREATE('/api/text', array('container' => self::$project->rootContainer, 'name' => 'Dies ist eine Überschrift', 'type' => 'Überschrift'));
         $this->checkText($hl);
-        $this->client->request('POST', '/api/text', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('container' => $this->project->rootContainer, 'name' => 'Dies ist eine Unter-Überschrift', 'type' => 'Unter-Überschrift')));
-        $sl = json_decode($this->client->getResponse()->getContent());
+        $sl = self::$client->CREATE('/api/text', array('container' => self::$project->rootContainer, 'name' => 'Dies ist eine Unter-Überschrift', 'type' => 'Unter-Überschrift'));
         $this->checkText($sl);
-        $this->client->request('POST', '/api/text', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('container' => $this->project->rootContainer, 'name' => 'Lorem Ipsum', 'type' => 'Fließtext')));
-        $text1 = json_decode($this->client->getResponse()->getContent());
-        $this->client->request('POST', '/api/text', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('container' => $this->project->rootContainer, 'name' => 'Lorem Ipsum 2', 'type' => 'Fließtext')));
-        $text2 = json_decode($this->client->getResponse()->getContent());
+        $text1 = self::$client->CREATE('/api/text', array('container' => self::$project->rootContainer, 'name' => 'Lorem Ipsum', 'type' => 'Fließtext'));
+        $text2 = self::$client->CREATE('/api/text', array('container' => self::$project->rootContainer, 'name' => 'Lorem Ipsum 2', 'type' => 'Fließtext'));
         $this->checkText($text1);
         $this->checkText($text2);
     }

@@ -2,18 +2,19 @@
 
 namespace Retext\ApiBundle\Tests\Integration\Secondrun\Controller;
 
+use Retext\ApiBundle\Tests\Integration\ApiClient;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 abstract class Base extends WebTestCase
 {
     /**
-     * @var \Symfony\Bundle\FrameworkBundle\Client
+     * @var \Retext\ApiBundle\Tests\Integration\ApiClient
      */
-    protected $client;
+    protected static $client;
 
-    protected function setUp()
+    public static function setUpBeforeClass()
     {
-        $this->client = static::createClient();
+        self::$client = new ApiClient(static::createClient());
     }
 
     protected function getRelationHref($object, $context, $list = false, $role = null)
@@ -35,8 +36,6 @@ abstract class Base extends WebTestCase
      */
     protected function fetchRelation($object, $context)
     {
-        $this->client->request('GET', $this->getRelationHref($object, $context), array(), array(), array('HTTP_ACCEPT' => 'application/json'));
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-        return json_decode($this->client->getResponse()->getContent());
+        return self::$client->GET($this->getRelationHref($object, $context));
     }
 }

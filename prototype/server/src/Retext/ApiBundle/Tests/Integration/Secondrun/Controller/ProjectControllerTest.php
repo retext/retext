@@ -4,18 +4,13 @@ namespace Retext\ApiBundle\Tests\Integration\Secondrun\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class ProjectControllerTest extends WebTestCase
+class ProjectControllerTest extends Base
 {
-    /**
-     * @var \Symfony\Bundle\FrameworkBundle\Client
-     */
-    private $client;
-
-    public function setUp()
+    public static function setUpBeforeClass()
     {
-        $this->client = static::createClient();
-        $this->client->request('POST', '/api/user', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('email' => 'phpunit+project@retext.it')));
-        $this->client->request('POST', '/api/login', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('email' => 'phpunit+project@retext.it', 'password' => 'phpunit+project@retext.it')));
+        parent::setUpBeforeClass();
+        self::$client->CREATE('/api/user', array('email' => 'phpunit+project@retext.it'));
+        self::$client->POST('/api/login', array('email' => 'phpunit+project@retext.it', 'password' => 'phpunit+project@retext.it'));
     }
 
     /**
@@ -24,27 +19,16 @@ class ProjectControllerTest extends WebTestCase
      */
     public function testCreateProject()
     {
-        $this->client->request('POST', '/api/project', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('name' => 'Test-Project äöß')));
-        $this->assertEquals(201, $this->client->getResponse()->getStatusCode());
-        $this->assertNotEmpty($this->client->getResponse()->getHeader('Location'));
-        $project = json_decode($this->client->getResponse()->getContent());
-        $this->assertObjectHasAttribute('@context', $project);
+        $project = self::$client->CREATE('/api/project', array('name' => 'Test-Project äöß'));
         $this->assertEquals('http://jsonld.retext.it/Project', $project->{'@context'});
-        $this->assertObjectHasAttribute('@subject', $project);
-        $this->assertNotNull($project->{'@subject'});
-        $this->assertEquals($this->client->getResponse()->getHeader('Location'), $project->{'@subject'});
         $this->assertObjectHasAttribute('name', $project);
         $this->assertEquals('Test-Project äöß', $project->name);
 
-        $this->client->request('GET', $project->{'@subject'}, array(), array(), array('HTTP_ACCEPT' => 'application/json'));
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-        $project = json_decode($this->client->getResponse()->getContent());
+        $project = self::$client->GET($project->{'@subject'});
         $this->assertObjectHasAttribute('name', $project);
         $this->assertEquals('Test-Project äöß', $project->name);
 
-        $this->client->request('GET', '/api/project', array(), array(), array('HTTP_ACCEPT' => 'application/json'));
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-        $projects = json_decode($this->client->getResponse()->getContent());
+        $projects = self::$client->GET('/api/project');
         $this->assertInternalType('array', $projects);
         $this->assertEquals(1, count($projects));
 
