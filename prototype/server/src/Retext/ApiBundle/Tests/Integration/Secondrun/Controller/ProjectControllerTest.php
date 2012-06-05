@@ -14,7 +14,8 @@ class ProjectControllerTest extends WebTestCase
     public function setUp()
     {
         $this->client = static::createClient();
-        $this->client->request('POST', '/api/login', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('email' => 'phpunit@retext.it', 'password' => 'phpunit@retext.it')));
+        $this->client->request('POST', '/api/user', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('email' => 'phpunit+project@retext.it')));
+        $this->client->request('POST', '/api/login', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('email' => 'phpunit+project@retext.it', 'password' => 'phpunit+project@retext.it')));
     }
 
     /**
