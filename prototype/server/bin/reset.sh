@@ -2,6 +2,7 @@
 
 ENV=$1
 
+app/console --env=$ENV cache:clear
 app/console --env=$ENV doctrine:mongodb:generate:hydrators
 app/console --env=$ENV doctrine:mongodb:generate:proxies
 app/console --env=$ENV doctrine:mongodb:generate:repositories RetextApiBundle
