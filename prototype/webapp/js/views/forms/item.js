@@ -1,7 +1,10 @@
 define([
-    'views/page/base'
-], function (PageViewBase) {
+    'views/page/base',
+    'models/container',
+    'text!templates/forms/container.html'
+], function (PageViewBase, FormModel, FormTemplate) {
     var FormView = PageViewBase.extend({
+        template:_.template(FormTemplate),
         events:{
             'click button.gui-save':'save',
             'click button.gui-delete':'delete'
