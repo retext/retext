@@ -64,7 +64,7 @@ class ContainerController extends Base
         $query = $dm->getRepository('RetextApiBundle:Container')
             ->createQueryBuilder()
             ->field('project')->equals(new \MongoId($project->getId()))
-            ->field('parent')->equals($parent == null ? null : new \MongoId($parent->getId()))
+            ->field('parent')->equals(new \MongoId($parent->getId()))
             ->field('deletedAt')->exists(false)
             ->getQuery();
         $container = $query->execute();
@@ -131,12 +131,12 @@ class ContainerController extends Base
         $this->ensureLoggedIn();
         $breadcrumb = array();
         $container = $this->getContainer($container_id);
-        array_unshift($breadcrumb, $container);
+        if ($container->isRootContainer()) return $this->createResponse();
+        $breadcrumb[] = $container;
         while ($container = $container->getParent()) {
             if ($container->isRootContainer()) break;
             array_unshift($breadcrumb, $container);
         }
-        $response = $this->createResponse($breadcrumb);
-        return $response;
+        return $this->createResponse($breadcrumb);
     }
 }
