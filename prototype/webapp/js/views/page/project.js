@@ -34,20 +34,22 @@ define([
             parentContainerFetched:function () {
                 var elementCollection = new ElementCollection();
                 elementCollection.url = this.parentContainer.getRelation('http://jsonld.retext.it/Element', true).get('href');
-                var containerList = Vm.create(this, 'current-container', ElementListView, {el:$('#gui-current-container'), model:elementCollection, newContainerModel:this.newContainerModel, newTextModel:this.newTextModel});
+                var elementList = Vm.create(this, 'current-container', ElementListView, {el:$('#gui-current-container'), model:elementCollection, newContainerModel:this.newContainerModel, newTextModel:this.newTextModel});
                 var breadcrumbCollection = new BreadcrumbCollection();
                 breadcrumbCollection.url = this.parentContainer.getRelation('http://jsonld.retext.it/Breadcrumb', true).get('href');
                 Vm.create(this, 'breadcrumb', BreadCrumbModule, {el:$(this.el).find('div.view-breadcrumb'), model:breadcrumbCollection, project:this.model});
                 var project = this.model;
-                containerList.on('elementSelected', function (model) {
+                elementList.on('elementSelected', function (model) {
                     if (model.get('@context') == 'http://jsonld.retext.it/Container') {
+                        // Vm.create(this, 'current-element-form', ContainerForm, {el:$('#current-element-form'), model:new ContainerModel(model.toJSON())});
                         Vm.create(this, 'current-element-form', ContainerForm, {el:$('#current-element-form'), model:model});
                     } else {
+                        // Vm.create(this, 'current-element-form', TextForm, {el:$('#current-element-form'), model:new TextModel(model.toJSON())});
                         Vm.create(this, 'current-element-form', TextForm, {el:$('#current-element-form'), model:model});
                     }
                 }, this);
-                containerList.on('elementsReordered', function (order) {
-                    this.parentContainer.save({childOrder:order}, {wait:true, silent: true});
+                elementList.on('elementsReordered', function (order) {
+                    this.parentContainer.save({childOrder:order}, {wait:true, silent:true});
                 }, this);
             },
             complete:function () {

@@ -3,7 +3,6 @@ define([
 ], function (BaseModel) {
     var Breadcrumb = BaseModel.extend({
         defaults:{
-            '@relations':[],
             id:null,
             name:'Kein Name'
         }

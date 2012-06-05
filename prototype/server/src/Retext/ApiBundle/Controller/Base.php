@@ -146,7 +146,8 @@ abstract class Base extends Controller
                 /** @var \Retext\ApiBundle\RequestParamater $key  */
                 $key = RequestParamater::create($key);
             }
-            if (!$hasKey($key)) {
+            $value = $getKeyValue($key);
+            if (!$hasKey($key) || empty($value)) {
                 if ($key->isRequired()) {
                     throw $this->createException(400, 'Bad Request | Missing input: ' . $key->getName());
                 }
@@ -154,13 +155,13 @@ abstract class Base extends Controller
             }
             switch ($key->getFormat()) {
                 case RequestParamater::FORMAT_INTEGER;
-                    return (int)$getKeyValue($key);
+                    return (int)$value;
                 case RequestParamater::FORMAT_LIST:
-                    $data = $getKeyValue($key);
+                    $data = $value;
                     if (!is_array($data)) throw $this->createException(400, 'Bad Request | input ' . $key->getName() . ' must be list');
                     return $data;
                 default:
-                    return $getKeyValue($key);
+                    return $value;
             }
         };
 

@@ -22,27 +22,14 @@ class TextController extends Base
         $parent = $this->getContainer($this->getFromRequest(RequestParamater::create('parent')));
         $project = $parent->getProject();
 
-        $dm = $this->get('doctrine.odm.mongodb.document_manager');
-        $typeName = $this->getFromRequest(RequestParamater::create('type')->makeOptional()->defaultsTo('default'));
-        $type = $dm->getRepository('RetextApiBundle:TextType')
-            ->createQueryBuilder()
-            ->field('project')->equals(new \MongoId($project->getId()))
-            ->field('name')->equals($typeName)
-            ->field('deletedAt')->exists(false)
-            ->getQuery()
-            ->getSingleResult();
-        if ($type == null) {
-            $type = new TextType();
-            $type->setName($typeName);
-            $type->setProject($project);
-        }
-
+        $type = $this->getTypeByName($project, $this->getFromRequest(RequestParamater::create('type')->makeOptional()->defaultsTo('default')));
         $text = new Text();
         $text->setProject($project);
         $text->setParent($parent);
         $text->setName($this->getFromRequest(RequestParamater::create('name')->makeOptional()->defaultsTo(null)));
         $text->setType($type);
 
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $dm->persist($text);
         $dm->flush();
 
@@ -63,6 +50,8 @@ class TextController extends Base
 
         // TODO: Check update permissions
         $text->setName($this->getFromRequest(RequestParamater::create('name')->makeOptional()->defaultsTo($text->getName())));
+        $typeName = $this->getFromRequest(RequestParamater::create('type')->makeOptional());
+        if ($typeName !== null) $text->setType($this->getTypeByName($text->getProject(), $typeName));
 
         $dm->persist($text);
         $dm->flush();
@@ -114,5 +103,30 @@ class TextController extends Base
         $this->removedChildElement($text);
 
         return $this->createResponse();
+    }
+
+    /**
+     * @param \Retext\ApiBundle\Document\Project $project
+     * @param $typeName
+     * @return \Retext\ApiBundle\Document\TextType $type
+     */
+    protected function getTypeByName(Project $project, $typeName)
+    {
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $type = $dm->getRepository('RetextApiBundle:TextType')
+            ->createQueryBuilder()
+            ->field('project')->equals(new \MongoId($project->getId()))
+            ->field('name')->equals($typeName)
+            ->field('deletedAt')->exists(false)
+            ->getQuery()
+            ->getSingleResult();
+        if ($type == null) {
+            $type = new TextType();
+            $type->setName($typeName);
+            $type->setProject($project);
+            $dm->persist($type);
+            $dm->flush();
+        }
+        return $type;
     }
 }

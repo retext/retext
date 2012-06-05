@@ -5,7 +5,6 @@ define([
     var Project = BaseModel.extend({
         urlRoot:Remote.apiUrlBase + 'project',
         defaults:{
-            '@relations':[],
             id:null,
             name:null,
             rootContainer:null

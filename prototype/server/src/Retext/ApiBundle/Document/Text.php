@@ -31,7 +31,7 @@ class Text extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteab
      * @MongoDB\ReferenceOne(targetDocument="Retext\ApiBundle\Document\TextType", cascade={"persist"}, simple=true)
      * @MongoDB\Index(order="asc")
      * @var \Retext\ApiBundle\Document\TextType $type
-     * @SerializerBundle\Accessor(getter="getTypeId")
+     * @SerializerBundle\Accessor(getter="getTypeName")
      */
     private $type;
 
@@ -154,6 +154,16 @@ class Text extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteab
     public function getTypeId()
     {
         return $this->type->getId();
+    }
+
+    /**
+     * Get type id
+     *
+     * @return string
+     */
+    public function getTypeName()
+    {
+        return $this->type->getName();
     }
 
     /**

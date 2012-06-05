@@ -5,7 +5,8 @@ define([
     var Container = ElementModel.extend({
         urlRoot:Remote.apiUrlBase + 'container',
         defaults:{
-            '@relations':[],
+            '@relations':null,
+            '@subject':null,
             id:null,
             project:null,
             name:null,

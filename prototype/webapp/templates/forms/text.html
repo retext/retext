@@ -1,7 +1,9 @@
 <fieldset>
     <legend>Text</legend>
     <label for="text.name">Name des Textes</label>
-    <input type="text" id="text.name" name="name" placeholder="Überschrift" value="<%= name %>">
+    <input type="text" id="text.name" name="name" placeholder="Überschrift" value="<%= model.name %>">
+    <label for="text.type">Typ des Textes</label>
+    <input type="text" name="type" id="text.type" value="<%= model.type %>">
     <br>
     <button type="submit" class="btn btn-primary gui-save">Speichern</button>
 </fieldset>

@@ -11,7 +11,7 @@ define([
             this.model.bind("reset", this.render, this);
         },
         render:function () {
-            $(this.el).html(this.template(this.model.toJSON()));
+            $(this.el).html(this.template({model:this.model.toJSON()}));
             return this;
         },
         save:function (ev) {
@@ -26,6 +26,12 @@ define([
                     data[name] = inp.attr('value');
                 }
             });
+            // Setze Felder aus Form. Dies behebt das Problem, Attribute auf Models verschwinden, wenn diese als Null-Werte vom Server geliefert werden
+            _.each(form.find('input'), function (input) {
+                var inp = $(input);
+                data[inp.attr('name')] = inp.attr('value');
+            });
+
             model.url = model.get('@subject');
             model.save(data, {
                 success:function (updatedModel) {
