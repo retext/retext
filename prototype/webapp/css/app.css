@@ -61,3 +61,15 @@
     background-color: #F0F0F0;
     border: 3px solid #999;
 }
+
+#toggleleft {
+    position: absolute;
+    top: 25%;
+    left: 0;
+}
+
+#toggleright {
+    position: absolute;
+    top: 25%;
+    right: 0;
+}

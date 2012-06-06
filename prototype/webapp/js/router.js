@@ -23,10 +23,10 @@ define([
             });
         },
         listProject:function (projectId) {
-            this.showPage('projects/list', {projectId:projectId});
+            this.showPage('projects/list', {model:{projectId:projectId}});
         },
         project:function (projectId, parentContainerId) {
-            var opts = {id:projectId, parentContainerId:parentContainerId};
+            var opts = {model:{id:projectId, parentContainerId:parentContainerId}};
             this.showPage('project', opts);
         }
     });

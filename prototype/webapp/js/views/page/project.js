@@ -17,18 +17,18 @@ define([
             events:{
                 'click a.gui-toggle':'toggleCol'
             },
-            initialize:function (options) {
-                this.model = new ProjectModel({id:options.id});
-                this.parentContainer = new ContainerModel({id:options.parentContainerId});
-                this.newContainerModel = new ContainerModel({parent:options.parentContainerId});
-                this.newTextModel = new TextModel({parent:options.parentContainerId});
+            initialize:function () {
+                // IDs are passed as in the model param
+                var projectId = this.model.id;
+                var parentContainerId = this.model.parentContainerId;
+                this.model = new ProjectModel({id:projectId});
+                this.parentContainer = new ContainerModel({id:parentContainerId});
+                this.newContainerModel = new ContainerModel({parent:parentContainerId});
+                this.newTextModel = new TextModel({parent:parentContainerId});
                 this.parentContainer.bind('change', this.parentContainerFetched, this);
             },
             render:function () {
                 $(this.el).html(this.template({project:this.model.toJSON()}));
-                $('#toggleleft').css({position:'absolute', top:'25%', left:0});
-                $('#toggleright').css({position:'absolute', top:'25%', right:0});
-                this.hiddenDiv = $('#hiddendiv');
                 return this;
             },
             parentContainerFetched:function () {

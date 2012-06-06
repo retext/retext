@@ -12,25 +12,26 @@ define([
         events:{
             'click a.project':'selectProject'
         },
-        initialize:function (options) {
-            this.options = _.defaults(options, {projectId:null});
-            this.selectedProject = new ProjectModel();
-            if (this.options.projectId !== null) {
-                this.selectedProject.id = this.options.projectId;
+        initialize:function () {
+            // IDs are passed as in the model param
+            if (!_.isUndefined(this.model) && _.has(this.model, 'projectId')) {
+                this.model = new ProjectModel({id:this.model.projectId});
+            } else {
+                this.model = new ProjectModel();
             }
         },
         render:function () {
             $(this.el).html(ProjectListPageTemplate);
             Vm.create(this, 'projectlisting', ProjectListingView, {el:$('#projectlist'), model:new ProjectCollection()});
-            Vm.create(this, 'projectinfo', ProjectInfoView, {el:$('#projectinfo'), model:this.selectedProject});
+            Vm.create(this, 'projectinfo', ProjectInfoView, {el:$('#projectinfo'), model:this.model});
             return this;
         },
         selectProject:function (ev) {
             ev.preventDefault();
             var a = $(ev.target);
             Events.trigger('navigate', a.attr('href'));
-            this.selectedProject.id = a.data('projectid');
-            this.selectedProject.fetch();
+            this.model.id = a.data('projectid');
+            this.model.fetch();
         }
     });
     return StatusView;
