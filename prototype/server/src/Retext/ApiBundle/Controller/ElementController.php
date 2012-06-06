@@ -37,4 +37,21 @@ class ElementController extends Base
 
         return $this->createListResponse($elements, $parent->getChildOrder());
     }
+
+    /**
+     * Gibt eine Liste mit allen Containern eines Projektes zurück
+     *
+     * @Route("/element/tree", requirements={"_method":"GET"})
+     */
+    public function listTreeAction()
+    {
+        $this->ensureLoggedIn();
+
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $project = $this->getProject($this->getFromRequest(new RequestParamater('project')));
+
+        // TODO: Implementiere das erstellen eine Baumes, bei dem die Elemente entsprechend des childOrder angeordnet sind.
+
+        return $this->createListResponse(array());
+    }
 }

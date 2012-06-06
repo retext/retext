@@ -162,19 +162,19 @@ class ContainerControllerTest extends Base
         $root = self::$client->GET($this->getRelationHref($project, 'http://jsonld.retext.it/Container', false, 'http://jsonld.retext.it/ontology/root'));
 
         // Create tree
-        $l1_1 = self::$client->CREATE('/api/container', array('parent' => $project->rootContainer, 'name' => '1.1'));
-        $l1_2 = self::$client->CREATE('/api/container', array('parent' => $project->rootContainer, 'name' => '1.2'));
-        foreach (array($l1_1, $l1_2) as $c) {
+        $l1 = self::$client->CREATE('/api/container', array('parent' => $project->rootContainer, 'name' => '1.1'));
+        $l2 = self::$client->CREATE('/api/container', array('parent' => $project->rootContainer, 'name' => '1.2'));
+        foreach (array($l1, $l2) as $c) {
             $this->checkContainer($c);
             $this->assertObjectHasAttribute('parent', $c);
             $this->assertEquals($c->parent, $root->id);
         }
-        $l1_1_1 = self::$client->CREATE('/api/container', array('parent' => $l1_1->id, 'name' => '1.1.1'));
-        $l1_1_2 = self::$client->CREATE('/api/container', array('parent' => $l1_1->id, 'name' => '1.1.2'));
-        foreach (array($l1_1_1, $l1_1_2) as $c) {
+        $l1_1 = self::$client->CREATE('/api/container', array('parent' => $l1->id, 'name' => '1.1.1'));
+        $l1_2 = self::$client->CREATE('/api/container', array('parent' => $l1->id, 'name' => '1.1.2'));
+        foreach (array($l1_1, $l1_2) as $c) {
             $this->checkContainer($c);
             $this->assertObjectHasAttribute('parent', $c);
-            $this->assertEquals($c->parent, $l1_1->id);
+            $this->assertEquals($c->parent, $l1->id);
         }
 
         // Prüfe root
@@ -252,6 +252,32 @@ class ContainerControllerTest extends Base
         $this->assertEquals('Header', $rootChilds[0]->name);
         $this->assertEquals('Footer', $rootChilds[1]->name);
         $this->assertEquals('Headline', $rootChilds[2]->name);
+    }
+
+    /**
+     * @group secondrun
+     * @group integration
+     */
+    public function testTreeWithMixedElements()
+    {
+        $this->markTestIncomplete('Noch nicht implementiert.');
+        // Create project
+        $project = self::$client->CREATE('/api/project', array('name' => 'Tree-Test-Project'));
+        $root = self::$client->GET($this->getRelationHref($project, 'http://jsonld.retext.it/Container', false, 'http://jsonld.retext.it/ontology/root'));
+
+        // Create tree
+        $t_hl = self::$client->CREATE('/api/text', array('parent' => $root->id, 'name' => 'Headline'));
+        $l1 = self::$client->CREATE('/api/container', array('parent' => $root->id, 'name' => '1.1'));
+        $lc = self::$client->CREATE('/api/text', array('parent' => $root->id, 'name' => 'Copy 1'));
+        $l1_1 = self::$client->CREATE('/api/container', array('parent' => $l1->id, 'name' => '1.1.1'));
+        $l1_2 = self::$client->CREATE('/api/container', array('parent' => $l1->id, 'name' => '1.1.2'));
+        $l1_2c = self::$client->CREATE('/api/text', array('parent' => $l1->id, 'name' => 'Copy 1'));
+        $l2 = self::$client->CREATE('/api/container', array('parent' => $project->rootContainer, 'name' => '1.2'));
+        $l3 = self::$client->CREATE('/api/container', array('parent' => $project->rootContainer, 'name' => '1.3'));
+
+        $tree = self::$client->GET($this->getRelationHref($project, 'http://jsonld.retext.it/Element', true, 'http://jsonld.retext.it/ontology/tree'));
+        $this->assertInternalType('array', $tree);
+        $this->assertEquals(8, count($tree));
     }
 
 }

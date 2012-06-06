@@ -49,7 +49,7 @@ class ContainerController extends Base
     }
 
     /**
-     * Gibt eine Liste mit den Containern auf der obersten Ebene eines Projektes zurück
+     * Gibt eine Liste mit den Containern auf einer Ebene eines Projektes zurück
      *
      * @Route("/container", requirements={"_method":"GET"})
      */
