@@ -19,7 +19,7 @@ define([
         showPage:function (pageId, options) {
             var appView = this.appView;
             require(['views/page/' + pageId], function (PageView) {
-                Vm.create(appView, 'page', PageView, options);
+                $('#page').html(Vm.create(appView, 'page', PageView, options).el);
             });
         },
         listProject:function (projectId) {

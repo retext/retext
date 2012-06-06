@@ -1,7 +1,8 @@
 define([
 ], function () {
     var BaseView = Backbone.View.extend({
-        el:'.page'
+        tagName:'div',
+        className:'page'
     });
     return BaseView;
 });
