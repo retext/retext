@@ -2,7 +2,6 @@ define([
     'text!templates/modules/project/listing.html'
 ], function (ListingTemplate) {
     var ProjectListing = Backbone.View.extend({
-        el:$('#projectlist'),
         template:_.template(ListingTemplate),
         initialize:function () {
             this.model.bind("change", this.render, this);

@@ -21,9 +21,10 @@ define([
             }
         },
         render:function () {
-            $(this.el).html(ProjectListPageTemplate);
-            Vm.create(this, 'projectlisting', ProjectListingView, {el:$('#projectlist'), model:new ProjectCollection()});
-            Vm.create(this, 'projectinfo', ProjectInfoView, {el:$('#projectinfo'), model:this.model});
+            var el = $(this.el);
+            el.html(ProjectListPageTemplate);
+            el.find('div.view-projectlist').html(Vm.create(this, 'projectlisting', ProjectListingView, {model:new ProjectCollection()}).el);;
+            el.find('div.view-projectinfo').html(Vm.create(this, 'projectinfo', ProjectInfoView, {model:this.model}).el);
             return this;
         },
         selectProject:function (ev) {

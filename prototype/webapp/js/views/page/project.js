@@ -79,7 +79,7 @@ define([
                 div.detach();
                 a.data('div', div);
                 var span = parseInt(div.data('openspan'), 10);
-                var main = $('#project-main');
+                var main = $(this.el).find('div.project-main');
                 main.removeClass('span' + main.data('currentspan'));
                 var mainSpan = parseInt(main.data('currentspan'), 10) + span;
                 main.data('currentspan', mainSpan);
@@ -88,7 +88,7 @@ define([
             openCol:function (a) {
                 var div = a.data('div');
                 var span = parseInt(div.data('openspan'), 10);
-                var main = $('#project-main');
+                var main = $(this.el).find('div.project-main');
                 main.removeClass('span' + main.data('currentspan'));
                 var mainSpan = parseInt(main.data('currentspan'), 10) - span;
                 main.data('currentspan', mainSpan);
