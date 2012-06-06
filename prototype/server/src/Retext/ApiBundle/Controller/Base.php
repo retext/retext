@@ -146,10 +146,16 @@ abstract class Base extends Controller
                 /** @var \Retext\ApiBundle\RequestParamater $key  */
                 $key = RequestParamater::create($key);
             }
-            $value = $getKeyValue($key);
-            if (!$hasKey($key) || empty($value)) {
+            if (!$hasKey($key)) {
                 if ($key->isRequired()) {
                     throw $this->createException(400, 'Bad Request | Missing input: ' . $key->getName());
+                }
+                return $key->getDefaultValue();
+            }
+            $value = $getKeyValue($key);
+            if(empty($value)) {
+                if ($key->isRequired()) {
+                    throw $this->createException(400, 'Bad Request | Empty input: ' . $key->getName());
                 }
                 return $key->getDefaultValue();
             }
