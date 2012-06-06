@@ -2,7 +2,7 @@
 
 <project name="name-of-project" default="build">
     <target name="build"
-            depends="composer,prepare,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpdox,phpunit,phpcb"/>
+            depends="composer,prepare,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpdox,phpunit-integration,phpcb"/>
 
     <target name="build-parallel"
             depends="composer,prepare,lint,tools-parallel,phpunit,phpcb"/>
@@ -153,14 +153,13 @@
         </exec>
     </target>
 
+<!-- Auf vishnu.coderbyheart.de laeuft noch ein alter mongod
     <available file="${basedir}/mongodb/mongod.pid" property="mongod.pid.present"/>
     <target name="integration" description="Run integration tests with PHPUnit">
-        <fail unless="mongod.pid.present">Mongod is not running</fail>
-        <exec executable="app/console">
-            <arg value="doctrine:mongodb:schema:drop"/>
-        </exec>
-        <exec executable="app/console">
-            <arg value="doctrine:mongodb:schema:create"/>
+-->
+    <target name="phpunit-integration" description="Run integration tests with PHPUnit">
+        <exec executable="bin/reset.sh" failonerror="true">
+            <arg value="test"/>
         </exec>
         <exec executable="phpunit" failonerror="true">
             <arg value="-c"/>
