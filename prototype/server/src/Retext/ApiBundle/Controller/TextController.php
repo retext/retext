@@ -71,22 +71,6 @@ class TextController extends Base
     }
 
     /**
-     * @Route("/texttype", requirements={"_method":"GET"})
-     */
-    public function listTypesAction()
-    {
-        $this->ensureLoggedIn();
-        $project = $this->getProject($this->getFromRequest(new RequestParamater('project')));
-        $dm = $this->get('doctrine.odm.mongodb.document_manager');
-        return $this->createListResponse($dm->getRepository('RetextApiBundle:TextType')
-            ->createQueryBuilder()
-            ->field('project')->equals(new \MongoId($project->getId()))
-            ->field('deletedAt')->exists(false)
-            ->getQuery()
-            ->execute());
-    }
-
-    /**
      * @Route("/text/{text_id}", requirements={"_method":"DELETE"})
      */
     public function deleteTextAction($text_id)

@@ -1,16 +1,15 @@
 <fieldset>
     <legend>Text-Typ</legend>
     <label for="texttype.name">Name des Typs</label>
-    <input type="text" id="texttype.name" name="name" placeholder="Überschrift" value="<%= name %>">
+    <input type="text" id="texttype.name" name="name" placeholder="Überschrift" value="<%= model.name %>">
     <label for="texttype.fontsize">Schriftgröße</label>
-
     <div class="input-append">
-        <input type="number" name="fontsize" id="texttype.fontsize" min="1" placeholder="16"><span
+        <input type="number" name="fontsize" id="texttype.fontsize" min="1" placeholder="16"
+               value="<%= model.fontsize %>"><span
             class="add-on">px</span>
     </div>
     <label for="texttype.fontname">Schriftart</label>
-    <input type="text" name="fontname" id="texttype.fontname">
-    <br>
+    <input type="text" name="fontname" id="texttype.fontname" value="<%= model.fontname %>">
     <br>
     <button type="submit" class="btn btn-primary gui-save">Speichern</button>
 </fieldset>

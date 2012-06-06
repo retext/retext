@@ -153,7 +153,7 @@ abstract class Base extends Controller
                 return $key->getDefaultValue();
             }
             $value = $getKeyValue($key);
-            if(empty($value)) {
+            if (empty($value)) {
                 if ($key->isRequired()) {
                     throw $this->createException(400, 'Bad Request | Empty input: ' . $key->getName());
                 }
@@ -188,18 +188,11 @@ abstract class Base extends Controller
      */
     protected function getProject($project_id)
     {
-        $dm = $this->get('doctrine.odm.mongodb.document_manager');
-        $project = $dm->getRepository('RetextApiBundle:Project')
-            ->createQueryBuilder()
-            ->field('id')->equals(new \MongoId($project_id))
-            ->field('owner')->equals(new \MongoId($this->getUser()->getId()))
-            ->getQuery()
-            ->getSingleResult();
-        if ($project === null)
-            throw $this->createNotFoundException('Project ' . $project_id . ' not found.');
-        if ($project->getDeletedAt() !== null)
-            throw $this->createGoneException('Project ' . $project_id . ' has been deleted.');
-        return $project;
+        $user = $this->getUser();
+        return $this->getDocument('Project', $project_id, function(\Doctrine\ODM\MongoDB\Query\Builder $qb) use($user)
+        {
+            $qb->field('owner')->equals(new \MongoId($user->getId()));
+        });
     }
 
     /**
@@ -208,18 +201,7 @@ abstract class Base extends Controller
      */
     protected function getContainer($container_id)
     {
-        $dm = $this->get('doctrine.odm.mongodb.document_manager');
-        $container = $dm->getRepository('RetextApiBundle:Container')
-            ->createQueryBuilder()
-            ->field('id')->equals(new \MongoId($container_id))
-            ->getQuery()
-            ->getSingleResult();
-
-        if ($container === null)
-            throw $this->createNotFoundException('Container ' . $container_id . ' not found.');
-        if ($container->getDeletedAt() !== null)
-            throw $this->createGoneException('Container ' . $container_id . ' has been deleted.');
-        return $container;
+        return $this->getDocument('Container', $container_id);
     }
 
     /**
@@ -228,18 +210,40 @@ abstract class Base extends Controller
      */
     protected function getText($text_id)
     {
+        return $this->getDocument('Text', $text_id);
+    }
+
+    /**
+     * @param string $texttype_id
+     * @return \Retext\ApiBundle\Document\TextType
+     */
+    protected function getTextType($texttype_id)
+    {
+        return $this->getDocument('TextType', $texttype_id);
+    }
+
+    /**
+     * @param $collection
+     * @param $id
+     * @return \Retext\ApiBundle\Document\Base
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     */
+    protected function getDocument($collection, $id, \closure $queryModifier = null)
+    {
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
-        $text = $dm->getRepository('RetextApiBundle:Text')
+        $qb = $dm->getRepository('RetextApiBundle:' . $collection)
             ->createQueryBuilder()
-            ->field('id')->equals(new \MongoId($text_id))
-            ->getQuery()
+            ->field('id')->equals(new \MongoId($id));
+        if ($queryModifier !== null) $queryModifier($qb);
+        $doc = $qb->getQuery()
             ->getSingleResult();
 
-        if ($text === null)
-            throw $this->createNotFoundException('Text ' . $text_id . ' not found.');
-        if ($text->getDeletedAt() !== null)
-            throw $this->createGoneException('Text ' . $text_id . ' has been deleted.');
-        return $text;
+        if ($doc === null)
+            throw $this->createNotFoundException($collection . ' ' . $id . ' not found.');
+        if ($doc->getDeletedAt() !== null)
+            throw $this->createGoneException($collection . ' ' . $id . ' has been deleted.');
+        return $doc;
     }
 
     /**

@@ -1,7 +1,8 @@
 define([
-    'views/page/base'
-], function (PageViewBase) {
-    var FormView = PageViewBase.extend({
+], function () {
+    var FormView = Backbone.View.extend({
+        tagName: 'form',
+        className:'well',
         events:{
             'click button.gui-save':'save',
             'click button.gui-delete':'delete'

@@ -40,13 +40,15 @@ define([
                 Vm.create(this, 'breadcrumb', BreadCrumbModule, {el:$(this.el).find('div.view-breadcrumb'), model:breadcrumbCollection, project:this.model});
                 var project = this.model;
                 elementList.on('elementSelected', function (model) {
+                    var form;
                     if (model.get('@context') == 'http://jsonld.retext.it/Container') {
                         // Vm.create(this, 'current-element-form', ContainerForm, {el:$('#current-element-form'), model:new ContainerModel(model.toJSON())});
-                        Vm.create(this, 'current-element-form', ContainerForm, {el:$('#current-element-form'), model:model});
+                        form = Vm.create(this, 'current-element-form', ContainerForm, {model:model});
                     } else {
                         // Vm.create(this, 'current-element-form', TextForm, {el:$('#current-element-form'), model:new TextModel(model.toJSON())});
-                        Vm.create(this, 'current-element-form', TextForm, {el:$('#current-element-form'), model:model});
+                        form = Vm.create(this, 'current-element-form', TextForm, {model:model});
                     }
+                    $('#gui-edit-forms').html(form.el);
                 }, this);
                 elementList.on('elementsReordered', function (order) {
                     this.parentContainer.save({childOrder:order}, {wait:true, silent:true});
