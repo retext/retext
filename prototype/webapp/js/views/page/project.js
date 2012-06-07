@@ -3,6 +3,7 @@ define([
     'views/page/base',
     'views/modules/element/list',
     'views/modules/project/breadcrumb',
+    'views/modules/project/mode-switcher',
     'views/forms/container',
     'views/forms/text',
     'text!templates/page/project.html',
@@ -11,7 +12,7 @@ define([
     'models/text',
     'collections/element',
     'collections/breadcrumb'
-], function (Vm, PageViewBase, ElementListView, BreadCrumbModule, ContainerForm, TextForm, ViewTemplate, ProjectModel, ContainerModel, TextModel, ElementCollection, BreadcrumbCollection) {
+], function (Vm, PageViewBase, ElementListView, BreadCrumbView, ModeSwitcherView, ContainerForm, TextForm, ViewTemplate, ProjectModel, ContainerModel, TextModel, ElementCollection, BreadcrumbCollection) {
     var View = PageViewBase.extend({
             template:_.template(ViewTemplate),
             events:{
@@ -28,7 +29,9 @@ define([
                 this.parentContainer.bind('change', this.parentContainerFetched, this);
             },
             render:function () {
-                $(this.el).html(this.template({project:this.model.toJSON()}));
+                var el = $(this.el);
+                el.html(this.template({project:this.model.toJSON()}));
+                el.find('.view-mode-switcher').html(Vm.create(this, 'mode-switcher', ModeSwitcherView).el);
                 return this;
             },
             parentContainerFetched:function () {
@@ -37,7 +40,7 @@ define([
                 var elementList = Vm.create(this, 'current-container', ElementListView, {el:$('#gui-current-container'), model:elementCollection, newContainerModel:this.newContainerModel, newTextModel:this.newTextModel});
                 var breadcrumbCollection = new BreadcrumbCollection();
                 breadcrumbCollection.url = this.parentContainer.getRelation('http://jsonld.retext.it/Breadcrumb', true).get('href');
-                Vm.create(this, 'breadcrumb', BreadCrumbModule, {el:$(this.el).find('div.view-breadcrumb'), model:breadcrumbCollection, project:this.model});
+                Vm.create(this, 'breadcrumb', BreadCrumbView, {el:$(this.el).find('div.view-breadcrumb'), model:breadcrumbCollection, project:this.model});
                 var project = this.model;
                 elementList.on('elementSelected', function (model) {
                     var form;

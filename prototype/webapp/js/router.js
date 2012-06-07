@@ -10,7 +10,7 @@ define([
         routes:{
             "":"home",
             "projects/list/:id":"listProject",
-            "project/:projectId/:parentContainerId":"project",
+            "project/:projectId/:mode/:parentContainerId":"project",
             "*page":"showPage"
         },
         home:function () {
@@ -25,8 +25,8 @@ define([
         listProject:function (projectId) {
             this.showPage('projects/list', {model:{projectId:projectId}});
         },
-        project:function (projectId, parentContainerId) {
-            var opts = {model:{id:projectId, parentContainerId:parentContainerId}};
+        project:function (projectId, mode, parentContainerId) {
+            var opts = {model:{id:projectId, parentContainerId:parentContainerId, mode: mode}};
             this.showPage('project', opts);
         }
     });

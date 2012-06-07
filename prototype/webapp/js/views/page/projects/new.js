@@ -22,7 +22,7 @@ define([
                     },
                     success:function (model, request) {
                         $('#project-new-progress').remove();
-                        Events.trigger('navigate', 'project/' + model.id + '/' + model.get('rootContainer'), {trigger: true});
+                        Events.trigger('navigate', 'project/' + model.id + '/structure/' + model.get('rootContainer'), {trigger: true});
                     }
                 }
             );
