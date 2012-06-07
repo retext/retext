@@ -3,7 +3,7 @@ define([
     'models/register',
     'text!templates/page/register.html'
 ], function (PageViewBase, RegisterModel, RegisterPageTemplate) {
-    var RegisterView = PageViewBase.extend({
+    return PageViewBase.extend({
         initialize:function () {
             this.model = new RegisterModel();
         },
@@ -13,7 +13,7 @@ define([
         submitForm:function (ev) {
             ev.preventDefault();
             var form = $($(this.el).find('form'));
-            form.parent().prepend('<div class="well" id="register-progress"><p>Verarbeite Registrierung…</p><div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div></div>');
+            form.parent().prepend('<div class="well" id="register-progress"><p>Verarbeite Registrierung…</p><div class="progress progress-striped active"><div class="bar" style="width: 50%;"></div></div></div>');
             $(".alert").alert('close');
             this.model.save(
                 {
@@ -37,5 +37,4 @@ define([
             return this;
         }
     });
-    return RegisterView;
 });
