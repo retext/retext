@@ -1,9 +1,14 @@
 define([
     'views/page/base',
+    'collections/element',
+    'models/container',
+    'models/text',
     'views/modules/element/structure/container',
     'views/modules/element/structure/text',
-    'text!templates/modules/element/structure/list.html'
-], function (PageViewBase, ContainerElementView, TextElementView, ViewTemplate) {
+    'text!templates/modules/element/structure/list.html',
+    'views/forms/container',
+    'views/forms/text'
+], function (PageViewBase, ElementCollection, ContainerModel, TextModel, ContainerElementView, TextElementView, ViewTemplate, ContainerForm, TextForm) {
     var View = PageViewBase.extend({
         events:{
             'click button.act-new-container':'newContainer',
@@ -17,12 +22,14 @@ define([
             'dragover div.gui-element':'dragOverEvent',
             'drop div.gui-element':'dragDropEvent'
         },
-        initialize:function (options) {
-            this.newContainerModel = options.newContainerModel;
-            this.newTextModel = options.newTextModel;
+        initialize:function () {
             _.extend(this, Backbone.Events);
-            this.model.bind("reset", this.renderList, this);
-            this.model.bind("add", this.renderElement, this);
+            this.elements = new ElementCollection();
+            this.elements.url = this.model.get('container').getRelation('http://jsonld.retext.it/Element', true).get('href');
+            this.elements.bind("reset", this.renderList, this);
+            this.elements.bind("add", this.renderElement, this);
+            this.newTextModel = new TextModel({parent:this.model.get('container').id});
+            this.newContainerModel = new ContainerModel({parent:this.model.get('container').id});
         },
         render:function () {
             var el = $(this.el);
@@ -32,7 +39,7 @@ define([
         },
         renderList:function () {
             this.list.empty();
-            _.each(this.model.models, function (model) {
+            _.each(this.elements.models, function (model) {
                 this.renderElement(model);
             }, this);
         },
@@ -46,10 +53,10 @@ define([
             this.list.append(elementView.el);
         },
         complete:function () {
-            this.model.fetch();
+            this.elements.fetch();
         },
         newContainer:function () {
-            var containers = this.model;
+            var containers = this.elements;
             var newContainerModel = this.newContainerModel.clone();
             newContainerModel.save({}, {
                 success:function (model) {
@@ -58,7 +65,7 @@ define([
             });
         },
         newText:function () {
-            var containers = this.model;
+            var containers = this.elements;
             var newTextModel = this.newTextModel.clone();
             newTextModel.save({}, {
                 success:function (model) {
@@ -68,15 +75,16 @@ define([
         },
         selectElement:function (ev) {
             var div = $(ev.target).closest('div.gui-element');
-            _.invoke(this.model.models, 'set', 'selected', false);
-            var selectedModel = this.model.get(div.data('id'));
+            _.invoke(this.elements.models, 'set', 'selected', false);
+            var selectedModel = this.elements.get(div.data('id'));
             selectedModel.set('selected', true);
-            this.trigger('elementSelected', selectedModel);
+            var Form = (selectedModel.get('@context') == 'http://jsonld.retext.it/Container') ? ContainerForm : TextForm;
+            this.trigger('showForm', Form, selectedModel);
         },
         deleteElement:function (ev) {
             ev.stopPropagation();
             var div = $(ev.target).closest('div.gui-element');
-            var selectedModel = this.model.get(div.data('id'));
+            var selectedModel = this.elements.get(div.data('id'));
             selectedModel.url = selectedModel.get('@subject');
             selectedModel.destroy({
                 success:function () {
@@ -124,7 +132,7 @@ define([
             var order = _.map($(this.el).find('div.gui-element'), function (element) {
                 return $(element).data('id');
             });
-            this.trigger('elementsReordered', order);
+            this.model.get('container').save({childOrder:order}, {wait:true, silent:true});
         }
     });
     return View;

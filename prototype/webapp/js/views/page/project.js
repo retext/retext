@@ -3,16 +3,12 @@ define([
     'views/page/base',
     'views/modules/project/breadcrumb',
     'views/modules/project/mode-switcher',
-    'views/forms/container',
-    'views/forms/text',
     'text!templates/page/project.html',
     'models/projectView',
     'models/project',
     'models/container',
-    'models/text',
-    'collections/element',
     'collections/breadcrumb'
-], function (Vm, PageViewBase, BreadCrumbView, ModeSwitcherView, ContainerForm, TextForm, ViewTemplate, ProjectViewModel, ProjectModel, ContainerModel, TextModel, ElementCollection, BreadcrumbCollection) {
+], function (Vm, PageViewBase, BreadCrumbView, ModeSwitcherView, ViewTemplate, ProjectViewModel, ProjectModel, ContainerModel, BreadcrumbCollection) {
     var View = PageViewBase.extend({
             template:_.template(ViewTemplate),
             events:{
@@ -25,8 +21,6 @@ define([
                 var mode = this.model.mode;
                 this.project = new ProjectModel({id:projectId});
                 this.parentContainer = new ContainerModel({id:parentContainerId});
-                this.newContainerModel = new ContainerModel({parent:parentContainerId});
-                this.newTextModel = new TextModel({parent:parentContainerId});
                 this.parentContainer.bind('change', this.parentContainerFetched, this);
                 this.model = new ProjectViewModel({project:this.project, container:this.parentContainer, mode:mode});
             },
@@ -44,28 +38,16 @@ define([
                 });
             },
             viewFetched:function (elementListView) {
-                var elementCollection = new ElementCollection();
-                elementCollection.url = this.parentContainer.getRelation('http://jsonld.retext.it/Element', true).get('href');
-                var elementList = Vm.create(this, 'current-container', elementListView, {model:elementCollection, newContainerModel:this.newContainerModel, newTextModel:this.newTextModel});
-                $(this.el).find('div.view-current-container').html(elementList.el);
+                var el = $(this.el);
+                // Die Unter-View kann anfordern, dass ein Formular zum Editieren angezeigt wird
+                var elementList = Vm.create(this, 'current-container', elementListView, {model:this.model});
+                el.find('div.view-current-container').html(elementList.el);
+                elementList.on('showForm', function (form, model) {
+                    el.find('div.view-edit-forms').html(Vm.create(this, 'current-element-form', form, {model:model}).el);
+                });
                 var breadcrumbCollection = new BreadcrumbCollection();
                 breadcrumbCollection.url = this.parentContainer.getRelation('http://jsonld.retext.it/Breadcrumb', true).get('href');
                 Vm.create(this, 'breadcrumb', BreadCrumbView, {el:$(this.el).find('div.view-breadcrumb'), model:breadcrumbCollection, project:this.project});
-                var project = this.project;
-                elementList.on('elementSelected', function (model) {
-                    var form;
-                    if (model.get('@context') == 'http://jsonld.retext.it/Container') {
-                        // Vm.create(this, 'current-element-form', ContainerForm, {el:$('#current-element-form'), model:new ContainerModel(model.toJSON())});
-                        form = Vm.create(this, 'current-element-form', ContainerForm, {model:model});
-                    } else {
-                        // Vm.create(this, 'current-element-form', TextForm, {el:$('#current-element-form'), model:new TextModel(model.toJSON())});
-                        form = Vm.create(this, 'current-element-form', TextForm, {model:model});
-                    }
-                    $('#gui-edit-forms').html(form.el);
-                }, this);
-                elementList.on('elementsReordered', function (order) {
-                    this.parentContainer.save({childOrder:order}, {wait:true, silent:true});
-                }, this);
             },
             complete:function () {
                 this.project.fetch(); // Will trigger update an subviews

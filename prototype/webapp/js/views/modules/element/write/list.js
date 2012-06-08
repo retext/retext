@@ -1,14 +1,20 @@
 define([
     'views/page/base',
+    'collections/element',
     'views/modules/element/write/container',
     'views/modules/element/write/text',
     'text!templates/modules/element/write/list.html'
-], function (PageViewBase, ContainerElementView, TextElementView, ViewTemplate) {
+], function (PageViewBase, ElementCollection, ContainerElementView, TextElementView, ViewTemplate) {
     var View = PageViewBase.extend({
-        initialize:function (options) {
+        events:{
+            'click div.gui-element':'selectElement'
+        },
+        initialize:function () {
             _.extend(this, Backbone.Events);
-            this.model.bind("reset", this.renderList, this);
-            this.model.bind("add", this.renderElement, this);
+            this.elements = new ElementCollection();
+            this.elements.url = this.model.get('container').getRelation('http://jsonld.retext.it/Element', true).get('href');
+            this.elements.bind("reset", this.renderList, this);
+            this.elements.bind("add", this.renderElement, this);
         },
         render:function () {
             var el = $(this.el);
@@ -18,7 +24,7 @@ define([
         },
         renderList:function () {
             this.list.empty();
-            _.each(this.model.models, function (model) {
+            _.each(this.elements.models, function (model) {
                 this.renderElement(model);
             }, this);
         },
@@ -32,12 +38,12 @@ define([
             this.list.append(elementView.el);
         },
         complete:function () {
-            this.model.fetch();
+            this.elements.fetch();
         },
         selectElement:function (ev) {
             var div = $(ev.target).closest('div.gui-element');
-            _.invoke(this.model.models, 'set', 'selected', false);
-            var selectedModel = this.model.get(div.data('id'));
+            _.invoke(this.elements.models, 'set', 'selected', false);
+            var selectedModel = this.elements.get(div.data('id'));
             selectedModel.set('selected', true);
             this.trigger('elementSelected', selectedModel);
         }
