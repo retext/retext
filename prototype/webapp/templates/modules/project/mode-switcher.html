@@ -1,9 +1,13 @@
-    <a class="btn" href="#"><i class="icon-list-alt"></i> Definieren</a>
-    <button class="btn dropdown-toggle" data-toggle="dropdown">
-        <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu">
-        <li><a href="#"><i class="icon-edit"></i> Schreiben</a></li>
-        <li><a href="#"><i class="icon-random"></i> Übersetzen</a></li>
-        <li><a href="#"><i class="icon-check"></i> Prüfen</a></li>
-    </ul>
+<a href="#project/<%= model.project.id %>/<%= selectedMode.id %>/<%= model.container.id %>" class="btn"><i class="<%= selectedMode.icon %>"></i> <%=
+    selectedMode.label %>
+</a>
+<button class="btn dropdown-toggle" data-toggle="dropdown">
+    <span class="caret"></span>
+</button>
+<ul class="dropdown-menu">
+    <% _.each(modes, function(mode) { if(!_.isEqual(mode, selectedMode)) { %>
+    <li>
+        <a href="#project/<%= model.project.id %>/<%= mode.id %>/<%= model.container.id %>"><i class="<%= mode.icon %>"></i> <%= mode.label %></a>
+    </li>
+    <% }}); %>
+</ul>

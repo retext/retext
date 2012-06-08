@@ -7,31 +7,34 @@ define([
     'views/forms/container',
     'views/forms/text',
     'text!templates/page/project.html',
+    'models/projectView',
     'models/project',
     'models/container',
     'models/text',
     'collections/element',
     'collections/breadcrumb'
-], function (Vm, PageViewBase, ElementListView, BreadCrumbView, ModeSwitcherView, ContainerForm, TextForm, ViewTemplate, ProjectModel, ContainerModel, TextModel, ElementCollection, BreadcrumbCollection) {
+], function (Vm, PageViewBase, ElementListView, BreadCrumbView, ModeSwitcherView, ContainerForm, TextForm, ViewTemplate, ProjectViewModel, ProjectModel, ContainerModel, TextModel, ElementCollection, BreadcrumbCollection) {
     var View = PageViewBase.extend({
             template:_.template(ViewTemplate),
             events:{
                 'click a.gui-toggle':'toggleCol'
             },
             initialize:function () {
-                // IDs are passed as in the model param
+                // IDs are passed in the model param
                 var projectId = this.model.id;
                 var parentContainerId = this.model.parentContainerId;
-                this.model = new ProjectModel({id:projectId});
+                var mode = this.model.mode;
+                this.project = new ProjectModel({id:projectId});
                 this.parentContainer = new ContainerModel({id:parentContainerId});
                 this.newContainerModel = new ContainerModel({parent:parentContainerId});
                 this.newTextModel = new TextModel({parent:parentContainerId});
                 this.parentContainer.bind('change', this.parentContainerFetched, this);
+                this.model = new ProjectViewModel({project:this.project, container:this.parentContainer, mode:mode});
             },
             render:function () {
                 var el = $(this.el);
-                el.html(this.template({project:this.model.toJSON()}));
-                el.find('.view-mode-switcher').html(Vm.create(this, 'mode-switcher', ModeSwitcherView).el);
+                el.html(this.template({project:this.project.toJSON()}));
+                el.find('.view-mode-switcher').html(Vm.create(this, 'mode-switcher', ModeSwitcherView, {model:this.model}).el);
                 return this;
             },
             parentContainerFetched:function () {
@@ -40,8 +43,8 @@ define([
                 var elementList = Vm.create(this, 'current-container', ElementListView, {el:$('#gui-current-container'), model:elementCollection, newContainerModel:this.newContainerModel, newTextModel:this.newTextModel});
                 var breadcrumbCollection = new BreadcrumbCollection();
                 breadcrumbCollection.url = this.parentContainer.getRelation('http://jsonld.retext.it/Breadcrumb', true).get('href');
-                Vm.create(this, 'breadcrumb', BreadCrumbView, {el:$(this.el).find('div.view-breadcrumb'), model:breadcrumbCollection, project:this.model});
-                var project = this.model;
+                Vm.create(this, 'breadcrumb', BreadCrumbView, {el:$(this.el).find('div.view-breadcrumb'), model:breadcrumbCollection, project:this.project});
+                var project = this.project;
                 elementList.on('elementSelected', function (model) {
                     var form;
                     if (model.get('@context') == 'http://jsonld.retext.it/Container') {
@@ -58,7 +61,7 @@ define([
                 }, this);
             },
             complete:function () {
-                this.model.fetch(); // Will trigger update an subviews
+                this.project.fetch(); // Will trigger update an subviews
                 this.parentContainer.fetch();
             },
             toggleCol:function (ev) {
