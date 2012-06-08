@@ -1,8 +1,8 @@
 define([
     'views/page/base',
-    'views/modules/element/container',
-    'views/modules/element/text',
-    'text!templates/modules/element/list.html'
+    'views/modules/element/structure/container',
+    'views/modules/element/structure/text',
+    'text!templates/modules/element/structure/list.html'
 ], function (PageViewBase, ContainerElementView, TextElementView, ViewTemplate) {
     var View = PageViewBase.extend({
         events:{

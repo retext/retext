@@ -1,6 +1,6 @@
 define([
     'views/modules/element/element',
-    'text!templates/modules/element/text.html'
+    'text!templates/modules/element/structure/text.html'
 ], function (ElementView, ViewTemplate) {
     var View = ElementView.extend({
         template:_.template(ViewTemplate),

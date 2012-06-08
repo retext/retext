@@ -1,7 +1,6 @@
 define([
     'vm',
     'views/page/base',
-    'views/modules/element/list',
     'views/modules/project/breadcrumb',
     'views/modules/project/mode-switcher',
     'views/forms/container',
@@ -13,7 +12,7 @@ define([
     'models/text',
     'collections/element',
     'collections/breadcrumb'
-], function (Vm, PageViewBase, ElementListView, BreadCrumbView, ModeSwitcherView, ContainerForm, TextForm, ViewTemplate, ProjectViewModel, ProjectModel, ContainerModel, TextModel, ElementCollection, BreadcrumbCollection) {
+], function (Vm, PageViewBase, BreadCrumbView, ModeSwitcherView, ContainerForm, TextForm, ViewTemplate, ProjectViewModel, ProjectModel, ContainerModel, TextModel, ElementCollection, BreadcrumbCollection) {
     var View = PageViewBase.extend({
             template:_.template(ViewTemplate),
             events:{
@@ -38,9 +37,17 @@ define([
                 return this;
             },
             parentContainerFetched:function () {
+                // Lade View je nach aktuellem Modus
+                var that = this;
+                require(['views/modules/element/' + this.model.get('mode') + '/list'], function (ElementListView) {
+                    that.viewFetched(ElementListView);
+                });
+            },
+            viewFetched:function (elementListView) {
                 var elementCollection = new ElementCollection();
                 elementCollection.url = this.parentContainer.getRelation('http://jsonld.retext.it/Element', true).get('href');
-                var elementList = Vm.create(this, 'current-container', ElementListView, {el:$('#gui-current-container'), model:elementCollection, newContainerModel:this.newContainerModel, newTextModel:this.newTextModel});
+                var elementList = Vm.create(this, 'current-container', elementListView, {model:elementCollection, newContainerModel:this.newContainerModel, newTextModel:this.newTextModel});
+                $(this.el).find('div.view-current-container').html(elementList.el);
                 var breadcrumbCollection = new BreadcrumbCollection();
                 breadcrumbCollection.url = this.parentContainer.getRelation('http://jsonld.retext.it/Breadcrumb', true).get('href');
                 Vm.create(this, 'breadcrumb', BreadCrumbView, {el:$(this.el).find('div.view-breadcrumb'), model:breadcrumbCollection, project:this.project});
