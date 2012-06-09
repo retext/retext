@@ -31,7 +31,9 @@ backbone:
 
 jquery:
 	cp vendor/jquery/jquery-1.7.2.js assets/jquery.js
+	cp vendor/timeago/jquery.timeago.js assets/jquery.timeago.js
 	uglifyjs -nc vendor/jquery/jquery-1.7.2.js > assets/jquery-min.js
+	uglifyjs -nc vendor/timeago/jquery.timeago.js >> assets/jquery-min.js
 
 require:
 	cp vendor/require/require.js assets/require.js

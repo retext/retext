@@ -62,6 +62,36 @@
     border: 3px solid #999;
 }
 
+/* WRITE text */
+
+.gui-write-text {
+    margin-bottom: 1.5em;
+}
+
+.gui-write-text .name {
+    position: absolute;
+    top: -18px;
+    left: 1%;
+    border: 1px solid #999;
+    background-color: #F0F0F0;
+    border-radius: 4px;
+    padding: 0.25em 0.5em;
+}
+
+.gui-write-text form {
+    margin: 0;
+}
+
+.gui-write-text input {
+    width: 100%;
+}
+
+.gui-write-text .gui-saving-progress, .gui-write-text .gui-saving-error {
+    display: none;
+}
+
+/* Misc */
+
 #toggleleft {
     position: absolute;
     top: 25%;

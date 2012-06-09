@@ -11,7 +11,8 @@ define([
             project:null,
             parent:null,
             name:null,
-            type:null
+            type:null,
+            text:null
         }
     });
     return Text;

@@ -2,7 +2,7 @@
 
 namespace Retext\ApiBundle\Controller;
 
-use Retext\ApiBundle\RequestParamater, Retext\ApiBundle\Document\Project, Retext\ApiBundle\Document\Text, Retext\ApiBundle\Document\TextType;
+use Retext\ApiBundle\RequestParamater, Retext\ApiBundle\Document\Project, Retext\ApiBundle\Document\Text, Retext\ApiBundle\Document\TextVersion, Retext\ApiBundle\Document\TextType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller,
 Symfony\Component\HttpFoundation\Response, Symfony\Component\HttpFoundation\Request;
@@ -27,10 +27,19 @@ class TextController extends Base
         $text->setProject($project);
         $text->setParent($parent);
         $text->setName($this->getFromRequest(RequestParamater::create('name')->makeOptional()->defaultsTo(null)));
+        $textValue = $this->getFromRequest(RequestParamater::create('text')->makeOptional()->defaultsTo(null));
+        $text->setText($textValue);
         $text->setType($type);
+
+        $textVersion = new TextVersion();
+        $textVersion->setProject($project);
+        $textVersion->setParent($text);
+        $textVersion->setText($textValue);
 
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $dm->persist($text);
+        $dm->flush();
+        $dm->persist($textVersion);
         $dm->flush();
 
         $this->addedChildElement($text);
@@ -50,7 +59,16 @@ class TextController extends Base
 
         // TODO: Check update permissions
         $text->setName($this->getFromRequest(RequestParamater::create('name')->makeOptional()->defaultsTo($text->getName())));
-        $typeName = $this->getFromRequest(RequestParamater::create('type')->makeOptional());
+        $newText = $this->getFromRequest(RequestParamater::create('text')->makeOptional()->defaultsTo($text->getText()));
+        if ($newText != $text->getText()) {
+            $textVersion = new TextVersion();
+            $textVersion->setProject($text->getProject());
+            $textVersion->setParent($text);
+            $textVersion->setText($newText);
+            $dm->persist($textVersion);
+        }
+        $text->setText($newText);
+        $typeName = $this->getFromRequest(RequestParamater::create('type')->makeOptional()->defaultsTo($text->getTypeName()));
         if ($typeName !== null) $text->setType($this->getTypeByName($text->getProject(), $typeName));
 
         $dm->persist($text);
@@ -112,5 +130,24 @@ class TextController extends Base
             $dm->flush();
         }
         return $type;
+    }
+
+    /**
+     * @Route("/text/{text_id}/history", requirements={"_method":"GET"})
+     */
+    public function getTextHistoryAction($text_id)
+    {
+        $this->ensureLoggedIn();
+        $text = $this->getText($text_id);
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $history = $dm->getRepository('RetextApiBundle:TextVersion')
+            ->createQueryBuilder()
+            ->field('project')->equals(new \MongoId($text->getProject()->getId()))
+            ->field('parent')->equals(new \MongoId($text->getId()))
+            ->field('deletedAt')->exists(false)
+            ->sort('_id', 'desc')
+            ->getQuery()
+            ->execute();
+        return $this->createListResponse($history);
     }
 }

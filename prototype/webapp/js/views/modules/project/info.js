@@ -1,9 +1,8 @@
 define([
-    'views/page/base',
     'models/project',
     'text!templates/modules/project/info.html'
-], function (PageViewBase, Model, ModuleTemplate) {
-    var ModelView = PageViewBase.extend({
+], function (Model, ModuleTemplate) {
+    var ModelView = Backbone.View.extend({
         template:_.template(ModuleTemplate),
         initialize:function () {
             this.model.bind("change", this.render, this);

@@ -1,11 +1,10 @@
 define([
-    'views/page/base',
     'collections/element',
     'views/modules/element/check/container',
     'views/modules/element/check/text',
     'text!templates/modules/element/check/list.html'
-], function (PageViewBase, ElementCollection, ContainerElementView, TextElementView, ViewTemplate) {
-    var View = PageViewBase.extend({
+], function (ElementCollection, ContainerElementView, TextElementView, ViewTemplate) {
+    var View = Backbone.View.extend({
         events:{
             'click div.gui-element':'selectElement'
         },

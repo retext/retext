@@ -130,6 +130,7 @@ abstract class Base extends Controller
         } else {
             $data = json_decode($request->getContent());
             if ($data === null) $data = new \stdClass();
+            if (is_array($data)) throw $this->createException(400, 'Bad Request | Must send object, array sent.');
             $hasKey = function(RequestParamater $key) use($data)
             {
                 return property_exists($data, $key->getName());

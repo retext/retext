@@ -44,6 +44,37 @@ class TextControllerTest extends Base
         $this->assertEquals(3, count($textTypes));
     }
 
+    /**
+     * @group secondrun
+     * @group integration
+     * @depends testCreateText
+     */
+    public function testUpdateText()
+    {
+        $text = self::$client->CREATE('/api/text', array('parent' => self::$project->rootContainer, 'name' => 'Copy 1', 'text' => 'LOREM IPSUM!', 'type' => 'Fließtext'));
+        $text = self::$client->UPDATE($text->{'@subject'}, array('text' => 'Lorem Ipsum!'));
+        $this->checkText($text);
+        $this->assertObjectHasAttribute('text', $text);
+        $this->assertEquals('Lorem Ipsum!', $text->text);
+        return $text;
+    }
+
+    /**
+     * @group secondrun
+     * @group integration
+     * @depends testUpdateText
+     */
+    public function testTextHasUpdateHistory(\stdClass $text)
+    {
+        self::$client->UPDATE($text->{'@subject'}, array('text' => 'Lorem Ipsum'));
+        $history = self::$client->GET($this->getRelationHref($text, 'http://jsonld.retext.it/TextVersion', true));
+        $this->assertInternalType('array', $history);
+        $this->assertEquals(3, count($history));
+        $this->assertEquals('Lorem Ipsum', $history[0]->text);
+        $this->assertEquals('Lorem Ipsum!', $history[1]->text);
+        $this->assertEquals('LOREM IPSUM!', $history[2]->text);
+    }
+
     private function checkText(\stdClass $text)
     {
         $this->assertObjectHasAttribute('@context', $text);

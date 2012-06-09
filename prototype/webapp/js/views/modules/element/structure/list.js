@@ -1,5 +1,4 @@
 define([
-    'views/page/base',
     'collections/element',
     'models/container',
     'models/text',
@@ -8,8 +7,8 @@ define([
     'text!templates/modules/element/structure/list.html',
     'views/forms/container',
     'views/forms/text'
-], function (PageViewBase, ElementCollection, ContainerModel, TextModel, ContainerElementView, TextElementView, ViewTemplate, ContainerForm, TextForm) {
-    var View = PageViewBase.extend({
+], function (ElementCollection, ContainerModel, TextModel, ContainerElementView, TextElementView, ViewTemplate, ContainerForm, TextForm) {
+    var View = Backbone.View.extend({
         events:{
             'click button.act-new-container':'newContainer',
             'click button.act-new-text':'newText',

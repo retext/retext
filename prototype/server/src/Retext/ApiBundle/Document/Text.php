@@ -50,6 +50,11 @@ class Text extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteab
     private $parent;
 
     /**
+     * @MongoDB\String
+     */
+    private $text;
+
+    /**
      * @MongoDB\Date
      * @MongoDB\Index(order="asc")
      * @var \DateTime|null
@@ -167,6 +172,26 @@ class Text extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteab
     }
 
     /**
+     * Set text
+     *
+     * @param string $text
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+    }
+
+    /**
+     * Get text
+     *
+     * @return string $text
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
      * @MongoDB\PrePersist
      * @MongoDB\PreUpdate
      */
@@ -223,11 +248,13 @@ class Text extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteab
     public function getRelatedDocuments()
     {
         $types = new TextType();
+        $versions = new TextVersion();
         return array(
             DocumentRelation::createFromDoc($this->getProject()),
             DocumentRelation::createFromDoc($this->getParent()),
             DocumentRelation::createFromDoc($this->getType()),
             DocumentRelation::createFromDoc($types)->setHref($types->getSubject() . '?project=' . $this->getProjectId())->setList(true),
+            DocumentRelation::createFromDoc($versions)->setHref($this->getSubject() . '/history')->setList(true),
         );
     }
 }

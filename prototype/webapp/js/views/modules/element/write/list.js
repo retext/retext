@@ -1,13 +1,15 @@
 define([
-    'views/page/base',
     'collections/element',
+    'collections/texthistory',
     'views/modules/element/write/container',
     'views/modules/element/write/text',
+    'views/modules/texthistory',
     'text!templates/modules/element/write/list.html'
-], function (PageViewBase, ElementCollection, ContainerElementView, TextElementView, ViewTemplate) {
-    var View = PageViewBase.extend({
+], function (ElementCollection, TextHistoryCollection, ContainerElementView, TextElementView, TextHistoryView, ViewTemplate) {
+    var View = Backbone.View.extend({
         events:{
-            'click div.gui-element':'selectElement'
+            'click div.gui-element':'selectElement',
+            'focus input':'selectElement'
         },
         initialize:function () {
             _.extend(this, Backbone.Events);
@@ -46,6 +48,9 @@ define([
             var selectedModel = this.elements.get(div.data('id'));
             selectedModel.set('selected', true);
             this.trigger('elementSelected', selectedModel);
+            var historyCollection = new TextHistoryCollection();
+            historyCollection.url = selectedModel.getRelation('http://jsonld.retext.it/TextVersion', true).get('href');
+            this.trigger('showHistory', TextHistoryView, historyCollection);
         }
     });
     return View;
