@@ -18,6 +18,11 @@ define([
             } else {
                 el.removeClass('selected');
             }
+            _.each(['name', 'text'], function (attribute) {
+                var val = this.model.get(attribute);
+                var attrElem = el.find('[data-attribute="' + attribute + '"]');
+                attrElem.html(_.isEmpty(val) ? attrElem.data('empty') : val);
+            }, this);
         }
     });
     return View;
