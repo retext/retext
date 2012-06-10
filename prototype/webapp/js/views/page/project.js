@@ -6,8 +6,7 @@ define([
     'text!templates/page/project.html',
     'models/projectView',
     'models/project',
-    'models/container',
-    'collections/breadcrumb'
+    'models/container'
 ], function (Vm, PageViewBase, BreadCrumbView, ModeSwitcherView, ViewTemplate, ProjectViewModel, ProjectModel, ContainerModel, BreadcrumbCollection) {
     var View = PageViewBase.extend({
             template:_.template(ViewTemplate),
@@ -46,12 +45,10 @@ define([
                     el.find('div.view-edit-forms').html(Vm.create(this, 'current-element-form', form, {model:model}).el);
                 });
                 elementList.on('showHistory', function (view, model) {
-                    el.find('div.view-history').html('<h2>Verlauf</h2>')
+                    el.find('div.view-history').html('<h2>Verlauf</h2>');
                     el.find('div.view-history').append(Vm.create(this, 'current-element-history', view, {model:model}).el);
                 });
-                var breadcrumbCollection = new BreadcrumbCollection();
-                breadcrumbCollection.url = this.parentContainer.getRelation('http://jsonld.retext.it/Breadcrumb', true).get('href');
-                Vm.create(this, 'breadcrumb', BreadCrumbView, {el:$(this.el).find('div.view-breadcrumb'), model:breadcrumbCollection, project:this.project});
+                Vm.create(this, 'breadcrumb', BreadCrumbView, {el:$(this.el).find('div.view-breadcrumb'), model:this.model});
             },
             complete:function () {
                 this.project.fetch(); // Will trigger update an subviews

@@ -1,21 +1,21 @@
 define([
-    'models/breadcrumb',
+    'collections/breadcrumb',
     'text!templates/modules/project/breadcrumb.html'
-], function (ModuleModel, ModuleTemplate) {
+], function (BreadcrumbCollection, ModuleTemplate) {
     var Module = Backbone.View.extend({
         template:_.template(ModuleTemplate),
-        initialize:function (options) {
-            this.project = options.project;
-            this.project.bind("change", this.render, this);
-            this.model.bind("change", this.render, this);
-            this.model.bind("reset", this.render, this);
+        initialize:function () {
+            this.breadcrumbCollection = new BreadcrumbCollection();
+            this.breadcrumbCollection.url = this.model.get('container').getRelation('http://jsonld.retext.it/Breadcrumb', true).get('href');
+            this.breadcrumbCollection.bind("change", this.render, this);
+            this.breadcrumbCollection.bind("reset", this.render, this);
         },
         render:function () {
-            var el = $(this.el).html(this.template({project:this.project.toJSON(), breadcrumbs:this.model.toJSON()}));
+            var el = $(this.el).html(this.template({project:this.model.get('project').toJSON(), mode:this.model.get('mode'), breadcrumbs:this.breadcrumbCollection.toJSON()}));
             return this;
         },
         complete:function () {
-            this.model.fetch();
+            this.breadcrumbCollection.fetch();
         }
     });
     return Module;

@@ -48,9 +48,11 @@ define([
             var selectedModel = this.elements.get(div.data('id'));
             selectedModel.set('selected', true);
             this.trigger('elementSelected', selectedModel);
-            var historyCollection = new TextHistoryCollection();
-            historyCollection.url = selectedModel.getRelation('http://jsonld.retext.it/TextVersion', true).get('href');
-            this.trigger('showHistory', TextHistoryView, historyCollection);
+            if (selectedModel.get('@context') == 'http://jsonld.retext.it/Text') {
+                var historyCollection = new TextHistoryCollection();
+                historyCollection.url = selectedModel.getRelation('http://jsonld.retext.it/TextVersion', true).get('href');
+                this.trigger('showHistory', TextHistoryView, historyCollection);
+            }
         }
     });
     return View;
