@@ -103,3 +103,23 @@
     top: 25%;
     right: 0;
 }
+
+/* History */
+
+ul.texthistory {
+    margin: 0;
+}
+
+ul.texthistory li {
+    list-style: none;
+    border-bottom: 1px solid #cccccc;
+}
+
+ul.texthistory li:last-child {
+    border: none;
+}
+
+ul.texthistory span.time {
+    float: right;
+    font-style: italic;
+}

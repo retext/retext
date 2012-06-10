@@ -46,7 +46,8 @@ define([
                     el.find('div.view-edit-forms').html(Vm.create(this, 'current-element-form', form, {model:model}).el);
                 });
                 elementList.on('showHistory', function (view, model) {
-                    el.find('div.view-history').html(Vm.create(this, 'current-element-history', view, {model:model}).el);
+                    el.find('div.view-history').html('<h2>Verlauf</h2>')
+                    el.find('div.view-history').append(Vm.create(this, 'current-element-history', view, {model:model}).el);
                 });
                 var breadcrumbCollection = new BreadcrumbCollection();
                 breadcrumbCollection.url = this.parentContainer.getRelation('http://jsonld.retext.it/Breadcrumb', true).get('href');

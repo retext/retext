@@ -1,6 +1,9 @@
 <% _.each(versions, function(version) { %>
 <li>
-    <abbr class="date" title="<%= version.createdAt %>"><%= version.createdAtDiff %></abbr>
-    <span class="text"><% if (_.isEmpty(version.text)) { %><em>Kein Text</em><% } else { %><%= version.text %><% } %></span>
+    <span class="time"><i class="icon-time"></i> <time datetime="<%= version.createdAt %>"><%= version.createdAt %></time></span>
+    <dl>
+        <dt>Text</dt>
+        <dd><% if (_.isEmpty(version.text)) { %><em>Kein Text</em><% } else { %><%= version.text %><% } %></dd>
+    </dl>
 </li>
 <% }); %>

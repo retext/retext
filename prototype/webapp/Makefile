@@ -1,4 +1,4 @@
-all: bootstrap underscore backbone jquery require
+all: bootstrap underscore backbone jquery require timeago
 
 BOOTSTRAP_SRC=vendor/bootstrap
 BOOTSTRAP_TRG=assets/bootstrap
@@ -31,11 +31,13 @@ backbone:
 
 jquery:
 	cp vendor/jquery/jquery-1.7.2.js assets/jquery.js
-	cp vendor/timeago/jquery.timeago.js assets/jquery.timeago.js
 	uglifyjs -nc vendor/jquery/jquery-1.7.2.js > assets/jquery-min.js
-	uglifyjs -nc vendor/timeago/jquery.timeago.js >> assets/jquery-min.js
 
 require:
 	cp vendor/require/require.js assets/require.js
 	cat vendor/require/text.js >> assets/require.js
 	uglifyjs -nc vendor/require/require.js > assets/require-min.js
+
+timeago:
+    cp vendor/timeago/jquery.timeago.js assets/jquery.timeago.js
+    cp vendor/timeago/locales/jquery.timeago.de.js assets/jquery.timeago.de.js
