@@ -67,6 +67,9 @@
 .gui-write-text {
     margin-bottom: 1.5em;
 }
+.gui-container + .gui-write-text {
+    margin-top: 2em;
+}
 
 .gui-write-text .name {
     position: absolute;
