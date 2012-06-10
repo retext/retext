@@ -92,6 +92,11 @@
 .gui-write-text .gui-saving-progress, .gui-write-text .gui-saving-error {
     display: none;
 }
+/* Check Text */
+
+.gui-check-header {
+    margin-left: 3em;
+}
 
 /* Misc */
 

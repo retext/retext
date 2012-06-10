@@ -1,4 +1,13 @@
-<span class="name"><% if(element.name == null || element.name.length == 0) { %><em>Kein Name</em><% } else { %><%= element.name %><% } %></span>
-<div class="info">
-</div>
+<div class="row-fluid" data-icon-ok="icon-ok-sign" data-icon-notok="icon-remove-sign"
+     data-icon-undecided="icon-question-sign">
+    <div class="span7"><span class="name"><% if(element.name == null || element.name.length == 0) { %><em>Kein Name</em><% } else { %><%= element.name %><% } %></span>
 
+        <div class="info">
+        </div>
+    </div>
+    <div class="span1"><span data-attribute="numberOfComments" data-empty="&mdash;">&mdash;</span></div>
+    <div class="span1"><i class="icon-question-sign" title="Korrigiert"></i></div>
+    <div class="span1"><i class="icon-question-sign" title="Geprüft"></i></div>
+    <div class="span1"><i class="icon-question-sign" title="Freigegeben"></i></div>
+    <div class="span1"><i class="icon-question-sign" title="Veröffentlicht"></i></div>
+</div>
