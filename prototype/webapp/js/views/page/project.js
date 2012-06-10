@@ -25,7 +25,7 @@ define([
             },
             render:function () {
                 var el = $(this.el);
-                el.html(this.template({project:this.project.toJSON()}));
+                el.html(this.template(this.model.toJSON()));
                 el.find('.view-mode-switcher').html(Vm.create(this, 'mode-switcher', ModeSwitcherView, {model:this.model}).el);
                 return this;
             },
@@ -38,17 +38,15 @@ define([
             },
             viewFetched:function (elementListView) {
                 var el = $(this.el);
-                // Die Unter-View kann anfordern, dass ein Formular zum Editieren angezeigt wird
                 var elementList = Vm.create(this, 'current-container', elementListView, {model:this.model});
                 el.find('div.view-current-container').html(elementList.el);
-                elementList.on('showForm', function (form, model) {
-                    el.find('div.view-edit-forms').html(Vm.create(this, 'current-element-form', form, {model:model}).el);
-                });
-                elementList.on('showHistory', function (view, model) {
-                    el.find('div.view-history').html('<h2>Verlauf</h2>');
-                    el.find('div.view-history').append(Vm.create(this, 'current-element-history', view, {model:model}).el);
-                });
+                $(this.el).find('a[data-target="#context-tab-' + elementList.preferredContext + '"]').tab('show');
+                // Breadcrumb
                 Vm.create(this, 'breadcrumb', BreadCrumbView, {el:$(this.el).find('div.view-breadcrumb'), model:this.model});
+                // Die Unter-View kann anfordern, dass Context-Informationen angezeigt werden
+                elementList.on('contextInfo', function (type, view, model) {
+                    el.find('div.view-context-' + type).html(Vm.create(this, 'context-' + type, view, {model:model}).el);
+                });
             },
             complete:function () {
                 this.project.fetch(); // Will trigger update an subviews
@@ -75,7 +73,7 @@ define([
                 div.detach();
                 a.data('div', div);
                 var span = parseInt(div.data('openspan'), 10);
-                var main = $(this.el).find('div.project-main');
+                var main = $(this.el).find('div.view-project-main');
                 main.removeClass('span' + main.data('currentspan'));
                 var mainSpan = parseInt(main.data('currentspan'), 10) + span;
                 main.data('currentspan', mainSpan);
@@ -84,7 +82,7 @@ define([
             openCol:function (a) {
                 var div = a.data('div');
                 var span = parseInt(div.data('openspan'), 10);
-                var main = $(this.el).find('div.project-main');
+                var main = $(this.el).find('div.view-project-main');
                 main.removeClass('span' + main.data('currentspan'));
                 var mainSpan = parseInt(main.data('currentspan'), 10) - span;
                 main.data('currentspan', mainSpan);

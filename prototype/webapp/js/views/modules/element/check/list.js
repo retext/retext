@@ -5,6 +5,7 @@ define([
     'text!templates/modules/element/check/list.html'
 ], function (ElementCollection, ContainerElementView, TextElementView, ViewTemplate) {
     var View = Backbone.View.extend({
+        preferredContext:'comments',
         events:{
             'click div.gui-element':'selectElement'
         },

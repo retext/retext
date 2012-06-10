@@ -4,3 +4,9 @@
     <span class="btn btn-small childCount"><i class="icon-folder-close"></i> <%= element.childCount %></span>
     <% } %>
 </div>
+<div class="meta">
+    <% if(element.childCount > 0) { %>
+    <a href="#project/<%= element.project %>/check/<%= element.id %>" class="btn btn-small actn-open"><i
+            class="icon-folder-open"></i> <% if(element.childCount > 0) { %><%= element.childCount %><% } %></a>
+    <% } %>
+</div>

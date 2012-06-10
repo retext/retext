@@ -7,6 +7,7 @@ define([
     'text!templates/modules/element/write/list.html'
 ], function (ElementCollection, TextHistoryCollection, ContainerElementView, TextElementView, TextHistoryView, ViewTemplate) {
     var View = Backbone.View.extend({
+        preferredContext:'info',
         events:{
             'click div.gui-element':'selectElement',
             'focus input':'selectElement'
@@ -51,7 +52,7 @@ define([
             if (selectedModel.get('@context') == 'http://jsonld.retext.it/Text') {
                 var historyCollection = new TextHistoryCollection();
                 historyCollection.url = selectedModel.getRelation('http://jsonld.retext.it/TextVersion', true).get('href');
-                this.trigger('showHistory', TextHistoryView, historyCollection);
+                this.trigger('contextInfo', 'history', TextHistoryView, historyCollection);
             }
         }
     });

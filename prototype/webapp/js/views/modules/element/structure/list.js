@@ -9,6 +9,7 @@ define([
     'views/forms/text'
 ], function (ElementCollection, ContainerModel, TextModel, ContainerElementView, TextElementView, ViewTemplate, ContainerForm, TextForm) {
     var View = Backbone.View.extend({
+        preferredContext:'edit',
         events:{
             'click button.act-new-container':'newContainer',
             'click button.act-new-text':'newText',
@@ -78,7 +79,7 @@ define([
             var selectedModel = this.elements.get(div.data('id'));
             selectedModel.set('selected', true);
             var Form = (selectedModel.get('@context') == 'http://jsonld.retext.it/Container') ? ContainerForm : TextForm;
-            this.trigger('showForm', Form, selectedModel);
+            this.trigger('contextInfo', 'edit', Form, selectedModel);
         },
         deleteElement:function (ev) {
             ev.stopPropagation();

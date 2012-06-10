@@ -10,7 +10,6 @@ define([
             this.modes = new ModeCollection();
             this.modes.add(new ModeModel({id:'structure', label:'Definieren', 'icon':'icon-list-alt'}));
             this.modes.add(new ModeModel({id:'write', label:'Schreiben', 'icon':'icon-edit'}));
-            this.modes.add(new ModeModel({id:'translate', label:'Übersetzen', 'icon':'icon-random'}));
             this.modes.add(new ModeModel({id:'check', label:'Prüfen', 'icon':'icon-check'}));
             this.selectedMode = this.modes.get(this.model.get('mode'));
 
