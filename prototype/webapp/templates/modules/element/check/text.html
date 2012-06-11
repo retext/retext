@@ -1,13 +1,46 @@
 <div class="row-fluid" data-icon-ok="icon-ok-sign" data-icon-notok="icon-remove-sign"
      data-icon-undecided="icon-question-sign">
-    <div class="span7"><span class="name"><% if(element.name == null || element.name.length == 0) { %><em>Kein Name</em><% } else { %><%= element.name %><% } %></span>
-
-        <div class="info">
+    <div class="span4 center"><span class="name"><% if(element.name == null || element.name.length == 0) { %><em>Kein
+        Name</em><% } else { %><%= element.name %><% } %></span>
+    </div>
+    <div class="span2 center"><span data-attribute="numberOfComments" data-empty="&mdash;">&mdash;</span></div>
+    <div class="span2">
+        <div class="btn-group">
+            <button class="btn btn-small dropdown-toggle" data-toggle="dropdown"><i class="icon-remove-sign"
+                                             title="Abgelehnt"></i></button>
+            <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a><i class="icon-ok-sign"></i> Akzeptieren</a></li>
+                <li><a><i class="icon-remove-sign"></i> Ablehnen</a></li>
+            </ul>
         </div>
     </div>
-    <div class="span1"><span data-attribute="numberOfComments" data-empty="&mdash;">&mdash;</span></div>
-    <div class="span1"><i class="icon-question-sign" title="Korrigiert"></i></div>
-    <div class="span1"><i class="icon-question-sign" title="Geprüft"></i></div>
-    <div class="span1"><i class="icon-question-sign" title="Freigegeben"></i></div>
-    <div class="span1"><i class="icon-question-sign" title="Veröffentlicht"></i></div>
+    <div class="span2">
+        <div class="btn-group">
+            <button class="btn btn-small dropdown-toggle" data-toggle="dropdown"><i class="icon-remove-sign"
+                                             title="Abgelehnt"></i></button>
+            <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a><i class="icon-ok-sign"></i> Akzeptieren</a></li>
+                <li><a><i class="icon-remove-sign"></i> Ablehnen</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="span2">
+        <div class="btn-group">
+            <button class="btn btn-small dropdown-toggle" data-toggle="dropdown"><i class="icon-remove-sign"
+                                             title="Abgelehnt"></i></button>
+            <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a><i class="icon-ok-sign"></i> Akzeptieren</a></li>
+                <li><a><i class="icon-remove-sign"></i> Ablehnen</a></li>
+            </ul>
+        </div>
+    </div>
 </div>

@@ -4,7 +4,7 @@ define([
 ], function (ElementView, ViewTemplate) {
     var View = ElementView.extend({
         template:_.template(ViewTemplate),
-        className:'gui-element gui-text'
+        className:'gui-element gui-text gui-check-text'
     });
     return View;
 });

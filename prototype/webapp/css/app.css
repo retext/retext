@@ -2,7 +2,6 @@
     margin: 0.5em 0 0.5em 0;
     padding: 1em;
     color: #797979;
-    text-align: center;
     position: relative;
 }
 
@@ -67,6 +66,7 @@
 .gui-write-text {
     margin-bottom: 1.5em;
 }
+
 .gui-container + .gui-write-text {
     margin-top: 2em;
 }
@@ -92,10 +92,15 @@
 .gui-write-text .gui-saving-progress, .gui-write-text .gui-saving-error {
     display: none;
 }
+
 /* Check Text */
 
 .gui-check-header {
-    margin-left: 3em;
+    margin-left: 1em;
+}
+
+.gui-check-text .btn-group {
+    float: right;
 }
 
 /* Misc */
@@ -130,4 +135,9 @@ ul.texthistory li:last-child {
 ul.texthistory span.time {
     float: right;
     font-style: italic;
+}
+
+/* Semantic helpers */
+.center {
+    text-align: center;
 }
