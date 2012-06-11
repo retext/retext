@@ -3,8 +3,9 @@ define([
     return Backbone.Model.extend({
         defaults:{
             project:null,
-            parent:null,
             text:null,
+            user:null,
+            comment:null,
             createdAt:null
         }
     });

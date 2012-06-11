@@ -12,7 +12,8 @@ define([
             parent:null,
             name:null,
             type:null,
-            text:null
+            text:null,
+            commentCount:null
         }
     });
     return Text;

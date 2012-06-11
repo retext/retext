@@ -141,3 +141,7 @@ ul.texthistory span.time {
 .center {
     text-align: center;
 }
+
+.hidden {
+    display: none;
+}

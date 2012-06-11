@@ -1,9 +1,11 @@
 define([
     'collections/element',
+    'collections/comment',
     'views/modules/element/check/container',
     'views/modules/element/check/text',
+    'views/modules/textcomments',
     'text!templates/modules/element/check/list.html'
-], function (ElementCollection, ContainerElementView, TextElementView, ViewTemplate) {
+], function (ElementCollection, CommentsCollection, ContainerElementView, TextElementView, CommentsCollectionView, ViewTemplate) {
     var View = Backbone.View.extend({
         preferredContext:'comments',
         events:{
@@ -46,6 +48,14 @@ define([
             var selectedModel = this.elements.get(div.data('id'));
             selectedModel.set('selected', true);
             this.trigger('elementSelected', selectedModel);
+            if (selectedModel.get('@context') == 'http://jsonld.retext.it/Text') {
+                var commentsCollection = new CommentsCollection();
+                commentsCollection.url = selectedModel.getRelation('http://jsonld.retext.it/Comment', true).get('href');
+                this.trigger('contextInfo', 'comments', CommentsCollectionView, commentsCollection);
+                commentsCollection.bind('add', function () {
+                    selectedModel.set('commentCount', selectedModel.get('commentCount') + 1);
+                }, this);
+            }
         }
     });
     return View;

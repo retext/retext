@@ -45,7 +45,7 @@ class Comment extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDelet
     private $user;
 
     /**
-     * @MongoDB\Document
+     * @MongoDB\Hash
      * @var object $userData
      * @SerializerBundle\SerializedName("user")
      */
@@ -195,6 +195,7 @@ class Comment extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDelet
         $this->user = $user;
         $this->userData = array(
             'email' => $user->getEmail(),
+            'emailmd5' => md5(strtolower(trim($user->getEmail()))) // Für Gravatar-URLs
         );
     }
 

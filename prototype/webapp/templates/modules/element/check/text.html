@@ -3,7 +3,7 @@
     <div class="span4 center"><span class="name"><% if(element.name == null || element.name.length == 0) { %><em>Kein
         Name</em><% } else { %><%= element.name %><% } %></span>
     </div>
-    <div class="span2 center"><span data-attribute="numberOfComments" data-empty="&mdash;">&mdash;</span></div>
+    <div class="span2 center"><span data-attribute="commentCount" data-empty="&mdash;"><%= element.commentCount %></span></div>
     <div class="span2">
         <div class="btn-group">
             <button class="btn btn-small dropdown-toggle" data-toggle="dropdown"><i class="icon-remove-sign"
