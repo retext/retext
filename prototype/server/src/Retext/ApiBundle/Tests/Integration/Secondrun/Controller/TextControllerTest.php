@@ -75,6 +75,33 @@ class TextControllerTest extends Base
         $this->assertEquals('LOREM IPSUM!', $history[2]->text);
     }
 
+
+
+    /**
+     * @group secondrun
+     * @group integration
+     * @depends testUpdateText
+     */
+    public function testTextComments(\stdClass $text)
+    {
+        $this->assertEquals(0, $text->commentCount);
+        $commentsRel = $this->getRelationHref($text, 'http://jsonld.retext.it/Comment', true);
+        $comment = self::$client->CREATE($commentsRel, array('text' => $text->id, 'comment' => 'First!'));
+        $this->assertEquals('First!', $comment->comment);
+        $this->assertEquals('phpunit+text@retext.it', $comment->user->email);
+        $this->assertNotNull($comment->createdAt);
+        $text = self::$client->GET($text->{'@subject'});
+        $this->assertEquals(1, $text->commentCount);
+        self::$client->CREATE($commentsRel, array('text' => $text->id, 'comment' => 'Second!'));
+        self::$client->CREATE($commentsRel, array('text' => $text->id, 'comment' => 'Third!'));
+        $comments = self::$client->GET($commentsRel);
+        $this->assertInternalType('array', $comments);
+        $this->assertEquals(3, count($comments));
+        $this->assertEquals('Third!', $comments[0]->comment);
+        $this->assertEquals('Second!', $comments[1]->comment);
+        $this->assertEquals('First!', $comments[2]->comment);
+    }
+
     private function checkText(\stdClass $text)
     {
         $this->assertObjectHasAttribute('@context', $text);

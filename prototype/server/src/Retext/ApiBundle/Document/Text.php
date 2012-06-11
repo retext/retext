@@ -55,6 +55,13 @@ class Text extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteab
     private $text;
 
     /**
+     * @MongoDB\Int
+     * @var int
+     * @SerializerBundle\SerializedName("commentCount")
+     */
+    private $commentCount = 0;
+
+    /**
      * @MongoDB\Date
      * @MongoDB\Index(order="asc")
      * @var \DateTime|null
@@ -249,12 +256,34 @@ class Text extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteab
     {
         $types = new TextType();
         $versions = new TextVersion();
+        $comments = new Comment();
         return array(
             DocumentRelation::createFromDoc($this->getProject()),
             DocumentRelation::createFromDoc($this->getParent()),
             DocumentRelation::createFromDoc($this->getType()),
             DocumentRelation::createFromDoc($types)->setHref($types->getSubject() . '?project=' . $this->getProjectId())->setList(true),
             DocumentRelation::createFromDoc($versions)->setHref($this->getSubject() . '/history')->setList(true),
+            DocumentRelation::createFromDoc($comments)->setHref($this->getSubject() . '/comments')->setList(true),
         );
+    }
+
+    /**
+     * Set commentCount
+     *
+     * @param int $commentCount
+     */
+    public function setCommentCount($commentCount)
+    {
+        $this->commentCount = $commentCount;
+    }
+
+    /**
+     * Get commentCount
+     *
+     * @return int $commentCount
+     */
+    public function getCommentCount()
+    {
+        return $this->commentCount;
     }
 }

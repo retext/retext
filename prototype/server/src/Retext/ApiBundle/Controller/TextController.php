@@ -2,7 +2,12 @@
 
 namespace Retext\ApiBundle\Controller;
 
-use Retext\ApiBundle\RequestParamater, Retext\ApiBundle\Document\Project, Retext\ApiBundle\Document\Text, Retext\ApiBundle\Document\TextVersion, Retext\ApiBundle\Document\TextType;
+use Retext\ApiBundle\RequestParamater,
+Retext\ApiBundle\Document\Project,
+Retext\ApiBundle\Document\Text,
+Retext\ApiBundle\Document\TextVersion,
+Retext\ApiBundle\Document\TextType,
+Retext\ApiBundle\Document\Comment;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller,
 Symfony\Component\HttpFoundation\Response, Symfony\Component\HttpFoundation\Request;
@@ -149,5 +154,51 @@ class TextController extends Base
             ->getQuery()
             ->execute();
         return $this->createListResponse($history);
+    }
+
+    /**
+     * @Route("/text/{text_id}/comments", requirements={"_method":"GET"})
+     */
+    public function getTextCommentsAction($text_id)
+    {
+        $this->ensureLoggedIn();
+        $text = $this->getText($text_id);
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $comments = $dm->getRepository('RetextApiBundle:Comment')
+            ->createQueryBuilder()
+            ->field('project')->equals(new \MongoId($text->getProject()->getId()))
+            ->field('text')->equals(new \MongoId($text->getId()))
+            ->field('deletedAt')->exists(false)
+            ->sort('_id', 'desc')
+            ->getQuery()
+            ->execute();
+        return $this->createListResponse($comments);
+    }
+
+    /**
+     * @Route("/text/{text_id}/comments", requirements={"_method":"POST"})
+     */
+    public function addTextCommentAction($text_id)
+    {
+        $this->ensureLoggedIn();
+        $text = $this->getText($text_id);
+
+        $comment = new Comment();
+        $comment->setComment($this->getFromRequest(RequestParamater::create('comment')));
+        $comment->setUser($this->getUser());
+        $comment->setText($text);
+        $comment->setProject($text->getProject());
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $dm->persist($comment);
+        $dm->getRepository('RetextApiBundle:Text')
+            ->createQueryBuilder()
+            ->findAndUpdate()
+            ->field('id')->equals(new \MongoId($text->getId()))
+            ->update()
+            ->field('commentCount')->inc(1)
+            ->getQuery()
+            ->execute();
+        $dm->flush();
+        return $this->createResponse($comment)->setStatusCode(201)->addHeader('Location', $comment->getSubject());
     }
 }
