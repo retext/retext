@@ -35,5 +35,4 @@ class ProjectControllerTest extends Base
         $this->assertObjectHasAttribute('name', $projects[0]);
         $this->assertEquals('Test-Project äöß', $projects[0]->name);
     }
-
 }

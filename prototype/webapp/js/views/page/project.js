@@ -3,11 +3,13 @@ define([
     'views/page/base',
     'views/modules/project/breadcrumb',
     'views/modules/project/mode-switcher',
+    'views/modules/project/progress',
     'text!templates/page/project.html',
     'models/projectView',
     'models/project',
+    'models/projectprogress',
     'models/container'
-], function (Vm, PageViewBase, BreadCrumbView, ModeSwitcherView, ViewTemplate, ProjectViewModel, ProjectModel, ContainerModel, BreadcrumbCollection) {
+], function (Vm, PageViewBase, BreadCrumbView, ModeSwitcherView, ProjectProgressView, ViewTemplate, ProjectViewModel, ProjectModel, ProjectProgressModel, ContainerModel) {
     var View = PageViewBase.extend({
             template:_.template(ViewTemplate),
             events:{
@@ -27,6 +29,9 @@ define([
                 var el = $(this.el);
                 el.html(this.template(this.model.toJSON()));
                 el.find('.view-mode-switcher').html(Vm.create(this, 'mode-switcher', ModeSwitcherView, {model:this.model}).el);
+                var progressModel = new ProjectProgressModel();
+                progressModel.url = this.project.url() + '/progress';
+                el.find('.view-context-project-progress').html(Vm.create(this, 'project-progress', ProjectProgressView, {model:progressModel}).el);
                 return this;
             },
             parentContainerFetched:function () {
@@ -45,7 +50,7 @@ define([
                 Vm.create(this, 'breadcrumb', BreadCrumbView, {el:$(this.el).find('div.view-breadcrumb'), model:this.model});
                 // Die Unter-View kann anfordern, dass Context-Informationen angezeigt werden
                 elementList.on('contextInfo', function (type, view, model) {
-                    el.find('div.view-context-' + type).html(Vm.create(this, 'context-' + type, view, {model:model}).el);
+                    el.find('div.view-context-' + type + ' .view-context-replaceable').html(Vm.create(this, 'context-' + type, view, {model:model}).el);
                 });
             },
             complete:function () {

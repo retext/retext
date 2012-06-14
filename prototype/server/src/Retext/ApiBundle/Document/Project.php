@@ -165,9 +165,11 @@ class Project extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDelet
     {
         $rootContainer = $this->getRootContainer();
         $textType = new TextType();
+        $progress = new ProjectProgress();
         return array(
             DocumentRelation::createFromDoc($rootContainer)->setHref($rootContainer->getSubject())->setRole('http://jsonld.retext.it/ontology/root'),
             DocumentRelation::createFromDoc($textType)->setHref($textType->getSubject() . '?project=' . $this->getId())->setList(true),
+            DocumentRelation::createFromDoc($progress)->setHref($this->getSubject() . '/progress'),
         );
     }
 }

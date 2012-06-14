@@ -100,6 +100,45 @@ class TextControllerTest extends Base
         $this->assertEquals('First!', $comments[2]->comment);
     }
 
+
+    /**
+     * @group secondrun
+     * @group integration
+     */
+    public function testProjectProgress()
+    {
+        $project = self::$client->CREATE('/api/project', array('name' => 'Test-Project für Progress'));
+        $t1 = self::$client->CREATE('/api/text', array('parent' => $project->rootContainer, 'name' => 'Text1'));
+        $t2 = self::$client->CREATE('/api/text', array('parent' => $project->rootContainer, 'name' => 'Text2'));
+        $t3 = self::$client->CREATE('/api/text', array('parent' => $project->rootContainer, 'name' => 'Text3'));
+        $t4 = self::$client->CREATE('/api/text', array('parent' => $project->rootContainer, 'name' => 'Text4'));
+        $t5 = self::$client->CREATE('/api/text', array('parent' => $project->rootContainer, 'name' => 'Text4'));
+        $progress = self::$client->GET($this->getRelationHref($project, 'http://jsonld.retext.it/ProjectProgress'));
+        foreach (array('total', 'approved', 'contentApproved', 'spellingApproved') as $type) {
+            $this->assertEquals(0, $progress->$type->yes);
+            $this->assertEquals(5, $progress->$type->no);
+            $this->assertEquals(0.0, $progress->$type->progress);
+        }
+
+        self::$client->UPDATE($t1->{'@subject'}, array('approved' => 'true'));
+        self::$client->UPDATE($t1->{'@subject'}, array('spellingApproved' => 'true'));
+        self::$client->UPDATE($t2->{'@subject'}, array('spellingApproved' => 'true'));
+        self::$client->UPDATE($t1->{'@subject'}, array('contentApproved' => 'true'));
+        self::$client->UPDATE($t2->{'@subject'}, array('contentApproved' => 'true'));
+        self::$client->UPDATE($t3->{'@subject'}, array('contentApproved' => 'true'));
+        $progress = self::$client->GET($this->getRelationHref($project, 'http://jsonld.retext.it/ProjectProgress'));
+        $this->assertEquals(1, $progress->total->yes);
+        $this->assertEquals(4, $progress->total->no);
+        $this->assertEquals(1, $progress->approved->yes);
+        $this->assertEquals(4, $progress->approved->no);
+        $this->assertEquals(2, $progress->spellingApproved->yes);
+        $this->assertEquals(3, $progress->spellingApproved->no);
+        $this->assertEquals(3, $progress->contentApproved->yes);
+        $this->assertEquals(2, $progress->contentApproved->no);
+        $this->assertEquals(0.6, $progress->contentApproved->progress);
+
+    }
+
     private function checkText(\stdClass $text)
     {
         $this->assertObjectHasAttribute('@context', $text);

@@ -115,7 +115,7 @@ abstract class Base extends Controller
      */
     public function getFromRequest()
     {
-        //$this->ensureRequest();
+        $this->ensureRequest();
         $request = $this->getRequest();
 
         if ($request->getMethod() === 'GET') {
