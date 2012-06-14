@@ -13,7 +13,10 @@ define([
             name:null,
             type:null,
             text:null,
-            commentCount:null
+            commentCount:null,
+            spellingApproved:false,
+            contentApproved:false,
+            approved:false
         }
     });
     return Text;

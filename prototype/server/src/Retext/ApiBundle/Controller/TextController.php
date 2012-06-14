@@ -64,6 +64,25 @@ class TextController extends Base
 
         // TODO: Check update permissions
         $text->setName($this->getFromRequest(RequestParamater::create('name')->makeOptional()->defaultsTo($text->getName())));
+
+        // Freigabe
+        $newSpellingApproved = $this->getFromRequest(RequestParamater::create('spellingApproved')->makeOptional()->makeBoolean()->defaultsTo($text->getSpellingApproved()));
+        $newContentApproved = $this->getFromRequest(RequestParamater::create('contentApproved')->makeOptional()->makeBoolean()->defaultsTo($text->getContentApproved()));
+        $newApproved = $this->getFromRequest(RequestParamater::create('approved')->makeOptional()->makeBoolean()->defaultsTo($text->getApproved()));
+
+        if ($newSpellingApproved !== $text->getSpellingApproved()) {
+            $this->createComment($text, 'Rechtschreibung ' . ($newSpellingApproved ? 'akzeptiert' : 'abgelehnt'));
+        }
+        if ($newContentApproved !== $text->getContentApproved()) {
+            $this->createComment($text, 'Inhalt ' . ($newContentApproved ? 'akzeptiert' : 'abgelehnt'));
+        }
+        if ($newApproved !== $text->getApproved()) {
+            $this->createComment($text, 'Freigabe ' . ($newApproved ? 'erteilt' : 'abgelehnt'));
+        }
+        $text->setSpellingApproved($newSpellingApproved);
+        $text->setContentApproved($newContentApproved);
+        $text->setApproved($newApproved);
+
         $newText = $this->getFromRequest(RequestParamater::create('text')->makeOptional()->defaultsTo($text->getText()));
         if ($newText != $text->getText()) {
             $textVersion = new TextVersion();
@@ -182,14 +201,24 @@ class TextController extends Base
     {
         $this->ensureLoggedIn();
         $text = $this->getText($text_id);
+        $comment = $this->createComment($text, $this->getFromRequest(RequestParamater::create('comment')));
+        return $this->createResponse($comment)->setStatusCode(201)->addHeader('Location', $comment->getSubject());
+    }
 
-        $comment = new Comment();
-        $comment->setComment($this->getFromRequest(RequestParamater::create('comment')));
-        $comment->setUser($this->getUser());
-        $comment->setText($text);
-        $comment->setProject($text->getProject());
+    /**
+     * @param \Retext\ApiBundle\Document\Text $text
+     * @param string $comment
+     * @return \Retext\ApiBundle\Document\Comment
+     */
+    protected function createComment(Text $text, $comment)
+    {
+        $c = new Comment();
+        $c->setComment($comment);
+        $c->setUser($this->getUser());
+        $c->setText($text);
+        $c->setProject($text->getProject());
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
-        $dm->persist($comment);
+        $dm->persist($c);
         $dm->getRepository('RetextApiBundle:Text')
             ->createQueryBuilder()
             ->findAndUpdate()
@@ -199,6 +228,6 @@ class TextController extends Base
             ->getQuery()
             ->execute();
         $dm->flush();
-        return $this->createResponse($comment)->setStatusCode(201)->addHeader('Location', $comment->getSubject());
+        return $c;
     }
 }

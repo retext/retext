@@ -139,6 +139,7 @@ abstract class Base extends Controller
             {
                 return $data->{$key->getName()};
             };
+
         }
 
         $getKey = function($key) use($hasKey, $getKeyValue)
@@ -154,15 +155,34 @@ abstract class Base extends Controller
                 return $key->getDefaultValue();
             }
             $value = $getKeyValue($key);
-            if (empty($value)) {
+
+            if ($key->isBoolean()) {
+                $isEmpty = function($value)
+                {
+                    if (is_bool($value)) return false;
+                    return strlen($value) === 0;
+                };
+            } else {
+                $isEmpty = function($value)
+                {
+                    return empty($value);
+                };
+            }
+
+            if ($isEmpty($value)) {
                 if ($key->isRequired()) {
                     throw $this->createException(400, 'Bad Request | Empty input: ' . $key->getName());
                 }
                 return $key->getDefaultValue();
             }
             switch ($key->getFormat()) {
-                case RequestParamater::FORMAT_INTEGER;
+                case RequestParamater::FORMAT_INTEGER:
+                    if (!preg_match('/^[0-9]+$/', $value)) throw $this->createException(400, 'Bad Request | input ' . $key->getName() . ' must be integer');
                     return (int)$value;
+                case RequestParamater::FORMAT_BOOLEAN:
+                    if (is_bool($value)) return $value;
+                    if (!preg_match('/^true|false|0|1$/', $value)) throw $this->createException(400, 'Bad Request | input ' . $key->getName() . ' must be boolean');
+                    return (boolean)$value;
                 case RequestParamater::FORMAT_LIST:
                     $data = $value;
                     if (!is_array($data)) throw $this->createException(400, 'Bad Request | input ' . $key->getName() . ' must be list');

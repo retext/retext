@@ -3,43 +3,59 @@
     <div class="span4 center"><span class="name"><% if(element.name == null || element.name.length == 0) { %><em>Kein
         Name</em><% } else { %><%= element.name %><% } %></span>
     </div>
-    <div class="span2 center"><span data-attribute="commentCount" data-empty="&mdash;"><%= element.commentCount %></span></div>
+    <div class="span2 center"><span data-attribute="commentCount"
+                                    data-empty="&mdash;"><%= element.commentCount %></span></div>
     <div class="span2">
         <div class="btn-group">
-            <button class="btn btn-small dropdown-toggle" data-toggle="dropdown"><i class="icon-remove-sign"
-                                             title="Abgelehnt"></i></button>
+            <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
+                <% if(element.spellingApproved) { %>
+                <i class="icon-ok-sign" title="Akzeptiert"></i>
+                <% } else { %>
+                <i class="icon-remove-sign" title="Abgelehnt"></i>
+                <% } %>
+            </button>
             <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                <li><a><i class="icon-ok-sign"></i> Akzeptieren</a></li>
-                <li><a><i class="icon-remove-sign"></i> Ablehnen</a></li>
+                <li><a data-state-name="spellingApproved" data-state-value="true"><i class="icon-ok-sign" title="Akzeptiert"></i> Akzeptieren</a></li>
+                <li><a data-state-name="spellingApproved" data-state-value="false"><i class="icon-remove-sign" title="Abgelehnt"></i> Ablehnen</a></li>
             </ul>
         </div>
     </div>
     <div class="span2">
         <div class="btn-group">
-            <button class="btn btn-small dropdown-toggle" data-toggle="dropdown"><i class="icon-remove-sign"
-                                             title="Abgelehnt"></i></button>
+            <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
+                <% if(element.contentApproved) { %>
+                <i class="icon-ok-sign" title="Akzeptiert"></i>
+                <% } else { %>
+                <i class="icon-remove-sign" title="Abgelehnt"></i>
+                <% } %>
+            </button>
             <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                <li><a><i class="icon-ok-sign"></i> Akzeptieren</a></li>
-                <li><a><i class="icon-remove-sign"></i> Ablehnen</a></li>
+                <li><a data-state-name="contentApproved" data-state-value="true"><i class="icon-ok-sign" title="Akzeptiert"></i> Akzeptieren</a></li>
+                <li><a data-state-name="contentApproved" data-state-value="false"><i class="icon-remove-sign" title="Abgelehnt"></i> Ablehnen</a></li>
             </ul>
         </div>
     </div>
     <div class="span2">
         <div class="btn-group">
-            <button class="btn btn-small dropdown-toggle" data-toggle="dropdown"><i class="icon-remove-sign"
-                                             title="Abgelehnt"></i></button>
+            <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
+                <% if(element.approved) { %>
+                <i class="icon-ok-sign" title="Akzeptiert"></i>
+                <% } else { %>
+                <i class="icon-remove-sign" title="Abgelehnt"></i>
+                <% } %>
+            </button>
             <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                <li><a><i class="icon-ok-sign"></i> Akzeptieren</a></li>
-                <li><a><i class="icon-remove-sign"></i> Ablehnen</a></li>
+                <li><a data-state-name="approved" data-state-value="true"><i class="icon-ok-sign" title="Akzeptiert"></i> Akzeptieren</a> </li>
+                <li><a data-state-name="approved" data-state-value="false"><i class="icon-remove-sign" title="Abgelehnt"></i> Ablehnen</a> </li>
             </ul>
         </div>
     </div>

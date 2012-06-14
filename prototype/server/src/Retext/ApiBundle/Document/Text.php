@@ -62,6 +62,32 @@ class Text extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteab
     private $commentCount = 0;
 
     /**
+     * Rechtschreibung in Ordnung
+     *
+     * @MongoDB\Boolean
+     * @SerializerBundle\SerializedName("spellingApproved")
+     * @var bool
+     */
+    private $spellingApproved = false;
+
+    /**
+     * Inhalt in Ordnung
+     *
+     * @MongoDB\Boolean
+     * @SerializerBundle\SerializedName("contentApproved")
+     * @var bool
+     */
+    private $contentApproved = false;
+
+    /**
+     * Freigabe erteilt
+     *
+     * @MongoDB\Boolean
+     * @var bool
+     */
+    private $approved = false;
+
+    /**
      * @MongoDB\Date
      * @MongoDB\Index(order="asc")
      * @var \DateTime|null
@@ -285,5 +311,65 @@ class Text extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteab
     public function getCommentCount()
     {
         return $this->commentCount;
+    }
+
+    /**
+     * Set spellingApproved
+     *
+     * @param boolean $spellingApproved
+     */
+    public function setSpellingApproved($spellingApproved)
+    {
+        $this->spellingApproved = $spellingApproved;
+    }
+
+    /**
+     * Get spellingApproved
+     *
+     * @return boolean $spellingApproved
+     */
+    public function getSpellingApproved()
+    {
+        return $this->spellingApproved;
+    }
+
+    /**
+     * Set contentApproved
+     *
+     * @param boolean $contentApproved
+     */
+    public function setContentApproved($contentApproved)
+    {
+        $this->contentApproved = $contentApproved;
+    }
+
+    /**
+     * Get contentApproved
+     *
+     * @return boolean $contentApproved
+     */
+    public function getContentApproved()
+    {
+        return $this->contentApproved;
+    }
+
+    /**
+     * Set approved
+     *
+     * @param boolean $approved
+     */
+    public function setApproved($approved)
+    {
+        $this->approved = $approved;
+    }
+
+    /**
+     * Get approved
+     *
+     * @return boolean $approved
+     */
+    public function getApproved()
+    {
+        return $this->approved;
     }
 }

@@ -268,4 +268,24 @@ class Comment extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDelet
     {
         $this->deletedAt = $deletedAt;
     }
+
+    /**
+     * Set userData
+     *
+     * @param hash $userData
+     */
+    public function setUserData($userData)
+    {
+        $this->userData = $userData;
+    }
+
+    /**
+     * Get userData
+     *
+     * @return hash $userData
+     */
+    public function getUserData()
+    {
+        return $this->userData;
+    }
 }

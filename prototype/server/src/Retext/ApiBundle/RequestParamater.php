@@ -7,6 +7,7 @@ class RequestParamater
     const FORMAT_STRING = 1;
     const FORMAT_INTEGER = 2;
     const FORMAT_LIST = 3;
+    const FORMAT_BOOLEAN = 4;
 
     /**
      * @var bool
@@ -93,6 +94,23 @@ class RequestParamater
     {
         $this->format = self::FORMAT_INTEGER;
         return $this;
+    }
+
+    /**
+     * @return \Retext\ApiBundle\RequestParamater
+     */
+    public function makeBoolean()
+    {
+        $this->format = self::FORMAT_BOOLEAN;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isBoolean()
+    {
+        return $this->format === self::FORMAT_BOOLEAN;
     }
 
     /**

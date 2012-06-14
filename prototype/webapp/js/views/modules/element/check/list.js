@@ -55,8 +55,8 @@ define([
             selectedModel.set('selected', true);
         },
         // Dieses Callback wird verwendet, um bei mehrfachem auswählen des selben Elements nicht mehrfach zur Triggern
-        triggerSelectChange:function (model) {
-            if (!model.get('selected')) return;
+        triggerSelectChange:function (model, info) {
+            if (!_.has(info.changes, 'selected') && !model.get('selected')) return;
             this.trigger('elementSelected', model);
             if (model.get('@context') == 'http://jsonld.retext.it/Text') {
                 var commentsCollection = new CommentsCollection();

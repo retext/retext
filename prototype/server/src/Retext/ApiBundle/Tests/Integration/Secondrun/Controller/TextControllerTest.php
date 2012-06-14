@@ -75,8 +75,6 @@ class TextControllerTest extends Base
         $this->assertEquals('LOREM IPSUM!', $history[2]->text);
     }
 
-
-
     /**
      * @group secondrun
      * @group integration
@@ -114,6 +112,9 @@ class TextControllerTest extends Base
         $this->assertObjectHasAttribute('parent', $text);
         $this->assertNotNull($text->parent);
         $this->assertInternalType('string', $text->parent);
+        $this->assertFalse($text->spellingApproved);
+        $this->assertFalse($text->contentApproved);
+        $this->assertFalse($text->approved);
     }
 
 }

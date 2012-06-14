@@ -4,7 +4,21 @@ define([
 ], function (ElementView, ViewTemplate) {
     var View = ElementView.extend({
         template:_.template(ViewTemplate),
-        className:'gui-element gui-text gui-check-text'
+        className:'gui-element gui-text gui-check-text',
+        events:{
+            'click .dropdown-menu a':'changeState'
+        },
+        changeState:function (ev) {
+            var a = $(ev.target).closest('a');
+            var firstButton = $(ev.target).closest('.btn-group').find('.btn:first');
+            var stateIcon = a.find('i');
+            var firstButtonIcon = firstButton.find('i');
+            firstButtonIcon.attr('title', stateIcon.attr('title'));
+            firstButtonIcon.attr('class', stateIcon.attr('class'));
+            var data = {};
+            data[a.data('state-name')] = a.data('state-value');
+            this.model.save(data, {wait:true});
+        }
     });
     return View;
 });
