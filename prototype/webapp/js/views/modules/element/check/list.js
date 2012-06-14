@@ -8,6 +8,7 @@ define([
 ], function (ElementCollection, CommentsCollection, ContainerElementView, TextElementView, CommentsCollectionView, ViewTemplate) {
     var View = Backbone.View.extend({
         preferredContext:'comments',
+        lastSelected:null,
         events:{
             'click div.gui-element':'selectElement'
         },
@@ -17,6 +18,7 @@ define([
             this.elements.url = this.model.get('container').getRelation('http://jsonld.retext.it/Element', true).get('href');
             this.elements.bind("reset", this.renderList, this);
             this.elements.bind("add", this.renderElement, this);
+            this.elements.bind("change", this.triggerSelectChange, this)
         },
         render:function () {
             var el = $(this.el);
@@ -44,16 +46,24 @@ define([
         },
         selectElement:function (ev) {
             var div = $(ev.target).closest('div.gui-element');
-            _.invoke(this.elements.models, 'set', 'selected', false);
             var selectedModel = this.elements.get(div.data('id'));
+            // Allen anderen Models deselectieren
+            _.invoke(_.filter(this.elements.models, function (model) {
+                return !_.isEqual(model.id, selectedModel.id);
+            }), 'set', 'selected', false);
+            // Aktuelles Model selektieren
             selectedModel.set('selected', true);
-            this.trigger('elementSelected', selectedModel);
-            if (selectedModel.get('@context') == 'http://jsonld.retext.it/Text') {
+        },
+        // Dieses Callback wird verwendet, um bei mehrfachem auswählen des selben Elements nicht mehrfach zur Triggern
+        triggerSelectChange:function (model) {
+            if (!model.get('selected')) return;
+            this.trigger('elementSelected', model);
+            if (model.get('@context') == 'http://jsonld.retext.it/Text') {
                 var commentsCollection = new CommentsCollection();
-                commentsCollection.url = selectedModel.getRelation('http://jsonld.retext.it/Comment', true).get('href');
+                commentsCollection.url = model.getRelation('http://jsonld.retext.it/Comment', true).get('href');
                 this.trigger('contextInfo', 'comments', CommentsCollectionView, commentsCollection);
                 commentsCollection.bind('add', function () {
-                    selectedModel.set('commentCount', selectedModel.get('commentCount') + 1);
+                    model.set('commentCount', model.get('commentCount') + 1);
                 }, this);
             }
         }
