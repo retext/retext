@@ -141,6 +141,11 @@ ul.texthistory span.time {
     margin-right: 1em;
 }
 
+/* Darstellung des Projekt-Fortschritts */
+
+.projectprogress.compact dt, .projectprogress.compact dd { display: none; }
+.projectprogress.compact dd.total { display: block; }
+
 /* Semantic helpers */
 .center {
     text-align: center;

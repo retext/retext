@@ -9,7 +9,6 @@ define([
         },
         routes:{
             "":"home",
-            "projects/list/:id":"listProject",
             "project/:projectId/:mode/:parentContainerId":"project",
             "*page":"showPage"
         },
@@ -21,9 +20,6 @@ define([
             require(['views/page/' + pageId], function (PageView) {
                 $('#page').html(Vm.create(appView, 'page', PageView, options).el);
             });
-        },
-        listProject:function (projectId) {
-            this.showPage('projects/list', {model:{projectId:projectId}});
         },
         project:function (projectId, mode, parentContainerId) {
             var opts = {model:{id:projectId, parentContainerId:parentContainerId, mode: mode}};

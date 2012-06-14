@@ -1,9 +1,7 @@
-<hr>
-<h2>Projekt-Fortschritt</h2>
 <dl>
     <% _.each(progresses, function(progress) { %>
-    <dt><%= progress.label %></dt>
-    <dd>
+    <dt class="<%= progress.id %>"><%= progress.label %></dt>
+    <dd class="<%= progress.id %>">
         <div class="progress <% if(progress.percent < 15) { %>progress-danger<% } else if(progress.percent < 75) { %>progress-warning<% } else if (progress.percent == 100) { %>progress-success<% } %>">
             <div class="bar"
                  style="width: <%= progress.percent %>%;"></div>
