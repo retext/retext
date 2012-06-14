@@ -137,6 +137,10 @@ ul.texthistory span.time {
     font-style: italic;
 }
 
+.textcomments .gravatar {
+    margin-right: 1em;
+}
+
 /* Semantic helpers */
 .center {
     text-align: center;

@@ -10,18 +10,20 @@
 </div>
 <% _.each(models, function(comment) { %>
 <div class="row-fluid">
-    <div class="span2">
-        <img src="http://www.gravatar.com/avatar/<%= comment.user.emailmd5 %>?s=25&amp;r=g"
-             alt="<%= comment.user.email %>">
-    </div>
-    <div class="span10">
+    <div class="span12">
+
         <p><%= comment.comment %></p>
 
         <p>
-            <small><span class="time"><i class="icon-time"></i> <time datetime="<%= comment.createdAt %>"><%=
-                comment.createdAt %>
-            </time></span></small>
+            <img src="http://www.gravatar.com/avatar/<%= comment.user.emailmd5 %>?s=25&amp;r=g"
+                 alt="<%= comment.user.email %>" class="gravatar">
+            <small><a href="mailto:<%= comment.user.email %>"><%= comment.user.email %></a> &middot;
+                <span class="time"><i class="icon-time"></i> <time datetime="<%= comment.createdAt %>"><%=
+                    comment.createdAt %>
+                </time></span></small>
         </p>
+
+        <hr>
     </div>
 </div>
 <% }); %>
