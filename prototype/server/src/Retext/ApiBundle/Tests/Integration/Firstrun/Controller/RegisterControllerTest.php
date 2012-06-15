@@ -15,7 +15,6 @@ class RegisterControllerTest extends WebTestCase
         $client = static::createClient();
         $client->request('POST', '/api/user', array(), array(), array('HTTP_ACCEPT' => 'application/json', 'HTTP_CONTENT_TYPE' => 'application/json'), json_encode(array('email' => 'phpunit@retext.it')));
         $this->assertEquals(201, $client->getResponse()->getStatusCode());
-        $this->assertNotEmpty($client->getResponse()->getHeader('Location'));
     }
 
     /**
