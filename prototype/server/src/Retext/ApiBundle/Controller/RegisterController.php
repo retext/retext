@@ -25,6 +25,14 @@ class RegisterController extends Base
         $dm->persist($user);
         $dm->flush();
 
-        return $this->createResponse()->setStatusCode(201);
+        return $this->createResponse()->addHeader('Location', $user->getSubject())->setStatusCode(201);
+    }
+
+    /**
+     * @Route("/user/{id}", requirements={"_method":"GET"})
+     */
+    public function getUserAction($id)
+    {
+        return $this->createResponse($this->getDocument('User', $id));
     }
 }

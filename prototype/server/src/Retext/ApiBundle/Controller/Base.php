@@ -262,7 +262,7 @@ abstract class Base extends Controller
 
         if ($doc === null)
             throw $this->createNotFoundException($collection . ' ' . $id . ' not found.');
-        if ($doc->getDeletedAt() !== null)
+        if ($doc instanceof \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteable && $doc->getDeletedAt() !== null)
             throw $this->createGoneException($collection . ' ' . $id . ' has been deleted.');
         return $doc;
     }
