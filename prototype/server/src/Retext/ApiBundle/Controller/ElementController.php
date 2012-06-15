@@ -45,13 +45,8 @@ class ElementController extends Base
      */
     public function listTreeAction()
     {
-        $this->ensureLoggedIn();
-
-        $dm = $this->get('doctrine.odm.mongodb.document_manager');
-        $project = $this->getProject($this->getFromRequest(new RequestParamater('project')));
-
         // TODO: Implementiere das erstellen eine Baumes, bei dem die Elemente entsprechend des childOrder angeordnet sind.
-
+        $this->ensureLoggedIn();
         return $this->createListResponse(array());
     }
 }

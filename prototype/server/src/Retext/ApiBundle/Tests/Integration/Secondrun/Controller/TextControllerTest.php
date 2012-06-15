@@ -111,8 +111,8 @@ class TextControllerTest extends Base
         $t1 = self::$client->CREATE('/api/text', array('parent' => $project->rootContainer, 'name' => 'Text1'));
         $t2 = self::$client->CREATE('/api/text', array('parent' => $project->rootContainer, 'name' => 'Text2'));
         $t3 = self::$client->CREATE('/api/text', array('parent' => $project->rootContainer, 'name' => 'Text3'));
-        $t4 = self::$client->CREATE('/api/text', array('parent' => $project->rootContainer, 'name' => 'Text4'));
-        $t5 = self::$client->CREATE('/api/text', array('parent' => $project->rootContainer, 'name' => 'Text4'));
+        self::$client->CREATE('/api/text', array('parent' => $project->rootContainer, 'name' => 'Text4'));
+        self::$client->CREATE('/api/text', array('parent' => $project->rootContainer, 'name' => 'Text4'));
         $progress = self::$client->GET($this->getRelationHref($project, 'http://jsonld.retext.it/ProjectProgress'));
         foreach (array('total', 'approved', 'contentApproved', 'spellingApproved') as $type) {
             $this->assertEquals(0, $progress->$type->yes);

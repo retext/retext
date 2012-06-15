@@ -82,7 +82,6 @@ class RegisterControllerTest extends WebTestCase
         $this->assertEquals(204, $client->getResponse()->getStatusCode());
         $client->request('GET', '/api/auth');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $cookies = $client->getResponse()->getHeaderCookies();
         $response = json_decode($client->getResponse()->getContent());
         $this->assertObjectHasAttribute('authorized', $response);
         $this->assertFalse($response->authorized);

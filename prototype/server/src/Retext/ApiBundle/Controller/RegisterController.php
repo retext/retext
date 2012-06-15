@@ -13,7 +13,7 @@ class RegisterController extends Base
     /**
      * @Route("/user", requirements={"_method":"POST"})
      */
-    public function registerAction(Request $request)
+    public function registerAction()
     {
         $email = $this->getFromRequest('email');
         $user = new User();

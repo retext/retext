@@ -13,22 +13,29 @@
         {
             "package": "doctrine/doctrine-bundle",
             "version": "dev-master",
-            "source-reference": "f100a7727b89ab5519ed68a72d29e75eb2c85d8b"
+            "source-reference": "8bbb70369af57a9ba994530f713bcbc29c457830",
+            "alias-pretty-version": "1.0.x-dev",
+            "alias-version": "1.0.9999999.9999999-dev"
+        },
+        {
+            "package": "doctrine/doctrine-bundle",
+            "version": "dev-master",
+            "source-reference": "8bbb70369af57a9ba994530f713bcbc29c457830"
         },
         {
             "package": "doctrine/mongodb",
             "version": "dev-master",
-            "source-reference": "996bdb9d4e4ca4fd4954772b194d2c3336a1fcb9"
+            "source-reference": "1a8380ff6b8a2ccdb09ebde375ad5b0b9449e3f1"
         },
         {
             "package": "doctrine/mongodb-odm",
             "version": "dev-master",
-            "source-reference": "20e7318514a6570afe25738820bbd387c05a5c7c"
+            "source-reference": "f7fc3fe33fcc8194d20a3faa2e1c2dfcd50841de"
         },
         {
             "package": "doctrine/mongodb-odm-bundle",
             "version": "dev-master",
-            "source-reference": "b535106bc76c44f0fc1e6428c09f02ba1c2c7ae3"
+            "source-reference": "5996d29b4faf4f0bc416d1e8432bc92f655dff93"
         },
         {
             "package": "doctrine/mongodb-odm-softdelete",
@@ -68,24 +75,24 @@
         {
             "package": "jms/serializer-bundle",
             "version": "dev-master",
-            "source-reference": "71643cb9c0fc977bf0b1118b8bd5ad2e76db844c"
+            "source-reference": "801132b68520b2b1f826a50e4eb12a31e1463303"
+        },
+        {
+            "package": "jms/serializer-bundle",
+            "version": "dev-master",
+            "source-reference": "801132b68520b2b1f826a50e4eb12a31e1463303",
+            "alias-pretty-version": "0.9.x-dev",
+            "alias-version": "0.9.9999999.9999999-dev"
         },
         {
             "package": "kriswallsmith/assetic",
             "version": "dev-master",
-            "source-reference": "8c76115503d23340e19b5cf6aa95f86663f7185f"
+            "source-reference": "d6f89a3170c5280ad554347dc113eb25fdf00ad7"
         },
         {
             "package": "kriswallsmith/assetic",
             "version": "dev-master",
-            "source-reference": "8c76115503d23340e19b5cf6aa95f86663f7185f",
-            "alias-pretty-version": "1.1.x-dev",
-            "alias-version": "1.1.9999999.9999999-dev"
-        },
-        {
-            "package": "kriswallsmith/assetic",
-            "version": "dev-master",
-            "source-reference": "1a1b5f963db158a1065343fab617d25ce351a2dc",
+            "source-reference": "d6f89a3170c5280ad554347dc113eb25fdf00ad7",
             "alias-pretty-version": "1.1.x-dev",
             "alias-version": "1.1.9999999.9999999-dev"
         },
@@ -101,24 +108,38 @@
         {
             "package": "sensio/framework-extra-bundle",
             "version": "dev-master",
-            "source-reference": "e00b525b14784ea4f21c14945e58b4a76a530a6a"
+            "source-reference": "6884563f707cbdd4bd46be461a4fceec4e9832ac",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
+        },
+        {
+            "package": "sensio/framework-extra-bundle",
+            "version": "dev-master",
+            "source-reference": "6884563f707cbdd4bd46be461a4fceec4e9832ac"
         },
         {
             "package": "sensio/generator-bundle",
             "version": "dev-master",
-            "source-reference": "0813379920dcaa4b06361501f654379383d75f16"
+            "source-reference": "a142feefff90199c78e5fcecee09463ca9740c55"
+        },
+        {
+            "package": "sensio/generator-bundle",
+            "version": "dev-master",
+            "source-reference": "a142feefff90199c78e5fcecee09463ca9740c55",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
         },
         {
             "package": "swiftmailer/swiftmailer",
             "version": "dev-master",
-            "source-reference": "9895567cec5a13d1a43db5053defbaad260c1b87",
+            "source-reference": "0ba1372991110629f44ed076dfc5b93240a4a19a",
             "alias-pretty-version": "4.1.x-dev",
             "alias-version": "4.1.9999999.9999999-dev"
         },
         {
             "package": "swiftmailer/swiftmailer",
             "version": "dev-master",
-            "source-reference": "d33d54cc8a081b0b85734744936ede1ba230dd64"
+            "source-reference": "0ba1372991110629f44ed076dfc5b93240a4a19a"
         },
         {
             "package": "swiftmailer/swiftmailer",
@@ -130,12 +151,33 @@
         {
             "package": "symfony/assetic-bundle",
             "version": "dev-master",
-            "source-reference": "61c9f363e73b4ecbb72f81eb62675260a1132048"
+            "source-reference": "ca447e29f8ee2d38643f2f3a9faae1164aa708fb"
+        },
+        {
+            "package": "symfony/assetic-bundle",
+            "version": "dev-master",
+            "source-reference": "ca447e29f8ee2d38643f2f3a9faae1164aa708fb",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
         },
         {
             "package": "symfony/monolog-bundle",
             "version": "dev-master",
-            "source-reference": "1231105826078c117e07e57d7f658141d6147d35"
+            "source-reference": "00769daf48617316e3841575cf37eb6df81e3cbf",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
+        },
+        {
+            "package": "symfony/monolog-bundle",
+            "version": "dev-master",
+            "source-reference": "0b5046d3d1ef93cd59ceabfa37de2665f5118c7f"
+        },
+        {
+            "package": "symfony/monolog-bundle",
+            "version": "dev-master",
+            "source-reference": "0b5046d3d1ef93cd59ceabfa37de2665f5118c7f",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
         },
         {
             "package": "symfony/swiftmailer-bridge",
@@ -157,19 +199,12 @@
         {
             "package": "symfony/symfony",
             "version": "dev-master",
-            "source-reference": "1541fe26e4d78135ab24ae2edfb1dbc2a9b2fa40",
-            "alias-pretty-version": "2.1.x-dev",
-            "alias-version": "2.1.9999999.9999999-dev"
+            "source-reference": "7c91ee5755499bc3be26ed4ff5c547db58e32c20"
         },
         {
             "package": "symfony/symfony",
             "version": "dev-master",
-            "source-reference": "1541fe26e4d78135ab24ae2edfb1dbc2a9b2fa40"
-        },
-        {
-            "package": "symfony/symfony",
-            "version": "dev-master",
-            "source-reference": "b07fb3c459b78061d755df20ee3ad9461e5edec4",
+            "source-reference": "7c91ee5755499bc3be26ed4ff5c547db58e32c20",
             "alias-pretty-version": "2.1.x-dev",
             "alias-version": "2.1.9999999.9999999-dev"
         },
@@ -181,21 +216,21 @@
         {
             "package": "twig/twig",
             "version": "dev-master",
-            "source-reference": "573a36097146b319e5fb36546a0377c7440bbfe3",
+            "source-reference": "120c44d68f07ced5b1e08f582f94016f4f2685d6",
             "alias-pretty-version": "1.8.x-dev",
             "alias-version": "1.8.9999999.9999999-dev"
         },
         {
             "package": "twig/twig",
             "version": "dev-master",
-            "source-reference": "6d072640c44f1781049afd2d96060c72da80662a",
-            "alias-pretty-version": "1.8.x-dev",
-            "alias-version": "1.8.9999999.9999999-dev"
+            "source-reference": "120c44d68f07ced5b1e08f582f94016f4f2685d6"
         },
         {
             "package": "twig/twig",
             "version": "dev-master",
-            "source-reference": "6d072640c44f1781049afd2d96060c72da80662a"
+            "source-reference": "4c9e394c388a88e15b125175587b9d8a0adc17c2",
+            "alias-pretty-version": "1.8.x-dev",
+            "alias-version": "1.8.9999999.9999999-dev"
         }
     ],
     "packages-dev": null,
