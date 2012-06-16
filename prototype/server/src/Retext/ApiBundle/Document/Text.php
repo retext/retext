@@ -231,6 +231,8 @@ class Text extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteab
             'name' => $this->type->getName(),
             'fontname' => $this->type->getFontname(),
             'fontsize' => $this->type->getFontsize(),
+            'multiline' => $this->type->getMultiline(),
+            'description' => $this->type->getDescription(),
         );
     }
 

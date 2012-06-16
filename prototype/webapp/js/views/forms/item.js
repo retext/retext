@@ -1,7 +1,7 @@
 define([
 ], function () {
     var FormView = Backbone.View.extend({
-        tagName: 'form',
+        tagName:'form',
         className:'well',
         events:{
             'click button.gui-save':'save',
@@ -30,7 +30,11 @@ define([
             // Setze Felder aus Form. Dies behebt das Problem, Attribute auf Models verschwinden, wenn diese als Null-Werte vom Server geliefert werden
             _.each(form.find('input'), function (input) {
                 var inp = $(input);
-                data[inp.attr('name')] = inp.attr('value');
+                if (inp.attr('type') == 'checkbox') {
+                    data[inp.attr('name')] = _.isUndefined(inp.attr('checked')) ? inp.data('unchecked') : inp.attr('value');
+                } else {
+                    data[inp.attr('name')] = inp.attr('value');
+                }
             });
 
             model.url = model.get('@subject');

@@ -9,7 +9,8 @@ define([
         mode:'write',
         events:{
             'click div.gui-element':'selectElement',
-            'focus input':'selectElement'
+            'focus input':'selectElement',
+            'focus textarea':'selectElement'
         },
         selectChange:function (selectedModel) {
             if (selectedModel.get('@context') == 'http://jsonld.retext.it/Text') {

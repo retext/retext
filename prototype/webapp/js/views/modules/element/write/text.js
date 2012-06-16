@@ -3,15 +3,16 @@ define([
     'models/text',
     'text!templates/modules/element/write/text.html'
 ], function (ElementView, TextModel, ViewTemplate) {
-    var View = ElementView.extend({
+    return ElementView.extend({
         template:_.template(ViewTemplate),
         className:'gui-element gui-text gui-write-text',
         events:{
-            'blur input':'textBlur'
+            'blur .text':'textBlur'
         },
         textBlur:function (ev) {
-            var inp = $(ev.target).closest('input');
+            var inp = $(ev.target).closest('.text');
             var newText = inp.attr('value');
+            console.log(newText);
             if (_.isEmpty(newText)) newText = null;
             var oldText = this.model.get('text');
             if (_.isEmpty(oldText)) oldText = null;
@@ -20,7 +21,7 @@ define([
             var progress = el.find('div.gui-saving-progress');
             progress.css('display', 'block');
             var error = el.find('div.gui-saving-error');
-            this.model.save({text:inp.attr('value')}, {
+            this.model.save({text:newText}, {
                 success:function () {
                     progress.css('display', 'none');
                 },
@@ -31,5 +32,4 @@ define([
             });
         }
     });
-    return View;
 });

@@ -42,6 +42,12 @@ class TextType extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDele
     protected $description;
 
     /**
+     * @MongoDB\Boolean
+     * @var boolean
+     */
+    protected $multiline = false;
+
+    /**
      * @MongoDB\Int
      * @var int
      */
@@ -219,5 +225,25 @@ class TextType extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDele
     public function getFontname()
     {
         return $this->fontname;
+    }
+
+    /**
+     * Set multiline
+     *
+     * @param boolean $multiline
+     */
+    public function setMultiline($multiline)
+    {
+        $this->multiline = (bool)$multiline;
+    }
+
+    /**
+     * Get multiline
+     *
+     * @return boolean $multiline
+     */
+    public function getMultiline()
+    {
+        return $this->multiline;
     }
 }

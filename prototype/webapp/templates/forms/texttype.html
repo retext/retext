@@ -1,8 +1,12 @@
 <fieldset>
     <legend>Text-Typ</legend>
     <label for="texttype.name">Name des Typs</label>
-    <input type="text" id="texttype.name" name="name" placeholder="z.B. „Überschriften Ebene 1“" value="<%= model.name %>">
+    <input type="text" id="texttype.name" name="name" placeholder="z.B. „Überschriften Ebene 1“"
+           value="<%= model.name %>">
+    <label for="texttype.description">Beschreibung</label>
+    <input type="text" id="texttype.description" name="description" value="<%= model.description %>">
     <label for="texttype.fontsize">Schriftgröße</label>
+
     <div class="input-append">
         <input type="number" name="fontsize" id="texttype.fontsize" min="1" placeholder="100"
                value="<%= model.fontsize %>"><span
@@ -10,6 +14,7 @@
     </div>
     <label for="texttype.fontname">Schriftart</label>
     <input type="text" name="fontname" id="texttype.fontname" value="<%= model.fontname %>" placeholder="z.B. „Arial“">
-    <br>
+    <label class="checkbox" for="texttype.multiline"><input type="checkbox" name="multiline" value="true" data-unchecked="false"
+                                                            id="texttype.multiline" <% if(model.multiline) { %>checked<% } %>> Mehrzeilig?</label>
     <button type="submit" class="btn btn-primary gui-save">Speichern</button>
 </fieldset>

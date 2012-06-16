@@ -10,7 +10,8 @@ define([
             name:null,
             fontsize:null,
             fontname:null,
-            description:null
+            description:null,
+            multiline: false
         }
     });
     return Model;

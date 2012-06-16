@@ -52,6 +52,8 @@ class TextTypeController extends Base
         $texttype->setName($this->getFromRequest(RequestParamater::create('name')->makeOptional()->defaultsTo($texttype->getName())));
         $texttype->setFontsize($this->getFromRequest(RequestParamater::create('fontsize')->makeOptional()->makeInteger()->defaultsTo($texttype->getFontsize())));
         $texttype->setFontname($this->getFromRequest(RequestParamater::create('fontname')->makeOptional()->defaultsTo($texttype->getFontname())));
+        $texttype->setDescription($this->getFromRequest(RequestParamater::create('description')->makeOptional()->defaultsTo($texttype->getDescription())));
+        $texttype->setMultiline($this->getFromRequest(RequestParamater::create('multiline')->makeOptional()->makeBoolean()->defaultsTo($texttype->getMultiline())));
 
         $dm->persist($texttype);
         $dm->flush();
