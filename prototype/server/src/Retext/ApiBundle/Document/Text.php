@@ -88,6 +88,15 @@ class Text extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteab
     private $approved = false;
 
     /**
+     * Fortschritt der Freigabe
+     *
+     * @var float
+     * @SerializerBundle\Accessor(getter="getApprovedProgress")
+     * @SerializerBundle\SerializedName("approvedProgress")
+     */
+    private $approvedProgress;
+
+    /**
      * @MongoDB\Date
      * @MongoDB\Index(order="asc")
      * @var \DateTime|null
@@ -371,5 +380,18 @@ class Text extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteab
     public function getApproved()
     {
         return $this->approved;
+    }
+
+    /**
+     * @return float
+     */
+    public function getApprovedProgress()
+    {
+        $approvedCount = 0;
+        if ($this->spellingApproved) $approvedCount++;
+        if ($this->contentApproved) $approvedCount++;
+        if ($this->approved) $approvedCount++;
+        $this->approvedProgress = $approvedCount / 3;
+        return $this->approvedProgress;
     }
 }

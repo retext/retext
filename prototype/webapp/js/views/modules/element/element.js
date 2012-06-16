@@ -9,7 +9,10 @@ define([
             var el = $(this.el);
             el.html(this.template({element:this.model.toJSON()}));
             el.data('id', this.model.get('id'));
+            this.postRender();
             return this;
+        },
+        postRender:function () {
         },
         change:function () {
             var el = $(this.el);
@@ -25,6 +28,9 @@ define([
                     (_.isString(val) && val.length == 0)
                         || _.isNull(val) ? attrElem.data('empty') : val);
             }, this);
+            this.postChange();
+        },
+        postChange:function () {
         }
     });
     return View;

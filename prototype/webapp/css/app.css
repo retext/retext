@@ -109,6 +109,18 @@
     float: right;
 }
 
+.gui-check-text.progress-danger {
+    background-color: #FFD7D5;
+}
+
+.gui-check-text.progress-warning {
+    background-color: #FAEBBB;
+}
+
+.gui-check-text.progress-success {
+    background-color: #D7FFD7;
+}
+
 /* Misc */
 
 #toggleleft {

@@ -16,7 +16,8 @@ define([
             commentCount:null,
             spellingApproved:false,
             contentApproved:false,
-            approved:false
+            approved:false,
+            approvedCount:0
         }
     });
     return Text;

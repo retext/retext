@@ -119,13 +119,14 @@ class TextControllerTest extends Base
             $this->assertEquals(5, $progress->$type->no);
             $this->assertEquals(0.0, $progress->$type->progress);
         }
+        $this->assertEquals(0, $t1->approvedProgress);
 
         self::$client->UPDATE($t1->{'@subject'}, array('approved' => 'true'));
         self::$client->UPDATE($t1->{'@subject'}, array('spellingApproved' => 'true'));
         self::$client->UPDATE($t2->{'@subject'}, array('spellingApproved' => 'true'));
-        self::$client->UPDATE($t1->{'@subject'}, array('contentApproved' => 'true'));
-        self::$client->UPDATE($t2->{'@subject'}, array('contentApproved' => 'true'));
-        self::$client->UPDATE($t3->{'@subject'}, array('contentApproved' => 'true'));
+        $t1 = self::$client->UPDATE($t1->{'@subject'}, array('contentApproved' => 'true'));
+        $t2 = self::$client->UPDATE($t2->{'@subject'}, array('contentApproved' => 'true'));
+        $t3 = self::$client->UPDATE($t3->{'@subject'}, array('contentApproved' => 'true'));
         $progress = self::$client->GET($this->getRelationHref($project, 'http://jsonld.retext.it/ProjectProgress'));
         $this->assertEquals(1, $progress->total->yes);
         $this->assertEquals(4, $progress->total->no);
@@ -136,6 +137,9 @@ class TextControllerTest extends Base
         $this->assertEquals(3, $progress->contentApproved->yes);
         $this->assertEquals(2, $progress->contentApproved->no);
         $this->assertEquals(0.6, $progress->contentApproved->progress);
+        $this->assertEquals(1.0, $t1->approvedProgress);
+        $this->assertEquals(2 / 3, $t2->approvedProgress);
+        $this->assertEquals(1 / 3, $t3->approvedProgress);
 
     }
 
