@@ -2,8 +2,10 @@ define([
     'events',
     'collections/element',
     'collections/comment',
-    'views/modules/textcomments'
-], function (Events, ElementCollection, CommentsCollection, CommentsCollectionView) {
+    'views/modules/textcomments',
+    'views/modules/textinfo',
+    'views/modules/containerinfo'
+], function (Events, ElementCollection, CommentsCollection, CommentsCollectionView, TextInfoView, ContainerInfoView) {
     return Backbone.View.extend({
         preferredContext:'comments',
         lastSelected:null,
@@ -87,7 +89,9 @@ define([
                 commentsCollection.bind('add', function () {
                     model.set('commentCount', model.get('commentCount') + 1);
                 }, this);
+                this.trigger('contextInfo:show', 'info', TextInfoView, model);
             } else {
+                this.trigger('contextInfo:show', 'info', ContainerInfoView, model);
                 this.trigger('contextInfo:clear', 'comments');
             }
         }

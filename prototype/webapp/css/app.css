@@ -73,10 +73,6 @@
     padding: 0.25em 0.5em;
 }
 
-.gui-text .type {
-    font-family: monospace;
-}
-
 .gui-text q:before {
     content: "„";
 }

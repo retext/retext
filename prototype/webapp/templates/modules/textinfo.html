@@ -1,0 +1,39 @@
+<h2>Textbaustein</h2>
+<table class="table table-condensed">
+    <colgroup>
+        <col width="40%">
+        <col width="60%">
+    </colgroup>
+    <tbody>
+    <tr>
+        <th>Bezeichnung</th>
+        <td><% if (model.name == null || model.name.length == 0) { %><em>Kein Name</em><% } else { %><%= model.name %><%
+            }
+            %>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<h3>Typ</h3>
+<table class="table table-condensed">
+    <colgroup>
+        <col width="40%">
+        <col width="60%">
+    </colgroup>
+    <tbody>
+    <tr>
+        <th>Bezeichnung</th>
+        <td><%= model.typeData.name %></td>
+    </tr>
+    <tr>
+        <th>Schriftart</th>
+        <td><%= model.typeData.fontname %></td>
+    </tr>
+    <tr>
+        <th>Schriftgröße</th>
+        <td><%= model.typeData.fontsize %>%</td>
+    </tr>
+    </tbody>
+</table>
+<h3>Text</h3>
+<blockquote><p><%= model.text %></p></blockquote>

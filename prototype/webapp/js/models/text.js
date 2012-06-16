@@ -12,6 +12,7 @@ define([
             parent:null,
             name:null,
             type:null,
+            typeData:{name:null, fontsize:null, fontname:null},
             text:null,
             commentCount:null,
             spellingApproved:false,

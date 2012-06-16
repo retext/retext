@@ -36,6 +36,13 @@ class Text extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteab
     private $type;
 
     /**
+     * @var array
+     * @SerializerBundle\Accessor(getter="getTypeData")
+     * @SerializerBundle\SerializedName("typeData")
+     */
+    private $typeData;
+
+    /**
      * @MongoDB\String
      * @var string
      */
@@ -211,6 +218,20 @@ class Text extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteab
     public function getTypeName()
     {
         return $this->type->getName();
+    }
+
+    /**
+     * Get type id
+     *
+     * @return array
+     */
+    public function getTypeData()
+    {
+        return array(
+            'name' => $this->type->getName(),
+            'fontname' => $this->type->getFontname(),
+            'fontsize' => $this->type->getFontsize(),
+        );
     }
 
     /**
