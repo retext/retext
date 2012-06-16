@@ -138,18 +138,18 @@ class DemoDataCommand extends Command
         $texttypes = $this->client->GET($this->client->getRelationHref($project, 'http://jsonld.retext.it/TextType', true));
         $output->write(".");
         $typeConfig = array(
-            'default' => array("Flama Book", 100),
-            'Titel' => array("Flama Medium", 200),
-            'Titel - Subline' => array("Flama Book", 100),
-            'Überschrift' => array("Flama Book", 125),
-            'kursiv' => array("Flama Book", 100),
-            'klein' => array("Flama Book", 85),
-            'Thema' => array("Flama Medium", 100),
-            'Untertitel' => array("Flama Book", 100),
+            'default' => array("Flama Book", 100, true),
+            'Titel' => array("Flama Medium", 200, false),
+            'Titel - Subline' => array("Flama Book", 100, false),
+            'Überschrift' => array("Flama Book", 125, false),
+            'kursiv' => array("Flama Book", 100, false),
+            'klein' => array("Flama Book", 85, false),
+            'Thema' => array("Flama Medium", 100, false),
+            'Untertitel' => array("Flama Book", 100, false),
         );
         foreach ($texttypes as $texttype) {
-            list($fontname, $fontsize) = $typeConfig[$texttype->name];
-            $this->client->PUT($texttype->{'@subject'}, array('fontname' => $fontname, 'fontsize' => $fontsize));
+            list($fontname, $fontsize, $multiline) = $typeConfig[$texttype->name];
+            $this->client->PUT($texttype->{'@subject'}, array('fontname' => $fontname, 'fontsize' => $fontsize, 'multiline' => $multiline));
             $output->write(".");
         }
         $output->writeln(" <info>OK</info>");
