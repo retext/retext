@@ -59,19 +59,11 @@
     border-radius: 10px;
     background-color: #F0F0F0;
     border: 3px solid #999;
-}
-
-/* WRITE text */
-
-.gui-write-text {
+    margin-top: 2em;
     margin-bottom: 1.5em;
 }
 
-.gui-container + .gui-write-text {
-    margin-top: 2em;
-}
-
-.gui-write-text .name {
+.gui-text .flag {
     position: absolute;
     top: -18px;
     left: 1%;
@@ -80,6 +72,20 @@
     border-radius: 4px;
     padding: 0.25em 0.5em;
 }
+
+.gui-text .type {
+    font-family: monospace;
+}
+
+.gui-text q:before {
+    content: "„";
+}
+
+.gui-text q:after {
+    content: "“";
+}
+
+/* WRITE text */
 
 .gui-write-text form {
     margin: 0;
@@ -143,8 +149,13 @@ ul.texthistory span.time {
 
 /* Darstellung des Projekt-Fortschritts */
 
-.projectprogress.compact dt, .projectprogress.compact dd { display: none; }
-.projectprogress.compact dd.total { display: block; }
+.projectprogress.compact dt, .projectprogress.compact dd {
+    display: none;
+}
+
+.projectprogress.compact dd.total {
+    display: block;
+}
 
 /* Semantic helpers */
 .center {
