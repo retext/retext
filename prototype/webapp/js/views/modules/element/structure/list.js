@@ -1,19 +1,24 @@
 define([
-    'collections/element',
+    'events',
+    'views/modules/element/list',
     'models/container',
     'models/text',
-    'views/modules/element/structure/container',
-    'views/modules/element/structure/text',
-    'text!templates/modules/element/structure/list.html',
     'views/forms/container',
     'views/forms/text'
-], function (ElementCollection, ContainerModel, TextModel, ContainerElementView, TextElementView, ViewTemplate, ContainerForm, TextForm) {
-    var View = Backbone.View.extend({
+    /*
+     'collections/element',
+     'views/modules/element/structure/container',
+     'views/modules/element/structure/text',
+     'text!templates/modules/element/structure/list.html',
+     */
+], function (Events, BaseListView, ContainerModel, TextModel, ContainerForm, TextForm/* ElementCollection, ContainerElementView, TextElementView, ViewTemplate,  */) {
+    return BaseListView.extend({
         preferredContext:'edit',
+        mode:'structure',
         events:{
+            'click div.gui-element':'selectElement',
             'click button.act-new-container':'newContainer',
             'click button.act-new-text':'newText',
-            'click div.gui-element':'selectElement',
             'click button.actn-delete':'deleteElement',
             'dragstart div.gui-element':'dragStartEvent',
             'dragend div.gui-element':'dragStopEvent',
@@ -22,20 +27,9 @@ define([
             'dragover div.gui-element':'dragOverEvent',
             'drop div.gui-element':'dragDropEvent'
         },
-        initialize:function () {
-            _.extend(this, Backbone.Events);
-            this.elements = new ElementCollection();
-            this.elements.url = this.model.get('container').getRelation('http://jsonld.retext.it/Element', true).get('href');
-            this.elements.bind("reset", this.renderList, this);
-            this.elements.bind("add", this.renderElement, this);
+        postInitialize:function () {
             this.newTextModel = new TextModel({parent:this.model.get('container').id});
             this.newContainerModel = new ContainerModel({parent:this.model.get('container').id});
-        },
-        render:function () {
-            var el = $(this.el);
-            el.html(ViewTemplate);
-            this.list = el.find('div.view-containers');
-            return this;
         },
         renderList:function () {
             this.list.empty();
@@ -43,17 +37,8 @@ define([
                 this.renderElement(model);
             }, this);
         },
-        renderElement:function (element) {
-            if (element.get('@context') == 'http://jsonld.retext.it/Container') {
-                var elementView = new ContainerElementView({model:element}).render();
-            } else {
-                var elementView = new TextElementView({model:element}).render();
-            }
+        postRenderElement:function (elementView) {
             $(elementView.el).attr('draggable', 'true');
-            this.list.append(elementView.el);
-        },
-        complete:function () {
-            this.elements.fetch();
         },
         newContainer:function () {
             var containers = this.elements;
@@ -73,13 +58,9 @@ define([
                 }
             });
         },
-        selectElement:function (ev) {
-            var div = $(ev.target).closest('div.gui-element');
-            _.invoke(this.elements.models, 'set', 'selected', false);
-            var selectedModel = this.elements.get(div.data('id'));
-            selectedModel.set('selected', true);
+        selectChange:function (selectedModel) {
             var Form = (selectedModel.get('@context') == 'http://jsonld.retext.it/Container') ? ContainerForm : TextForm;
-            this.trigger('contextInfo', 'edit', Form, selectedModel);
+            this.trigger('contextInfo:show', 'edit', Form, selectedModel);
         },
         deleteElement:function (ev) {
             ev.stopPropagation();
@@ -135,5 +116,4 @@ define([
             this.model.get('container').save({childOrder:order}, {wait:true, silent:true});
         }
     });
-    return View;
 });

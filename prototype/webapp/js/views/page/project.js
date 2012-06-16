@@ -49,8 +49,11 @@ define([
                 // Breadcrumb
                 Vm.create(this, 'breadcrumb', BreadCrumbView, {el:$(this.el).find('div.view-breadcrumb'), model:this.model});
                 // Die Unter-View kann anfordern, dass Context-Informationen angezeigt werden
-                elementList.on('contextInfo', function (type, view, model) {
-                    el.find('div.view-context-' + type + ' .view-context-replaceable').html(Vm.create(this, 'context-' + type, view, {model:model}).el);
+                elementList.on('contextInfo:show', function (type, view, model) {
+                    el.find('div.view-context-' + type).html(Vm.create(this, 'context-' + type, view, {model:model}).el);
+                });
+                elementList.on('contextInfo:clear', function (type) {
+                    el.find('div.view-context-' + type).html('');
                 });
             },
             complete:function () {
