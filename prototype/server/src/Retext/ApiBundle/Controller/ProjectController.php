@@ -110,7 +110,12 @@ class ProjectController extends Base
             }');
         $query = $qb->getQuery();
         $result = $query->execute();
-        $data = array();
+        $data = array(
+            'approved' => array('yes' => 0, 'no' => 0, 'progress' => 0),
+            'contentApproved' => array('yes' => 0, 'no' => 0, 'progress' => 0),
+            'spellingApproved' => array('yes' => 0, 'no' => 0, 'progress' => 0),
+            'total' => array('yes' => 0, 'no' => 0, 'progress' => 0),
+        );
         foreach ($result as $stats) {
             $data[$stats['_id']] = $stats['value'];
             $total = ($stats['value']['yes'] + $stats['value']['no']);

@@ -226,7 +226,7 @@ class Comment extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDelet
      */
     public function setComment($comment)
     {
-        $this->comment = $comment;
+        $this->comment = trim($comment);
     }
 
     /**

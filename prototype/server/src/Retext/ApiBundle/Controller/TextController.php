@@ -64,21 +64,25 @@ class TextController extends Base
 
         // TODO: Check update permissions
         $text->setName($this->getFromRequest(RequestParamater::create('name')->makeOptional()->defaultsTo($text->getName())));
+        $userComment = $this->getFromRequest(RequestParamater::create('comment')->makeOptional());
 
         // Freigabe
         $newSpellingApproved = $this->getFromRequest(RequestParamater::create('spellingApproved')->makeOptional()->makeBoolean()->defaultsTo($text->getSpellingApproved()));
         $newContentApproved = $this->getFromRequest(RequestParamater::create('contentApproved')->makeOptional()->makeBoolean()->defaultsTo($text->getContentApproved()));
         $newApproved = $this->getFromRequest(RequestParamater::create('approved')->makeOptional()->makeBoolean()->defaultsTo($text->getApproved()));
 
+        $comment = '';
         if ($newSpellingApproved !== $text->getSpellingApproved()) {
-            $this->createComment($text, 'Rechtschreibung ' . ($newSpellingApproved ? 'akzeptiert' : 'abgelehnt'));
+            $comment = 'Rechtschreibung ' . ($newSpellingApproved ? 'akzeptiert' : 'abgelehnt') . '. ';
         }
         if ($newContentApproved !== $text->getContentApproved()) {
-            $this->createComment($text, 'Inhalt ' . ($newContentApproved ? 'akzeptiert' : 'abgelehnt'));
+            $comment = 'Inhalt ' . ($newContentApproved ? 'akzeptiert' : 'abgelehnt') . '. ';
         }
         if ($newApproved !== $text->getApproved()) {
-            $this->createComment($text, 'Freigabe ' . ($newApproved ? 'erteilt' : 'abgelehnt'));
+            $comment = 'Freigabe ' . ($newApproved ? 'erteilt' : 'abgelehnt') . '. ';
         }
+        if (!empty($userComment)) $comment .= $userComment;
+        if (!empty($comment)) $this->createComment($text, $comment);
         $text->setSpellingApproved($newSpellingApproved);
         $text->setContentApproved($newContentApproved);
         $text->setApproved($newApproved);
