@@ -1,6 +1,6 @@
 <?php
 
-namespace Retext\ApiBundle\Document;
+namespace Retext\ApiBundle\Model;
 
 use JMS\SerializerBundle\Annotation as SerializerBundle;
 
@@ -33,7 +33,7 @@ class DocumentRelation
     private $list = false;
 
     /**
-     * @param \Retext\ApiBundle\Document\Base $doc related document class
+     * @param \Retext\ApiBundle\Model\Base $doc related document class
      * @static
      * @return DocumentRelation
      */

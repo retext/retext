@@ -11,7 +11,7 @@ use JMS\SerializerBundle\Annotation as SerializerBundle;
  * @MongoDB\Document
  * @Doctrine\HasLifecycleCallbacks
  */
-class User extends Base
+class User extends \Retext\ApiBundle\Model\Base
 {
     /**
      * @MongoDB\Id
@@ -117,7 +117,7 @@ class User extends Base
     /**
      * Gibt die Namen der verknüpften Dokumente zurück
      *
-     * @return DocumentRelation[]|null
+     * @return \Retext\ApiBundle\Model\DocumentRelation[]|null
      */
     function getRelatedDocuments()
     {

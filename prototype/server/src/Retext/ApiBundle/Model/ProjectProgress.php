@@ -1,6 +1,6 @@
 <?php
 
-namespace Retext\ApiBundle\Document;
+namespace Retext\ApiBundle\Model;
 
 use Retext\ApiBundle\Exception\ValidationException;
 use JMS\SerializerBundle\Annotation as SerializerBundle;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Retext\ApiBundle\Document;
+namespace Retext\ApiBundle\Model;
 
 /**
  * Interface für Bausteine eines Produktes (Container und Texte)

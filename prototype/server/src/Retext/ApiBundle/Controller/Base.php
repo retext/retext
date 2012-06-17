@@ -4,8 +4,8 @@ namespace Retext\ApiBundle\Controller;
 
 use Retext\ApiBundle\ApiResponse,
 Retext\ApiBundle\RequestParamater,
-Retext\ApiBundle\Document\LinkedData,
-Retext\ApiBundle\Document\Element;
+Retext\ApiBundle\Model\LinkedData,
+Retext\ApiBundle\Model\Element;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller,
 Symfony\Component\HttpFoundation\Response,
@@ -53,7 +53,7 @@ abstract class Base extends Controller
             if ($orderItems) $idPos = array_flip($order);
             foreach ($data as $d) {
                 $items[] = $d;
-                if ($orderItems && $d instanceof \Retext\ApiBundle\Document\Element) $itemPos[] = $idPos[$d->getId()];
+                if ($orderItems && $d instanceof \Retext\ApiBundle\Model\Element) $itemPos[] = $idPos[$d->getId()];
             }
             if ($orderItems) array_multisort($itemPos, SORT_ASC, $items);
         } else {
@@ -242,7 +242,7 @@ abstract class Base extends Controller
     /**
      * @param $collection
      * @param $id
-     * @return \Retext\ApiBundle\Document\Base
+     * @return \Retext\ApiBundle\Model\Base
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      */

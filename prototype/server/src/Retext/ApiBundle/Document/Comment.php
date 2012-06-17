@@ -11,7 +11,7 @@ use JMS\SerializerBundle\Annotation as SerializerBundle;
  * @MongoDB\Document
  * @Doctrine\HasLifecycleCallbacks
  */
-class Comment extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteable
+class Comment extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteable
 {
     /**
      * @MongoDB\Id
@@ -104,14 +104,14 @@ class Comment extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDelet
     /**
      * Gibt die Namen der verknüpften Dokumente zurück
      *
-     * @return DocumentRelation
+     * @return \Retext\ApiBundle\Model\DocumentRelation
      */
     public function getRelatedDocuments()
     {
         return array(
-            DocumentRelation::createFromDoc($this->getProject()),
-            DocumentRelation::createFromDoc($this->getText()),
-            DocumentRelation::createFromDoc($this->getUser()),
+            \Retext\ApiBundle\Model\DocumentRelation::createFromDoc($this->getProject()),
+            \Retext\ApiBundle\Model\DocumentRelation::createFromDoc($this->getText()),
+            \Retext\ApiBundle\Model\DocumentRelation::createFromDoc($this->getUser()),
         );
     }
 

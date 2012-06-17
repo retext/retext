@@ -11,7 +11,7 @@ use JMS\SerializerBundle\Annotation as SerializerBundle;
  * @MongoDB\Document
  * @Doctrine\HasLifecycleCallbacks
  */
-class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteable, Element
+class Container extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteable, \Retext\ApiBundle\Model\Element
 {
     /**
      * @MongoDB\Id
@@ -57,7 +57,7 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
 
     /**
      * @MongoDB\Hash
-     * @var \Retext\ApiBundle\Document\Element[] $element
+     * @var \Retext\ApiBundle\Model\Element[] $element
      * @SerializerBundle\Exclude
      */
     private $childOrder = array();
@@ -219,19 +219,20 @@ class Container extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDel
     /**
      * Gibt die Namen der verknüpften Dokumente zurück
      *
-     * @return DocumentRelation
+     * @return \Retext\ApiBundle\Model\DocumentRelation
      */
     public function getRelatedDocuments()
     {
         $container = new Container();
         $text = new Text();
-        $breadcrumb = new Breadcrumb();
+        $breadcrumb = new \Retext\ApiBundle\Model\Breadcrumb();
         return array(
-            DocumentRelation::createFromDoc($this->getProject()),
-            DocumentRelation::createFromDoc($container)->setHref($container->getSubject() . '?parent=' . $this->getId())->setList(true)->setRole('http://jsonld.retext.it/ontology/child'),
-            DocumentRelation::createFromDoc($text)->setHref($text->getSubject() . '?parent=' . $this->getId())->setList(true),
-            DocumentRelation::createFromDoc($breadcrumb)->setHref($this->getSubject() . '/breadcrumb')->setList(true),
-            DocumentRelation::create()->setRelatedcontext('http://jsonld.retext.it/Element')->setList(true)->setRole('http://jsonld.retext.it/ontology/child')->setHref('/api/element?parent=' . $this->getId())
+            \Retext\ApiBundle\Model\DocumentRelation::createFromDoc($this->getProject()),
+            \Retext\ApiBundle\Model\DocumentRelation::createFromDoc($container)->setHref($container->getSubject() . '?parent=' . $this->getId())->setList(true)->setRole('http://jsonld.retext.it/ontology/child'),
+            \Retext\ApiBundle\Model\DocumentRelation::createFromDoc($text)->setHref($text->getSubject() . '?parent=' . $this->getId())->setList(true),
+            \Retext\ApiBundle\Model\DocumentRelation::createFromDoc($breadcrumb)->setHref($this->getSubject() . '/breadcrumb')->setList(true),
+            \Retext\ApiBundle\Model\DocumentRelation::create()->setRelatedcontext('http://jsonld.retext.it/Element')->setList(true)->setRole('http://jsonld.retext.it/ontology/child')->setHref('/api/element?parent=' . $this->getId()),
+            \Retext\ApiBundle\Model\DocumentRelation::create()->setRelatedcontext('http://jsonld.retext.it/Element')->setList(true)->setRole('http://jsonld.retext.it/ontology/tree')->setHref($this->getSubject() . '/tree'),
         );
     }
 

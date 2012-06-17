@@ -22,16 +22,4 @@ class ElementController extends Base
         $exportContainerChildren = $this->get('retext.apibundle.export.containerchildren');
         return $this->createListResponse($exportContainerChildren->getChildren($parent));
     }
-
-    /**
-     * Gibt eine Liste mit allen Containern eines Projektes zurück
-     *
-     * @Route("/element/tree", requirements={"_method":"GET"})
-     */
-    public function listTreeAction()
-    {
-        // TODO: Implementiere das erstellen eine Baumes, bei dem die Elemente entsprechend des childOrder angeordnet sind.
-        $this->ensureLoggedIn();
-        return $this->createListResponse(array());
-    }
 }

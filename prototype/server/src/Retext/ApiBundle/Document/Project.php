@@ -11,7 +11,7 @@ use JMS\SerializerBundle\Annotation as SerializerBundle;
  * @MongoDB\Document
  * @Doctrine\HasLifecycleCallbacks
  */
-class Project extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteable
+class Project extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteable
 {
     /**
      * @MongoDB\Id
@@ -159,17 +159,18 @@ class Project extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDelet
     /**
      * Gibt die Namen der verknüpften Dokumente zurück
      *
-     * @return DocumentRelation[]|null
+     * @return \Retext\ApiBundle\Model\DocumentRelation[]|null
      */
     public function getRelatedDocuments()
     {
         $rootContainer = $this->getRootContainer();
         $textType = new TextType();
-        $progress = new ProjectProgress();
+        $progress = new \Retext\ApiBundle\Model\ProjectProgress();
         return array(
-            DocumentRelation::createFromDoc($rootContainer)->setHref($rootContainer->getSubject())->setRole('http://jsonld.retext.it/ontology/root'),
-            DocumentRelation::createFromDoc($textType)->setHref($textType->getSubject() . '?project=' . $this->getId())->setList(true),
-            DocumentRelation::createFromDoc($progress)->setHref($this->getSubject() . '/progress'),
+            \Retext\ApiBundle\Model\DocumentRelation::createFromDoc($rootContainer)->setHref($rootContainer->getSubject())->setRole('http://jsonld.retext.it/ontology/root'),
+            \Retext\ApiBundle\Model\DocumentRelation::createFromDoc($textType)->setHref($textType->getSubject() . '?project=' . $this->getId())->setList(true),
+            \Retext\ApiBundle\Model\DocumentRelation::createFromDoc($progress)->setHref($this->getSubject() . '/progress'),
+            \Retext\ApiBundle\Model\DocumentRelation::create()->setRelatedcontext('http://jsonld.retext.it/Element')->setList(true)->setRole('http://jsonld.retext.it/ontology/tree')->setHref($rootContainer->getSubject() . '/tree'),
         );
     }
 }

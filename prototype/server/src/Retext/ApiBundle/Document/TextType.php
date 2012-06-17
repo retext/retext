@@ -12,7 +12,7 @@ use JMS\SerializerBundle\Annotation as SerializerBundle;
  * @MongoDB\UniqueIndex(keys={"project"="asc", "name"="asc"})
  * @Doctrine\HasLifecycleCallbacks
  */
-class TextType extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteable
+class TextType extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteable
 {
     /**
      * @MongoDB\Id
@@ -158,12 +158,12 @@ class TextType extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDele
     /**
      * Gibt die Namen der verknüpften Dokumente zurück
      *
-     * @return DocumentRelation
+     * @return \Retext\ApiBundle\Model\DocumentRelation
      */
     public function getRelatedDocuments()
     {
         return array(
-            DocumentRelation::createFromDoc($this->getProject()),
+            \Retext\ApiBundle\Model\DocumentRelation::createFromDoc($this->getProject()),
         );
     }
 

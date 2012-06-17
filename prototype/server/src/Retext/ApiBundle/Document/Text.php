@@ -11,7 +11,7 @@ use JMS\SerializerBundle\Annotation as SerializerBundle;
  * @MongoDB\Document
  * @Doctrine\HasLifecycleCallbacks
  */
-class Text extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteable, Element
+class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteable, \Retext\ApiBundle\Model\Element
 {
     /**
      * @MongoDB\Id
@@ -308,7 +308,7 @@ class Text extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteab
     /**
      * Gibt die Namen der verknüpften Dokumente zurück
      *
-     * @return DocumentRelation
+     * @return \Retext\ApiBundle\Model\DocumentRelation
      */
     public function getRelatedDocuments()
     {
@@ -316,12 +316,12 @@ class Text extends Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteab
         $versions = new TextVersion();
         $comments = new Comment();
         return array(
-            DocumentRelation::createFromDoc($this->getProject()),
-            DocumentRelation::createFromDoc($this->getParent()),
-            DocumentRelation::createFromDoc($this->getType()),
-            DocumentRelation::createFromDoc($types)->setHref($types->getSubject() . '?project=' . $this->getProjectId())->setList(true),
-            DocumentRelation::createFromDoc($versions)->setHref($this->getSubject() . '/history')->setList(true),
-            DocumentRelation::createFromDoc($comments)->setHref($this->getSubject() . '/comments')->setList(true),
+            \Retext\ApiBundle\Model\DocumentRelation::createFromDoc($this->getProject()),
+            \Retext\ApiBundle\Model\DocumentRelation::createFromDoc($this->getParent()),
+            \Retext\ApiBundle\Model\DocumentRelation::createFromDoc($this->getType()),
+            \Retext\ApiBundle\Model\DocumentRelation::createFromDoc($types)->setHref($types->getSubject() . '?project=' . $this->getProjectId())->setList(true),
+            \Retext\ApiBundle\Model\DocumentRelation::createFromDoc($versions)->setHref($this->getSubject() . '/history')->setList(true),
+            \Retext\ApiBundle\Model\DocumentRelation::createFromDoc($comments)->setHref($this->getSubject() . '/comments')->setList(true),
         );
     }
 
