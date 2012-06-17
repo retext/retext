@@ -42,7 +42,5 @@ class ExportController extends Base
                 )
             );
         }
-
-
     }
 }
