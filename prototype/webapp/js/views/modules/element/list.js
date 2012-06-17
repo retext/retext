@@ -16,7 +16,7 @@ define([
         initialize:function () {
             _.extend(this, Backbone.Events);
             this.elements = new ElementCollection();
-            this.elements.url = this.model.get('container').getRelation('http://jsonld.retext.it/Element', true).get('href');
+            this.elements.url = this.model.get('container').getRelation('http://jsonld.retext.it/Element', true, 'http://jsonld.retext.it/ontology/child').get('href');
             this.elements.bind("reset", this.renderList, this);
             this.elements.bind("add", this.renderElement, this);
             this.elements.bind("change", this.change, this);

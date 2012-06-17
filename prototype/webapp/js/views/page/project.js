@@ -4,12 +4,13 @@ define([
     'views/modules/project/breadcrumb',
     'views/modules/project/mode-switcher',
     'views/modules/project/progress',
+    'views/modules/project/tree',
     'text!templates/page/project.html',
     'models/projectView',
     'models/project',
     'models/projectprogress',
     'models/container'
-], function (Vm, PageViewBase, BreadCrumbView, ModeSwitcherView, ProjectProgressView, ViewTemplate, ProjectViewModel, ProjectModel, ProjectProgressModel, ContainerModel) {
+], function (Vm, PageViewBase, BreadCrumbView, ModeSwitcherView, ProjectProgressView, ProjectTreeView, ViewTemplate, ProjectViewModel, ProjectModel, ProjectProgressModel, ContainerModel) {
     var View = PageViewBase.extend({
             template:_.template(ViewTemplate),
             events:{
@@ -40,6 +41,7 @@ define([
                 require(['views/modules/element/' + this.model.get('mode') + '/list'], function (ElementListView) {
                     that.viewFetched(ElementListView);
                 });
+                $(this.el).find('.view-project-tree').html(Vm.create(this, 'project-tree', ProjectTreeView, {model:this.model}).el);
             },
             viewFetched:function (elementListView) {
                 var el = $(this.el);
