@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle(),
             new Doctrine\Bundle\MongoDBSoftDeleteBundle\DoctrineMongoDBSoftDeleteBundle(),
+            new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
             new Retext\ApiBundle\RetextApiBundle(),
         );
 

@@ -60,6 +60,7 @@ swiftmailer:
     password:  %mailer_password%
     spool:     { type: memory }
 
+# MongoDB configuration
 doctrine_mongodb:
     connections:
         default:
@@ -70,3 +71,13 @@ doctrine_mongodb:
     document_managers:
         default:
             auto_mapping: true
+
+# wkhtmltopdf configuration
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     %kernel.root_dir%/../bin/wkhtmltopdf-amd64
+        options:
+          page-size: A4
+          orientation: Landscape
+          outline: true
