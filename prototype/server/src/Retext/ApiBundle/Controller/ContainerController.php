@@ -2,7 +2,7 @@
 
 namespace Retext\ApiBundle\Controller;
 
-use Retext\ApiBundle\RequestParamater, Retext\ApiBundle\Document\Project, Retext\ApiBundle\Document\Container;
+use Retext\ApiBundle\RequestParamater, Retext\ApiBundle\Document\Project, Retext\ApiBundle\Document\Container, Retext\ApiBundle\Model\TreeNode;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller,
 Symfony\Component\HttpFoundation\Response, Symfony\Component\HttpFoundation\Request;
@@ -139,4 +139,31 @@ class ContainerController extends Base
         }
         return $this->createResponse($breadcrumb);
     }
+
+    /**
+     * Gibt das Projekt als Baumstruktur zurück
+     *
+     * @Route("/container/{container_id}/tree", requirements={"_method":"GET"})
+     */
+    public function getContainerTreeAction($container_id)
+    {
+        $this->ensureLoggedIn();
+
+        $container = $this->getContainer($container_id);
+        $exportContainerChildren = $this->get('retext.apibundle.export.containerchildren');
+
+        $walkTree = function(Container $parent) use($exportContainerChildren, &$walkTree)
+        {
+            $elements = array();
+            foreach ($exportContainerChildren->getChildren($parent) as $childElement) {
+                $node = new TreeNode($childElement);
+                $elements[] = $node;
+                if ($childElement instanceof Container) $node->children = $walkTree($childElement);
+            }
+            return $elements;
+        };
+        $tree = $walkTree($container);
+        return $this->createResponse($tree);
+    }
+
 }

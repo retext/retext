@@ -260,7 +260,6 @@ class ContainerControllerTest extends Base
      */
     public function testTreeWithMixedElements()
     {
-        $this->markTestIncomplete('Noch nicht implementiert.');
         // Create project
         $project = self::$client->CREATE('/api/project', array('name' => 'Tree-Test-Project'));
         $root = self::$client->GET($this->getRelationHref($project, 'http://jsonld.retext.it/Container', false, 'http://jsonld.retext.it/ontology/root'));
@@ -272,12 +271,34 @@ class ContainerControllerTest extends Base
         self::$client->CREATE('/api/container', array('parent' => $l1->id, 'name' => '1.1.1'));
         self::$client->CREATE('/api/container', array('parent' => $l1->id, 'name' => '1.1.2'));
         self::$client->CREATE('/api/text', array('parent' => $l1->id, 'name' => 'Copy 1'));
-        self::$client->CREATE('/api/container', array('parent' => $project->rootContainer, 'name' => '1.2'));
-        self::$client->CREATE('/api/container', array('parent' => $project->rootContainer, 'name' => '1.3'));
+        self::$client->CREATE('/api/container', array('parent' => $root->id, 'name' => '1.2'));
+        self::$client->CREATE('/api/container', array('parent' => $root->id, 'name' => '1.3'));
 
         $tree = self::$client->GET($this->getRelationHref($project, 'http://jsonld.retext.it/Element', true, 'http://jsonld.retext.it/ontology/tree'));
         $this->assertInternalType('array', $tree);
-        $this->assertEquals(8, count($tree));
+        $this->assertEquals(5, count($tree));
+        $this->assertEquals($tree[0]->data->name, 'Headline');
+        $this->assertEquals($tree[0]->data->{'@context'}, 'http://jsonld.retext.it/Text');
+        $this->assertEquals(0, count($tree[0]->children));
+        $this->assertEquals($tree[1]->data->name, '1.1');
+        $this->assertEquals($tree[1]->data->{'@context'}, 'http://jsonld.retext.it/Container');
+        $this->assertEquals(3, count($tree[1]->children));
+        $this->assertEquals($tree[2]->data->name, 'Copy 1');
+        $this->assertEquals($tree[2]->data->{'@context'}, 'http://jsonld.retext.it/Text');
+        $this->assertEquals(0, count($tree[2]->children));
+        $this->assertEquals($tree[3]->data->name, '1.2');
+        $this->assertEquals($tree[3]->data->{'@context'}, 'http://jsonld.retext.it/Container');
+        $this->assertEquals(0, count($tree[3]->children));
+        $this->assertEquals($tree[4]->data->name, '1.3');
+        $this->assertEquals($tree[4]->data->{'@context'}, 'http://jsonld.retext.it/Container');
+        $this->assertEquals(0, count($tree[4]->children));
+
+        $this->assertEquals($tree[1]->children[0]->data->name, '1.1.1');
+        $this->assertEquals($tree[1]->children[0]->data->{'@context'}, 'http://jsonld.retext.it/Container');
+        $this->assertEquals($tree[1]->children[1]->data->name, '1.1.2');
+        $this->assertEquals($tree[1]->children[1]->data->{'@context'}, 'http://jsonld.retext.it/Container');
+        $this->assertEquals($tree[1]->children[2]->data->name, 'Copy 1');
+        $this->assertEquals($tree[1]->children[2]->data->{'@context'}, 'http://jsonld.retext.it/Text');
     }
 
 }
