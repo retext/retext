@@ -28,7 +28,7 @@
 
  <rule ref="Generic.PHP.DisallowShortOpenTag"/>
  <rule ref="Generic.PHP.NoSilencedErrors"/>
- <rule ref="Generic.PHP.UpperCaseConstant"/>
+ <!-- <rule ref="Generic.PHP.UpperCaseConstant"/> -->
 
  <rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
  <rule ref="Generic.WhiteSpace.ScopeIndent"/>
