@@ -117,6 +117,12 @@
     background-color: #D7FFD7;
 }
 
+.gui-check-text q.text {
+    display: inline-block;
+    height: 1.5em;
+    overflow: hidden;
+}
+
 /* Misc */
 
 #toggleleft {
@@ -163,6 +169,15 @@ ul.texthistory span.time {
 
 .projectprogress.compact dd.total {
     display: block;
+}
+
+/* Text Info */
+blockquote.multiline p {
+    margin-bottom: 1em;
+}
+blockquote.multiline p:after {
+    content: " ¶";
+    color: #c0c0c0;
 }
 
 /* Semantic helpers */

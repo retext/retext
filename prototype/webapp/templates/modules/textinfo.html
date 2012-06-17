@@ -45,13 +45,16 @@
 </table>
 <h3>Text</h3>
 <% if (model.text != null && model.text.length > 0) { %>
-<blockquote>
-    <% if(model.typeData.multiline) { %>
+<% if(model.typeData.multiline) { %>
+<blockquote class="multiline">
     <p><%= model.text.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1</p><p>$2') %></p>
-    <% } else { %>
-    <p><%= model.text %></p>
-    <% } %>
 </blockquote>
+<% } else { %>
+<blockquote>
+    <p><%= model.text %></p>
+</blockquote>
+<% } %>
+
 <% } else { %>
 <p><em>Kein Text.</em></p>
 <% } %>
