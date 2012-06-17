@@ -2,18 +2,16 @@
 
 namespace Retext\ApiBundle\Tests\Integration\Firstrun\Controller;
 
+use Retext\ApiBundle\Tests\Integration\ApiClient;
+
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class StatusControllerTest extends WebTestCase
 {
     public function testStatus()
     {
-        $client = static::createClient();
-        $client->request('GET', '/api/status');
-
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertEquals("application/json", $client->getResponse()->getHeader('Content-Type'));
-        $response = json_decode($client->getResponse()->getContent());
-        $this->assertObjectHasAttribute('time', $response);
+        $client = new ApiClient(static::createClient());
+        $status = $client->GET('/api/status');
+        $this->assertObjectHasAttribute('time', $status);
     }
 }

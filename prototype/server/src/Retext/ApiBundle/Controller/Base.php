@@ -21,8 +21,9 @@ abstract class Base extends Controller
      */
     public function createResponse($data = null)
     {
+        $request = $this->getRequest();
         $response = new ApiResponse();
-        $response->addHeader('Content-Type', 'application/json');
+
         /* CORS stuff
             ->addHeader('Access-Control-Allow-Origin', $this->getRequest()->headers->get('Origin'))
             ->addHeader('Access-Control-Allow-Credentials', 'true')
@@ -31,6 +32,8 @@ abstract class Base extends Controller
             ->addHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
         */
         if ($data !== null) {
+            if (!in_array('application/json', $request->getAcceptableContentTypes())) throw $this->createException(406, 'Not Acceptable | You must accept application/json');
+            $response->addHeader('Content-Type', 'application/json');
             $response->setContent($this->container->get('serializer')->serialize($data, 'json'));
         }
         return $response;
@@ -101,13 +104,6 @@ abstract class Base extends Controller
         return $this->getRequest()->getSession()->get('User');
     }
 
-    public function ensureRequest()
-    {
-        $request = $this->getRequest();
-        if (!in_array('application/json', $request->getAcceptableContentTypes())) throw $this->createException(406, 'Not Acceptable | You must accept application/json');
-        if ((int)$request->headers->get('Content-Length') > 0) if ($request->getContentType() != 'json') throw $this->createException(400, 'Bad Request | Content-Type must be application/json');
-    }
-
     /**
      * @param $key
      * @return array|string
@@ -115,7 +111,6 @@ abstract class Base extends Controller
      */
     public function getFromRequest()
     {
-        $this->ensureRequest();
         $request = $this->getRequest();
 
         if ($request->getMethod() === 'GET') {
@@ -128,6 +123,7 @@ abstract class Base extends Controller
                 return $request->query->get($key->getName());
             };
         } else {
+            if ((int)$request->headers->get('Content-Length') > 0) if ($request->getContentType() != 'json') throw $this->createException(400, 'Bad Request | Content-Type must be application/json');
             $data = json_decode($request->getContent());
             if ($data === null) $data = new \stdClass();
             if (is_array($data)) throw $this->createException(400, 'Bad Request | Must send object, array sent.');

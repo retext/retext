@@ -19,17 +19,18 @@ class ApiClient
         $header = array('HTTP_ACCEPT' => 'application/json');
         if ($method !== 'GET') $header['HTTP_CONTENT_TYPE'] = 'application/json';
         $this->client->request($method, $url, array(), array(), $header, json_encode($data));
-        $responseBody = $this->client->getResponse()->getContent();
-        if ($expectedStatus !== $this->client->getResponse()->getStatusCode()) throw new \Exception(sprintf("Expected status %d, got %d.\n%s %s\n> %s\n< %s", $expectedStatus, $this->client->getResponse()->getStatusCode(), $method, $url, json_encode($data), $responseBody));
+        $responseBody = $this->getResponse()->getContent();
+        if ($expectedStatus !== $this->getResponse()->getStatusCode()) throw new \Exception(sprintf("Expected status %d, got %d.\n%s %s\n> %s\n< %s", $expectedStatus, $this->getResponse()->getStatusCode(), $method, $url, json_encode($data), $responseBody));
 
         if (empty($responseBody)) return null;
+        if ($this->getResponse()->headers->get('Content-Type') != "application/json") throw new \Exception(sprintf("Expected response to be application/json, got %s instead", $this->getResponse()->headers->get('Content-Type')));
         $result = json_decode($responseBody);
         if ($expectedStatus === 201) {
             foreach (array('@context', '@subject') as $prop) {
                 if (!property_exists($result, $prop)) throw new \Exception(sprintf('Missing attribute %s', $prop));
                 if ($result->$prop == null) throw new \Exception(sprintf('Attribute %s must not be null', $prop));
             }
-            $location = $this->client->getResponse()->getHeader('Location');
+            $location = $this->getResponse()->headers->get('Location');
             if (empty($location)) throw new \Exception('Response must contain a Location header');
             if ($location !== $result->{'@subject'}) throw new \Exception('Location header must equal @subject: ' . $location);
         }
@@ -59,5 +60,13 @@ class ApiClient
     public function DELETE($url)
     {
         return $this->doRequest('DELETE', $url);
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function getResponse()
+    {
+        return $this->client->getResponse();
     }
 }

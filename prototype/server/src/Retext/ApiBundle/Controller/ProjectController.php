@@ -41,7 +41,6 @@ class ProjectController extends Base
     public function getProjectAction($id)
     {
         $this->ensureLoggedIn();
-        $this->ensureRequest();
 
         return $this->createResponse($this->getProject($id));
     }
@@ -68,7 +67,6 @@ class ProjectController extends Base
     public function listProjectAction()
     {
         $this->ensureLoggedIn();
-        $this->ensureRequest();
 
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $projects = $dm->getRepository('RetextApiBundle:Project')
