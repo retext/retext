@@ -175,9 +175,20 @@ ul.texthistory span.time {
 blockquote.multiline p {
     margin-bottom: 1em;
 }
+
 blockquote.multiline p:after {
     content: " ¶";
     color: #c0c0c0;
+}
+
+/* Tree */
+.projecttree ul {
+    list-style: none;
+    margin: 0 0 0 1.5em;
+}
+
+.projecttree ul.hide-texts li.gui-text-node {
+    display: none;
 }
 
 /* Semantic helpers */

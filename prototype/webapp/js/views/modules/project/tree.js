@@ -1,8 +1,12 @@
 define([
     'collections/treenode',
-], function (TreenodeCollection) {
+    'text!templates/modules/project/tree.html'
+], function (TreenodeCollection, ModuleTemplate) {
     return Backbone.View.extend({
         className:'projecttree',
+        events:{
+            'click #tree-show-texts':'toggleTexts'
+        },
         initialize:function () {
             this.model.bind("change", this.render, this);
             this.tree = new TreenodeCollection();
@@ -10,20 +14,24 @@ define([
             this.tree.bind("reset", this.render, this);
         },
         render:function () {
-            var html = '<ul>';
+            var tree = '<ul class="gui-tree hide-texts">';
             _.each(this.tree.models, function (node) {
-                html += this.renderNode(node.get('data'), node.get('children'));
+                tree += this.renderNode(node.get('data'), node.get('children'));
             }, this);
-            html += '<ul>';
-            $(this.el).html(html);
+            tree += '<ul>';
+            $(this.el).html(ModuleTemplate);
+            $(this.el).find('.gui-tree').html(tree);
             return this;
         },
         renderNode:function (data, children) {
-            var nodeHtml = '<li>';
+            var nodeHtml = '';
             var link = false;
             if (data['@context'] == 'http://jsonld.retext.it/Container') {
+                nodeHtml += '<li class="gui-container-node"><i class="icon-list-alt"></i> ';
                 nodeHtml += '<a href="#project/' + data.project + '/' + this.model.get('mode') + '/' + data.id + '">';
                 link = true;
+            } else {
+                nodeHtml += '<li class="gui-text-node"><i class="icon-pencil"></i> ';
             }
             nodeHtml += '<span class="name">' + data.name + '</span>';
             if (link) nodeHtml += '</a>';
@@ -39,6 +47,14 @@ define([
         },
         complete:function () {
             this.tree.fetch();
+        },
+        toggleTexts:function (ev) {
+            var input = $(ev.target).closest('input');
+            if (_.isUndefined(input.attr('checked'))) {
+                $(this.el).find('ul.gui-tree').addClass('hide-texts');
+            } else {
+                $(this.el).find('ul.gui-tree').removeClass('hide-texts');
+            }
         }
     });
 });
