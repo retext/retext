@@ -1,6 +1,6 @@
 <?php
 
-namespace Retext\ApiBundle;
+namespace Retext\ApiBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 

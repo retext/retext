@@ -2,8 +2,7 @@
 
 namespace Retext\ApiBundle\Controller;
 
-use Retext\ApiBundle\ApiResponse,
-Retext\ApiBundle\RequestParamater,
+use Retext\ApiBundle\Controller\RequestParameter,
 Retext\ApiBundle\Model\LinkedData,
 Retext\ApiBundle\Model\Element;
 
@@ -17,7 +16,7 @@ abstract class Base extends Controller
 {
     /**
      * @param mixed|null $data
-     * @return \Retext\ApiBundle\ApiResponse
+     * @return \Retext\ApiBundle\Controller\ApiResponse
      */
     public function createResponse($data = null)
     {
@@ -42,7 +41,7 @@ abstract class Base extends Controller
     /**
      * @param mixed|null $data
      * @param mixed|null $order list of ids in the order the items should appear in the list
-     * @return \Retext\ApiBundle\ApiResponse
+     * @return \Retext\ApiBundle\Controller\ApiResponse
      */
     public function createListResponse($data = null, $order = null)
     {
@@ -114,11 +113,11 @@ abstract class Base extends Controller
         $request = $this->getRequest();
 
         if ($request->getMethod() === 'GET') {
-            $hasKey = function(RequestParamater $key) use($request)
+            $hasKey = function(RequestParameter $key) use($request)
             {
                 return $request->query->has($key->getName());
             };
-            $getKeyValue = function(RequestParamater $key) use($request)
+            $getKeyValue = function(RequestParameter $key) use($request)
             {
                 return $request->query->get($key->getName());
             };
@@ -127,11 +126,11 @@ abstract class Base extends Controller
             $data = json_decode($request->getContent());
             if ($data === null) $data = new \stdClass();
             if (is_array($data)) throw $this->createException(400, 'Bad Request | Must send object, array sent.');
-            $hasKey = function(RequestParamater $key) use($data)
+            $hasKey = function(RequestParameter $key) use($data)
             {
                 return property_exists($data, $key->getName());
             };
-            $getKeyValue = function(RequestParamater $key) use($data)
+            $getKeyValue = function(RequestParameter $key) use($data)
             {
                 return $data->{$key->getName()};
             };
@@ -140,9 +139,9 @@ abstract class Base extends Controller
 
         $getKey = function($key) use($hasKey, $getKeyValue)
         {
-            if (!($key instanceof RequestParamater)) {
-                /** @var \Retext\ApiBundle\RequestParamater $key  */
-                $key = RequestParamater::create($key);
+            if (!($key instanceof RequestParameter)) {
+                /** @var \Retext\ApiBundle\Controller\RequestParameter $key  */
+                $key = RequestParameter::create($key);
             }
             if (!$hasKey($key)) {
                 if ($key->isRequired()) {
@@ -172,14 +171,14 @@ abstract class Base extends Controller
                 return $key->getDefaultValue();
             }
             switch ($key->getFormat()) {
-                case RequestParamater::FORMAT_INTEGER:
+                case RequestParameter::FORMAT_INTEGER:
                     if (!preg_match('/^[0-9]+$/', $value)) throw $this->createException(400, 'Bad Request | input ' . $key->getName() . ' must be integer');
                     return (int)$value;
-                case RequestParamater::FORMAT_BOOLEAN:
+                case RequestParameter::FORMAT_BOOLEAN:
                     if (is_bool($value)) return $value;
                     if (!preg_match('/^true|false|0|1$/', $value)) throw $this->createException(400, 'Bad Request | input ' . $key->getName() . ' must be boolean');
                     return (boolean)$value;
-                case RequestParamater::FORMAT_LIST:
+                case RequestParameter::FORMAT_LIST:
                     $data = $value;
                     if (!is_array($data)) throw $this->createException(400, 'Bad Request | input ' . $key->getName() . ' must be list');
                     return $data;

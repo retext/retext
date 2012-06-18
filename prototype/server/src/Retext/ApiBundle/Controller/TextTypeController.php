@@ -2,7 +2,7 @@
 
 namespace Retext\ApiBundle\Controller;
 
-use Retext\ApiBundle\RequestParamater, Retext\ApiBundle\Document\Project, Retext\ApiBundle\Document\Text, Retext\ApiBundle\Document\TextType;
+use Retext\ApiBundle\Controller\RequestParameter, Retext\ApiBundle\Document\Project, Retext\ApiBundle\Document\Text, Retext\ApiBundle\Document\TextType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller,
 Symfony\Component\HttpFoundation\Response, Symfony\Component\HttpFoundation\Request;
@@ -28,7 +28,7 @@ class TextTypeController extends Base
     public function listTypesAction()
     {
         $this->ensureLoggedIn();
-        $project = $this->getProject($this->getFromRequest(new RequestParamater('project')));
+        $project = $this->getProject($this->getFromRequest(new RequestParameter('project')));
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         return $this->createListResponse($dm->getRepository('RetextApiBundle:TextType')
             ->createQueryBuilder()
@@ -49,11 +49,11 @@ class TextTypeController extends Base
         $texttype = $this->getTextType($id);
 
         // TODO: Check update permissions
-        $texttype->setName($this->getFromRequest(RequestParamater::create('name')->makeOptional()->defaultsTo($texttype->getName())));
-        $texttype->setFontsize($this->getFromRequest(RequestParamater::create('fontsize')->makeOptional()->makeInteger()->defaultsTo($texttype->getFontsize())));
-        $texttype->setFontname($this->getFromRequest(RequestParamater::create('fontname')->makeOptional()->defaultsTo($texttype->getFontname())));
-        $texttype->setDescription($this->getFromRequest(RequestParamater::create('description')->makeOptional()->defaultsTo($texttype->getDescription())));
-        $texttype->setMultiline($this->getFromRequest(RequestParamater::create('multiline')->makeOptional()->makeBoolean()->defaultsTo($texttype->getMultiline())));
+        $texttype->setName($this->getFromRequest(RequestParameter::create('name')->makeOptional()->defaultsTo($texttype->getName())));
+        $texttype->setFontsize($this->getFromRequest(RequestParameter::create('fontsize')->makeOptional()->makeInteger()->defaultsTo($texttype->getFontsize())));
+        $texttype->setFontname($this->getFromRequest(RequestParameter::create('fontname')->makeOptional()->defaultsTo($texttype->getFontname())));
+        $texttype->setDescription($this->getFromRequest(RequestParameter::create('description')->makeOptional()->defaultsTo($texttype->getDescription())));
+        $texttype->setMultiline($this->getFromRequest(RequestParameter::create('multiline')->makeOptional()->makeBoolean()->defaultsTo($texttype->getMultiline())));
 
         $dm->persist($texttype);
         $dm->flush();

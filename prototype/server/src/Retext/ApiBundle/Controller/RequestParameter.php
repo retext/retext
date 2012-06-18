@@ -1,8 +1,8 @@
 <?php
 
-namespace Retext\ApiBundle;
+namespace Retext\ApiBundle\Controller;
 
-class RequestParamater
+class RequestParameter
 {
     const FORMAT_STRING = 1;
     const FORMAT_INTEGER = 2;
@@ -32,11 +32,11 @@ class RequestParamater
     /**
      * @static
      * @param $name
-     * @return \Retext\ApiBundle\RequestParamater
+     * @return \Retext\ApiBundle\Controller\RequestParameter
      */
     public static function create($name)
     {
-        return new RequestParamater($name);
+        return new RequestParameter($name);
     }
 
     public function __construct($name)
@@ -61,7 +61,7 @@ class RequestParamater
     }
 
     /**
-     * @return \Retext\ApiBundle\RequestParamater
+     * @return \Retext\ApiBundle\Controller\RequestParameter
      */
     public function makeOptional()
     {
@@ -71,7 +71,7 @@ class RequestParamater
 
     /**
      * @param mixed $value
-     * @return \Retext\ApiBundle\RequestParamater
+     * @return \Retext\ApiBundle\Controller\RequestParameter
      */
     public function defaultsTo($value)
     {
@@ -88,7 +88,7 @@ class RequestParamater
     }
 
     /**
-     * @return \Retext\ApiBundle\RequestParamater
+     * @return \Retext\ApiBundle\Controller\RequestParameter
      */
     public function makeInteger()
     {
@@ -97,7 +97,7 @@ class RequestParamater
     }
 
     /**
-     * @return \Retext\ApiBundle\RequestParamater
+     * @return \Retext\ApiBundle\Controller\RequestParameter
      */
     public function makeBoolean()
     {
@@ -114,7 +114,7 @@ class RequestParamater
     }
 
     /**
-     * @return \Retext\ApiBundle\RequestParamater
+     * @return \Retext\ApiBundle\Controller\RequestParameter
      */
     public function makeList()
     {

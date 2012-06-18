@@ -2,7 +2,7 @@
 
 namespace Retext\ApiBundle\Controller;
 
-use Retext\ApiBundle\RequestParamater, Retext\ApiBundle\Document\Project, Retext\ApiBundle\Document\Container;
+use Retext\ApiBundle\Controller\RequestParameter, Retext\ApiBundle\Document\Project, Retext\ApiBundle\Document\Container;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller,
 Symfony\Component\HttpFoundation\Response, Symfony\Component\HttpFoundation\Request;
@@ -18,7 +18,7 @@ class ElementController extends Base
     public function listElementAction()
     {
         $this->ensureLoggedIn();
-        $parent = $this->getContainer($this->getFromRequest(RequestParamater::create('parent')));
+        $parent = $this->getContainer($this->getFromRequest(RequestParameter::create('parent')));
         $exportContainerChildren = $this->get('retext.apibundle.export.containerchildren');
         return $this->createListResponse($exportContainerChildren->getChildren($parent));
     }

@@ -2,7 +2,7 @@
 
 namespace Retext\ApiBundle\Controller;
 
-use Retext\ApiBundle\RequestParamater, Retext\ApiBundle\Document\Project, Retext\ApiBundle\Document\Container, Retext\ApiBundle\Model\TreeNode;
+use Retext\ApiBundle\Controller\RequestParameter, Retext\ApiBundle\Document\Project, Retext\ApiBundle\Document\Container, Retext\ApiBundle\Model\TreeNode;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller,
 Symfony\Component\HttpFoundation\Response, Symfony\Component\HttpFoundation\Request;
@@ -26,7 +26,7 @@ class ContainerController extends Base
         $container = new Container();
         $container->setProject($project);
         $container->setParent($parent);
-        $container->setName($this->getFromRequest(RequestParamater::create('name')->makeOptional()->defaultsTo(null)));
+        $container->setName($this->getFromRequest(RequestParameter::create('name')->makeOptional()->defaultsTo(null)));
 
         $dm->persist($container);
         $dm->flush();
@@ -43,7 +43,7 @@ class ContainerController extends Base
      */
     protected function getProjectAndParent()
     {
-        $parent = $this->getContainer($this->getFromRequest(RequestParamater::create('parent')));
+        $parent = $this->getContainer($this->getFromRequest(RequestParameter::create('parent')));
         $project = $parent->getProject();
         return array($parent, $project);
     }
@@ -83,8 +83,8 @@ class ContainerController extends Base
         $container = $this->getContainer($container_id);
 
         // TODO: Check update permissions
-        $container->setName($this->getFromRequest(RequestParamater::create('name')->makeOptional()->defaultsTo($container->getName())));
-        $container->setChildOrder($this->getFromRequest(RequestParamater::create('childOrder')->makeOptional()->makeList()->defaultsTo($container->getChildOrder())));
+        $container->setName($this->getFromRequest(RequestParameter::create('name')->makeOptional()->defaultsTo($container->getName())));
+        $container->setChildOrder($this->getFromRequest(RequestParameter::create('childOrder')->makeOptional()->makeList()->defaultsTo($container->getChildOrder())));
 
         $dm->persist($container);
         $dm->flush();

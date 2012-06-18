@@ -2,7 +2,7 @@
 
 namespace Retext\ApiBundle\Controller;
 
-use Retext\ApiBundle\RequestParamater,
+use Retext\ApiBundle\Controller\RequestParameter,
 Retext\ApiBundle\Document\Project,
 Retext\ApiBundle\Document\Text,
 Retext\ApiBundle\Document\TextVersion,
@@ -24,15 +24,15 @@ class TextController extends Base
     {
         $this->ensureLoggedIn();
 
-        $parent = $this->getContainer($this->getFromRequest(RequestParamater::create('parent')));
+        $parent = $this->getContainer($this->getFromRequest(RequestParameter::create('parent')));
         $project = $parent->getProject();
 
-        $type = $this->getTypeByName($project, $this->getFromRequest(RequestParamater::create('type')->makeOptional()->defaultsTo('default')));
+        $type = $this->getTypeByName($project, $this->getFromRequest(RequestParameter::create('type')->makeOptional()->defaultsTo('default')));
         $text = new Text();
         $text->setProject($project);
         $text->setParent($parent);
-        $text->setName($this->getFromRequest(RequestParamater::create('name')->makeOptional()->defaultsTo(null)));
-        $textValue = $this->getFromRequest(RequestParamater::create('text')->makeOptional()->defaultsTo(null));
+        $text->setName($this->getFromRequest(RequestParameter::create('name')->makeOptional()->defaultsTo(null)));
+        $textValue = $this->getFromRequest(RequestParameter::create('text')->makeOptional()->defaultsTo(null));
         $text->setText($textValue);
         $text->setType($type);
 
@@ -63,13 +63,13 @@ class TextController extends Base
         $text = $this->getText($text_id);
 
         // TODO: Check update permissions
-        $text->setName($this->getFromRequest(RequestParamater::create('name')->makeOptional()->defaultsTo($text->getName())));
-        $userComment = $this->getFromRequest(RequestParamater::create('comment')->makeOptional());
+        $text->setName($this->getFromRequest(RequestParameter::create('name')->makeOptional()->defaultsTo($text->getName())));
+        $userComment = $this->getFromRequest(RequestParameter::create('comment')->makeOptional());
 
         // Freigabe
-        $newSpellingApproved = $this->getFromRequest(RequestParamater::create('spellingApproved')->makeOptional()->makeBoolean()->defaultsTo($text->getSpellingApproved()));
-        $newContentApproved = $this->getFromRequest(RequestParamater::create('contentApproved')->makeOptional()->makeBoolean()->defaultsTo($text->getContentApproved()));
-        $newApproved = $this->getFromRequest(RequestParamater::create('approved')->makeOptional()->makeBoolean()->defaultsTo($text->getApproved()));
+        $newSpellingApproved = $this->getFromRequest(RequestParameter::create('spellingApproved')->makeOptional()->makeBoolean()->defaultsTo($text->getSpellingApproved()));
+        $newContentApproved = $this->getFromRequest(RequestParameter::create('contentApproved')->makeOptional()->makeBoolean()->defaultsTo($text->getContentApproved()));
+        $newApproved = $this->getFromRequest(RequestParameter::create('approved')->makeOptional()->makeBoolean()->defaultsTo($text->getApproved()));
 
         $comment = '';
         if ($newSpellingApproved !== $text->getSpellingApproved()) {
@@ -87,7 +87,7 @@ class TextController extends Base
         $text->setContentApproved($newContentApproved);
         $text->setApproved($newApproved);
 
-        $newText = $this->getFromRequest(RequestParamater::create('text')->makeOptional()->defaultsTo($text->getText()));
+        $newText = $this->getFromRequest(RequestParameter::create('text')->makeOptional()->defaultsTo($text->getText()));
         if ($newText != $text->getText()) {
             $textVersion = new TextVersion();
             $textVersion->setProject($text->getProject());
@@ -96,7 +96,7 @@ class TextController extends Base
             $dm->persist($textVersion);
         }
         $text->setText($newText);
-        $typeName = $this->getFromRequest(RequestParamater::create('type')->makeOptional()->defaultsTo($text->getTypeName()));
+        $typeName = $this->getFromRequest(RequestParameter::create('type')->makeOptional()->defaultsTo($text->getTypeName()));
         if ($typeName !== null) $text->setType($this->getTypeByName($text->getProject(), $typeName));
 
         $dm->persist($text);
@@ -205,7 +205,7 @@ class TextController extends Base
     {
         $this->ensureLoggedIn();
         $text = $this->getText($text_id);
-        $comment = $this->createComment($text, $this->getFromRequest(RequestParamater::create('comment')));
+        $comment = $this->createComment($text, $this->getFromRequest(RequestParameter::create('comment')));
         return $this->createResponse($comment)->setStatusCode(201)->addHeader('Location', $comment->getSubject());
     }
 
