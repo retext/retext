@@ -21,7 +21,7 @@ define([
             } else {
                 el.removeClass('selected');
             }
-            _.each(['name', 'text', 'commentCount'], function (attribute) {
+            _.each(['name', 'text', 'commentCount', 'type'], function (attribute) {
                 var val = this.model.get(attribute);
                 var attrElem = el.find('[data-attribute="' + attribute + '"]');
                 attrElem.html(
