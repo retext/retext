@@ -1,0 +1,102 @@
+digraph G {
+rankdir=BT
+
+node [ shape=box ]
+
+Base [ label="Base\n&lt;&lt;abstract&gt;&gt;" ]
+BaseModel [ label="Base\n&lt;&lt;abstract&gt;&gt;" ]
+ConcreteController [ shape=folder label="…Controller" ]
+ContainerChildren
+ContentBooklet
+ApiResponse
+Tests [ label="…Tests" shape=folder ]
+Exception [ label="…Exception" shape=folder ]
+Document [ label="…Document" shape=folder ]
+Model [ label="…Model" shape=folder ]
+Command [ label="…Command" shape=folder ]
+
+
+node [ shape=none style=filled color=yellow fontcolor="#666666" fontsize=8 ]
+
+ControllerComment [ label="Konkrete Controller:\n\lContainerController\lDummyController\lElementController\lExportController\lLoginController\lProjectController\lRegisterController\lRequestParameter\lSatusController\lTextController\lTextTypeController\l" ]
+
+DocumentComment [ label="Persistierte Models:\n\lProjekt\lContainer\lText\lTextType\lTextVersion\lComment\lUser\l" ]
+CommandComment [ label="Commands stehen\nim Symfony2 CLI\nzur Verfügung" ]
+ApiResponseComment [ label="Abstrahiert API-Kommunikation\naus den Controllern" ]
+ContainerChildrenComment [ label="Hilfsklasse zum\nErstellen von\nBaumstrukturen des\nProjekts" ]
+
+ContentBookletComment [ label="Exportiert das\ngesamte Projekt\nals Booklet" ]
+ModelComment [ label="Nicht-persistente Models:\n\lBreadcrumb\lDocumentRelation\lElement\lLinkedData\lProjectProgress\lTreeNode\l" ]
+
+subgraph cluster0 {
+label="Controller"
+
+Base
+ConcreteController
+ApiResponse
+ControllerComment
+ApiResponseComment
+
+}
+
+subgraph cluster1 {
+label="Export"
+
+ContainerChildren
+ContentBooklet
+ContentBookletComment
+ContainerChildrenComment
+
+}
+
+subgraph cluster2 {
+label="Test"
+Tests
+}
+subgraph cluster3 {
+label="Exception"
+Exception
+}
+
+subgraph cluster4 {
+label="Document"
+Document
+DocumentComment
+}
+
+subgraph cluster5 {
+label="Model"
+Model
+ModelComment
+BaseModel
+
+}
+
+subgraph cluster6 {
+label="Command"
+Command
+CommandComment
+}
+
+edge [ arrowhead=onormal ]
+
+Document -> BaseModel
+Model -> BaseModel
+ConcreteController -> Base
+
+edge [ arrowhead=none penwidth=4 weight=0 color=yellow ]
+
+ControllerComment -> ConcreteController
+DocumentComment -> Document
+CommandComment -> Command
+ContainerChildrenComment -> ContainerChildren
+ContentBookletComment -> ContentBooklet
+ModelComment -> Model
+
+
+ApiResponseComment -> ApiResponse
+
+}
+
+
+
