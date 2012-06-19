@@ -4,7 +4,9 @@ Für den Prototypen wurden das PHP-Framework \trademark{Symfony2}\footnote{\url{
 
 \subsubsection{API}\label{l:api-implementierung}
 
-Alle Funktionen des Anwendungsservers sind über eine Schnittstelle verwendbar, die JSON-Objekte enthalten dabei Zusatzinformationen zum Kontext und zu Relationen, wie in Abschnitt \ref{l:anbindung-gui} / S.\pageref{l:anbindung-gui} beschrieben. 
+Die API des Anwendungsservers wurde als RESTful-API implementiert und deckt alle Funktionen des Anwendungsservers ab. Sie folgt dem CRUD-Paradigme und unterstützt dementsprechen die jeweiligen Methoden: \texttt{POST} zum Erzeugen von (CREATE), \texttt{GET} zum Lesen von Daten (READ), \texttt{PUT} zum Aktualisieren bestehender Daten (UPDATE) und \texttt{DELETE} zum Löschen von Daten. Datenobjekte werden als JSON-Objekte übertragen, bei \texttt{GET}-Anfragen sind URL-Parameter zulässig. Eine Aufstellung aller implementierten API-Endpunkte findet sich in Anhang \ref{l:api-endpoints} / \pageref{l:api-endpoints}.
+
+Die ausgelieferten JSON-Objekte enthalten Zusatzinformationen zum Kontext und zu Relationen, wie in Abschnitt \ref{l:anbindung-gui} / S.\pageref{l:anbindung-gui} beschrieben. 
 
 \begin{samepage}
 \begin{verbatim}

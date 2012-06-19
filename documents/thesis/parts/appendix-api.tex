@@ -1,0 +1,84 @@
+\section{API-Endpunkte}\label{l:api-endpoints}
+
+\subsection{Benutzer}
+
+\begin{tabular}{@{}l l l}
+\textbf{Methode} & \textbf{Pfad} & \textbf{Beschreibung}\\
+\hline\\[-1.5ex]
+\texttt{POST} & \texttt{/user} & Benutzer registrieren\\
+\texttt{POST} & \texttt{/login} & Login\\
+\texttt{POST} & \texttt{/logout} & Logout\\
+\texttt{GET} & \texttt{/auth} & Sitzungsstatus abfragen\\
+\texttt{GET} & \texttt{/user/<id>} & Benutzerprofil laden\\
+\end{tabular}
+
+\subsection{Projekt}
+
+\begin{tabular}{@{}l l l}
+\textbf{Methode} & \textbf{Pfad} & \textbf{Beschreibung}\\
+\hline\\[-1.5ex]
+\texttt{POST} & \texttt{/project} & Neues Projekt anlegen\\
+\texttt{GET} & \texttt{/project} & Liste mit Projekten des Nutzers laden\\
+\texttt{GET} & \texttt{/project/<id>} & Projekt laden\\
+\texttt{GET} & \texttt{/project/<id>/progress} & Fortschritt des Projektes laden\\
+\end{tabular}
+
+\subsection{Elemente}
+
+\begin{tabular}{@{}l l l}
+\textbf{Methode} & \textbf{Pfad} & \textbf{Beschreibung}\\
+\hline\\[-1.5ex]
+\texttt{GET} & \texttt{/element} & Liste mit Elementen (Container, Text) unterhalb eines Elementes laden\\
+\end{tabular}
+
+\subsection{Container}
+
+\begin{tabular}{@{}l l l}
+\textbf{Methode} & \textbf{Pfad} & \textbf{Beschreibung}\\
+\hline\\[-1.5ex]
+\texttt{POST} & \texttt{/container}& Container anlegen\\
+\texttt{GET} & \texttt{/container} & Liste mit Containernunterhalb eines Elementes laden\\
+\texttt{GET} & \texttt{/container/<id>} & Container laden\\
+\texttt{PUT} & \texttt{/container/<id>} & Container aktualisieren\\
+\texttt{DELETE} & \texttt{/container/<id>} & Container löschen\\
+\texttt{GET} & \texttt{/container/<id>/breadcrumb} & Navigationspfad ab einem Container bis zum\\
+&&obersten Container laden\\
+\texttt{GET} & \texttt{/container/<id>/tree} & Baumstruktur ab einem Container laden\\
+\end{tabular}
+
+\subsection{Texte}
+
+\begin{tabular}{@{}l l l}
+\textbf{Methode} & \textbf{Pfad} & \textbf{Beschreibung}\\
+\hline\\[-1.5ex]
+\texttt{POST} & \texttt{/text} & Text anlegen\\
+\texttt{GET} & \texttt{/text/<id>} & Text laden\\
+\texttt{PUT} & \texttt{/text/<id>} & Text aktualisieren\\
+\texttt{DELETE} & \texttt{/text/<id>}\\
+\texttt{POST} & \texttt{/text/<id>/comments} & Kommentar zu einem Text anlegen\\
+\texttt{GET} & \texttt{/text/<id>/comments} & Kommentare zu einem Text laden\\
+\texttt{GET} & \texttt{/text/<id>/history} & Änderungshistorie zu einem Text laden\\
+\end{tabular}
+
+\subsection{Text-Typen}
+
+\begin{tabular}{@{}l l l}
+\textbf{Methode} & \textbf{Pfad} & \textbf{Beschreibung}\\
+\hline\\[-1.5ex]
+\texttt{GET} & \texttt{/texttype} & Liste mit Text-Typen eines Projektes laden\\
+\texttt{GET} & \texttt{/texttype/<id>} & Text-Typ laden\\
+\texttt{PUT} & \texttt{/texttype/<id>} & Text-Typ aktualisieren\\
+\end{tabular}
+
+\subsection{Export}
+
+\begin{tabular}{@{}l l l}
+\textbf{Methode} & \textbf{Pfad} & \textbf{Beschreibung}\\
+\hline\\[-1.5ex]
+\texttt{GET} & \texttt{/export/contentbooklet.pdf} & Content-Booklet eines Projektes\\
+&&als PDF exportieren\\
+\texttt{GET} & \texttt{/export/contentbooklet.html} & Content-Booklet eines Projektes\\
+&&als HTML exportieren\\
+\end{tabular}
+
+\pagebreak
