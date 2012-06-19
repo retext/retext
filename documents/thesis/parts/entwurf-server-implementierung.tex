@@ -10,7 +10,7 @@ Da im Kern jeder Web-Anwendung HTTP-Anfragen beantwortet werden, überträgt \tr
 
 Die API des Anwendungsservers wurde als RESTful-API implementiert und deckt alle Funktionen des Anwendungsservers ab. Sie folgt dem CRUD-Paradigme und unterstützt dementsprechen die jeweiligen Methoden: \texttt{POST} zum Erzeugen von (CREATE), \texttt{GET} zum Lesen von Daten (READ), \texttt{PUT} zum Aktualisieren bestehender Daten (UPDATE) und \texttt{DELETE} zum Löschen von Daten. Datenobjekte werden als JSON-Objekte übertragen, bei \texttt{GET}-Anfragen sind URL-Parameter zulässig. Eine Aufstellung aller implementierten API-Endpunkte findet sich in Anhang \ref{l:api-endpoints} / \pageref{l:api-endpoints}.
 
-Die ausgelieferten JSON-Objekte enthalten Zusatzinformationen zum Kontext und zu Relationen, wie in Abschnitt \ref{l:anbindung-gui} / S.\pageref{l:anbindung-gui} beschrieben. 
+Die ausgelieferten JSON-Objekte enthalten Zusatzinformationen zum Kontext und zu Relationen, wie in Abschnitt \ref{l:anbindung-gui} · S.\pageref{l:anbindung-gui} beschrieben. 
 
 \begin{samepage}
 \begin{verbatim}
@@ -50,7 +50,7 @@ Dieses Listing zeigt als Beispiel das JSON-Objekt eines Containers. In der \text
 \captionof{figure}{Persistierte Objekte im Prototypen}\label{chart:prototype-persistenz}
 \end{center}
 
-Zum Persistieren der Daten kommt \trademark{MongoDB}\footnote{\url{http://www.mongodb.org/}}, eine No-SQL-Datenbank zum Einsatz, diese ermöglicht das unkomplizierte speichern auch komplexer Dokumentenstrukturen. Die Wahl einer nicht-relationen Datenbank bietet den Vorteil, dass aufwändiges Zusammensetzen und Zerlegen von Dokumenten entfallen kann. In der Datenbank werden die in Abbildung \ref{chart:prototype-persistenz} gezeigten Domänenobjekte gespeichert. Das Laden- und Speichern ist durch den Einsatz eines Object-Document-Mappers (ODM) für Doctrine 2 und MongoDB\footnote{\url{https://github.com/doctrine/mongodb-odm}} weitestgehend automatisiert. Dieses Modell ist deutlich einfacher als das in Abschnitt \ref{l:domänenmodell} / S.\pageref{l:domänenmodell} vorgestellte Domänenmodell, da im Prototyp nur wenige, entscheidende Funktionen implementiert wurden.
+Zum Persistieren der Daten kommt \trademark{MongoDB}\footnote{\url{http://www.mongodb.org/}}, eine No-SQL-Datenbank zum Einsatz, diese ermöglicht das unkomplizierte speichern auch komplexer Dokumentenstrukturen. Die Wahl einer nicht-relationen Datenbank bietet den Vorteil, dass aufwändiges Zusammensetzen und Zerlegen von Dokumenten entfallen kann. In der Datenbank werden die in Abbildung \ref{chart:prototype-persistenz} gezeigten Domänenobjekte gespeichert. Das Laden- und Speichern ist durch den Einsatz eines Object-Document-Mappers (ODM) für Doctrine 2 und MongoDB\footnote{\url{https://github.com/doctrine/mongodb-odm}} weitestgehend automatisiert. Dieses Modell ist deutlich einfacher als das in Abschnitt \ref{l:domänenmodell} · S.\pageref{l:domänenmodell} vorgestellte Domänenmodell, da im Prototyp nur wenige, entscheidende Funktionen implementiert wurden.
 
 \subsubsection{Klassendiagramm}
 
