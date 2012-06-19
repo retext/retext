@@ -191,6 +191,8 @@ blockquote.multiline p:after {
     display: none;
 }
 
+.projecttree label.checkbox { float: right; }
+
 /* Semantic helpers */
 .center {
     text-align: center;
