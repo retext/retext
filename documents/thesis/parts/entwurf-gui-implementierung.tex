@@ -17,3 +17,14 @@ Alle genannten Komponenten sind umfangreich getestet und funktionieren in allen 
 \end{center}
 
 Abbildung \ref{chart:gui-prototyp} zeigt den Aufbau des GUI des Prototypen beispielhaft in der Ansicht zur Definition des Produktes (vgl. Abschnitt \ref{l:gui-definition} / \pageref{l:gui-definition}). Die Anordnung der Elemente aus dem Entwurf wurde weitgehend beibehalten. Unterschiede resultieren aus im Prototyp nicht implementierte Funktionen, die nicht mit Platzhalter-Elementen dargestellt werden, sondern entfallen. Weitere Screenshots finden sich in Anhang~\ref{l:screenshots} / S.\pageref{l:screenshots}.
+
+\subsubsection{Klassendiagramm}
+
+\begin{center}
+\includegraphics[width=\textwidth]{media/prototyp-gui-klassendiagramm.pdf}
+\captionof{figure}{GUI-Klassendiagramm des Prototypen}\label{chart:prototyp-gui-klassendiagramm}
+\end{center}
+
+Abbildung \ref{chart:prototyp-gui-klassendiagramm} zeigt das Klassendiagramm der browserbasierten Anwendung. Zentraler Einstiegspunkt ist die JavaScript-Datein \texttt{main.js}, die die Anwendung initialisiert. Dazu lädt sie mit Hilfe von \texttt{require.js} die notwendigen Komponenten. Dabei handelt es sich zum einem um die \texttt{AppView}, die grundlegende Zustände der Anwendung verwaltet und den \texttt{AppRouter}, der je nach aktueller Route die jeweilige \texttt{PageView} initialisiert und anzeigt. Die \texttt{PageViews} erzeigen danach wiederum eiogenständig die von ihnen benötigten Ansichten (\texttt{ModuleViews}, \texttt{MenuViews} und \texttt{FormViews}) und Laden die dafür benötigten Daten mithilfe der \texttt{Models} und \texttt{Collections} -- in \trademark{Backbone.js} sind \emph{Views} eigentlich Controller, eine Trennung zwischen Darstellungslogik und Businesslogik ist nicht vorgesehen. Den HTML-Quellcode zur Darstellung laden die Views ebenfalls selbständig aus dem \texttt{Templates} nach. Abhängigkeiten wie JavaScript-Objekte und Templates werden dabei zentral von \trademark{require.js} bereitgestellt, dass damit die Aufgabe eines DI-Containers übernimmt und praktisch auch so verwendet werden kann.
+
+Die Kommunikation mit der API wird durch die \trademark{Backbone.js}-Klassen \texttt{Backbone.Model} und \texttt{Backbone.Collection} abstrahiert, die RESTful-APIs ansprechen können, die dem CRUD-Paradigma entsprechen. Siehe dazu die Beschreibung der API-Implementierung in Abschnitt \ref{l:api-implementierung} / S.\pageref{l:api-implementierung}.

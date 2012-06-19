@@ -2,7 +2,7 @@
 
 Für den Prototypen wurden das PHP-Framework \trademark{Symfony2}\footnote{\url{http://symfony.com/}} eingesetzt, das von sich aus bereits viele Anforderungen aus dem vorangegangenen Abschnitt erfüllt. Da im Kern jeder Web-Anwendung HTTP-Anfragen beantwortet werden, überträgt \trademark{Symfony2} dieses Paradigma auf die Art und Weise, wie im Framework Anfragen verarbeitet werden: mit Hilfe einer Routen-Konfiguration werden Controller für auf bestimmt Pfade in der Anfrage-URL registriert und vom Framework automatisch instanziert und aufgerufen. Die Controller schreiben dann ihre Antwort in ein Antwort-Objekt, das vom Framework als Antwort gesendet wird. Oberstes Prinzip bei der Entwicklung des Frameworks war die Modularisierung und die Wiederverwendbarkeit, so dass alle Komponenten nur mit Hilfe eines Service-Containers kommunizieren. Dadurch sind \trademark{Symfony2} besonders leicht zu warten und auch zu testen, entsprechende Unit-Testing-Komponenten werden bereits mitgeliefert.
 
-\subsubsection{API}
+\subsubsection{API}\label{l:api-implementierung}
 
 Alle Funktionen des Anwendungsservers sind über eine Schnittstelle verwendbar, die JSON-Objekte enthalten dabei Zusatzinformationen zum Kontext und zu Relationen, wie in Abschnitt \ref{l:anbindung-gui} / S.\pageref{l:anbindung-gui} beschrieben. 
 

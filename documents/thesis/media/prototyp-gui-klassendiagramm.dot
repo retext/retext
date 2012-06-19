@@ -1,0 +1,90 @@
+
+# neato
+digraph G {
+rankdir=BT
+
+node [ shape=ellipse ]
+main [ label="main.js" ]
+require [ label="require.js" ]
+
+node [ shape=folder ]
+Views [ label="Views" ]
+Templates [ label="Templates" ]
+Models [ label="Models" ]
+Collections [ label="Collections" ]
+ModuleViews
+FormViews
+MenuViews
+PageViews
+
+node [ shape=record ]
+
+AppView [ label="{AppView|}" ]
+AppRouter [ label="{AppRouter|}" ]
+BackboneRouter [ label="{Backbone.Router|}" ]
+BackboneView [ label="{Backbone.View|}" ]
+ViewManager [ label="{ViewManager|}" ]
+BaseModel [ label="{BaseModel|}" ]
+Events [ label="{Events|}" ]
+BackboneModel [ label="{Backbone.Model|}" ]
+BackboneCollection [ label="{Backbone.Collection|}" ]
+
+# Notizen
+node [ shape=none style=filled color=yellow fontcolor="#666666" fontsize=10 ]
+CollectionsComment [ label="apistatus\lbreadcrumb\ltreenode\lcomment\ltexthistory\lelement\lmode\ltexttype\lgroup\litem\lproject\l" ]
+ModelsComment [ label="apistatus\lauth\lbreadcrumb\ltreenode\lrelation\ltextversion\lprojectprogress\lcontainer\lcomment\ldefaultapistatus\lregister\ltext\lprojectView\lelement\lmode\ltexttype\luser\lgroup\litem\lproject\l" ]
+ModuleViewsComment [ label="history\lproject/breadcrumb\lproject/list\lproject/mode-switcher\lproject/info\lproject/listing\lproject/progress\lproject/tree\ltexthistory\ltextcomments\lelement/structure/list\lelement/structure/container\lelement/structure/text\lelement/list\lelement/element\lelement/write/list\lelement/write/container\lelement/write/text\lelement/check/list\lelement/check/container\lelement/check/text\lcontainerinfo\ltextinfo\l" ]
+FormViewsComment [ label="container\ltext\ltexttype\litem\l" ]
+MenuViewsComment [ label="menu\lgroup\litem\l" ]
+PageViewsComment [ label="base\lprojects/list\lprojects/new\lstatus\lregister\llogin\llogout\lproject\l" ]
+TemplatesComments [ label="HTML-Templates" ]
+
+
+# Association
+edge [ arrowhead=none color="#999999" len=2 style=solid ]
+
+require -> ViewManager
+AppRouter -> require
+require -> Events
+Collections -> Models
+Templates -> require
+ViewManager -> Views
+Models -> require
+Collections -> require
+require -> Views
+require -> AppView
+require -> main
+
+# Composition
+# Composition usually has a strong life cycle dependency between instances of the container class and instances of the contained class(es): If the container is destroyed, normally every instance that it contains is destroyed as well.
+# The UML graphical representation of a composition relationship is a filled diamond shape on the containing class end of the tree of lines that connect contained class(es) to the containing class.
+edge [ arrowhead=diamond ]
+AppView -> AppRouter [ taillabel="1" headlabel="1" ]
+
+# Generalization
+edge [ arrowtail=none arrowhead=onormal color="#5abbe6" fontcolor="#5abbe6" weight=10 len=2 ]
+AppRouter -> BackboneRouter
+AppView -> Views
+Views -> BackboneView
+Models -> BaseModel -> BackboneModel
+Collections -> BackboneCollection
+
+# Unterteilung
+edge [ style=dotted color=black arrowhead=none ]
+ModuleViews -> Views
+FormViews -> Views
+MenuViews -> Views
+PageViews -> Views
+
+# Notizen
+edge [ arrowhead=none penwidth=4 weight=0 color=yellow headport=none tailport=none style=solid ]
+
+CollectionsComment -> Collections
+ModelsComment -> Models [ len=2.5 ]
+ModuleViewsComment -> ModuleViews [ len=2.5 ]
+FormViewsComment -> FormViews 
+PageViewsComment -> PageViews 
+MenuViewsComment -> MenuViews 
+TemplatesComments -> Templates
+
+}
