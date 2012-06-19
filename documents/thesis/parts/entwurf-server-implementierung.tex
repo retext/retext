@@ -7,11 +7,26 @@ Für den Prototypen wurden das PHP-Framework \trademark{Symfony2}\footnote{\url{
 \begin{center}
 \includegraphics[width=\textwidth]{media/prototyp-klassendiagramm.pdf}
 \end{center}
-\captionof{figure}{Klassendiagramm des Prototypen}\label{chart:prototyp-klassendiagramm}
+\captionof{figure}{Anwendungsserver-Klassendiagramm des Prototypen}\label{chart:prototyp-klassendiagramm}
 
 \bigskip
 
-Abbildung \ref{chart:prototyp-klassendiagramm} zeigt das Klassendiagramm der Implementierung des Prototypen.
+Abbildung \ref{chart:prototyp-klassendiagramm} zeigt das Klassendiagramm der Implementierung des Prototypen. Zentrale Komponente ist der Dependency-Injection-Container (DI-Container) des Symfony2-Frameworks, dieser instanziert je nach Pfad der Anfrage einen Controller und ruft dort die entsprechende Methode auf. Dieses Listing zeigt die am Beispiel des \texttt{LoginControllers}, in dem die Methode \texttt{loginAction} aufgerufen wird, wenn der Pfad \texttt{/login} lautet und die HTTP-Methode der Anfrage \texttt{POST} ist.
+
+\begin{samepage}
+\begin{verbatim}
+class LoginController extends Base {
+    /**
+     * @Route("/login", requirements={"_method":"POST"})
+     */
+    public function loginAction() { … }
+}
+\end{verbatim}
+\end{samepage}
+
+Innerhalb der Controller steht der DI-Container zur Verfügung über den dann z.B. der Object-Document-Mapper des Doctrine2-Frameworks (ODM) instaziert werden kann, um Daten aus der Datenbank zu laden. Der ODM verwendet zur Repräsentierung der Daten die Klassen aus dem Package \texttt{Documents}, die Controller können diese selber erzeugen, oder bekommen diese als Anfrage-Ergebnisse vom ODM übergeben.
+
+Funktionen, die an mehreren Stellen, oder über unterschiedliche Arten verwendet werden, wurden in eigene Services ausgelagert (\texttt{ContentBooklet} und \texttt{ContainerChildren}). Diese werden zum einen innerhalb der Controller verwendet, können aber auch über das CLI gestartet werden. \trademark{Symfony2} stellt ein einfache Möglichkeit zum Erstellen vom Operationen über die Kommandozeile zur Verfügung. Im Prototyp wurde das Anlegen von Demo-Projekt-Daten mithilfe dieser Möglichkeit realisiert. Das \texttt{DemoDataCommand} wird von der Konsole aus gestartet und verwendet den \texttt{ApiClient}, um über HTTP mit der Schnittstelle des Anwendungsservers zu kommunizieren.
 
 \subsubsection{API}
 
