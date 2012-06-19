@@ -12,9 +12,11 @@ Im vorigen Kapitel \ref{l:konzeption} / S.\pageref{l:konzeption} wurde eine Anwe
 
 Abbildung~\ref{chart:komponenten} liefert einen Überblick über die in den folgenden Abschnitten beschriebenen Komponenten des Systems. \emph{Blau} eingezeichnet sind der Endanwender und externe Benutzer-Werkzeuge wie z.B. Plug-Ins und Software von Drittanbietern. \emph{Gelb} eingezeichnet sind die Komponenten des browserbasierten GUI. \emph{Grau} eingezeichnet sind die Komponenten des Servers. \emph{Braun} eingezeichnet sind (aus Sicht des Servers) externe Dienste, die durch diesen angebunden werden. \emph{Gestrichelte Linien} zeigen Kommunikationsverbindung zwischen Komponenten über Schnittstellen. \emph{Durchgezogene Linien} zeigen Verbindungungen innerhalb eines Systems. 
 
-Der zentrale Bestandteil der Anwendung ist der Server, mit dem verschiedene GUIs über Schnittstellen kommunzieren. Das wichtigsten GUI ist das browserbasierte Interface, da hiermit alle Mitarbeiter arbeiten, dessen Gestaltung in Abschnitt \ref{l:entwurf-gui} / S.\pageref{l:entwurf-gui}) und Anbindung an den Server in Abschnitt \ref{l:anbindung-gui} / S.\pageref{l:anbindung-gui} beschrieben wird. Abschnitt \ref{l:entwurf-server} / S.\pageref{l:entwurf-server} beschreibt die Komponenten des Servers. Abschließend wird in Abschnitt \ref{l:domänenmodell} / S.\pageref{l:domänenmodell} das Domänenmodell vorgestellt, das allen Teilen der Anwendung zu grunde liegt.
+Der zentrale Bestandteil der Anwendung ist der Server, mit dem verschiedene GUIs über Schnittstellen kommunzieren. Das wichtigsten GUI ist das browserbasierte Interface, da hiermit alle Mitarbeiter arbeiten, dessen Gestaltung in Abschnitt \ref{l:entwurf-gui} / S.\pageref{l:entwurf-gui}) und Anbindung an den Server in Abschnitt \ref{l:anbindung-gui} / S.\pageref{l:anbindung-gui} beschrieben wird. Abschnitt \ref{l:entwurf-server} / S.\pageref{l:entwurf-server} beschreibt die Komponenten des Servers. 
 
-Zur Validierung des Entwurfes wurde ein Querschnitt durch die vorgestellte Architektur also Prototyp umgesetzt, mit dessen Hilfe sich überprüfen lässt, inwieweit sich das vorgeschlagene Konzept praktisch einsetzen lässt und die entworfene Systemarchitektur geeignet ist, die benötigten Funktionen abzubilden. In diesem Kapitel wird der Entwurf direkt den jeweiligen im Prototypen umgesetzten Komponenten gegenübergestellt.
+Zur Validierung des Entwurfes wurde ein Querschnitt durch die vorgestellte Architektur also Prototyp umgesetzt, mit dessen Hilfe sich überprüfen lässt, inwieweit sich das vorgeschlagene Konzept praktisch einsetzen lässt und die entworfene Systemarchitektur geeignet ist, die benötigten Funktionen abzubilden. In Abschnitt \ref{l:implementierung-gui} / S.\pageref{l:implementierung-gui} und \ref{l:implementierung-server} / S.\pageref{l:implementierung-server} wird die prototypische Implementierung der GUI bzw. des Anwendungsservers, die auf dem Entwurf basiert, beschrieben.
+
+\input{parts/domaenenmodell.tex}
 
 \input{parts/entwurf-gui.tex}
 
@@ -25,8 +27,6 @@ Zur Validierung des Entwurfes wurde ein Querschnitt durch die vorgestellte Archi
 \input{parts/entwurf-server.tex}
 
 \input{parts/entwurf-server-implementierung.tex}
-
-\input{parts/domaenenmodell.tex}
 
 \input{parts/entwurf-workflow.tex}
 
