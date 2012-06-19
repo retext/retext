@@ -1,6 +1,6 @@
 \subsection{Entwurf des Anwendungsservers}\label{l:entwurf-server}
 
-In diesem Abschnitt werden die in Abbildung~\ref{chart:komponenten} · S.\pageref{chart:komponenten} grau eingefärbten Komponenten des Servers beschrieben.
+In diesem Abschnitt werden die in Abbildung~\ref{chart:komponenten} · S.\pageref{chart:komponenten} grau eingefärbten Komponenten des Anwendungsservers beschrieben.
 
 \subsubsection{API, Cronjobs, CLI, …}
 
@@ -8,15 +8,15 @@ In der API-Komponenten, die als REST-API implementiert ist, sind über eine Rou"
 
 \subsubsection{Dependency-Injection-Container}
 
-Der einzelnen Komponenten des Servers sind nach dem Prinzip der losen Kopplung verbunden (vgl.~\cite[S.62]{hn-web20}). Hierzu werden die einzelnen Komponenten als Services in einem Dependency-Injection-Container (DI-Container) registriert und von diesem instanziiert. Alle Komponenten können auf den DI-Container zugreifen und dort andere Komponenten anfordern. Der DI-Container übernimmt, wie der Name schon sagt, auch die Aufgabe Abhängigkeiten der einzelnen Komponenten bereitzustellen. Ein so aufgebautes System, bei dem konkrete Instanzen nicht mehr an der Stelle erzeugt werden, an der sie verwendet werden, sondern von außen \typoquotes{hereingereicht} werden, ist leicht zu modifizieren und vor allem leicht zu testen, da sich Abhängigkeiten für Tests leicht durch Mock-Objekte austauschen lassen (vgl.~\cite[Kap.2]{freeman2009growing}).
+Der einzelnen Komponenten des Anwendungsservers sind nach dem Prinzip der losen Kopplung verbunden (vgl.~\cite[S.62]{hn-web20}). Hierzu werden die einzelnen Komponenten als Services in einem Dependency-Injection-Container (DI-Container) registriert und von diesem instanziiert. Alle Komponenten können auf den DI-Container zugreifen und dort andere Komponenten anfordern. Der DI-Container übernimmt, wie der Name schon sagt, auch die Aufgabe Abhängigkeiten der einzelnen Komponenten bereitzustellen. Ein so aufgebautes System, bei dem konkrete Instanzen nicht mehr an der Stelle erzeugt werden, an der sie verwendet werden, sondern von außen \typoquotes{hereingereicht} werden, ist leicht zu modifizieren und vor allem leicht zu testen, da sich Abhängigkeiten für Tests leicht durch Mock-Objekte austauschen lassen (vgl.~\cite[Kap.2]{freeman2009growing}).
 
 \subsubsection{Controller}
 
-Zentrale Komponente bilden die Controller. Hier ist die Business-Logik der Anwendung implementiert. Die einzelnen Operationen sind in verschiedenen Controllern implementiert, so ist das System leicht erweiter- und wartbar. Die Controller werden von der API-Komponente entsprechende den Routen instanziiert, für die sie registriert sind. Controller haben über den DI-Container Zugriff auf alle Teile des Systems und erzeugen die Antwort auf eine Anfrage, die mit der API-Komponenten an den Client zurück geschickt wird.
+Zentrale Komponente bilden die Controller. Hier ist die Business-Logik der Anwendung implementiert. Die einzelnen Operationen sind in verschiedenen Controllern implementiert, so ist das System leicht erweiter- und wartbar. Die Controller werden von der API-Komponente entsprechende den Routen instanziiert, für die sie registriert sind. Controller haben über den DI-Container Zugriff auf alle Teile des Systems und erzeugen die Antwort auf eine Anfrage, die mit der API-Komponenten an den Client zurückgeschickt wird.
 
 \subsubsection{Models}
 
-Zu den Kern-Komponenten gehören auch die Models. Diese können ohne den DI-Container direkt von den jeweiligen Komponenten instanziiert werden, da sie reine Datenobjekt sind und werden Logik enthalten, noch Abhängigkeiten besitzen. Siehe hierzu auch das Domänenmodell auf S.\pageref{l:domänenmodell}.
+Zu den Kern-Komponenten gehören auch die Models. Diese können ohne den DI-Container direkt von den jeweiligen Komponenten instanziiert werden, da sie reine Datenobjekt sind und weder Logik enthalten, noch Abhängigkeiten besitzen. Siehe hierzu auch das Domänenmodell auf S.\pageref{l:domänenmodell}.
 
 \subsubsection{Persistenz, ORM}
 
@@ -37,9 +37,12 @@ Zeitaufwändige und wiederkehrende Operation wie z.B. der Datenimport oder das V
 
 \subsubsection{Workflow}
 
-In der Workflow-Komponente sind die Funktionen zur Definition und Ablaufsteuerung von Workflows implementiert.
+In der Workflow-Komponente sind die Funktionen zur Definition und Ablaufsteuerung von komplexeren Workflows implementiert.
 
 \subsubsection{Service-Adapter}
 
 Über Service-Adapter werden externe Dienste oder andere Softwarekomponenten angebunden, die bestimmte Funktionen für die Anwendung zur Verfügung stellen, z.B. Wörterbücher, Datei-Konverter usw.
 
+\secbar
+
+Die in diesem Abschnitt vorgestellten Komponenten bilden gemeinsam ein umfangreiches, komplexes System, mit dem sich alle Anforderungen abbilden lassen. Der im nächsten Abschnitt beschriebene Prototyp verwendet aufgrund seines sehr überschaubaren Funktionsumfangs nur einen Teil der genannten Komponenten. Es wird jedoch darauf geachtet, die Implementierung möglichst nahe an dieser Vorlage zu realisieren.
