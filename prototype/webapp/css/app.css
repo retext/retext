@@ -87,7 +87,7 @@
     margin: 0;
 }
 
-.gui-write-text input {
+.gui-write-text input, .gui-write-text textarea {
     width: 100%;
 }
 
