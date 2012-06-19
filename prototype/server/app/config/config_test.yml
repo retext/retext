@@ -12,3 +12,7 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
+
+# MongoDB configuration
+doctrine_mongodb:
+    default_database: retext-test
