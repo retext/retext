@@ -9,3 +9,4 @@ cache.properties
 app/config/parameters.yml
 mongodb
 web/app
+web/.htaccess
