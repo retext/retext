@@ -12,7 +12,7 @@ framework:
     csrf_protection: true
     validation:      { enable_annotations: true }
     templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
-    default_locale:  %locale%
+    default_locale:  de
     session:
         auto_start:     true
 
@@ -37,13 +37,7 @@ assetic:
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver:   %database_driver%
-        host:     %database_host%
-        port:     %database_port%
-        dbname:   %database_name%
-        user:     %database_user%
-        password: %database_password%
-        charset:  UTF8
+        driver:   pdo_mysql
 
     orm:
         auto_generate_proxy_classes: %kernel.debug%
@@ -54,10 +48,10 @@ doctrine_mongodb_softdelete:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: %mailer_transport%
-    host:      %mailer_host%
-    username:  %mailer_user%
-    password:  %mailer_password%
+    transport: smtp
+    host:      localhost
+    username:  null
+    password:  null
     spool:     { type: memory }
 
 # MongoDB configuration
