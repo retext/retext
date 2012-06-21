@@ -1,0 +1,50 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[paper=a4paper,width=17cm,height=25cm]{geometry}
+
+\input{base.tex}
+
+\input{parts/abkuerzungen.tex}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\begin{document}
+
+\setmainfont[Mapping=tex-text]{Museo Sans}
+
+\begin{center}
+Zusammenfassung der Bachelor-Thesis\\
+\begin{large}
+Konzeption und Entwurf einer Anwendung zur Verwaltung\\von Texten für In"-for"-ma"-ti"-ons- und Kom"-mu"-ni"-ka"-ti"-ons"-me"-di"-en\\
+\end{large}
+\bigskip
+\begin{tiny}
+Vorgelegt von Markus Tacker am \today\\
+Hochschule RheinMain · Fachbereich Design Informatik Medien · Studiengang Medieninformatik\\
+\end{tiny}
+\end{center}
+
+\setmainfont[Mapping=tex-text,BoldFont={Vollkorn-Bold},ItalicFont={Vollkorn-Italic},BoldItalicFont={Vollkorn-Bold Italic}]{Vollkorn}
+\setsansfont[Mapping=tex-text]{Museo Sans}
+
+Diese Bachelor-Thesis liefert eine konkrete Empfehlung für die Realisierung einer Lösung, mit der sich durch die maximale Orientierung an den Abläufen in Projekten zur Erstellung von Informations- und Kommunikations-Medien und den Bedürfnissen der beteiligten Personen in großem Maße Zeit einsparen und Fehler vermeiden lassen.
+
+\secbar
+
+Die Herstellung von Informations- und Kommunikationsmedien ist heute ein zentraler Wirtschaftsbereich in Deutschland. Hundertausende Unternehmen und Abteilungen haben es sich zur Aufgabe gemacht, Produkte zu erschaffen, die Werbebotschaften transportieren oder Information zugänglich zu machen -- dank des Siegeszug des Internets kann diese heute überall und zu jeder Zeit geschehen. Die technischen Möglichkeiten sind vielfältig wie nie. Trotzdem allem Fortschritt können auch die modernsten Kommunikationsformen auf klassischen Bestandteil nicht verzichten: \emph{Text}. Als universeller und verbindlicher Informationsträger ist es aber gerade dieser Bestandteil eines Mediums, der im Verlauf dessen Erstellung von den meisten Personen beeinflusst wird. Da die Erstellung von Medien-Produkten heute hohes technisches und fachliches Know-How erfordert, sind an diesen Projekten viele Personen beteiligt. Der Austausch zwischen allen Parteien hat sich trotz aller technischer Fortschritte in den letzten 15 Jahren nicht verändert: er findet fast ausschließlich durch das Versenden von \trademark{Word-} und \trademark{Excel-}Dateien als Anhang von E-Mails statt -- ein Prozess, der fehleranfällig, langwierig und chaotisch ist. 
+
+Die Suche nach einer Möglichkeit, diesen Prozess zu verbessern ist die Motiviation für diese Bachelor-Thesis. 
+
+Zu diesem Zweck wird gezeigt, dass die Werkzeuge die am häufigsten zur Erfassung, Organisation und dem Austausch über diese Texte verwendet werden -- namentliche \trademark{Microsoft Word} und \trademark{Excel} -- in der alltäglichen Arbeit zu vielerlei Problemen führen. In einer ausführlichen Analyse wird die irrtümliche Annahme widerlegt, diese Werkzeuge seinen für den Prozess geeignet, und im Einzelnen gezeigt, welche problematischen Auswirkungen der Einsatz monolithische Dateiformate und dezentraler Speicherung in den komplexen Abläufen in Zusammenhang mit der Erstellung von Medienprodukten haben.
+
+Aufbauend auf dieser Erkenntnis und unter Zuhilfenahme von Personas, die auf Interviews mit zwölf Branchenexperten basieren, wurde eine Lösung konzipiert, die versucht, die gennanten Probleme zu beseitigen und den Anforderungen der Personas zu genügen. Hierzu wurde ein zentraler Anwendungsserver vorgeschlagen, mit dem die Texte für Projekte in, an die jeweiligen spezifischen Bedürfnisse der Benutzer angepassten, GUIs Definiert, Geschrieben, Korrigiert, Kontrolliert, Freigegeben und Veröffentlicht werden können.
+
+Für die wichtigsten Bestandteile der Lösung, den Anwendungsserver und das browserbasierten GUI, wurde die konkrete Architektur entworfen und detaillierte Gestaltungsrichtlinen mithilfe von Wireframes festgelegt.
+
+Zur Validierung des Entwurfs wurde schließlich ein Prototyp umgesetzt, der die wichtigsten Funktionen anhand eines Beispiel-Projektes implementiert. Die Implementiert hat gezeigt, dass das Konzept funktioniert, der Entwurf realisierbar ist und bietet bereits in der prototypischen Fassung konkreten Mehrwert.
+
+\end{document}
