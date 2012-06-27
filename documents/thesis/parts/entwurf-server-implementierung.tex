@@ -1,6 +1,6 @@
 \subsection{Implementierung des Anwendungsservers}\label{l:implementierung-server}
 
-Für den Prototypen wurde das PHP-Framework \trademark{Symfony2}\footnote{\url{http://symfony.com/}} eingesetzt, das von sich aus bereits viele Anforderungen aus dem vorangegangenen Abschnitt erfüllt. 
+Für den Prototypen wurde das PHP-Framework \trademark{Symfony2}\footnote{\url{http://symfony.com/}} eingesetzt, das von sich aus bereits viele Anforderungen des vorangegangenen Abschnitts erfüllt. 
 
 \subsubsection{Kern-System}
 
@@ -72,7 +72,7 @@ Zum Persistieren der Daten kommt \trademark{MongoDB}\footnote{\url{http://www.mo
 \captionof{figure}{Anwendungsserver-Klassendiagramm des Prototypen}\label{chart:prototyp-klassendiagramm}
 \end{center}
 
-Abbildung \ref{chart:prototyp-klassendiagramm} zeigt das Klassendiagramm der Implementierung des Prototypen. Zentrale Komponente ist der Dependency-Injection-Container des Symfony2-Frameworks, dieser instanziert je nach Pfad der Anfrage einen Controller und ruft dort die entsprechende Methode auf. Innerhalb der Controller steht der DI-Container zur Verfügung über den dann z.B. der ODM instanziert werden kann, um Daten aus der Datenbank zu laden. Der ODM verwendet zur Repräsentierung der Daten die Klassen aus dem Package \texttt{Documents}, die Controller können diese selber erzeugen, oder bekommen diese als Anfrage-Ergebnisse vom ODM übergeben.
+Abbildung \ref{chart:prototyp-klassendiagramm} zeigt das Klassendiagramm der Implementierung des Prototypen. Zentrale Komponente ist der Dependency-Injection-Container des Symfony2-Frameworks, dieser instanziert je nach Pfad der Anfrage einen Controller und ruft dort die entsprechende Methode auf. Innerhalb der Controller steht der DI-Container zur Verfügung über den dann z.B. der ODM instanziert werden kann, um Daten aus der Datenbank zu laden. Der ODM verwendet zur Repräsentierung der Daten die Klassen des Packages \texttt{Documents}, die Controller können diese selber erzeugen, oder bekommen diese als Anfrage-Ergebnisse vom ODM übergeben.
 
 Funktionen, die an mehreren Stellen, oder über unterschiedliche Arten verwendet werden, wurden in eigene Services ausgelagert (\texttt{ContentBooklet} und \texttt{ContainerChildren}). Diese werden zum einen innerhalb der Controller verwendet, können aber auch über das CLI gestartet werden. \trademark{Symfony2} stellt ein einfache Möglichkeit zum Erstellen vom Operationen über die Kommandozeile zur Verfügung. Im Prototyp wurde das Anlegen von Demo-Projekt-Daten mithilfe dieser Möglichkeit realisiert. Das \texttt{DemoDataCommand} wird von der Konsole aus gestartet und verwendet den \texttt{ApiClient}, um über HTTP mit der Schnittstelle des Anwendungsservers zu kommunizieren.
 
