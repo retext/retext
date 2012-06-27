@@ -29,7 +29,7 @@ Veröffentlichung   & \HarveyEmpty     & \HarveyEmpty     & \HarveyEmpty    & \H
 \end{center}
 \end{table}
 
-Anhand der Personas lässt sich ermitteln, wer und in welchem Umfang das browserbasiert GUI verwenden wird. Tabelle \ref{table:webgui-usage-by-persona} · S.\pageref{table:webgui-usage-by-persona} zeigt in der Übersicht, welche Operationen besonders bei der Entwicklung des GUIs beachtet werden müssen. Besonders viel Zeit werden von Konzeptern und von den Mitarbeiter, die die Inhalte Erstellen, Kontrollieren und Freigeben im GUI verbracht, da diese Tätigkeiten bezogen auf die einzelnen Texte des Produktes sehr arbeitsintensiv sind.
+Anhand der Personas lässt sich ermitteln, wer und in welchem Umfang das browserbasiert GUI verwenden wird. Tabelle \ref{table:webgui-usage-by-persona} · S.\pageref{table:webgui-usage-by-persona} zeigt in der Übersicht, welche Operationen besonders bei der Entwicklung des GUIs beachtet werden müssen. Besonders viel Zeit werden von Konzeptern und von den Mitarbeiter, die die Inhalte Erstellen, Kontrollieren und Freigeben im GUI verbracht, da diese Tätigkeiten bezogen auf die einzelnen Texte des Produkts sehr arbeitsintensiv sind.
 
 \bigskip
 
@@ -46,7 +46,7 @@ Abbildung~\ref{chart:gui-aufbau} zeigt den Grundaufbau des GUIs. Zentraler Berei
 
 Die Projekt-Spalte \ball{3} bietet direkten Zugang zu allen Teilen des aktiven Projekts. Die Projektstruktur wird mit einem Navigationsbaum dargestellt, über den direkt zu den jeweiligen Abschnitten gesprungen werden kann. Über das Suchfeld lässen sich die Einträge im Baum filtern. In der Spalte befindet sich oben zur Orientierung der Names des aktiven Projekts. Über das ausklappbare Projektmenü gelangt man Teilen der Anwendung, die nicht direkt über die Texte erreichbar sind, z.B. Projektauswahl, Mitarbeiterverwaltung, Export. Über das ausklappbare Benutzermenü kann man sich ausloggen, sein Profil bearbeiten und persönliche Einstellungen anpassen.
 
-\subsubsection{Definieren des Produktes}\label{l:gui-definition}
+\subsubsection{Definieren des Produkts}\label{l:gui-definition}
 
 \begin{center}
 \includegraphics[width=0.95\textwidth]{media/GUIProduktstruktur.pdf}
@@ -64,7 +64,7 @@ Abbildung~\ref{chart:gui-produktstruktur} zeigt die Darstellung des GUIs zur Bea
 \captionof{figure}{GUI zum Erstellen der Texte}\label{chart:gui-texten}
 \end{center}
 
-Abbildung~\ref{chart:gui-texten} zeigt die Darstellung des GUIs zur Bearbeitung der Texte des Produktes. Die Inhaltselemente in der aktuelle Hierarchie werden dabei mit Eingabefeldern für die Inhalte dargestellt \ball{1}. Links über dem Eingabefeld wird die Bezeichnung des Textbausteins angezeigt und rechts darüber Hinweise zu Längebeschränkungen (falls vorhanden) mit Zähler. Während der Eingabe können bereits Auszeichnungen vorgenommen werden, die Schaltflächen dazu, werden eingeblendet, sobald sich der Cursor im Feld befindet. Innerhalb der Kontext-Informationen \ball{3} besteht die Möglichkeit direkt eine Suche zu starten, die Suchergebnisse werden in einem Dialog-Fenster geöffnet. 
+Abbildung~\ref{chart:gui-texten} zeigt die Darstellung des GUIs zur Bearbeitung der Texte des Produkts. Die Inhaltselemente in der aktuelle Hierarchie werden dabei mit Eingabefeldern für die Inhalte dargestellt \ball{1}. Links über dem Eingabefeld wird die Bezeichnung des Textbausteins angezeigt und rechts darüber Hinweise zu Längebeschränkungen (falls vorhanden) mit Zähler. Während der Eingabe können bereits Auszeichnungen vorgenommen werden, die Schaltflächen dazu, werden eingeblendet, sobald sich der Cursor im Feld befindet. Innerhalb der Kontext-Informationen \ball{3} besteht die Möglichkeit direkt eine Suche zu starten, die Suchergebnisse werden in einem Dialog-Fenster geöffnet. 
 
 \subsubsection{Texte übersetzen}\label{l:gui-uebersetzen}
 
@@ -73,7 +73,7 @@ Abbildung~\ref{chart:gui-texten} zeigt die Darstellung des GUIs zur Bearbeitung 
 \captionof{figure}{GUI zum Übersetzen der Texte}\label{chart:gui-uebersetzen}
 \end{center}
 
-Abbildung~\ref{chart:gui-uebersetzen} zeigt die Darstellung des GUIs zur Übersetzung der Texte des Produktes. Hierzu wird der Inhalt des Textbausteines in der Original-Sprache angezeigt und darunter ein Eingabefeld, in dem die Übersetzung eingetragen wird \ball{1}. Über einen Filter-Dialog \ball{2} kann konfiguriert werden, welche Sprachen angezeigt werden sollen.
+Abbildung~\ref{chart:gui-uebersetzen} zeigt die Darstellung des GUIs zur Übersetzung der Texte des Produkts. Hierzu wird der Inhalt des Textbausteines in der Original-Sprache angezeigt und darunter ein Eingabefeld, in dem die Übersetzung eingetragen wird \ball{1}. Über einen Filter-Dialog \ball{2} kann konfiguriert werden, welche Sprachen angezeigt werden sollen.
 
 \subsubsection{Prüfen}\label{l:gui-qs}
 
@@ -82,7 +82,7 @@ Abbildung~\ref{chart:gui-uebersetzen} zeigt die Darstellung des GUIs zur Überse
 \captionof{figure}{GUI zum Überprüfen der Texte}\label{chart:gui-qs}
 \end{center}
 
-Abbildung~\ref{chart:gui-qs} zeigt die Darstellung des GUIs zur Kontrolle und Freigabe der Texte des Produktes. In dieser Ansicht werden die verschiedenen Stati der Textbausteine bearbeitet. Hierzu sind die Textbausteine mit ihren Übersetzungen dargestellt \ball{1}. Über die mit Icons markierten Schaltflächen \ball{2} lassen sich die einzelnen Stati direkt setzen. Von links nach rechts sind das: Korrigiert, Geprüft, Freigegeben und Veröffentlicht. Es wird jeweils zwischen \typoquotes{keine Angabe} (grau), \typoquotes{abgelehnt} (rot) und \typoquotes{in Ordnung} (grün) unterschieden. Hier wird auch die Anzahl der hinterlegten Kommentare angezeigt. Zum massenhaften bearbeiten von Stati können mehrere oder alle Elemente über die Checkboxen \ball{3} ausgewählt werden. Über die Status-Icons in der Kopfzeile kann dann der Status für alle ausgewählten Elemente gleichzeitig gesetzt werden.
+Abbildung~\ref{chart:gui-qs} zeigt die Darstellung des GUIs zur Kontrolle und Freigabe der Texte des Produkts. In dieser Ansicht werden die verschiedenen Stati der Textbausteine bearbeitet. Hierzu sind die Textbausteine mit ihren Übersetzungen dargestellt \ball{1}. Über die mit Icons markierten Schaltflächen \ball{2} lassen sich die einzelnen Stati direkt setzen. Von links nach rechts sind das: Korrigiert, Geprüft, Freigegeben und Veröffentlicht. Es wird jeweils zwischen \typoquotes{keine Angabe} (grau), \typoquotes{abgelehnt} (rot) und \typoquotes{in Ordnung} (grün) unterschieden. Hier wird auch die Anzahl der hinterlegten Kommentare angezeigt. Zum massenhaften bearbeiten von Stati können mehrere oder alle Elemente über die Checkboxen \ball{3} ausgewählt werden. Über die Status-Icons in der Kopfzeile kann dann der Status für alle ausgewählten Elemente gleichzeitig gesetzt werden.
 
 \subsubsection{Kontext-Informationen}\label{l:gui-kontext}
 
@@ -98,7 +98,7 @@ Abbildung~\ref{chart:gui-kontext} zeigt die Darstellung des GUIs zur Anzeige und
 \item Änderungshistorie: Zeigt die vergangenen Änderungen an, mit der Möglichkeit, diese zu kommentieren und zurückzunehmen.
 \item Material: Zeigt hinterlegte Materialien an. Dabei handelt es sich um Dateien und Freitext-Notizen.
 \item Kommentare: Zeigt die Kommentare an.
-\item Struktur: Zeigt Informationen zur Struktur innerhalb des Produktes, wie z.B. die Attribute, an.
+\item Struktur: Zeigt Informationen zur Struktur innerhalb des Produkts, wie z.B. die Attribute, an.
 \end{enumerate}
 
 Über das Suchfeld \ball{2} lässt sich die aktuellen Ansicht filtern. In den Kontextinformation findet sich direkter Zugang zu Informationen und Operationen bezogen auf den aktuellen Inhalt. Die Inhalte lassen sich über Formulare \ball{3} direkt bearbeiten, Notizen und Dateien werden angezeigt \ball{4} und der Diksussion mithilfe der Kommentarfunktion ist möglich \ball{5}.
