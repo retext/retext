@@ -57,7 +57,7 @@ subgraph c6 {
 
 subgraph c7 {
   rank=same
-  r7 [ label="Server" shape=none style=solid ]
+  r7 [ label="Anwendungs-\nserver" shape=none style=solid ]
   Models [ shape=folder ]    
 }
 

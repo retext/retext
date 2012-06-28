@@ -1,5 +1,22 @@
 \section{Entwurf des zentralen Systems}\label{l:entwurf}
 
+Im vorigen Kapitel wurde eine Anwendung konzipiert, mit der sich die in Kapitel \ref{l:problemanalyse} · S.\pageref{l:problemanalyse} genannten Probleme beheben lassen. In diesem Kapitel wird ein Prototyp entworfen, der dieses Konzept umsetzt. Mithilfe des Prototyps soll gezeigt werden, dass sich der konzipierte Workflow mit der vorgeschlagenen Anwendungsart -- einer browserbasierte Web-Anwendung mit vollständiger Schnittstellen-Abdeckung -- abbilden lässt und einen Mehrwert für Projekte zur Erstellung von Informations- und Kommunikationsmedienprodukten bietet. 
+
+Der Funktionsumfang des Prototyps ist eingeschränkt, deckt aber die wichtigsten Anforderungen ab. Im Prototypen soll es möglich sein
+\begin{itemize}\itemsep -5pt
+\item die Struktur eines Produktes zu definieren
+\item die Texte des Produktes zu befüllen
+\item sich mit anderen Mitarbeitern über die Texte auszutauschen
+\item die Texte zu prüfen und freizugeben
+\item das Projekt zu exportieren, um die Texte weiterverarbeiten zu können.
+\end{itemize}
+
+Die Beschreibungen der Bestandteile der Anwendung in diesem Kapitel gehen zum Teil über diesen Funktionsumfang hinaus, da die Implementierung des Prototyps auch dazu dient, zu zeigen, dass die vorgeschlagene Architektur geignet ist, als Vorlage für eine belastbare Implementierung der Anwendung für den realen Einsatz zu dienen. Der Entwurf liefert hierfür schon wichtige Vorüberlegungen.
+
+\pagebreak
+
+\subsection{Komponenten}
+
 \begin{figure}[htb]
 \begin{center}
 \includegraphics[width=0.75\textwidth]{media/komponenten.pdf}
@@ -8,15 +25,13 @@
 \label{chart:komponenten}
 \end{figure}
 
-Im vorigen Kapitel \ref{l:konzeption} · S.\pageref{l:konzeption} wurde eine Anwendung konzipiert, die das gesamte Spektrum der Anforderungen abdeckt, die in den vorangegangenen Kapiteln beschrieben wurden. In diesem Kapitel werden die Komponenten beschrieben, die zur Erfüllung der wichtigsten Anforderungen benötigt werden.
-
 Abbildung~\ref{chart:komponenten} liefert einen Überblick über die in den folgenden Abschnitten beschriebenen Komponenten des Systems. \emph{Blau} eingezeichnet sind der Endanwender und externe Benutzer-Werkzeuge wie z.B. Plug-Ins und Software von Drittanbietern. \emph{Gelb} eingezeichnet sind die Komponenten des browserbasierten GUI. \emph{Grau} eingezeichnet sind die Komponenten des Servers. \emph{Braun} eingezeichnet sind (aus Sicht des Servers) externe Dienste, die durch diesen angebunden werden. \emph{Gestrichelte Linien} zeigen Kommunikationsverbindung zwischen Komponenten über Schnittstellen. \emph{Durchgezogene Linien} zeigen Verbindungungen innerhalb eines Systems. 
 
-Der zentrale Bestandteil der Anwendung ist der Server, mit dem verschiedene GUIs über Schnittstellen kommunzieren. Das wichtigsten GUI ist das browserbasierte Interface, da hiermit alle Mitarbeiter arbeiten, dessen Gestaltung in Abschnitt \ref{l:entwurf-gui} · S.\pageref{l:entwurf-gui} und dessen Anbindung an den Anwendungsserver in Abschnitt \ref{l:anbindung-gui} · S.\pageref{l:anbindung-gui} beschrieben wird. Abschnitt \ref{l:entwurf-server} · S.\pageref{l:entwurf-server} beschreibt die Komponenten des Anwendungsserver. 
+Der zentrale Bestandteil der Anwendung ist der Anwendungsserver, mit dem verschiedene GUIs über Schnittstellen kommunzieren. Das wichtigste GUI ist das browserbasierte Interface, da hiermit alle am Projekt beteiligten Personen arbeiten. Abschnitt \ref{l:entwurf-server} · S.\pageref{l:entwurf-server} beschreibt die Komponenten des Anwendungsserver und Abschnitt \ref{l:entwurf-gui} · S.\pageref{l:entwurf-gui} die Gestaltung des browserbasierten GUIs. In Abschnitt \ref{l:anbindung-gui} · S.\pageref{l:anbindung-gui} wird die Anbindung dieses GUIs an den Anwendungsserver beschrieben.
 
 Zur Validierung des Entwurfes wurde ein Querschnitt durch die vorgestellte Architektur als Prototyp umgesetzt, mit dessen Hilfe sich überprüfen lässt, inwieweit sich das vorgeschlagene Konzept praktisch einsetzen lässt und die entworfene Systemarchitektur geeignet ist, die benötigten Funktionen abzubilden. In Abschnitt \ref{l:implementierung-gui} · S.\pageref{l:implementierung-gui} und \ref{l:implementierung-server} · S.\pageref{l:implementierung-server} wird die prototypische Implementierung der GUI bzw. des Anwendungsservers, die auf dem Entwurf basiert, beschrieben.
 
-Zuerst wird jedoch das Domänenmodell, dass die gemeinsame Grundlage bildet, im nächsten Abschnitt \ref{l:domänenmodell} beschrieben.
+Im nächsten Abschnitt wird jedoch zuerst das Domänenmodell, das die gemeinsame Grundlage für GUI und Anwendungsserver bildet, beschrieben.
 
 \pagebreak
 
