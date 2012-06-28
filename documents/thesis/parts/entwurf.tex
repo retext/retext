@@ -282,19 +282,19 @@ In diesem Abschnitt werden die in Abbildung~\ref{chart:komponenten} · S.\pagere
 
 \subsubsection{API, Cronjobs, CLI, …}
 
-In der API-Komponenten, die als REST-API implementiert ist, sind über eine Rou"-ting-Ta"-bel"-le alle Controller registriert. Da das System mit einer vollständigen Abdeckung aller Operation durch API-Endpunkte implementiert ist, wird diese auch lokalen ausgeführten Scripten wie z.B. Cronjobs oder CLIs verwendet. Dies ermöglicht eine saubere Trennung, auch für administrative Aufgaben, und verhindert, dass Sonderfälle oder Workarounds für bestimmte Aufgaben kultiviert werden.
+In der API-Komponente, die als RESTful-API implementiert ist, sind über eine Rou"-ting-Ta"-bel"-le alle Controller registriert. Da das System mit einer vollständigen Abdeckung aller Operationen durch API-Endpunkte implementiert ist, wird diese auch für lokal ausgeführte Scripte wie z.B. Cronjobs oder CLIs verwendet. Dies ermöglicht eine saubere Trennung, auch für administrative Aufgaben, und verhindert, dass Sonderfälle oder Workarounds für bestimmte Aufgaben kultiviert werden.
 
 \subsubsection{Dependency-Injection-Container}
 
-Der einzelnen Komponenten des Anwendungsservers sind nach dem Prinzip der losen Kopplung verbunden (vgl.~\cite[S.62]{hn-web20}). Hierzu werden die einzelnen Komponenten als Services in einem Dependency-Injection-Container (DI-Container) registriert und von diesem instanziiert. Alle Komponenten können auf den DI-Container zugreifen und dort andere Komponenten anfordern. Der DI-Container übernimmt, wie der Name schon sagt, auch die Aufgabe Abhängigkeiten der einzelnen Komponenten bereitzustellen. Ein so aufgebautes System, bei dem konkrete Instanzen nicht mehr an der Stelle erzeugt werden, an der sie verwendet werden, sondern von außen \typoquotes{hereingereicht} werden, ist leicht zu modifizieren und vor allem leicht zu testen, da sich Abhängigkeiten für Tests leicht durch Mock-Objekte austauschen lassen (vgl.~\cite[Kap.2]{freeman2009growing}).
+Die einzelnen Komponenten des Anwendungsservers sind nach dem Prinzip der losen Kopplung verbunden (vgl.~\cite[S.62]{hn-web20}). Hierzu werden die einzelnen Komponenten als Services in einem Dependency-Injection-Container (DI-Container) registriert und von diesem instanziiert. Alle Komponenten können auf den DI-Container zugreifen und dort andere Komponenten anfordern. Der DI-Container übernimmt, wie der Name schon sagt, auch die Aufgabe Abhängigkeiten der einzelnen Komponenten bereitzustellen. Ein so aufgebautes System, bei dem konkrete Instanzen nicht mehr an der Stelle erzeugt werden, an der sie verwendet werden, sondern von außen \typoquotes{hereingereicht} werden, ist leicht zu modifizieren und vor allem leicht zu testen, da sich Abhängigkeiten für Tests leicht durch Mock-Objekte austauschen lassen (vgl.~\cite[Kap.2]{freeman2009growing}).
 
 \subsubsection{Controller}
 
-Zentrale Komponente bilden die Controller. Hier ist die Business-Logik der Anwendung implementiert. Die einzelnen Operationen sind in verschiedenen Controllern implementiert, so ist das System leicht erweiter- und wartbar. Die Controller werden von der API-Komponente entsprechende den Routen instanziiert, für die sie registriert sind. Controller haben über den DI-Container Zugriff auf alle Teile des Systems und erzeugen die Antwort auf eine Anfrage, die mit der API-Komponenten an den Client zurückgeschickt wird.
+Zentrale Komponente bilden die Controller. Hier ist die Business-Logik der Anwendung implementiert. Die einzelnen Operationen sind in verschiedenen Controllern implementiert, so ist das System leicht erweiter- und wartbar. Die Controller werden von der API-Komponente entsprechend den Routen instanziiert, für die sie registriert sind. Controller haben über den DI-Container Zugriff auf alle Teile des Systems und erzeugen die Antwort auf eine Anfrage, die mit der API-Komponente an den Client zurückgeschickt wird.
 
 \subsubsection{Models}
 
-Zu den Kern-Komponenten gehören auch die Models. Diese können ohne den DI-Container direkt von den jeweiligen Komponenten instanziiert werden, da sie reine Datenobjekt sind und weder Logik enthalten, noch Abhängigkeiten besitzen. Siehe hierzu auch das Domänenmodell auf S.\pageref{l:domänenmodell}.
+Zu den Kern-Komponenten gehören auch die Models. Diese können ohne den DI-Container direkt von den jeweiligen Komponenten instanziiert werden, da sie reine Datenobjekt sind und weder Logik enthalten, noch von anderen Komponenten abhängig sind. Siehe hierzu auch das Domänenmodell auf S.\pageref{l:domänenmodell}.
 
 \subsubsection{Persistenz, ORM}
 
@@ -307,11 +307,11 @@ Mit dieser Komponente werden die innerhalb der Anwendung erzeugten Daten persist
 \captionof{figure}{IO-Komponente}\label{chart:io}
 \end{center}
 
-Diese Komponente ist für den Import von Daten aus verschiedenen Formaten in das interne Repräsentationsmodell und den umgekehrten Export zuständig. Die Komponente ist unterteilt in drei Bereiche, die nach dem Transport-Weg (z.B. E-Mail oder FTP), der Art des Ex- oder Importes (synchron, asynchron bzw. Push oder Pull) und nach dem Dateiformat unterscheiden (vgl.~Abb.~\ref{chart:io}).  Hierbei gibt es synchrone Exporte, z.B. den Download eines Exports über die Schnittstelle und asynchrone Exporte, z.B. den Upload auf einen FTP-Server. Benachrichtigungen sind ebenfalls in dieser Komponente implementiert, eine Benachrichtigung ist z.B. ein asynchroner Export via E-Mail, wobei keine Daten exportiert werden, sondern z.B. nur die Informationen zu einem Ereignis.
+Diese Komponente ist für den Import von Daten aus verschiedenen Formaten in das interne Repräsentationsmodell und den umgekehrten Export zuständig. Die Komponente ist unterteilt in drei Bereiche für die Implementierungen des Transportwegs (z.B. E-Mail oder FTP), der Art des Ex- oder Importes (synchron, asynchron bzw. Push oder Pull) und das Dateiformat (vgl.~Abb.~\ref{chart:io}). Aus diesen drei Teilen lassen sich beliebige Kombinationen erstellen. Beispiele sind synchrone Exporte, wie den Download eines Exports über die Schnittstelle oder asynchrone Exporte, z.B. den Upload auf einen FTP-Server. Benachrichtigungen sind ebenfalls in dieser Komponente implementiert. Eine Benachrichtigung ist z.B. ein asynchroner Export via E-Mail, wobei keine Daten exportiert werden, sondern z.B. nur die Informationen zu einem Ereignis.
 
 \subsubsection{Jobs}
 
-Zeitaufwändige und wiederkehrende Operation wie z.B. der Datenimport oder das Versenden von Benachrichtigungen werden mithilfe von Jobs verarbeitet. Die Informationen zu einem Job werden in die Message-Queue eines Job-Server eingestellt und von dort registrierten Job-Runnern verarbeitet.
+Zeitaufwändige und wiederkehrende Operationen, wie z.B. der Datenimport oder das Versenden von Benachrichtigungen, werden mithilfe von Jobs verarbeitet. Die Informationen zu einem Job werden in die Message-Queue eines Job-Server eingestellt und dort durch registrierte Job-Runner verarbeitet.
 
 \subsubsection{Workflow}
 
@@ -433,7 +433,7 @@ Der Prototyp ist in der Lage, bereits mit diesem einfachen Funktionsumfang einen
 
 \subsection{Zusammenfassung}
 
-In diesem Kapitel wurde das zentrale System der Anwendung, bestehend aus Server und browserbasierten GUI entworfen und beschrieben. Der Aufbau des Servers mithilfe einer lose gekoppelten Architektur ermöglich einfache Erweiterbarkeit und Wartung. Das browserbasierte GUI ist als JavaScript-MVC-Anwendung entworfen, die über eine REST-API mit dem Server kommuniziert. Die wichtigsten Ansichten des GUIs wurden mithilfe von Wireframes beschrieben. 
+In diesem Kapitel wurde das zentrale System der Anwendung, bestehend aus Server und browserbasierten GUI entworfen und beschrieben. Der Aufbau des Servers mithilfe einer lose gekoppelten Architektur ermöglich einfache Erweiterbarkeit und Wartung. Das browserbasierte GUI ist als JavaScript-MVC-Anwendung entworfen, die über eine RESTful-API mit dem Server kommuniziert. Die wichtigsten Ansichten des GUIs wurden mithilfe von Wireframes beschrieben. 
 
 Der Entwurf wurde mithilfe einer prototypischen Implementierung, in der die wichtigsten Abläufe abgebildet werden, anhand eines realen Projekts überprüft. Dabei wurde gezeigt, dass sich die vorgeschlagenen Prinzipien, in der Darstellung wie in der Implementierung mit aktuell verfügbaren Technologien problemlos umsetzen lassen. Zudem wurde gezeigt, dass das Konzept der Trennung zwischen Anwendungsserver und GUI keine negativen Auswirkungen auf die Verwendbarkeit einer Anwendung hat. Für die Realisierung weiterer Funktionen im Sinne des Entwurfes sind keine Hindernisse aufgetreten.
 

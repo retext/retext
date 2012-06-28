@@ -3,22 +3,24 @@ rankdir=BT
 
 node [ shape=record ]
 
-FileFormat [ label="{FileFormat|}" ]
-OneWay  [ label="{OneWay|}" ]
-TwoWay [ label="{TwoWay|}" ]
+subgraph cluster0 {
+label="I/O-Komponente"
+
+FileFormat [ label="{FileFormat\n&lt;&lt;abstract&gt;&gt;|}" ]
+OneWay  [ label="{OneWay\n&lt;&lt;abstract&gt;&gt;|}" ]
+TwoWay [ label="{TwoWay\n&lt;&lt;abstract&gt;&gt;|}" ]
 XML [ label="{XML|}" ]
 Gettext [ label="{gettext|}" ]
 PDF [ label="{PDF|}" ]
 Word [ label="{Word|}" ]
 
-IO [ label="{IO|}" ]
-TransportType [ label="{TransportType|}" ]
+
+TransportType [ label="{TransportType\n&lt;&lt;abstract&gt;&gt;|}" ]
 Push [ label="{Push|}" ]
 Pull [ label="{Pull|}" ]
 Email [ label="{E-Mail|}" ]
 FTP [ label="{FTP|}" ]
-ExportType [ label="{ExportType|}" ]
-
+ExportType [ label="{ExportType\n&lt;&lt;abstract&gt;&gt;|}" ]
 
 node [ shape=point color="#5abbe6" ]
 edge [ arrowhead=onormal headport=s tailport=n color="#5abbe6" ]
@@ -26,7 +28,6 @@ edge [ arrowhead=onormal headport=s tailport=n color="#5abbe6" ]
 TwoWayMerge -> TwoWay
 OneWayMerge -> OneWay
 FileFormatMerge -> FileFormat
-IOMerge -> IO
 TransportTypeMerge -> TransportType
 ExportTypeMerge -> ExportType
 
@@ -42,9 +43,8 @@ Push -> ExportTypeMerge
 Pull -> ExportTypeMerge
 FTP -> TransportTypeMerge
 Email -> TransportTypeMerge
+}
 
-FileFormat -> IOMerge
-ExportType -> IOMerge
-TransportType -> IOMerge
+
 
 }
