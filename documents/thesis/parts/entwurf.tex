@@ -94,16 +94,18 @@ Die einzelnen Objekte werden nachfolgend beschrieben:
 
 \subsection{Entwurf eines browserbasierten GUI}\label{l:entwurf-gui}
 
-Das browserbasierte GUI der Anwendung ist der wichtigste Zugang zum System, da es von allen Mitarbeiter zu irgendeinem Zeitpunkt verwendet wird. Die Zeit, die der Einzelne damit verbringt kann sich je nach Rolle stark unterscheiden. Neben den sehr unterschiedlichen Anforderungen and das GUI sind die Benutzer auch technisch sehr unterschiedlich stark versiert, wie in den Personas in Kapitel \ref{l:personas} · S.\pageref{l:personas} gezeigt wurde. Diesen Umständen muss bei der Gestaltung eines GUI Rechnung getragen werden. In Anlehnung an \cite{nielsen} wurden für den Entwurf der browserbasierten GUI folgende Leitlinien gewählt:
+Das browserbasierte GUI der Anwendung ist der wichtigste Zugang zum System, da es von allen Mitarbeitern zu irgendeinem Zeitpunkt verwendet wird. Die Zeit, die der Einzelne damit verbringt kann sich je nach Rolle stark unterscheiden. Neben den sehr unterschiedlichen Anforderungen an das GUI sind die Benutzer auch technisch sehr unterschiedlich stark versiert, wie in den Personas in Kapitel \ref{l:personas} · S.\pageref{l:personas} gezeigt wurde. Diesen Umständen muss bei der Gestaltung Rechnung getragen werden. In Anlehnung an \cite{nielsen} wurden für den Entwurf der browserbasierten GUI folgende Leitlinien gewählt:
 
 \begin{enumerate}\itemsep -5pt
-\item{Das wichtigste zuerst: Die aktuelle Aufgabe soll immer im Fokus der Darstellung liegen.}
-\item{Schnell zum Ziel: Alle Aufgaben müssen leicht und umkompliziert durchführbar sein.}
-\item{Nicht ablenken: Veränderungen in der Darstellung, z.B. durch Benachrichtigungen, lenken ab und müssen deswegen so gestaltet sein, dass diese sich nach den Präferenzen des Nutzers richten.}
-\item{Hilfe nur einen Klick entfernt: Das Hilfesystem muss kontextsensitiv verfügbar sein und ist eine Kernfunktion der Anwendung}
+\item Das Wichtigste zuerst: Die aktuelle Aufgabe soll immer im Fokus der Darstellung liegen.
+\item Schnell zum Ziel: Alle Aufgaben müssen leicht und unkompliziert durchführbar sein. 
+\item Nicht ablenken: Veränderungen in der Darstellung, z.B. durch Benachrichtigungen, lenken ab und müssen deswegen so gestaltet sein, dass diese sich nach den Präferenzen des Nutzers richten.
+\item Hilfe nur einen Klick entfernt: Das Hilfesystem muss kontextsensitiv verfügbar sein und ist eine Kernfunktion der Anwendung.
 \end{enumerate}
 
 Da die Anwendung von allen Benutzern gerne verwendet werden soll und vor allem die Usability und die Zeitersparnis ein wichtiger Punkt sind, wie man auch skeptische Mitarbeiter überzeugen kann, mit ihren alten Gewohnheiten zu brechen, ist die Beachtung dieser Grundsätze essentiell. Funktionalitäten, die nur von wenigen gebraucht werden, sollten, wenn überhaupt, optional einblendbar sein. Die Konzeption des Systems ermöglicht es leicht, zusätzliche Anwendungen für besondere Benutzergruppen zu schaffen, z.B. Plug-Ins für die speziellen Werkzeuge einzelner Mitarbeiter. Für diese \typoquotes{Power-User} ist dieser Weg meistens der bessere Weg.
+
+Anhand der Personas lässt sich ermitteln, wer und in welchem Umfang das browserbasiert GUI verwenden wird. Tabelle \ref{table:webgui-usage-by-persona} · S.\pageref{table:webgui-usage-by-persona} zeigt in der Übersicht, welche Operationen besonders bei der Entwicklung des GUIs beachtet werden müssen. Besonders viel Zeit werden von Konzeptern und von den Mitarbeitern, die die Inhalte erstellen, kontrollieren und freigeben im GUI verbracht, da diese Tätigkeiten bezogen auf die einzelnen Texte des Produkts sehr arbeitsintensiv sind. In den folgenden Wireframes werden dementsprechend die wichtigsten Ansichten des GUIs beschrieben.
 
 \begin{table}
 \begin{center}
@@ -118,16 +120,10 @@ Qualitätskontrolle & \HarveyQuarter   & \HarveyEmpty     & \HarveyEmpty    & \H
 Freigabe           & \HarveyEmpty     & \HarveyEmpty     & \HarveyEmpty    & \HarveyEmpty    & \HarveyEmpty   & \HarveyQuarter   & \HarveyQuarter \\
 Veröffentlichung   & \HarveyEmpty     & \HarveyEmpty     & \HarveyEmpty    & \HarveyEmpty    & \HarveyQuarter & \HarveyEmpty     & \HarveyEmpty \\
 \end{tabular}
-\caption[Umfang und Häufigkeit der Benutzung des browserbasierten GUIs bezogen auf die durchgeführten Operation]{Umfang und Häufigkeit der Benutzung des browserbasierten GUIs bezogen auf die durchgeführten Operation\\\begin{tiny}{\HarveyEmpty} selten {\HarveyFull} häufig\end{tiny}}
+\caption[Umfang und Häufigkeit der Benutzung des browserbasierten GUIs bezogen auf die durchgeführte Operation]{Umfang und Häufigkeit der Benutzung des browserbasierten GUIs bezogen auf die durchgeführte Operation\\\begin{tiny}{\HarveyEmpty} selten {\HarveyFull} häufig\end{tiny}}
 \label{table:webgui-usage-by-persona}
 \end{center}
 \end{table}
-
-Anhand der Personas lässt sich ermitteln, wer und in welchem Umfang das browserbasiert GUI verwenden wird. Tabelle \ref{table:webgui-usage-by-persona} · S.\pageref{table:webgui-usage-by-persona} zeigt in der Übersicht, welche Operationen besonders bei der Entwicklung des GUIs beachtet werden müssen. Besonders viel Zeit werden von Konzeptern und von den Mitarbeiter, die die Inhalte Erstellen, Kontrollieren und Freigeben im GUI verbracht, da diese Tätigkeiten bezogen auf die einzelnen Texte des Produkts sehr arbeitsintensiv sind.
-
-\bigskip
-
-Die folgenden Wireframes zeigen dementsprechend die wichtigsten Ansichten des GUIs.
 
 \pagebreak
 
@@ -138,9 +134,9 @@ Die folgenden Wireframes zeigen dementsprechend die wichtigsten Ansichten des GU
 \captionof{wireframe}{Aufbau des browserbasierten GUIs}\label{chart:gui-aufbau}
 \end{center}
 
-Wireframe~\ref{chart:gui-aufbau} zeigt den Grundaufbau des GUIs. Zentraler Bereich ist die Darstellung der \emph{aktuellen Operation} \ball{1} mit den zugehörigen \emph{Kontext-Informationen} \ball{2}. Auf der linke Seite findet sich eine Spalte über die im Projekt navigiert werden kann \ball{3}. Um den Fokus auf die aktuelle Aufgaben zu verbessern sind die Kontext-Information und die Projektspalte ausblendbar \ball{4}. Das gesamte Layout passt sich flexibel an verschiedene Bildschirmgrößen und -formate an, zusätzlich kann die Position der Kontext-Information an die eigenen Vorlieben angepasst werden \ball{5}.
+Wireframe~\ref{chart:gui-aufbau} zeigt den Grundaufbau des GUIs. Zentraler Bereich ist die Darstellung der \emph{aktuellen Operation} \ball{1} mit den zugehörigen \emph{Kontext-Informationen} \ball{2}. Auf der linken Seite findet sich eine Spalte über die im Projekt navigiert werden kann \ball{3}. Um den Fokus auf die aktuelle Aufgaben zu verbessern, sind die Kontext-Information und die Projektspalte ausblendbar \ball{4}. Das gesamte Layout passt sich flexibel an verschiedene Bildschirmgrößen und -formate an, zusätzlich kann die Position der Kontext-Information an die eigenen Vorlieben angepasst werden \ball{5}.
 
-Die Projekt-Spalte \ball{3} bietet direkten Zugang zu allen Teilen des aktiven Projekts. Die Projektstruktur wird mit einem Navigationsbaum dargestellt, über den direkt zu den jeweiligen Abschnitten gesprungen werden kann. Über das Suchfeld lässen sich die Einträge im Baum filtern. In der Spalte befindet sich oben zur Orientierung der Names des aktiven Projekts. Über das ausklappbare Projektmenü gelangt man Teilen der Anwendung, die nicht direkt über die Texte erreichbar sind, z.B. Projektauswahl, Mitarbeiterverwaltung, Export. Über das ausklappbare Benutzermenü kann man sich ausloggen, sein Profil bearbeiten und persönliche Einstellungen anpassen.
+Die Projekt-Spalte \ball{3} bietet direkten Zugang zu allen Teilen des aktiven Projekts. Die Projektstruktur wird mit einem Navigationsbaum dargestellt, über den direkt zu den jeweiligen Abschnitten gesprungen werden kann. Über das Suchfeld lassen sich die Einträge im Baum filtern. In der Spalte befindet sich oben zur Orientierung der Name des aktiven Projekts. Über das ausklappbare Projektmenü gelangt man zu Ansichten der Anwendung, die nicht direkt über die Texte erreichbar sind, z.B. die Projektauswahl, die Mitarbeiterverwaltung oder den Export. Über das ausklappbare Benutzermenü kann man sich ausloggen, sein Profil bearbeiten und persönliche Einstellungen anpassen.
 
 \pagebreak
 
