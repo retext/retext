@@ -42,13 +42,15 @@ Im nächsten Abschnitt wird jedoch zuerst das Domänenmodell, das die gemeinsame
 \captionof{figure}{Domänenmodell}\label{chart:domain}
 \end{center}
 
-Aus den vorangegangenen Überlegungen zur Anwendung und zum Workflow lässt sich ein Domänenmodell extrahieren, die einzelnen logischen Objekte innerhalb der Anwendung beschreibt, mit deren Hilfe alle Operationen abgebildet werden. Abbildung~\ref{chart:domain} zeigt das Modell in der Übersicht, dass die sich im Entwurf der Anwendung in deren Implementierung im Prototyp widerspiegelt.
+Aus den vorangegangenen Überlegungen zur Anwendung und zum Workflow lässt sich ein Domänenmodell extrahieren, das die einzelnen logischen Objekte innerhalb der Anwendung beschreibt. Abbildung~\ref{chart:domain} zeigt das Modell in der Übersicht. Der Entwurf in diesem Kapitel und der Prototyp orientieren sich an diesem Domänenmodell.
+
+Die einzelnen Objekte werden nachfolgend beschrieben:
 
 \textsf{\textbf{Attribut}}\\Beschreibt die Attribute eines Textbausteins.
 
-\textsf{\textbf{Benutzer}}\\Repräsentiert einen Benutzer des Systems
+\textsf{\textbf{Benutzer}}\\Repräsentiert einen Benutzer des Systems.
 
-\textsf{\textbf{Container}}\\Containern dienen zur hierarchischen Organisation der Texte innerhalb des Projekts. Containern können weitere Container und Texte enthalten. Eine Container ohne übergeordneten Container befindet sich auf der obersten Ebene. Es kann mehrere Containern auf der obersten Ebene geben.
+\textsf{\textbf{Container}}\\Container dienen zur hierarchischen Organisation der Texte innerhalb des Projekts. Container können weitere Container und Texte enthalten. Ein Container ohne übergeordneten Container befindet sich auf der obersten Ebene. Es kann mehrere Container auf der obersten Ebene geben.
 
 \textsf{\textbf{Gruppe}}\\Mitarbeiter können in Gruppen zusammengefasst werden. Dies erleichtert die Konfiguration des Workflows und der Rechte.
 
@@ -56,16 +58,17 @@ Aus den vorangegangenen Überlegungen zur Anwendung und zum Workflow lässt sich
 
 \textsf{\textbf{Kontext-Information}}\\Projektspezifische Kontext-Informationen lassen sich hinterlegen und Textbausteinen und Containern zuordnen.
 
-\textsf{\textbf{Projekt}}\\Projekte bildet den Rahmen für alle Texte eines einzelnen Produkts.
+\textsf{\textbf{Projekt}}\\Projekte bilden den Rahmen für alle Texte eines einzelnen Produkts. Dieses Model geht davon aus, dass auch alle anderen Einstellungen (Gruppenzugehörigkeit, Rechte, Workflows,~…) immer projektspezifisch sind. Dies macht in einem Szenario sinn, bei dem unterschiedliche Unternehmen Zugriff auf die selbe Instanz der Anwendung haben. So wird eine saubere Trennung der Daten erreicht.
 
-\textsf{\textbf{Projektmitarbeiter}}\\Gestattet einem Benutzer die Mitarbeit an einem Projekt und legt dabei fest, welche Rechte dem Benutzer für das Projekt zustehen.
+\textsf{\textbf{Projektmitarbeiter}}\\Gestattet einem Benutzer die Mitarbeit an einem Projekt und legt dabei fest, welche Rechte dem Benutzer für das Projekt zugewiesen sind.
 
-\textsf{\textbf{Recht}}\\Beschreibt ein Recht, eine Operation auf einem Objekt auszuführen.
+\textsf{\textbf{Recht}}\\Beschreibt das Recht, eine Operation auf einem Objekt auszuführen.
 
 \textsf{\textbf{Rolle}}\\Beschreibt die verschiedenen Rollen innerhalb der Anwendung. Die Rechte der Rollen sind durch die Zuordnung von Benutzern zu Projekten durch den Projektmitarbeiter immer an das jeweilige Projekt gebunden.
 
 \textsf{\textbf{Sprache}}\\Die Texte jedes Projekts liegen in einer oder mehreren Sprachen vor.
 
+\begin{samepage}
 \textsf{\textbf{Status}}\\Beschreibt die verschiedenen Zustände eines Textbausteins (vgl. Abschnitt \ref{l:konzept-workflow-status} · S.\pageref{l:konzept-workflow-status}).
 
 \begin{enumerate}\itemsep -5pt
@@ -77,6 +80,7 @@ Aus den vorangegangenen Überlegungen zur Anwendung und zum Workflow lässt sich
 \item \texttt{Freigegeben}, durch Kunden freigegeben
 \item \texttt{Veröffentlicht}, in Produkt übernommen
 \end{enumerate}
+\end{samepage}
 
 \textsf{\textbf{Statusänderung}}\\Beschreibt eine Änderung eines Status durch einen Benutzer, z.B. durch Freigabe oder Überprüfung.
 
