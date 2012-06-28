@@ -14,7 +14,7 @@ Abbildung~\ref{chart:komponenten} liefert einen Überblick über die in den folg
 
 Der zentrale Bestandteil der Anwendung ist der Server, mit dem verschiedene GUIs über Schnittstellen kommunzieren. Das wichtigsten GUI ist das browserbasierte Interface, da hiermit alle Mitarbeiter arbeiten, dessen Gestaltung in Abschnitt \ref{l:entwurf-gui} · S.\pageref{l:entwurf-gui} und dessen Anbindung an den Anwendungsserver in Abschnitt \ref{l:anbindung-gui} · S.\pageref{l:anbindung-gui} beschrieben wird. Abschnitt \ref{l:entwurf-server} · S.\pageref{l:entwurf-server} beschreibt die Komponenten des Anwendungsserver. 
 
-Zur Validierung des Entwurfes wurde ein Querschnitt durch die vorgestellte Architektur also Prototyp umgesetzt, mit dessen Hilfe sich überprüfen lässt, inwieweit sich das vorgeschlagene Konzept praktisch einsetzen lässt und die entworfene Systemarchitektur geeignet ist, die benötigten Funktionen abzubilden. In Abschnitt \ref{l:implementierung-gui} · S.\pageref{l:implementierung-gui} und \ref{l:implementierung-server} · S.\pageref{l:implementierung-server} wird die prototypische Implementierung der GUI bzw. des Anwendungsservers, die auf dem Entwurf basiert, beschrieben.
+Zur Validierung des Entwurfes wurde ein Querschnitt durch die vorgestellte Architektur als Prototyp umgesetzt, mit dessen Hilfe sich überprüfen lässt, inwieweit sich das vorgeschlagene Konzept praktisch einsetzen lässt und die entworfene Systemarchitektur geeignet ist, die benötigten Funktionen abzubilden. In Abschnitt \ref{l:implementierung-gui} · S.\pageref{l:implementierung-gui} und \ref{l:implementierung-server} · S.\pageref{l:implementierung-server} wird die prototypische Implementierung der GUI bzw. des Anwendungsservers, die auf dem Entwurf basiert, beschrieben.
 
 Zuerst wird jedoch das Domänenmodell, dass die gemeinsame Grundlage bildet, im nächsten Abschnitt \ref{l:domänenmodell} beschrieben.
 
@@ -27,7 +27,7 @@ Zuerst wird jedoch das Domänenmodell, dass die gemeinsame Grundlage bildet, im 
 \captionof{figure}{Domänenmodell}\label{chart:domain}
 \end{center}
 
-Aus den vorangegangenen Überlegungen zur Anwendung und zum Workflow lässt sich ein Domänenmodell extrahieren, die einzelnen logischen Objekte innerhalb der Anwendung beschreibt, mit deren Hilfe alle Operationen abgebildet werden. Abbildung~\ref{chart:domain} zeigt das Modell in der Übersicht, dass die sich im Entwurf der Anwendung in deren Implementierung im Prototypen widerspiegelt.
+Aus den vorangegangenen Überlegungen zur Anwendung und zum Workflow lässt sich ein Domänenmodell extrahieren, die einzelnen logischen Objekte innerhalb der Anwendung beschreibt, mit deren Hilfe alle Operationen abgebildet werden. Abbildung~\ref{chart:domain} zeigt das Modell in der Übersicht, dass die sich im Entwurf der Anwendung in deren Implementierung im Prototyp widerspiegelt.
 
 \textsf{\textbf{Attribut}}\\Beschreibt die Attribute eines Textbausteins.
 
@@ -222,7 +222,7 @@ In dieser Art kann ein JSON-Objekt auch mit Informationen über zugehörige \emp
 
 \subsection{Implementierung des GUI}\label{l:implementierung-gui}
 
-Im Prototypen wurden das GUI als reine JavaScript-Anwendung umgesetzt. Als Framework für den Aufbau der Anwendung wurde \trademark{Backbone.js}\footnote{\url{http://backbonejs.org/}} eingesetzt. 
+Im Prototyp wurden das GUI als reine JavaScript-Anwendung umgesetzt. Als Framework für den Aufbau der Anwendung wurde \trademark{Backbone.js}\footnote{\url{http://backbonejs.org/}} eingesetzt. 
 
 \subsubsection{Komponenten}
 
@@ -239,16 +239,16 @@ Alle genannten Komponenten sind umfangreich getestet und funktionieren in allen 
 
 \begin{center}
 \fbox{\includegraphics[width=\textwidth]{media/screenshots/app.png}}
-\captionof{screenshot}{Browserbasiertes GUI des Prototypen}\label{chart:gui-prototyp}
+\captionof{screenshot}{Browserbasiertes GUI des Prototyps}\label{chart:gui-prototyp}
 \end{center}
 
-Screenshot~\ref{chart:gui-prototyp} zeigt den Aufbau des GUI des Prototypen beispielhaft in der Ansicht zur Definition des Produkts (vgl. Abschnitt \ref{l:gui-definition} / \pageref{l:gui-definition}). Die Anordnung der Elemente des Entwurfs wurde weitgehend beibehalten. Unterschiede resultieren aus im Prototyp nicht implementierte Funktionen, die nicht mit Platzhalter-Elementen dargestellt werden, sondern entfallen. Weitere Screenshots finden sich in Anhang~\ref{l:screenshots} · S.\pageref{l:screenshots}.
+Screenshot~\ref{chart:gui-prototyp} zeigt den Aufbau des GUI des Prototyps beispielhaft in der Ansicht zur Definition des Produkts (vgl. Abschnitt \ref{l:gui-definition} / \pageref{l:gui-definition}). Die Anordnung der Elemente des Entwurfs wurde weitgehend beibehalten. Unterschiede resultieren aus im Prototyp nicht implementierte Funktionen, die nicht mit Platzhalter-Elementen dargestellt werden, sondern entfallen. Weitere Screenshots finden sich in Anhang~\ref{l:screenshots} · S.\pageref{l:screenshots}.
 
 \subsubsection{Klassendiagramm}
 
 \begin{center}
 \includegraphics[width=\textwidth]{media/prototyp-gui-klassendiagramm.pdf}
-\captionof{figure}{GUI-Klassendiagramm des Prototypen}\label{chart:prototyp-gui-klassendiagramm}
+\captionof{figure}{GUI-Klassendiagramm des Prototyps}\label{chart:prototyp-gui-klassendiagramm}
 \end{center}
 
 Abbildung \ref{chart:prototyp-gui-klassendiagramm} zeigt das Klassendiagramm der browserbasierten Anwendung. Zentraler Einstiegspunkt ist die JavaScript-Datein \texttt{main.js}, die die Anwendung initialisiert. Dazu lädt sie mit Hilfe von \texttt{require.js} die notwendigen Komponenten. Dabei handelt es sich zum einem um die \texttt{AppView}, die grundlegende Zustände der Anwendung verwaltet und den \texttt{AppRouter}, der je nach aktueller Route die jeweilige \texttt{PageView} initialisiert und anzeigt. Die \texttt{PageViews} erzeigen danach wiederum eiogenständig die von ihnen benötigten Ansichten (\texttt{ModuleViews}, \texttt{MenuViews} und \texttt{FormViews}) und Laden die dafür benötigten Daten mithilfe der \texttt{Models} und \texttt{Collections} -- in \trademark{Backbone.js} sind \emph{Views} eigentlich Controller, eine Trennung zwischen Darstellungslogik und Businesslogik ist nicht vorgesehen. Den HTML-Quellcode zur Darstellung laden die Views ebenfalls selbständig aus den \texttt{Templates} nach. Abhängigkeiten wie JavaScript-Objekte und Templates werden dabei zentral von \trademark{require.js} bereitgestellt, dass damit die Aufgabe eines DI-Containers übernimmt und praktisch auch so verwendet werden kann.
@@ -314,7 +314,7 @@ Die in diesem Abschnitt vorgestellten Komponenten bilden gemeinsam ein umfangrei
 
 \subsection{Implementierung des Anwendungsservers}\label{l:implementierung-server}
 
-Für den Prototypen wurde das PHP-Framework \trademark{Symfony2}\footnote{\url{http://symfony.com/}} eingesetzt, das von sich aus bereits viele Anforderungen des vorangegangenen Abschnitts erfüllt. 
+Für den Prototyp wurde das PHP-Framework \trademark{Symfony2}\footnote{\url{http://symfony.com/}} eingesetzt, das von sich aus bereits viele Anforderungen des vorangegangenen Abschnitts erfüllt. 
 
 \subsubsection{Kern-System}
 
@@ -374,7 +374,7 @@ Dieses Listing zeigt als Beispiel das JSON-Objekt eines Containers. In der \text
 
 \begin{center}
 \includegraphics[width=0.65\textwidth]{media/prototyp-persistenz.pdf}
-\captionof{figure}{Persistierte Objekte im Prototypen}\label{chart:prototype-persistenz}
+\captionof{figure}{Persistierte Objekte im Prototyp}\label{chart:prototype-persistenz}
 \end{center}
 
 Zum Persistieren der Daten kommt \trademark{MongoDB}\footnote{\url{http://www.mongodb.org/}}, eine No-SQL-Datenbank zum Einsatz, diese ermöglicht das unkomplizierte Speichern auch komplexer Dokumentenstrukturen. Die Wahl einer nicht-relationen Datenbank bietet den Vorteil, dass aufwändiges Zusammensetzen und Zerlegen von Dokumenten entfallen kann. In der Datenbank werden die in Abbildung \ref{chart:prototype-persistenz} gezeigten Domänenobjekte gespeichert. Dieses Modell ist deutlich einfacher als das in Abschnitt \ref{l:domänenmodell} · S.\pageref{l:domänenmodell} vorgestellte Domänenmodell, da im Prototyp nur wenige, entscheidende Funktionen implementiert wurden. Das Laden- und Speichern ist durch den Einsatz eines Object-Document-Mappers (ODM) für Doctrine 2 und MongoDB\footnote{\url{https://github.com/doctrine/mongodb-odm}} weitestgehend automatisiert. 
@@ -383,26 +383,26 @@ Zum Persistieren der Daten kommt \trademark{MongoDB}\footnote{\url{http://www.mo
 
 \begin{center}
 \includegraphics[width=\textwidth]{media/prototyp-klassendiagramm.pdf}
-\captionof{figure}{Anwendungsserver-Klassendiagramm des Prototypen}\label{chart:prototyp-klassendiagramm}
+\captionof{figure}{Anwendungsserver-Klassendiagramm des Prototyps}\label{chart:prototyp-klassendiagramm}
 \end{center}
 
-Abbildung \ref{chart:prototyp-klassendiagramm} zeigt das Klassendiagramm der Implementierung des Prototypen. Zentrale Komponente ist der Dependency-Injection-Container des Symfony2-Frameworks, dieser instanziert je nach Pfad der Anfrage einen Controller und ruft dort die entsprechende Methode auf. Innerhalb der Controller steht der DI-Container zur Verfügung über den dann z.B. der ODM instanziert werden kann, um Daten aus der Datenbank zu laden. Der ODM verwendet zur Repräsentierung der Daten die Klassen des Packages \texttt{Documents}, die Controller können diese selber erzeugen, oder bekommen diese als Anfrage-Ergebnisse vom ODM übergeben.
+Abbildung \ref{chart:prototyp-klassendiagramm} zeigt das Klassendiagramm der Implementierung des Prototyps. Zentrale Komponente ist der Dependency-Injection-Container des Symfony2-Frameworks, dieser instanziert je nach Pfad der Anfrage einen Controller und ruft dort die entsprechende Methode auf. Innerhalb der Controller steht der DI-Container zur Verfügung über den dann z.B. der ODM instanziert werden kann, um Daten aus der Datenbank zu laden. Der ODM verwendet zur Repräsentierung der Daten die Klassen des Packages \texttt{Documents}, die Controller können diese selber erzeugen, oder bekommen diese als Anfrage-Ergebnisse vom ODM übergeben.
 
 Funktionen, die an mehreren Stellen, oder über unterschiedliche Arten verwendet werden, wurden in eigene Services ausgelagert (\texttt{ContentBooklet} und \texttt{ContainerChildren}). Diese werden zum einen innerhalb der Controller verwendet, können aber auch über das CLI gestartet werden. \trademark{Symfony2} stellt ein einfache Möglichkeit zum Erstellen vom Operationen über die Kommandozeile zur Verfügung. Im Prototyp wurde das Anlegen von Demo-Projekt-Daten mithilfe dieser Möglichkeit realisiert. Das \texttt{DemoDataCommand} wird von der Konsole aus gestartet und verwendet den \texttt{ApiClient}, um über HTTP mit der Schnittstelle des Anwendungsservers zu kommunizieren.
 
 \secbar
 
-Die Implementierung eines Prototypen dient zur Verifizierung des Entwurfs; im folgenden Abschnitt wird der Prototyp in einem realitätsnahen Szenario begutachtet.
+Die Implementierung eines Prototyps dient zur Verifizierung des Entwurfs; im folgenden Abschnitt wird der Prototyp in einem realitätsnahen Szenario begutachtet.
 
 \pagebreak
 
 \subsection{Implementierter Workflow am Beispiel des Studiengangsflyers}
 
-Die in den vorangegangenen Abschnitten vorgestellte Implementierung des Prototypen wird anhand eines realen Projekts auf ihre praxistauglichkeit hin überprüft. Es handelt sich dabei um die einmal im Jahr erscheinende Informationsbroschüre des Studienganges Medieninformatik an der Hochschule RheinMain. Die Broschüre zu Beginn des Wintersemesters 2011/2012 einen Umfang von 28 Seiten zuzüglich Titel und Rückseite. In ihr findet sich das Grußwort des Studiengangsleiters, eine Kurzinfo über den Studiengang, das Studienprogramm mit Informationen zum Verlauf des Studiums, ein Terminkalender, Informationen zu Einrichtungen des Fachbereiches, eine Liste mit Personen im Fachbereich, sowie eine Umgebungskarte und ein Gebäudeplan. Die Broschüre wird von den Mitarbeitern des Fachbereiches selber erstellt.
+Die in den vorangegangenen Abschnitten vorgestellte Implementierung des Prototyps wird anhand eines realen Projekts auf ihre praxistauglichkeit hin überprüft. Es handelt sich dabei um die einmal im Jahr erscheinende Informationsbroschüre des Studienganges Medieninformatik an der Hochschule RheinMain. Die Broschüre zu Beginn des Wintersemesters 2011/2012 einen Umfang von 28 Seiten zuzüglich Titel und Rückseite. In ihr findet sich das Grußwort des Studiengangsleiters, eine Kurzinfo über den Studiengang, das Studienprogramm mit Informationen zum Verlauf des Studiums, ein Terminkalender, Informationen zu Einrichtungen des Fachbereiches, eine Liste mit Personen im Fachbereich, sowie eine Umgebungskarte und ein Gebäudeplan. Die Broschüre wird von den Mitarbeitern des Fachbereiches selber erstellt.
 
 \bigskip
 
-Mit dem Prototypen ist es möglich, den Flyer als Projekt anzulegen. Im nächsten Schritt wird die Struktur des Flyers festgelegt. Die Anwendung unterscheidet dazu zwischen Containern und Textbausteinen. Container sind rein strukturelle Elemente, die wiederum weitere Container und Textbausteine enthalten können. Für den Flyer bietet es sich an, einzelnen Kapitel (Titel, Vorwort, Kurzinfo, Termin \& Öffnungszeiten, Personen, Orientierung) als Container auf oberster Ebene anzulegen und daruntere jeweils weitere Unterteilungen nach Abschnitten vorzunehmen. Innerhalb dieser Abschnitte werden dann die einzelnen Textbausteine definiert. Zu den Textbausteinen können auch Zusatzinformationen zum Text-Typ (Schriftart, Schriftgröße, ein- oder mehrzeilig) hinterlegt werden. Die Elemente lassen sich mittels Drag\&Drop in der Reihenfolge anpassen.
+Mit dem Prototyp ist es möglich, den Flyer als Projekt anzulegen. Im nächsten Schritt wird die Struktur des Flyers festgelegt. Die Anwendung unterscheidet dazu zwischen Containern und Textbausteinen. Container sind rein strukturelle Elemente, die wiederum weitere Container und Textbausteine enthalten können. Für den Flyer bietet es sich an, einzelnen Kapitel (Titel, Vorwort, Kurzinfo, Termin \& Öffnungszeiten, Personen, Orientierung) als Container auf oberster Ebene anzulegen und daruntere jeweils weitere Unterteilungen nach Abschnitten vorzunehmen. Innerhalb dieser Abschnitte werden dann die einzelnen Textbausteine definiert. Zu den Textbausteinen können auch Zusatzinformationen zum Text-Typ (Schriftart, Schriftgröße, ein- oder mehrzeilig) hinterlegt werden. Die Elemente lassen sich mittels Drag\&Drop in der Reihenfolge anpassen.
 
 Sobald die Bestandteile des Produkts angelegt wurden kann parallel bereits mit der Erstellung der Texte begonnen werden. Diese können in den jeweiligen Bausteinen je nach Typ als ein- oder mehrzeiliger Text hinterlegt werden. Änderungen an den Inhalten werden gespeichert und sind als Änderungsverlauf abrufbar. Über eine Kommentarfunktion ist der Austausch über die Texte innerhalb der Anwendung möglich. 
 
