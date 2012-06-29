@@ -12,7 +12,8 @@ Aufbau-und-Zeitplan.pdf: Aufbau-und-Zeitplan.tex
 
 Thesis.pdf: Thesis.tex parts/*.tex parts/*.bib media/*.pdf base.tex
 	-xelatex -interaction=nonstopmode Thesis.tex
-	-bibtex Thesis.aux
+	bibtex Thesis1
+	bibtex Thesis2
 	-xelatex -interaction=nonstopmode Thesis.tex
 	xelatex -interaction=nonstopmode Thesis.tex
 
