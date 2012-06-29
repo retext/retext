@@ -1,0 +1,27 @@
+<div class="row-fluid">
+    <div class="span12">
+        <h2><%= model.name %></h2>
+    </div>
+</div>
+<hr>
+<div class="row-fluid">
+    <div class="span12 tabbable">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" data-target="#project-tab-progress" href="#projects/list/<%= model.id %>/progress"><i class="icon-tasks"
+                                                                                           title="Fortschritt"></i></a>
+            </li>
+            <li><a data-toggle="tab" data-target="#project-tab-contributors" href="#projects/list/<%= model.id %>/contributors"><i class="icon-user" title="Mitarbeiter"></i></a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="project-tab-progress">
+                <h3>Fortschritt</h3>
+
+                <div class="view-project-progress"></div>
+            </div>
+            <div class="tab-pane" id="project-tab-contributors">
+                <h3>Mitarbeiter</h3>
+            </div>
+        </div>
+    </div>
+</div>

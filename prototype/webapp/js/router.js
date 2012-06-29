@@ -7,9 +7,12 @@ define([
             this.appView = appView;
             Events.on('navigate', this.navigate, this);
         },
+        /* TODO: Konfiguration der Routen in Views auslagern */
         routes:{
             "":"home",
             "project/:projectId/:mode/:parentContainerId":"project",
+            "projects/list/:projectId/:tab":"listProjectTab",
+            "projects/list/:projectId":"listProject",
             "*page":"showPage"
         },
         home:function () {
@@ -22,8 +25,14 @@ define([
             });
         },
         project:function (projectId, mode, parentContainerId) {
-            var opts = {model:{id:projectId, parentContainerId:parentContainerId, mode: mode}};
+            var opts = {model:{id:projectId, parentContainerId:parentContainerId, mode:mode}};
             this.showPage('project', opts);
+        },
+        listProject:function (projectId) {
+            this.showPage('projects/list', {model:{id:projectId}});
+        },
+        listProjectTab:function (projectId, tab) {
+            this.showPage('projects/list', {model:{id:projectId, tab:tab}});
         }
     });
     return AppRouter;
