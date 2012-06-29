@@ -2,7 +2,7 @@
 
 namespace Retext\ApiBundle\Controller;
 
-use Retext\ApiBundle\Controller\RequestParameter, Retext\ApiBundle\Document\Project, Retext\ApiBundle\Model\ProjectProgress, Retext\ApiBundle\Document\Container;
+use Retext\ApiBundle\Controller\RequestParameter, Retext\ApiBundle\Document\Project, Retext\ApiBundle\Model\ProjectProgress, Retext\ApiBundle\Document\Container, \Retext\ApiBundle\Model\ProjectContributor;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller,
 Symfony\Component\HttpFoundation\Response, Symfony\Component\HttpFoundation\Request;
@@ -52,12 +52,7 @@ class ProjectController extends Base
      */
     protected function getProject($id)
     {
-        $dm = $this->get('doctrine.odm.mongodb.document_manager');
-        $project = $dm->getRepository('RetextApiBundle:Project')
-            ->findOneBy(array('owner' => new \MongoId($this->getUser()->getId()), 'id' => $id));
-
-        if (!$project) throw $this->createNotFoundException();
-        return $project;
+        return parent::getProject($id);
     }
 
 
@@ -69,11 +64,19 @@ class ProjectController extends Base
         $this->ensureLoggedIn();
 
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
-        $projects = $dm->getRepository('RetextApiBundle:Project')
+        $projectsByOwner = $dm->getRepository('RetextApiBundle:Project')
             ->createQueryBuilder()
             ->field('owner')->equals(new \MongoId($this->getUser()->getId()))
             ->getQuery()
             ->execute();
+        $projectsByContributor = $dm->getRepository('RetextApiBundle:Project')
+            ->createQueryBuilder()
+            ->field('contributors')->all(array($this->getUser()->getEmail()))
+            ->getQuery()
+            ->execute();
+        $projects = array();
+        foreach ($projectsByOwner as $project) $projects[] = $project;
+        foreach ($projectsByContributor as $project) $projects[] = $project;
         return $this->createListResponse($projects);
     }
 
@@ -127,5 +130,60 @@ class ProjectController extends Base
         $progress->setSpellingApproved($data['spellingApproved']);
         $progress->setTotal($data['total']);
         return $this->createResponse($progress);
+    }
+
+    /**
+     * Fügt dem Projekt einen Mitarbeiter hinzu
+     *
+     * @Route("/project/{id}/contributor", requirements={"_method":"POST"})
+     */
+    public function addContributorAction($id)
+    {
+        $this->ensureLoggedIn();
+        $project = $this->getProject($id);
+        $email = $this->getFromRequest(new RequestParameter('email'));
+        $project->addContributor($email);
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $dm->persist($project);
+        $dm->flush();
+        $projectContributor = new ProjectContributor();
+        $projectContributor->setProject($project);
+        $projectContributor->setEmail($email);
+        return $this->createResponse($projectContributor);
+    }
+
+    /**
+     * Gibt die Projektmitarbeiter zurück
+     *
+     * @Route("/project/{id}/contributor", requirements={"_method":"GET"})
+     */
+    public function listContributorAction($id)
+    {
+        $this->ensureLoggedIn();
+        $project = $this->getProject($id);
+        $contributors = array();
+        foreach ($project->getContributors() as $email) {
+            $contributor = new ProjectContributor();
+            $contributor->setProject($project);
+            $contributor->setEmail($email);
+            $contributors[] = $contributor;
+        }
+        return $this->createListResponse($contributors);
+    }
+
+    /**
+     * Entfernt einen einen Mitarbeiter aus dem Projekt
+     *
+     * @Route("/project/{id}/contributor/{email}", requirements={"_method":"DELETE"})
+     */
+    public function removeContributorAction($id, $email)
+    {
+        $this->ensureLoggedIn();
+        $project = $this->getProject($id);
+        $project->removeContributor($email);
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $dm->persist($project);
+        $dm->flush();
+        return $this->createResponse();
     }
 }

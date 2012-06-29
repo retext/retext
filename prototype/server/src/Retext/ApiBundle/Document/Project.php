@@ -31,6 +31,14 @@ class Project extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
     private $owner;
 
     /**
+     * @MongoDB\Hash
+     * @var string[] $contributors E-mail addresses of contributors
+     * @MongoDB\Index(order="asc")
+     * @SerializerBundle\Exclude
+     */
+    private $contributors = array();
+
+    /**
      * @MongoDB\ReferenceOne(targetDocument="Retext\ApiBundle\Document\Container", cascade={"persist"}, simple=true)
      * @MongoDB\Index(order="asc")
      * @SerializerBundle\SerializedName("rootContainer")
@@ -45,6 +53,14 @@ class Project extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
      * @var \DateTime|null
      */
     private $deletedAt = null;
+
+    /**
+     * @param string $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
     /**
      * Get id
@@ -157,6 +173,49 @@ class Project extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
     }
 
     /**
+     * Setzt die Mitarbeiter des Projekts
+     *
+     * @param string[] $emails Liste mit E-Mail-Adressen
+     */
+    public function setContributors($emails)
+    {
+        $this->contributors = $emails;
+    }
+
+    /**
+     * Gibt die E-Mail-Adressen der Mitarbeiter eines Projekts zurück
+     *
+     * @return string[]
+     */
+    public function getContributors()
+    {
+        return $this->contributors;
+    }
+
+    /**
+     * Fügt dem Projekt einen Mitarbeiter hinzu
+     *
+     * @param string $emails
+     */
+    public function addContributor($email)
+    {
+        $this->contributors[] = $email;
+        $this->contributors = array_unique($this->contributors, SORT_STRING);
+    }
+
+    /**
+     * Entfernt einen Mitarbeiter aus dem Projekt
+     *
+     * @param string $email
+     */
+    public function removeContributor($email)
+    {
+        if ($pos = array_search($email, $this->contributors)) {
+            unset($this->contributors[$pos]);
+        }
+    }
+
+    /**
      * Gibt die Namen der verknüpften Dokumente zurück
      *
      * @return \Retext\ApiBundle\Model\DocumentRelation[]|null
@@ -166,10 +225,13 @@ class Project extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
         $rootContainer = $this->getRootContainer();
         $textType = new TextType();
         $progress = new \Retext\ApiBundle\Model\ProjectProgress();
+        $contributors = new \Retext\ApiBundle\Model\ProjectContributor();
+        $contributors->setProject($this);
         return array(
             \Retext\ApiBundle\Model\DocumentRelation::createFromDoc($rootContainer)->setHref($rootContainer->getSubject())->setRole('http://jsonld.retext.it/ontology/root'),
             \Retext\ApiBundle\Model\DocumentRelation::createFromDoc($textType)->setHref($textType->getSubject() . '?project=' . $this->getId())->setList(true),
             \Retext\ApiBundle\Model\DocumentRelation::createFromDoc($progress)->setHref($this->getSubject() . '/progress'),
+            \Retext\ApiBundle\Model\DocumentRelation::createFromDoc($contributors)->setList(true),
             \Retext\ApiBundle\Model\DocumentRelation::create()->setRelatedcontext('http://jsonld.retext.it/Element')->setList(true)->setRole('http://jsonld.retext.it/ontology/tree')->setHref($rootContainer->getSubject() . '/tree'),
         );
     }

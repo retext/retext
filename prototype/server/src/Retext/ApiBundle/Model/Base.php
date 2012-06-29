@@ -8,16 +8,19 @@ abstract class Base implements LinkedData
 {
     /**
      * @SerializerBundle\SerializedName("@context")
+     * @SerializerBundle\Accessor(getter="getContext")
      */
     public $context;
 
     /**
      * @SerializerBundle\SerializedName("@subject")
+     * @SerializerBundle\Accessor(getter="getSubject")
      */
     public $subject;
 
     /**
      * @SerializerBundle\SerializedName("@relations")
+     * @SerializerBundle\Accessor(getter="getRelatedDocuments")
      */
     public $relations;
 
@@ -25,11 +28,9 @@ abstract class Base implements LinkedData
      * Gibt den Context dieses Dokumentes zurück
      *
      * @return string
-     * @SerializerBundle\PreSerialize
      */
     public function getContext()
     {
-
         $this->context = 'http://jsonld.retext.it/' . $this->getContextName();
         return $this->context;
     }
@@ -38,7 +39,6 @@ abstract class Base implements LinkedData
      * Gibt die URL (Subject) dieses Dokumentes zurück
      *
      * @return string
-     * @SerializerBundle\PreSerialize
      */
     public function getSubject()
     {
@@ -56,20 +56,5 @@ abstract class Base implements LinkedData
     {
         $parts = explode('\\', get_class($this));
         return array_pop($parts);
-    }
-
-    /**
-     * Gibt die mit diesem Dokument verknüpften Dokumente (Relations) zurück
-     *
-     * @return array
-     * @SerializerBundle\PreSerialize
-     */
-    public function getRelations()
-    {
-        $this->relations = $this->getRelatedDocuments();
-        if (empty($this->relations)) {
-            $this->relations = null;
-            return;
-        }
     }
 }

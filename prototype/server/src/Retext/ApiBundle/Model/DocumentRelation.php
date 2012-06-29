@@ -96,7 +96,7 @@ class DocumentRelation
      */
     public function setList($list)
     {
-        $this->list = $list;
+        $this->list = (bool)$list;
         return $this;
     }
 

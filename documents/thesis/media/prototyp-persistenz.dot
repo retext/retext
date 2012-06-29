@@ -6,7 +6,7 @@ edge [ fontsize=10 ]
 
 Base [ label="{Base\n&lt;&lt;abstract&gt;&gt;|+id\l+deletedAt\l}" ]
 Element [ label="{Element\n&lt;&lt;abstract&gt;&gt;|+project\l+name\l+parent\l}" ]
-Projekt [ label="{Project|+name\l+owner\l+rootContainer\l}" ]
+Projekt [ label="{Project|+name\l+owner\l+contributors\l+rootContainer\l}" ]
 Container [ label="{Container|+childOrder\l}" ]
 Textbaustein [ label="{Text|+status\l+type\l+text\l+spellingApproved\l+contentApproved\l+approved\l}" ]
 TextTyp [ label="{TextType|+name\l+description\l+fontsize\l+fontname\l+multiline\l}" ]

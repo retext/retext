@@ -205,9 +205,27 @@ abstract class Base extends Controller
     protected function getProject($project_id)
     {
         $user = $this->getUser();
-        return $this->getDocument('Project', $project_id, function(\Doctrine\ODM\MongoDB\Query\Builder $qb) use($user)
+        $projectByOwner = $this->getDocumentOrNUll('Project', $project_id, function(\Doctrine\ODM\MongoDB\Query\Builder $qb) use($user)
         {
             $qb->field('owner')->equals(new \MongoId($user->getId()));
+        });
+        if ($projectByOwner) return $projectByOwner;
+        $projectByContributor = $this->getDocument('Project', $project_id, function(\Doctrine\ODM\MongoDB\Query\Builder $qb) use($user)
+        {
+            $qb->field('contributors')->all(array($user->getEmail()));
+        });
+        if ($projectByContributor) return $projectByContributor;
+    }
+
+    /**
+     * @param string $email
+     * @return \Retext\ApiBundle\Document\User
+     */
+    protected function getUserByEmail($email)
+    {
+        return $this->getDocument('User', null, function(\Doctrine\ODM\MongoDB\Query\Builder $qb) use($email)
+        {
+            $qb->field('email')->equals($email);
         });
     }
 
@@ -241,16 +259,17 @@ abstract class Base extends Controller
     /**
      * @param $collection
      * @param $id
+     * @param \closure Closure zum modifizieren des Queries
      * @return \Retext\ApiBundle\Model\Base
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      */
-    protected function getDocument($collection, $id, \closure $queryModifier = null)
+    protected function getDocument($collection, $id = null, \closure $queryModifier = null)
     {
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $qb = $dm->getRepository('RetextApiBundle:' . $collection)
-            ->createQueryBuilder()
-            ->field('id')->equals(new \MongoId($id));
+            ->createQueryBuilder();
+        if ($id !== null) $qb->field('id')->equals(new \MongoId($id));
         if ($queryModifier !== null) $queryModifier($qb);
         $doc = $qb->getQuery()
             ->getSingleResult();
@@ -260,6 +279,18 @@ abstract class Base extends Controller
         if ($doc instanceof \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteable && $doc->getDeletedAt() !== null)
             throw $this->createGoneException($collection . ' ' . $id . ' has been deleted.');
         return $doc;
+    }
+
+    /**
+     * @see getDocument
+     */
+    protected function getDocumentOrNull($collection, $id = null, \closure $queryModifier = null)
+    {
+        try {
+            return $this->getDocument($collection, $id, $queryModifier);
+        } catch (\Symfony\Component\HttpKernel\Exception\NotFoundHttpException $e) {
+            return null;
+        }
     }
 
     /**
