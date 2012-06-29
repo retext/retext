@@ -1,4 +1,4 @@
-all: Konzept.pdf Aufbau-und-Zeitplan.pdf Thesis.pdf Zusammenfassung.pdf
+all: Konzept.pdf Aufbau-und-Zeitplan.pdf Thesis.pdf Zusammenfassung.pdf Thesis-Externe.pdf
 
 Konzept.pdf: Konzept.tex
 #	-xelatex -interaction=nonstopmode Konzept.tex
@@ -16,6 +16,13 @@ Thesis.pdf: Thesis.tex parts/*.tex parts/*.bib media/*.pdf base.tex
 	bibtex Thesis2
 	-xelatex -interaction=nonstopmode Thesis.tex
 	xelatex -interaction=nonstopmode Thesis.tex
+
+Thesis-Externe.pdf: Thesis-Externe.tex parts/*.tex parts/*.bib media/*.pdf base.tex
+	-xelatex -interaction=nonstopmode Thesis-Externe.tex
+	bibtex Thesis-Externe1
+	bibtex Thesis-Externe2
+	-xelatex -interaction=nonstopmode Thesis-Externe.tex
+	xelatex -interaction=nonstopmode Thesis-Externe.tex
 
 Zusammenfassung.pdf: Zusammenfassung.tex base.tex
 	xelatex -interaction=nonstopmode Zusammenfassung.tex
