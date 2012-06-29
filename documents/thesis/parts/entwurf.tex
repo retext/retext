@@ -304,7 +304,7 @@ Mit dieser Komponente werden die innerhalb der Anwendung erzeugten Daten persist
 
 \begin{center}
 \includegraphics[width=0.75\textwidth]{media/io.pdf}
-\captionof{figure}{IO-Komponente}\label{chart:io}
+\captionof{figure}{I/O-Komponente}\label{chart:io}
 \end{center}
 
 Diese Komponente ist für den Import von Daten aus verschiedenen Formaten in das interne Repräsentationsmodell und den umgekehrten Export zuständig. Die Komponente ist unterteilt in drei Bereiche für die Implementierungen des Transportwegs (z.B. E-Mail oder FTP), der Art des Ex- oder Importes (synchron, asynchron bzw. Push oder Pull) und das Dateiformat (vgl.~Abb.~\ref{chart:io}). Aus diesen drei Teilen lassen sich beliebige Kombinationen erstellen. Beispiele sind synchrone Exporte, wie den Download eines Exports über die Schnittstelle oder asynchrone Exporte, z.B. den Upload auf einen FTP-Server. Benachrichtigungen sind ebenfalls in dieser Komponente implementiert. Eine Benachrichtigung ist z.B. ein asynchroner Export via E-Mail, wobei keine Daten exportiert werden, sondern z.B. nur die Informationen zu einem Ereignis.

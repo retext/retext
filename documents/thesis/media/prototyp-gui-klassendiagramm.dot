@@ -30,7 +30,7 @@ BackboneModel [ label="{Backbone.Model|}" ]
 BackboneCollection [ label="{Backbone.Collection|}" ]
 
 # Notizen
-node [ shape=none style=filled color=yellow fontcolor="#666666" fontsize=10 ]
+node [ shape=none style=filled color="#FCF3BF" fontcolor="#666666" fontsize=10 ]
 CollectionsComment [ label="apistatus\lbreadcrumb\ltreenode\lcomment\ltexthistory\lelement\lmode\ltexttype\lgroup\litem\lproject\l" ]
 ModelsComment [ label="apistatus\lauth\lbreadcrumb\ltreenode\lrelation\ltextversion\lprojectprogress\lcontainer\lcomment\ldefaultapistatus\lregister\ltext\lprojectView\lelement\lmode\ltexttype\luser\lgroup\litem\lproject\l" ]
 ModuleViewsComment [ label="history\lproject/breadcrumb\lproject/list\lproject/mode-switcher\lproject/info\lproject/listing\lproject/progress\lproject/tree\ltexthistory\ltextcomments\lelement/structure/list\lelement/structure/container\lelement/structure/text\lelement/list\lelement/element\lelement/write/list\lelement/write/container\lelement/write/text\lelement/check/list\lelement/check/container\lelement/check/text\lcontainerinfo\ltextinfo\l" ]
@@ -77,7 +77,7 @@ MenuViews -> Views
 PageViews -> Views
 
 # Notizen
-edge [ arrowhead=none penwidth=4 weight=0 color=yellow headport=none tailport=none style=solid ]
+edge [ arrowhead=none penwidth=4 weight=0 color="#FCF3BF" headport=none tailport=none style=solid ]
 
 CollectionsComment -> Collections
 ModelsComment -> Models [ len=2.5 ]
