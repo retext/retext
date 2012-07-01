@@ -193,12 +193,12 @@ Wireframe~\ref{chart:gui-qs} zeigt die Darstellung des GUIs zur Kontrolle und Fr
 \captionof{wireframe}{Kontext-Informationen}\label{chart:gui-kontext}
 \end{center}
 
-Wireframe~\ref{chart:gui-kontext} zeigt die Darstellung des GUIs zur Anzeige und Bearbeitung der Kon"-text-In"-for"-ma"-ti"-on"-en. Der Inhalt der Ansicht ist an die jeweilige Operation angepasst. Im oberen Bereich kann zwischen verschiedenen Kontextinformationen zu dem jeweiligen Inhalt umgeschaltet werden \ball{1} (v.l.n.r): 
+Wireframe~\ref{chart:gui-kontext} zeigt die Darstellung des GUIs zur Anzeige und Bearbeitung der Kontext"=Informationen. Der Inhalt der Ansicht ist an die jeweilige Operation angepasst. Im oberen Bereich kann zwischen verschiedenen Kontextinformationen zu dem jeweiligen Inhalt umgeschaltet werden \ball{1} (v.l.n.r): 
 
 \begin{enumerate}\itemsep -5pt
 \item Neues: Listet die neuesten Informationen aus den vier Bereichen und den aktuellen Status auf.
 \item Änderungshistorie: Anzeige der vergangenen Änderungen, mit der Möglichkeit, diese zu kommentieren und zurückzunehmen.
-\item Material: Zeigt hinterlegte Materialien an. Dabei handelt es sich um Dateien und Freitext-Notizen.
+\item Material: Zeigt hinterlegte Materialien an. Dabei handelt es sich um Dateien und Freitext"=Notizen.
 \item Kommentare: Zeigt die Kommentare an.
 \item Struktur: Zeigt Informationen zur Struktur innerhalb des Produkts, wie z.B. die Attribute, an.
 \end{enumerate}
@@ -220,7 +220,7 @@ Die in Abbildung~\ref{chart:komponenten} · S.\pageref{chart:komponenten} \emph{
 Ein Problem beim Datenaustausch mithilfe von JSON-Objekten ist, dass diese üblicherweise nur reine Daten enthalten, da schlichterweise Objekte serialisiert werden. Beim Serialisieren werden dann nur die Eigenschaften einer Objekt-Instanz beibehalten, Informationen wie die Klasse oder Relationen zu anderen Objekten werden verworfen. Werden APIs nach diesem Schema verwendet, müssen die Entwickler wissen, hinter welchem Endpunkt sie welche Arten von Daten erwarten. Diese Information wird als Quellcode in der Anwendung hart kodiert. Um zukünftigen Änderungen an der Schnittstelle ohne Änderungen auf Clientseite begegnen zu können, sollten die Antworten der Schnittstelle mit Meta-Informationen versehen sein, die es dem Client ermöglichen, ohne hart kodierte Zuordnung zwischen Endpunkt und Domänenobjekt auszukommen. 
 
 \begin{samepage}
-\trademark{JSON-LD}\footnote{\url{http://json-ld.org/}} hat sich dabei als Lösung bewährt. Hierbei werden JSON-Objekt mit Me"-ta-In"-for"-mat"-ion"-en versehen, die beschreiben, um \emph{was} für ein Objekt es sich bei der Antwort handelt (\texttt{@context}) und um \emph{welches} (\texttt{@id}):
+\trademark{JSON-LD}\footnote{\url{http://json-ld.org/}} hat sich dabei als Lösung bewährt. Hierbei werden JSON-Objekt mit Meta"=Informationen versehen, die beschreiben, um \emph{was} für ein Objekt es sich bei der Antwort handelt (\texttt{@context}) und um \emph{welches} (\texttt{@id}):
 
 \begin{verbatim}
 { "@context": "http://json-ld.org/contexts/person.jsonld",
@@ -268,7 +268,7 @@ Screenshot~\ref{chart:gui-prototyp} zeigt den Aufbau des GUI des Prototyps beisp
 
 Abbildung \ref{chart:prototyp-gui-klassendiagramm} zeigt das Klassendiagramm der browserbasierten Anwendung. Zentraler Einstiegspunkt ist die JavaScript-Datei \texttt{main.js}, die die Anwendung initialisiert. Dazu lädt sie mithilfe von \texttt{require.js} die notwendigen Komponenten. Dabei handelt es sich zum einen um die \texttt{AppView}, die grundlegende Zustände der Anwendung verwaltet und den \texttt{AppRouter}, der je nach aktueller Route die jeweilige \texttt{PageView} initialisiert und anzeigt. Die \texttt{PageViews} erzeugen danach wiederum eigenständig die von ihnen benötigten Ansichten (\texttt{ModuleViews}, \texttt{MenuViews} und \texttt{FormViews}) und laden die dafür benötigten Daten mithilfe der \texttt{Models} und \texttt{Collections} -- in \trademark{Backbone.js} sind \emph{Views} eigentlich Controller, eine Trennung zwischen Darstellungslogik und Businesslogik ist nicht vorgesehen. Den HTML-Quellcode zur Darstellung laden die Views ebenfalls selbständig aus den \texttt{Templates} nach. Abhängigkeiten wie JavaScript-Objekte und Templates werden dabei zentral von \trademark{require.js} bereitgestellt, das damit die Aufgabe eines Dependency-Injection-Containers (DI-Container) übernimmt und praktisch auch so verwendet werden kann.
 
-Die Kommunikation mit der API wird durch die \trademark{Backbone.js}-Klassen \texttt{Backbone.Model} und \texttt{Backbone.Collection} abstrahiert, die RESTful-APIs ansprechen können, die dem CRUD-Paradigma entsprechen. Siehe dazu die Beschreibung der API-Implementierung in Abschnitt \ref{l:api-implementierung} · S.\pageref{l:api-implementierung}.
+Die Kommunikation mit der API wird durch die \trademark{Backbone.js}-Klassen \texttt{Backbone.Model} und \texttt{Backbone.Collection} abstrahiert, die RESTful-APIs ansprechen können, die dem CRUD"=Paradigma entsprechen. Siehe dazu die Beschreibung der API-Implementierung in Abschnitt \ref{l:api-implementierung} · S.\pageref{l:api-implementierung}.
 
 \secbar
 
@@ -282,7 +282,7 @@ In diesem Abschnitt werden die in Abbildung~\ref{chart:komponenten} · S.\pagere
 
 \subsubsection{API, Cronjobs, CLI, …}
 
-In der API-Komponente, die als RESTful-API implementiert ist, sind über eine Rou"-ting-Ta"-bel"-le alle Controller registriert. Da das System mit einer vollständigen Abdeckung aller Operationen durch API-Endpunkte implementiert ist, wird diese auch für lokal ausgeführte Scripte wie z.B. Cronjobs oder CLIs verwendet. Dies ermöglicht eine saubere Trennung, auch für administrative Aufgaben, und verhindert, dass Sonderfälle oder Workarounds für bestimmte Aufgaben kultiviert werden.
+In der API-Komponente, die als RESTful-API implementiert ist, sind über eine Routing"=Tabelle alle Controller registriert. Da das System mit einer vollständigen Abdeckung aller Operationen durch API-Endpunkte implementiert ist, wird diese auch für lokal ausgeführte Scripte wie z.B. Cronjobs oder CLIs verwendet. Dies ermöglicht eine saubere Trennung, auch für administrative Aufgaben, und verhindert, dass Sonderfälle oder Workarounds für bestimmte Aufgaben kultiviert werden.
 
 \subsubsection{Dependency-Injection-Container}
 
