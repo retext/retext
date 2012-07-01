@@ -2,10 +2,10 @@
 
 Im vorigen Kapitel wurde eine Anwendung konzipiert, mit der sich die in Kapitel \ref{l:problemanalyse} · S.\pageref{l:problemanalyse} genannten Probleme beheben lassen. In diesem Kapitel wird ein Prototyp entworfen, der dieses Konzept umsetzt. Mithilfe des Prototyps soll gezeigt werden, dass sich der konzipierte Workflow mit der vorgeschlagenen Anwendungsart -- einer browserbasierte Web-Anwendung mit vollständiger Schnittstellen-Abdeckung -- abbilden lässt und einen Mehrwert für Projekte zur Erstellung von Informations- und Kommunikationsmedienprodukten bietet. 
 
-Der Funktionsumfang des Prototyps ist eingeschränkt, deckt aber die wichtigsten Anforderungen ab. Im Prototypen soll es möglich sein
+Der Funktionsumfang des Prototyps ist eingeschränkt, deckt aber die wichtigsten Anforderungen ab. Im Prototyp soll es möglich sein
 \begin{itemize}\itemsep -5pt
-\item die Struktur eines Produktes zu definieren
-\item die Texte des Produktes zu befüllen
+\item die Struktur eines Produkts zu definieren
+\item die Texte des Produkts zu befüllen
 \item sich mit anderen Mitarbeitern über die Texte auszutauschen
 \item die Texte zu prüfen und freizugeben
 \item das Projekt zu exportieren, um die Texte weiterverarbeiten zu können.
@@ -21,11 +21,11 @@ Die Beschreibungen der Bestandteile der Anwendung in diesem Kapitel gehen zum Te
 \begin{center}
 \includegraphics[width=0.75\textwidth]{media/komponenten.pdf}
 \end{center}
-\caption{Komponententen des zentralen Systems}
+\caption{Komponententen der Anwendung}
 \label{chart:komponenten}
 \end{figure}
 
-Abbildung~\ref{chart:komponenten} liefert einen Überblick über die in den folgenden Abschnitten beschriebenen Komponenten des Systems. \emph{Blau} eingezeichnet sind der Endanwender und externe Benutzer-Werkzeuge wie z.B. Plug-Ins und Software von Drittanbietern. \emph{Gelb} eingezeichnet sind die Komponenten des browserbasierten GUI. \emph{Grau} eingezeichnet sind die Komponenten des Servers. \emph{Braun} eingezeichnet sind (aus Sicht des Servers) externe Dienste, die durch diesen angebunden werden. \emph{Gestrichelte Linien} zeigen Kommunikationsverbindung zwischen Komponenten über Schnittstellen. \emph{Durchgezogene Linien} zeigen Verbindungungen innerhalb eines Systems. 
+Abbildung~\ref{chart:komponenten} liefert einen Überblick über die in den folgenden Abschnitten beschriebenen Komponenten der Anwendung. \emph{Blau} eingezeichnet sind der Endanwender und externe Benutzer"=Werkzeuge wie z.B. Plug-Ins und Software von Drittanbietern. \emph{Gelb} eingezeichnet sind die Komponenten des browserbasierten GUI. \emph{Grau} eingezeichnet sind die Komponenten des Anwendungsservers. \emph{Braun} eingezeichnet sind (aus Sicht des Anwendungsservers) externe Dienste, die durch diesen angebunden werden. \emph{Gestrichelte Linien} zeigen Kommunikationsverbindung zwischen Komponenten über Schnittstellen. \emph{Durchgezogene Linien} zeigen Verbindungungen innerhalb eines Systems.
 
 Der zentrale Bestandteil der Anwendung ist der Anwendungsserver, mit dem verschiedene GUIs über Schnittstellen kommunzieren. Das wichtigste GUI ist das browserbasierte Interface, da hiermit alle am Projekt beteiligten Personen arbeiten. Abschnitt \ref{l:entwurf-server} · S.\pageref{l:entwurf-server} beschreibt die Komponenten des Anwendungsserver und Abschnitt \ref{l:entwurf-gui} · S.\pageref{l:entwurf-gui} die Gestaltung des browserbasierten GUIs. In Abschnitt \ref{l:anbindung-gui} · S.\pageref{l:anbindung-gui} wird die Anbindung dieses GUIs an den Anwendungsserver beschrieben.
 
@@ -58,7 +58,7 @@ Die einzelnen Objekte werden nachfolgend beschrieben:
 
 \textsf{\textbf{Kontext-Information}}\\Projektspezifische Kontext-Informationen lassen sich hinterlegen und Textbausteinen und Containern zuordnen.
 
-\textsf{\textbf{Projekt}}\\Projekte bilden den Rahmen für alle Texte eines einzelnen Produkts. Dieses Model geht davon aus, dass auch alle anderen Einstellungen (Gruppenzugehörigkeit, Rechte, Workflows,~…) immer projektspezifisch sind. Dies macht in einem Szenario sinn, bei dem unterschiedliche Unternehmen Zugriff auf die selbe Instanz der Anwendung haben. So wird eine saubere Trennung der Daten erreicht.
+\textsf{\textbf{Projekt}}\\Projekte bilden den Rahmen für alle Texte eines einzelnen Produkts. Dieses Model geht davon aus, dass auch alle anderen Einstellungen (Gruppenzugehörigkeit, Rechte, Workflows,~…) immer projektspezifisch sind. Dies ist in einem Szenario sinnvoll, in dem unterschiedliche Unternehmen Zugriff auf die selbe Instanz der Anwendung haben. So wird eine saubere Trennung der Daten erreicht.
 
 \textsf{\textbf{Projektmitarbeiter}}\\Gestattet einem Benutzer die Mitarbeit an einem Projekt und legt dabei fest, welche Rechte dem Benutzer für das Projekt zugewiesen sind.
 
@@ -193,7 +193,7 @@ Wireframe~\ref{chart:gui-qs} zeigt die Darstellung des GUIs zur Kontrolle und Fr
 \captionof{wireframe}{Kontext-Informationen}\label{chart:gui-kontext}
 \end{center}
 
-Wireframe~\ref{chart:gui-kontext} zeigt die Darstellung des GUIs zur Anzeige und Bearbeitung der Kontext-Informationen. Der Inhalt der Ansicht ist an die jeweilige Operation angepasst. Im oberen Bereich kann zwischen verschiedenen Kontextinformationen zu dem jeweiligen Inhalt umgeschaltet werden \ball{1} (v.l.n.r): 
+Wireframe~\ref{chart:gui-kontext} zeigt die Darstellung des GUIs zur Anzeige und Bearbeitung der Kon"-text-In"-for"-ma"-ti"-on"-en. Der Inhalt der Ansicht ist an die jeweilige Operation angepasst. Im oberen Bereich kann zwischen verschiedenen Kontextinformationen zu dem jeweiligen Inhalt umgeschaltet werden \ball{1} (v.l.n.r): 
 
 \begin{enumerate}\itemsep -5pt
 \item Neues: Listet die neuesten Informationen aus den vier Bereichen und den aktuellen Status auf.
@@ -203,7 +203,7 @@ Wireframe~\ref{chart:gui-kontext} zeigt die Darstellung des GUIs zur Anzeige und
 \item Struktur: Zeigt Informationen zur Struktur innerhalb des Produkts, wie z.B. die Attribute, an.
 \end{enumerate}
 
-Über das Suchfeld \ball{2} lässt sich die aktuellen Ansicht filtern. In der Kontextinformation findet sich direkter Zugang zu Informationen und Operationen bezogen auf den aktuellen Inhalt. Die Inhalte lassen sich über Formulare \ball{3} direkt bearbeiten, Notizen und Dateien werden angezeigt \ball{4} und die Diskussion mithilfe der Kommentarfunktion ist möglich \ball{5}.
+Über das Suchfeld \ball{2} lässt sich die aktuelle Ansicht filtern. In der Kontextinformation findet sich direkter Zugang zu Informationen und Operationen bezogen auf den aktuellen Inhalt. Die Inhalte lassen sich über Formulare \ball{3} direkt bearbeiten, Notizen und Dateien werden angezeigt \ball{4} und die Diskussion mithilfe der Kommentarfunktion ist möglich \ball{5}.
 
 \pagebreak
 
@@ -215,7 +215,7 @@ Die in diesem Abschnitt gezeigten Wireframes sind die Vorlage für eine möglich
 
 \subsection{Anbindung des GUI an den Anwendungsserver}\label{l:anbindung-gui}
 
-Die in Abbildung~\ref{chart:komponenten} · S.\pageref{chart:komponenten} \emph{gelb} eingezeichneten Komponenten zeigen den Aufbau eines browserbasierten GUIs. Mittlerweile ist es üblich, klassische Paradigmen aus der Softwarentwicklung auch in browserbasierten Anwendung zu verwenden. Dementsprechend wird die GUI in Form einer MVC-Anwendung implementiert. Die Kommunikation mit dem Anwendungsserver wird in einer eigenen Komponente, dem \emph{API-Adapter}, gekapselt, die über die REST-Schnitt"-stelle JSON-Daten mit dem Anwendungsserver austauscht. Die Repräsentation der Domänendaten erfolgt dabei mithilfe von entsprechenden \emph{Models}, die durch die \emph{Controller} mit den \emph{Views} verbunden werden. Die Models sind nicht zwangsläufig mit den Models auf der Serverseite identisch sondern können Aggregationen sein, oder nur Teile der Daten abbilden. Sie orientieren sich an der öffentlichen API des Anwendungsserver, die nicht zwingenderweise die internen Models 1:1 nach außen weiterreicht. Views sind einzelne Bestandteile einer Ansicht. So lassen sich individuelle Bereiche der Darstellung leicht aktualisieren, ohne die ganze Seite neu laden zu müssen -- in \cite[S.1--5 und S.65--72]{maccaw2011javascript} ist dieses Prinzip ausführlich erläutert.
+Die in Abbildung~\ref{chart:komponenten} · S.\pageref{chart:komponenten} \emph{gelb} eingezeichneten Komponenten zeigen den Aufbau eines browserbasierten GUIs. Mittlerweile ist es üblich, klassische Paradigmen aus der Softwarentwicklung auch in browserbasierten Anwendung zu verwenden. Dementsprechend wird die GUI in Form einer MVC-Anwendung implementiert. Die Kommunikation mit dem Anwendungsserver wird in einer eigenen Komponente, dem \emph{API-Adapter}, gekapselt, die über die RESTful"=Schnittstelle JSON-Daten mit dem Anwendungsserver austauscht. Die Repräsentation der Domänendaten erfolgt dabei mithilfe von entsprechenden \emph{Models}, die durch die \emph{Controller} mit den \emph{Views} verbunden werden. Die Models sind nicht zwangsläufig mit den Models auf der Serverseite identisch sondern können Aggregationen sein, oder nur Teile der Daten abbilden. Sie orientieren sich an der öffentlichen API des Anwendungsserver, die nicht zwingenderweise die internen Models 1:1 nach außen weiterreicht. Views sind einzelne Bestandteile einer Ansicht. So lassen sich individuelle Bereiche der Darstellung leicht aktualisieren, ohne die ganze Seite neu laden zu müssen -- in \cite[S.1--5 und S.65--72]{maccaw2011javascript} ist dieses Prinzip ausführlich erläutert.
 
 Ein Problem beim Datenaustausch mithilfe von JSON-Objekten ist, dass diese üblicherweise nur reine Daten enthalten, da schlichterweise Objekte serialisiert werden. Beim Serialisieren werden dann nur die Eigenschaften einer Objekt-Instanz beibehalten, Informationen wie die Klasse oder Relationen zu anderen Objekten werden verworfen. Werden APIs nach diesem Schema verwendet, müssen die Entwickler wissen, hinter welchem Endpunkt sie welche Arten von Daten erwarten. Diese Information wird als Quellcode in der Anwendung hart kodiert. Um zukünftigen Änderungen an der Schnittstelle ohne Änderungen auf Clientseite begegnen zu können, sollten die Antworten der Schnittstelle mit Meta-Informationen versehen sein, die es dem Client ermöglichen, ohne hart kodierte Zuordnung zwischen Endpunkt und Domänenobjekt auszukommen. 
 
@@ -254,7 +254,7 @@ Alle genannten Komponenten sind umfangreich getestet, funktionieren in allen akt
 
 \begin{center}
 \fbox{\includegraphics[width=\textwidth]{media/screenshots/app.png}}
-\captionof{screenshot}[Browserbasiertes GUI des Prototyps]{Browserbasiertes GUI des Prototyps (vgl. Abschnitt \ref{l:gui-definition} / \pageref{l:gui-definition})}\label{chart:gui-prototyp}
+\captionof{screenshot}[Browserbasiertes GUI des Prototyps]{Browserbasiertes GUI des Prototyps (vgl. Abschnitt \ref{l:gui-definition} · S.\pageref{l:gui-definition})}\label{chart:gui-prototyp}
 \end{center}
 
 Screenshot~\ref{chart:gui-prototyp} zeigt den Aufbau des GUI des Prototyps beispielhaft in der Ansicht zur Definition des Produkts. Die Anordnung der Elemente des Entwurfs wurde weitgehend beibehalten. Unterschiede resultieren aus im Prototyp nicht implementierte Funktionen, die nicht mit Platzhalter-Elementen dargestellt werden, sondern entfallen. Weitere Screenshots finden sich in Anhang~\ref{l:screenshots} · S.\pageref{l:screenshots}.
@@ -266,13 +266,13 @@ Screenshot~\ref{chart:gui-prototyp} zeigt den Aufbau des GUI des Prototyps beisp
 \captionof{figure}{GUI-Klassendiagramm des Prototyps}\label{chart:prototyp-gui-klassendiagramm}
 \end{center}
 
-Abbildung \ref{chart:prototyp-gui-klassendiagramm} zeigt das Klassendiagramm der browserbasierten Anwendung. Zentraler Einstiegspunkt ist die JavaScript-Datei \texttt{main.js}, die die Anwendung initialisiert. Dazu lädt sie mithilfe von \texttt{require.js} die notwendigen Komponenten. Dabei handelt es sich zum einen um die \texttt{AppView}, die grundlegende Zustände der Anwendung verwaltet und den \texttt{AppRouter}, der je nach aktueller Route die jeweilige \texttt{PageView} initialisiert und anzeigt. Die \texttt{PageViews} erzeugen danach wiederum eigenständig die von ihnen benötigten Ansichten (\texttt{ModuleViews}, \texttt{MenuViews} und \texttt{FormViews}) und laden die dafür benötigten Daten mithilfe der \texttt{Models} und \texttt{Collections} -- in \trademark{Backbone.js} sind \emph{Views} eigentlich Controller, eine Trennung zwischen Darstellungslogik und Businesslogik ist nicht vorgesehen. Den HTML-Quellcode zur Darstellung laden die Views ebenfalls selbständig aus den \texttt{Templates} nach. Abhängigkeiten wie JavaScript-Objekte und Templates werden dabei zentral von \trademark{require.js} bereitgestellt, das damit die Aufgabe eines DI-Containers übernimmt und praktisch auch so verwendet werden kann.
+Abbildung \ref{chart:prototyp-gui-klassendiagramm} zeigt das Klassendiagramm der browserbasierten Anwendung. Zentraler Einstiegspunkt ist die JavaScript-Datei \texttt{main.js}, die die Anwendung initialisiert. Dazu lädt sie mithilfe von \texttt{require.js} die notwendigen Komponenten. Dabei handelt es sich zum einen um die \texttt{AppView}, die grundlegende Zustände der Anwendung verwaltet und den \texttt{AppRouter}, der je nach aktueller Route die jeweilige \texttt{PageView} initialisiert und anzeigt. Die \texttt{PageViews} erzeugen danach wiederum eigenständig die von ihnen benötigten Ansichten (\texttt{ModuleViews}, \texttt{MenuViews} und \texttt{FormViews}) und laden die dafür benötigten Daten mithilfe der \texttt{Models} und \texttt{Collections} -- in \trademark{Backbone.js} sind \emph{Views} eigentlich Controller, eine Trennung zwischen Darstellungslogik und Businesslogik ist nicht vorgesehen. Den HTML-Quellcode zur Darstellung laden die Views ebenfalls selbständig aus den \texttt{Templates} nach. Abhängigkeiten wie JavaScript-Objekte und Templates werden dabei zentral von \trademark{require.js} bereitgestellt, das damit die Aufgabe eines Dependency-Injection-Containers (DI-Container) übernimmt und praktisch auch so verwendet werden kann.
 
 Die Kommunikation mit der API wird durch die \trademark{Backbone.js}-Klassen \texttt{Backbone.Model} und \texttt{Backbone.Collection} abstrahiert, die RESTful-APIs ansprechen können, die dem CRUD-Paradigma entsprechen. Siehe dazu die Beschreibung der API-Implementierung in Abschnitt \ref{l:api-implementierung} · S.\pageref{l:api-implementierung}.
 
 \secbar
 
-Das browserbasierte GUI ist zwar eine eigenständige Anwendung, ohne einen Anwendungsserver lässt sich hiermit jedoch nicht arbeiten, da die GUI lediglich zum Darstellen und modifizieren von Daten verwendet wird. Die Persistenz und vor allem die Sicherung von Datenzugriffen, Berechtigungen, sowie viele weitere Funktionen werden im Anwendungsserver implementiert, der im nächsten Abschnitt beschrieben wird.
+Das browserbasierte GUI ist zwar eine eigenständige Anwendung, ohne einen Anwendungsserver lässt sich hiermit jedoch nicht arbeiten, da die GUI lediglich zum Darstellen und Modifizieren von Daten verwendet wird. Die Persistenz und vor allem die Sicherung von Datenzugriffen, Berechtigungen, sowie viele weitere Funktionen werden im Anwendungsserver implementiert, der im nächsten Abschnitt beschrieben wird.
 
 \pagebreak
 
@@ -286,7 +286,7 @@ In der API-Komponente, die als RESTful-API implementiert ist, sind über eine Ro
 
 \subsubsection{Dependency-Injection-Container}
 
-Die einzelnen Komponenten des Anwendungsservers sind nach dem Prinzip der losen Kopplung verbunden (vgl.~\cite[S.62]{hn-web20}). Hierzu werden die einzelnen Komponenten als Services in einem Dependency-Injection-Container (DI-Container) registriert und von diesem instanziiert. Alle Komponenten können auf den DI-Container zugreifen und dort andere Komponenten anfordern. Der DI-Container übernimmt, wie der Name schon sagt, auch die Aufgabe Abhängigkeiten der einzelnen Komponenten bereitzustellen. Ein so aufgebautes System, bei dem konkrete Instanzen nicht mehr an der Stelle erzeugt werden, an der sie verwendet werden, sondern von außen \typoquotes{hereingereicht} werden, ist leicht zu modifizieren und vor allem leicht zu testen, da sich Abhängigkeiten für Tests leicht durch Mock-Objekte austauschen lassen (vgl.~\cite[Kap.2]{freeman2009growing}).
+Die einzelnen Komponenten des Anwendungsservers sind nach dem Prinzip der losen Kopplung verbunden (vgl.~\cite[S.62]{hn-web20}). Hierzu werden die einzelnen Komponenten als Services in einem DI-Container registriert und von diesem instanziiert. Alle Komponenten können auf den DI-Container zugreifen und dort andere Komponenten anfordern. Der DI-Container übernimmt, wie der Name schon sagt, auch die Aufgabe Abhängigkeiten der einzelnen Komponenten bereitzustellen. Ein so aufgebautes System, bei dem konkrete Instanzen nicht mehr an der Stelle erzeugt werden, an der sie verwendet werden, sondern von außen \typoquotes{hereingereicht} werden, ist leicht zu modifizieren und vor allem leicht zu testen, da sich Abhängigkeiten für Tests leicht durch Mock-Objekte austauschen lassen (vgl.~\cite[Kap.2]{freeman2009growing}).
 
 \subsubsection{Controller}
 
@@ -307,7 +307,7 @@ Mit dieser Komponente werden die innerhalb der Anwendung erzeugten Daten persist
 \captionof{figure}{I/O-Komponente}\label{chart:io}
 \end{center}
 
-Diese Komponente ist für den Import von Daten aus verschiedenen Formaten in das interne Repräsentationsmodell und den umgekehrten Export zuständig. Die Komponente ist unterteilt in drei Bereiche für die Implementierungen des Transportwegs (z.B. E-Mail oder FTP), der Art des Ex- oder Importes (synchron, asynchron bzw. Push oder Pull) und das Dateiformat (vgl.~Abb.~\ref{chart:io}). Aus diesen drei Teilen lassen sich beliebige Kombinationen erstellen. Beispiele sind synchrone Exporte, wie den Download eines Exports über die Schnittstelle oder asynchrone Exporte, z.B. den Upload auf einen FTP-Server. Benachrichtigungen sind ebenfalls in dieser Komponente implementiert. Eine Benachrichtigung ist z.B. ein asynchroner Export via E-Mail, wobei keine Daten exportiert werden, sondern z.B. nur die Informationen zu einem Ereignis.
+Diese Komponente ist für den Import von Daten aus verschiedenen Formaten in das interne Repräsentationsmodell und den umgekehrten Export zuständig. Die Komponente ist unterteilt in drei Bereiche für die Implementierungen des Transportwegs (z.B. \emph{E-Mail} oder \emph{FTP}), der Art des Ex- oder Importes (synchron, asynchron bzw. \emph{Push} oder \emph{Pull}) und das Dateiformat (vgl.~Abb.~\ref{chart:io}). Aus diesen drei Teilen lassen sich beliebige Kombinationen erstellen. Beispiele sind synchrone Exporte, wie den Download eines Exports über die Schnittstelle oder asynchrone Exporte, z.B. den Upload auf einen FTP-Server. Benachrichtigungen sind ebenfalls in dieser Komponente implementiert. Eine Benachrichtigung ist z.B. ein asynchroner Export via E-Mail, wobei keine Daten exportiert werden, sondern z.B. nur die Informationen zu einem Ereignis.
 
 \subsubsection{Jobs}
 
@@ -333,9 +333,7 @@ Für den Prototyp wurde das PHP-Framework \trademark{Symfony2}\footnote{\url{htt
 
 \subsubsection{Kern-System}
 
-Da im Kern jeder Web-Anwendung HTTP-Anfragen beantwortet werden, überträgt \trademark{Symfony2} dieses Paradigma auf die Art und Weise, wie im Framework Anfragen verarbeitet werden: mithilfe einer Routen-Konfiguration werden Controller für bestimmt Pfade in der Anfrage-URL registriert und dann bei Bedarf vom Framework automatisch instanziert und aufgerufen. 
-
-Das folgende Listing zeigt am Beispiel des \texttt{LoginControllers}, in dem die Methode \texttt{loginAction} aufgerufen wird, wenn der Pfad \texttt{\/login} lautet und die HTTP-Methode der Anfrage \texttt{POST} ist.
+Da im Kern jeder Web-Anwendung HTTP-Anfragen beantwortet werden, überträgt \trademark{Symfony2} dieses Paradigma auf die Art und Weise, wie im Framework Anfragen verarbeitet werden: mithilfe einer Routen-Konfiguration werden Controller für bestimmt Pfade in der Anfrage-URL registriert und dann bei Bedarf vom Framework automatisch instanziert und aufgerufen. Das folgende Listing zeigt dies am Beispiel des \texttt{LoginControllers}, in dem die Methode \texttt{loginAction} aufgerufen wird, wenn der Pfad \texttt{\/login} lautet und die HTTP-Methode der Anfrage \texttt{POST} ist.
 
 \begin{samepage}
 \begin{verbatim}
@@ -348,7 +346,9 @@ class LoginController extends Base {
 \end{verbatim}
 \end{samepage}
 
-Die Controller schreiben ihre Antwort in ein Objekt, das vom Framework als Antwort gesendet wird. Oberstes Prinzip bei der Entwicklung des Frameworks war die Modularisierung und die Wiederverwendbarkeit, so sind alle Komponenten ohne harte Abhängikeiten mithilfe eines DI-Containers verbunden. Dadurch sind \trademark{Symfony2}-Anwendungen besonders leicht zu warten und auch zu testen, entsprechende Unit-Testing-Komponenten werden bereits mitgeliefert.
+Die Controller schreiben ihre Antwort in ein Objekt, das vom Framework als Antwort gesendet wird. 
+
+Oberstes Prinzip bei der Entwicklung des Frameworks war die Modularisierung und die Wiederverwendbarkeit, so sind alle Komponenten ohne harte Abhängigkeiten mithilfe eines DI-Containers verbunden. Dadurch sind \trademark{Symfony2}-Anwendungen leicht zu warten und auch zu testen, entsprechende Unit-Testing-Komponenten werden bereits mitgeliefert.
 
 \subsubsection{API}\label{l:api-implementierung}
 
@@ -403,7 +403,9 @@ Zum Persistieren der Daten kommt \trademark{MongoDB}\footnote{\url{http://www.mo
 
 Abbildung \ref{chart:prototyp-klassendiagramm} zeigt das Klassendiagramm der Implementierung des Prototyps. Zentrale Komponente ist der DI-Container des Symfony2-Frameworks, dieser instanziert je nach Pfad der Anfrage einen Controller und ruft dort die entsprechende Methode auf. Innerhalb der Controller steht der DI-Container zur Verfügung über den dann z.B. der ODM instanziert werden kann, um Daten aus der Datenbank zu laden. Der ODM verwendet zur Repräsentation der Daten die Klassen des Packages \texttt{Documents}, die Controller können diese selber erzeugen oder bekommen diese als Anfrage-Ergebnisse vom ODM übergeben.
 
-Funktionen, die an mehreren Stellen, oder über unterschiedliche Arten verwendet werden, wurden in eigene Services ausgelagert (\texttt{ContentBooklet} und \texttt{ContainerChildren}). Diese werden zum einen innerhalb der Controller verwendet, können aber auch über das CLI gestartet werden. \trademark{Symfony2} stellt eine einfache Möglichkeit zum Erstellen vom Operationen über die Kommandozeile zur Verfügung. Im Prototyp wurde das Anlegen von Demo-Projekt-Daten mithilfe dieser Möglichkeit realisiert. Das \texttt{DemoDataCommand} wird von der Konsole aus gestartet und verwendet den \texttt{ApiClient}, um über HTTP mit der Schnittstelle des Anwendungsservers zu kommunizieren.
+Funktionen, die an mehreren Stellen, oder über unterschiedliche Arten verwendet werden, wurden in eigene Services ausgelagert (\texttt{ContentBooklet} und \texttt{ContainerChildren}). Diese werden zum einen innerhalb der Controller verwendet, können aber auch über das CLI gestartet werden. 
+
+\trademark{Symfony2} stellt eine einfache Möglichkeit zum Erstellen vom Operationen über die Kommandozeile zur Verfügung. Im Prototyp wurde das Anlegen von Demo-Projekt-Daten mithilfe dieser Möglichkeit realisiert. Das \texttt{DemoDataCommand} wird von der Konsole aus gestartet und verwendet den \texttt{ApiClient}, um über HTTP mit der Schnittstelle des Anwendungsservers zu kommunizieren.
 
 \secbar
 
@@ -417,7 +419,7 @@ Die in den vorangegangenen Abschnitten vorgestellte Implementierung des Prototyp
 
 \bigskip
 
-Mit dem Prototyp ist es möglich, den Flyer als Projekt anzulegen. Im nächsten Schritt wird die Struktur des Flyers festgelegt. Die Anwendung unterscheidet dazu zwischen Containern und Textbausteinen. Container sind rein strukturelle Elemente, die wiederum weitere Container und Textbausteine enthalten können. Für den Flyer bietet es sich an, einzelne Kapitel (Titel, Vorwort, Kurzinfo, Termin \& Öffnungszeiten, Personen, Orientierung) als Container auf oberster Ebene anzulegen und daruntere jeweils weitere Unterteilungen nach Abschnitten vorzunehmen. Innerhalb dieser Abschnitte werden dann die einzelnen Textbausteine definiert. Zu den Textbausteinen können auch Zusatzinformationen zum Text-Typ (Schriftart, Schriftgröße, ein- oder mehrzeilig) hinterlegt werden. Die Elemente lassen sich mittels Drag\&Drop in der Reihenfolge anpassen.
+Mit dem Prototyp ist es möglich, den Flyer als Projekt anzulegen. Im nächsten Schritt wird die Struktur des Flyers festgelegt. Die Anwendung unterscheidet dazu zwischen Containern und Textbausteinen. Container sind rein strukturelle Elemente, die wiederum weitere Container und Textbausteine enthalten können. Für den Flyer bietet es sich an, einzelne Kapitel (Titel, Vorwort, Kurzinfo, Termin \& Öffnungszeiten, Personen, Orientierung) als Container auf oberster Ebene anzulegen und darunter jeweils weitere Unterteilungen nach Abschnitten vorzunehmen. Innerhalb dieser Abschnitte werden dann die einzelnen Textbausteine definiert. Zu den Textbausteinen können auch Zusatzinformationen zum Text-Typ (Schriftart, Schriftgröße, ein- oder mehrzeilig) hinterlegt werden. Die Elemente lassen sich mittels Drag\&Drop in der Reihenfolge anpassen.
 
 Sobald die Bestandteile des Produkts angelegt wurden kann parallel bereits mit der Erstellung der Texte begonnen werden. Diese können in den jeweiligen Bausteinen je nach Typ als ein- oder mehrzeiliger Text hinterlegt werden. Änderungen an den Inhalten werden gespeichert und sind als Änderungsverlauf abrufbar. Über eine Kommentarfunktion ist der Austausch über die Texte innerhalb der Anwendung möglich. 
 
@@ -433,7 +435,7 @@ Der Prototyp ist in der Lage, bereits mit diesem einfachen Funktionsumfang einen
 
 \subsection{Zusammenfassung}
 
-In diesem Kapitel wurde das zentrale System der Anwendung, bestehend aus Server und browserbasiertem GUI entworfen und beschrieben. Der Aufbau des Servers mithilfe einer lose gekoppelten Architektur ermöglicht einfache Erweiterbarkeit und Wartung. Das browserbasierte GUI ist als JavaScript-MVC-Anwendung entworfen, die über eine RESTful-API mit dem Server kommuniziert. Die wichtigsten Ansichten des GUIs wurden mithilfe von Wireframes beschrieben. 
+In diesem Kapitel wurde das zentrale System der Anwendung, bestehend aus Anwendungsserver und browserbasiertem GUI entworfen und beschrieben. Der Aufbau des Anwendungsserver mithilfe einer lose gekoppelten Architektur ermöglicht einfache Erweiterbarkeit und Wartung. Das browserbasierte GUI ist als JavaScript-MVC-Anwendung entworfen, die über eine RESTful-API mit dem Anwendungsserver kommuniziert. Die wichtigsten Ansichten des GUIs wurden mithilfe von Wireframes beschrieben. 
 
 Der Entwurf wurde mithilfe einer prototypischen Implementierung, in der die wichtigsten Abläufe abgebildet werden, anhand eines realen Projekts überprüft. Dabei wurde gezeigt, dass sich die vorgeschlagenen Prinzipien, in der Darstellung wie in der Implementierung mit aktuell verfügbaren Technologien problemlos umsetzen lassen. Zudem wurde gezeigt, dass das Konzept der Trennung zwischen Anwendungsserver und GUI keine negativen Auswirkungen auf die Verwendbarkeit einer Anwendung hat. Für die Realisierung weiterer Funktionen im Sinne des Entwurfes sind keine Hindernisse aufgetreten.
 

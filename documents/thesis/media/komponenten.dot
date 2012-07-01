@@ -133,7 +133,7 @@ ApiAdapter -> API [ label=" REST\n JSON" ]
 PlugIns -> API
 Shell -> API
 
-edge [ weight=none headport=none style=dotted color=black arrowhead=none arrowtail=none ]
+edge [ weight=none headport=none style=solid color=black arrowhead=none arrowtail=none ]
 Persistenz -> Models
 Controller -> Models
 Jobs -> Models
