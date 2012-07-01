@@ -17,19 +17,31 @@ class ProjectController extends Base
     {
         $this->ensureLoggedIn();
 
+        $defaultLanguageName = 'de';
+
         $project = new Project();
         $project->setOwner($this->getUser());
         $project->setName($this->getFromRequest('name'));
+        $project->setDefaultLanguage($defaultLanguageName);
 
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $dm->persist($project);
         $dm->flush();
 
+        // Root-Container anlegen
         $rootContainer = new Container();
         $rootContainer->setRootContainer(true);
         $rootContainer->setProject($project);
         $project->setRootContainer($rootContainer);
         $dm->persist($rootContainer);
+
+        // Standard-Sprache anlegen
+        $defaultLanguage = new \Retext\ApiBundle\Document\Language();
+        $defaultLanguage->setName($defaultLanguageName);
+        $defaultLanguage->setDescription('Deutsch');
+        $defaultLanguage->setProject($project);
+        $dm->persist($defaultLanguage);
+
         $dm->flush();
 
         return $this->createResponse($project)->setStatusCode(201)->addHeader('Location', $project->getSubject());
@@ -44,17 +56,6 @@ class ProjectController extends Base
 
         return $this->createResponse($this->getProject($id));
     }
-
-    /**
-     * @param string $id
-     * @return \Retext\ApiBundle\Document\Project
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     */
-    protected function getProject($id)
-    {
-        return parent::getProject($id);
-    }
-
 
     /**
      * @Route("/project", requirements={"_method":"GET"})
@@ -184,6 +185,67 @@ class ProjectController extends Base
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $dm->persist($project);
         $dm->flush();
+        return $this->createResponse();
+    }
+
+    /**
+     * Fügt dem Projekt eine Sprache hinzu
+     *
+     * @Route("/project/{id}/language", requirements={"_method":"POST"})
+     */
+    public function addLanguageAction($id)
+    {
+        $this->ensureLoggedIn();
+        $project = $this->getProject($id);
+
+        $language = new \Retext\ApiBundle\Document\Language();
+        $language->setProject($project);
+        $language->setName($this->getFromRequest(new RequestParameter('name')));
+        $language->setDescription($this->getFromRequest(RequestParameter::create('description')->makeOptional()));
+
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $dm->persist($language);
+        $dm->flush();
+        return $this->createResponse($language);
+    }
+
+    /**
+     * Gibt die Projektsprachen zurück
+     *
+     * @Route("/project/{id}/language", requirements={"_method":"GET"})
+     */
+    public function listLanguageAction($id)
+    {
+        $this->ensureLoggedIn();
+        $project = $this->getProject($id);
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $languages = $dm->getRepository('RetextApiBundle:Language')
+            ->createQueryBuilder()
+            ->field('project')->equals(new \MongoId($project->getId()))
+            ->field('deletedAt')->exists(false)
+            ->getQuery()
+            ->execute();
+        return $this->createListResponse($languages);
+    }
+
+    /**
+     * Entfernt einen eine Sprache aus dem Projekt
+     *
+     * @Route("/project/{id}/language/{language_id}", requirements={"_method":"DELETE"})
+     */
+    public function removeLanguageAction($id, $language_id)
+    {
+        $this->ensureLoggedIn();
+        $project = $this->getProject($id);
+        $language = $this->getDocument('Language', $language_id, function(\Doctrine\ODM\MongoDB\Query\Builder $qb) use($project)
+        {
+            $qb->field('project')->equals(new \MongoId($project->getId()));
+        });
+
+        $sdm = $this->get('doctrine.odm.mongodb.soft_delete.manager');
+        $sdm->delete($language);
+        $sdm->flush();
+
         return $this->createResponse();
     }
 }

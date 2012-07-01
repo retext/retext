@@ -58,8 +58,16 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
 
     /**
      * @MongoDB\String
+     * @var string
      */
     private $text;
+
+    /**
+     * @MongoDB\String
+     * @var string
+     * @MongoDB\Index(order="asc")
+     */
+    protected $language;
 
     /**
      * @MongoDB\Int
@@ -158,6 +166,7 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     public function setProject(\Retext\ApiBundle\Document\Project $project)
     {
         $this->project = $project;
+        if ($this->language === null) $this->language = $project->getDefaultLanguage();
     }
 
     /**
@@ -263,6 +272,7 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     public function validate()
     {
         if (empty($this->project)) throw new ValidationException('project', 'empty');
+        if (empty($this->language)) throw new ValidationException('language', 'empty');
     }
 
     /**
@@ -416,5 +426,21 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
         if ($this->approved) $approvedCount++;
         $this->approvedProgress = $approvedCount / 3;
         return $this->approvedProgress;
+    }
+
+    /**
+     * @param string $language
+     */
+    public function setLanguage($language)
+    {
+        $this->language = $language;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLanguage()
+    {
+        return $this->language;
     }
 }

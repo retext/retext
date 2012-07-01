@@ -33,11 +33,15 @@ class ContainerChildren
 
         $elements = array();
         foreach (array('Container', 'Text') as $collection) {
-            $collectionElements = $this->dm->getRepository('RetextApiBundle:' . $collection)
-                ->createQueryBuilder()
-                ->field('project')->equals(new \MongoId($project->getId()))
+            $qb = $this->dm->getRepository('RetextApiBundle:' . $collection)
+                ->createQueryBuilder();
+            $qb->field('project')->equals(new \MongoId($project->getId()))
                 ->field('parent')->equals(new \MongoId($parent->getId()))
-                ->field('deletedAt')->exists(false)
+                ->field('deletedAt')->exists(false);
+            if ($collection === 'Text') {
+                $qb->field('language')->equals($project->getDefaultLanguage()); // TODO: Hier müssen später dann verschiedene Sprachen unterstützt werden
+            }
+            $collectionElements = $qb
                 ->getQuery()
                 ->execute();
             foreach ($collectionElements as $element) $elements[] = $element;

@@ -55,6 +55,13 @@ class Project extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
     private $deletedAt = null;
 
     /**
+     * @MongoDB\String
+     * @var string
+     * @SerializerBundle\SerializedName("defaultLanguage")
+     */
+    private $defaultLanguage;
+
+    /**
      * @param string $id
      */
     public function setId($id)
@@ -120,6 +127,7 @@ class Project extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
     {
         if (empty($this->name)) throw new ValidationException('name', 'empty');
         if (empty($this->owner)) throw new ValidationException('owner', 'empty');
+        if (empty($this->defaultLanguage)) throw new ValidationException('defaultLanguage', 'empty');
     }
 
     /**
@@ -227,12 +235,31 @@ class Project extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
         $progress = new \Retext\ApiBundle\Model\ProjectProgress();
         $contributors = new \Retext\ApiBundle\Model\ProjectContributor();
         $contributors->setProject($this);
+        $languages = new Language();
+        $languages->setProject($this);
         return array(
             \Retext\ApiBundle\Model\DocumentRelation::createFromDoc($rootContainer)->setHref($rootContainer->getSubject())->setRole('http://jsonld.retext.it/ontology/root'),
             \Retext\ApiBundle\Model\DocumentRelation::createFromDoc($textType)->setHref($textType->getSubject() . '?project=' . $this->getId())->setList(true),
             \Retext\ApiBundle\Model\DocumentRelation::createFromDoc($progress)->setHref($this->getSubject() . '/progress'),
             \Retext\ApiBundle\Model\DocumentRelation::createFromDoc($contributors)->setList(true),
+            \Retext\ApiBundle\Model\DocumentRelation::createFromDoc($languages)->setList(true),
             \Retext\ApiBundle\Model\DocumentRelation::create()->setRelatedcontext('http://jsonld.retext.it/Element')->setList(true)->setRole('http://jsonld.retext.it/ontology/tree')->setHref($rootContainer->getSubject() . '/tree'),
         );
+    }
+
+    /**
+     * @param string $defaultLanguage
+     */
+    public function setDefaultLanguage($defaultLanguage)
+    {
+        $this->defaultLanguage = $defaultLanguage;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDefaultLanguage()
+    {
+        return $this->defaultLanguage;
     }
 }

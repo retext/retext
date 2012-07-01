@@ -99,4 +99,50 @@ class ProjectControllerTest extends Base
         self::$client->doRequest('GET', $project->{'@subject'}); // Should work
 
     }
+
+    /**
+     * @group secondrun
+     * @group integration
+     */
+    public function testLanguages()
+    {
+        $project = self::$client->CREATE('/api/project', array('name' => 'Test-Language-Project'));
+        $languageRel = $this->getRelationHref($project, 'http://jsonld.retext.it/Language', true);
+        $languages = self::$client->GET($languageRel);
+        $this->assertInternalType('array', $languages);
+        $this->assertEquals(1, count($languages)); // Deutsch ist default-Sprache
+
+        // Sprachen hinzufügen
+        $fr = 'fr';
+        $en = 'en';
+        self::$client->POST($languageRel, array('name' => $fr, 'description' => 'Französisch'));
+        self::$client->POST($languageRel, array('name' => $en, 'description' => 'Englisch'));
+
+        $searchLang = function($lang, array $languages)
+        {
+            return count(array_filter($languages, function($el) use($lang)
+            {
+                return $el->name == $lang;
+            })) === 1;
+        };
+
+        $languages = self::$client->GET($languageRel);
+        $this->assertEquals(3, count($languages));
+        $this->assertTrue($searchLang($en, $languages));
+        $this->assertTrue($searchLang($fr, $languages));
+        $this->assertTrue($searchLang($en, $languages));
+
+        // Sprache löschen
+        $frMatch = array_filter($languages, function($el) use($fr)
+        {
+            return $el->name == $fr;
+        });
+        $frLanguage = array_shift($frMatch);
+        self::$client->DELETE($frLanguage->{'@subject'});
+        $languages = self::$client->GET($languageRel);
+        $this->assertEquals(2, count($languages));
+        $this->assertTrue($searchLang($en, $languages));
+        $this->assertTrue($searchLang($en, $languages));
+        $this->assertFalse($searchLang($fr, $languages));
+    }
 }
