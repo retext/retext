@@ -24,7 +24,7 @@ Thesis-Externe.pdf: Thesis-Externe.tex parts/*.tex parts/*.bib media/*.pdf base.
 	-xelatex -interaction=nonstopmode Thesis-Externe.tex
 	xelatex -interaction=nonstopmode Thesis-Externe.tex
 
-Zusammenfassung.pdf: Zusammenfassung.tex base.tex
+Zusammenfassung.pdf: Zusammenfassung.tex base.tex parts/zusammenfassung.tex
 	xelatex -interaction=nonstopmode Zusammenfassung.tex
 
 clean:
