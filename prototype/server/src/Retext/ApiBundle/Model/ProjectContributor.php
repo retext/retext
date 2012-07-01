@@ -21,13 +21,19 @@ class ProjectContributor extends Base
     private $email;
 
     /**
+     * @var string
+     * @SerializerBundle\Accessor(getter="getEmail")
+     */
+    private $id;
+
+    /**
      * Get id
      *
      * @return string $id
      */
     public function getId()
     {
-        return null;
+        return $this->getEmail();
     }
 
     /**

@@ -180,7 +180,7 @@ class ProjectController extends Base
     {
         $this->ensureLoggedIn();
         $project = $this->getProject($id);
-        $project->removeContributor($email);
+        $project->removeContributor(rawurldecode($email));
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $dm->persist($project);
         $dm->flush();

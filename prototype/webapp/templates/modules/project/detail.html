@@ -7,10 +7,12 @@
 <div class="row-fluid">
     <div class="span12 tabbable">
         <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" data-target="#project-tab-progress" href="#projects/list/<%= model.id %>/progress"><i class="icon-tasks"
-                                                                                           title="Fortschritt"></i></a>
+            <li class="active"><a data-toggle="tab" data-target="#project-tab-progress"
+                                  href="#projects/list/<%= model.id %>/progress"><i class="icon-tasks"
+                                                                                    title="Fortschritt"></i></a>
             </li>
-            <li><a data-toggle="tab" data-target="#project-tab-contributors" href="#projects/list/<%= model.id %>/contributors"><i class="icon-user" title="Mitarbeiter"></i></a>
+            <li><a data-toggle="tab" data-target="#project-tab-contributors"
+                   href="#projects/list/<%= model.id %>/contributors"><i class="icon-user" title="Mitarbeiter"></i></a>
             </li>
         </ul>
         <div class="tab-content">
@@ -21,6 +23,8 @@
             </div>
             <div class="tab-pane" id="project-tab-contributors">
                 <h3>Mitarbeiter</h3>
+
+                <div class="view-project-contributors"></div>
             </div>
         </div>
     </div>

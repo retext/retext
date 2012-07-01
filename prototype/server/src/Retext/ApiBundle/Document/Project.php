@@ -199,7 +199,7 @@ class Project extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
      */
     public function addContributor($email)
     {
-        $this->contributors[] = $email;
+        $this->contributors[] = trim($email);
         $this->contributors = array_unique($this->contributors, SORT_STRING);
     }
 
@@ -210,7 +210,7 @@ class Project extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
      */
     public function removeContributor($email)
     {
-        if ($pos = array_search($email, $this->contributors)) {
+        if (($pos = array_search($email, $this->contributors)) !== false) {
             unset($this->contributors[$pos]);
         }
     }
