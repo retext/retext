@@ -28,7 +28,7 @@ Zusammenfassung.pdf: Zusammenfassung.tex base.tex parts/zusammenfassung.tex
 	xelatex -interaction=nonstopmode Zusammenfassung.tex
 
 clean:
-	-/bin/rm *.lof *.log *.lot *.aux *.bbl *.toc *.blg *.dvi *~ *.out
+	-/bin/rm *.aux *.bbl *.toc *.blg *.dvi *~ *.out *.lo*
 	-find ./ -type f -name \*.bak | xargs rm
 
 dropbox:
