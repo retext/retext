@@ -10,5 +10,9 @@
             <argument type="service" id="doctrine.odm.mongodb.document_manager"/>
             <argument type="service" id="retext.apibundle.export.containerchildren"/>
         </service>
+        <service id="retext.apibundle.listener.exception" class="Retext\ApiBundle\Listener\Exception">
+            <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException"/>
+            <argument type="service" id="serializer"/>
+        </service>
     </services>
 </container>

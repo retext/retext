@@ -2,6 +2,8 @@
 
 namespace Retext\ApiBundle;
 
+use Retext\ApiBundle\Exception\ApiClientException;
+
 /**
  * Ein einfacher HTTP-Client zum Kommunizieren mit der API
  */
@@ -9,6 +11,7 @@ class ApiClient
 {
     private $apiHost;
     private $cookies = array();
+    private $response;
 
     public function GET($path)
     {
@@ -31,7 +34,8 @@ class ApiClient
         $opts = array(
             'http' => array(
                 'method' => $method,
-                'header' => "Accept: application/json\r\n"
+                'header' => "Accept: application/json\r\n",
+                'ignore_errors' => true
             )
         );
         foreach ($this->cookies as $k => $v) {
@@ -42,13 +46,17 @@ class ApiClient
             $opts['http']['content'] = json_encode($data);
         }
         $context = stream_context_create($opts);
-        $response = file_get_contents($this->getApiHost() . $path, false, $context);
-        $data = json_decode($response);
+        $this->response = file_get_contents($this->getApiHost() . $path, false, $context);
+        $status = (int)substr($http_response_header[0], 9, 3); // e.g. HTTP/1.0 400 Bad Request
+        if ($status >= 400) {
+            throw new ApiClientException('Request failed: ' . $http_response_header[0] . ' (' . substr($this->response, 0, 255) . ')', $status);
+        }
         foreach ($http_response_header as $header) {
             if (preg_match('/^Set-Cookie: ([^=]+)=([^;]+);/', $header, $cookieMatch)) {
                 $this->cookies[$cookieMatch[1]] = $cookieMatch[2];
             }
         }
+        $data = json_decode($this->response);
         return $data;
     }
 
@@ -58,7 +66,7 @@ class ApiClient
         foreach ($object->{'@relations'} as $relation) {
             if ($relation->relatedcontext != $context) continue;
             if ($relation->list !== $list) continue;
-            if ($role !== null && $role !== $relation->role) continue;
+            if ($role !== null && property_exists($relation, 'role') && $role !== $relation->role) continue;
             return $relation->href;
         }
         throw new \Exception('Could not find relation ' . $context . ' (list=' . var_export($list, true) . ', role=' . var_export($role, true) . ') in ' . var_export($object, true));
@@ -73,5 +81,13 @@ class ApiClient
     public function getApiHost()
     {
         return $this->apiHost;
+    }
+
+    /**
+     * @return string
+     */
+    public function getResponse()
+    {
+        return $this->response;
     }
 }
