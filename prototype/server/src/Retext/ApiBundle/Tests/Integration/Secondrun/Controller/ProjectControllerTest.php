@@ -91,7 +91,7 @@ class ProjectControllerTest extends Base
 
         // Hans Rechte checken
         self::$client->POST('/api/login', array('email' => $hans, 'password' => $hans));
-        self::$client->doRequest('GET', $project->{'@subject'}, null, 404, 'text/html'); // Should not work
+        self::$client->doRequest('GET', $project->{'@subject'}, null, 404); // Should not work
 
         // Fritz Rechte checken
         self::$client->CREATE('/api/user', array('email' => $fritz));
