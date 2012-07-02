@@ -14,6 +14,9 @@
             <li><a data-toggle="tab" data-target="#project-tab-contributors"
                    href="#projects/list/<%= model.id %>/contributors"><i class="icon-user" title="Mitarbeiter"></i></a>
             </li>
+            <li><a data-toggle="tab" data-target="#project-tab-languages"
+                   href="#projects/list/<%= model.id %>/languages"><i class="icon-random" title="Sprachen"></i></a>
+            </li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="project-tab-progress">
@@ -25,6 +28,11 @@
                 <h3>Mitarbeiter</h3>
 
                 <div class="view-project-contributors"></div>
+            </div>
+            <div class="tab-pane" id="project-tab-languages">
+                <h3>Sprachen</h3>
+
+                <div class="view-project-languages"></div>
             </div>
         </div>
     </div>

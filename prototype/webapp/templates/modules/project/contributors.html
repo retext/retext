@@ -4,13 +4,20 @@
         Mitarbeiter hinzufügen
     </button>
 </form>
-<table>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>E-Mail</th>
+        <th>Aktion</th>
+    </tr>
+    </thead>
     <tbody>
     <% _.each(contributors, function(contributor) { %>
     <tr>
         <td><%= contributor.email %></td>
         <td>
-            <button class="btn btn-danger" data-id="<%= contributor.id %>"><i class="icon-white icon-trash"></i></button>
+            <button class="btn btn-danger" data-id="<%= contributor.id %>"><i class="icon-white icon-trash"></i>
+            </button>
         </td>
     </tr>
     <% }); %>

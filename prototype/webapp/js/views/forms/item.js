@@ -1,6 +1,6 @@
 define([
 ], function () {
-    var FormView = Backbone.View.extend({
+    return Backbone.View.extend({
         tagName:'form',
         className:'well',
         events:{
@@ -37,10 +37,12 @@ define([
                 }
             });
 
-            model.url = model.get('@subject');
+            if (!model.isNew()) model.url = model.get('@subject');
+            var that = this;
             model.save(data, {
                 success:function (updatedModel) {
                     model.set(updatedModel.attributes);
+                    that.trigger('saved', model);
                 }
             });
         },
@@ -48,5 +50,4 @@ define([
             ev.preventDefault();
         }
     });
-    return FormView;
 });

@@ -25,6 +25,9 @@ define([
                     }
                 }
             });
+            if (!matched) {
+                console.error('No relation found for ', {context:context, list:list, role:role});
+            }
             return rel;
         }
     });
