@@ -32,6 +32,8 @@ class TextController extends Base
         $text->setProject($project);
         $text->setParent($parent);
         $text->setName($this->getFromRequest(RequestParameter::create('name')->makeOptional()->defaultsTo(null)));
+        $text->setDescription($this->getFromRequest(RequestParameter::create('description')->makeOptional()->defaultsTo(null)));
+        $text->setIdentifier($this->getFromRequest(RequestParameter::create('identifier')->makeOptional()->defaultsTo((string)new \MongoId())));
         $textValue = $this->getFromRequest(RequestParameter::create('text')->makeOptional()->defaultsTo(null));
         $text->setText($textValue);
         $text->setType($type);

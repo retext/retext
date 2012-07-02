@@ -17,6 +17,9 @@
             <li><a data-toggle="tab" data-target="#project-tab-languages"
                    href="#projects/list/<%= model.id %>/languages"><i class="icon-random" title="Sprachen"></i></a>
             </li>
+            <li><a data-toggle="tab" data-target="#project-tab-info"
+                   href="#projects/list/<%= model.id %>/info"><i class="icon-info-sign" title="Info"></i></a>
+            </li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="project-tab-progress">
@@ -33,6 +36,17 @@
                 <h3>Sprachen</h3>
 
                 <div class="view-project-languages"></div>
+            </div>
+            <div class="tab-pane" id="project-tab-info">
+                <h3>Info</h3>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>API-URL</th>
+                            <td><a href="<%= window.location.protocol %>//<%= window.location.host %><%= model['@subject'] %>"><%= window.location.protocol %>//<%= window.location.host %><%= model['@subject'] %></a></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

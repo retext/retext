@@ -8,6 +8,7 @@ define([
             '@relations':null,
             '@subject':null,
             id:null,
+            identifier:null,
             project:null,
             parent:null,
             name:null,

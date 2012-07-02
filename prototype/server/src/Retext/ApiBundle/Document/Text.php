@@ -10,6 +10,7 @@ use JMS\SerializerBundle\Annotation as SerializerBundle;
 /**
  * @MongoDB\Document
  * @Doctrine\HasLifecycleCallbacks
+ * @MongoDB\UniqueIndex(keys={"project"="asc", "identifier"="asc"})
  */
 class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB\SoftDelete\SoftDeleteable, \Retext\ApiBundle\Model\Element
 {
@@ -47,6 +48,18 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
      * @var string
      */
     protected $name;
+
+    /**
+     * @MongoDB\String
+     * @var string
+     */
+    protected $description;
+
+    /**
+     * @MongoDB\String
+     * @var string
+     */
+    protected $identifier;
 
     /**
      * @MongoDB\ReferenceOne(targetDocument="Retext\ApiBundle\Document\Container", cascade={"persist"}, simple=true)
@@ -273,6 +286,7 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     {
         if (empty($this->project)) throw new ValidationException('project', 'empty');
         if (empty($this->language)) throw new ValidationException('language', 'empty');
+        if (empty($this->identifier)) throw new ValidationException('identifier', 'empty');
     }
 
     /**
@@ -442,5 +456,37 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     public function getLanguage()
     {
         return $this->language;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $identifier
+     */
+    public function setIdentifier($identifier)
+    {
+        $this->identifier = $identifier;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIdentifier()
+    {
+        return $this->identifier;
     }
 }

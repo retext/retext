@@ -6,6 +6,10 @@
     </colgroup>
     <tbody>
     <tr>
+        <th>Identifier</th>
+        <td><code><%= model.identifier %></code></td>
+    </tr>
+    <tr>
         <th>Bezeichnung</th>
         <td><% if (model.name == null || model.name.length == 0) { %><em>Kein Name</em><% } else { %><%= model.name %><%
             }
