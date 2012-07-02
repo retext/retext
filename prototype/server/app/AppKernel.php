@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MongoDBSoftDeleteBundle\DoctrineMongoDBSoftDeleteBundle(),
             new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
             new Retext\ApiBundle\RetextApiBundle(),
+            new Retext\ToolBundle\RetextToolBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
