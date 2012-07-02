@@ -1,6 +1,6 @@
 \section{Entwurf des zentralen Systems}\label{l:entwurf}
 
-Im vorigen Kapitel wurde eine Anwendung konzipiert, mit der sich die in Kapitel \ref{l:problemanalyse} · S.\pageref{l:problemanalyse} genannten Probleme beheben lassen. In diesem Kapitel wird ein Prototyp entworfen, der dieses Konzept umsetzt. Mithilfe des Prototyps soll gezeigt werden, dass sich der konzipierte Workflow mit der vorgeschlagenen Anwendungsart -- einer browserbasierte Web-Anwendung mit vollständiger Schnittstellen-Abdeckung -- abbilden lässt und einen Mehrwert für Projekte zur Erstellung von Informations- und Kommunikationsmedienprodukten bietet. 
+Im vorigen Kapitel wurde eine Anwendung konzipiert, mit der sich die in Kapitel \ref{l:problemanalyse}~·~S.\pageref{l:problemanalyse} genannten Probleme beheben lassen. In diesem Kapitel wird ein Prototyp entworfen, der dieses Konzept umsetzt. Mithilfe des Prototyps soll gezeigt werden, dass sich der konzipierte Workflow mit der vorgeschlagenen Anwendungsart -- einer browserbasierte Web-Anwendung mit vollständiger Schnittstellen-Abdeckung -- abbilden lässt und einen Mehrwert für Projekte zur Erstellung von Informations- und Kommunikationsmedienprodukten bietet. 
 
 Der Funktionsumfang des Prototyps ist eingeschränkt, deckt aber die wichtigsten Anforderungen ab. Im Prototyp soll es möglich sein
 \begin{itemize}\itemsep -5pt
@@ -27,9 +27,9 @@ Die Beschreibungen der Bestandteile der Anwendung in diesem Kapitel gehen zum Te
 
 Abbildung~\ref{chart:komponenten} liefert einen Überblick über die in den folgenden Abschnitten beschriebenen Komponenten der Anwendung. \emph{Blau} eingezeichnet sind der Endanwender und externe Benutzer"=Werkzeuge wie z.B. Plug-Ins und Software von Drittanbietern. \emph{Gelb} eingezeichnet sind die Komponenten des browserbasierten GUI. \emph{Grau} eingezeichnet sind die Komponenten des Anwendungsservers. \emph{Braun} eingezeichnet sind (aus Sicht des Anwendungsservers) externe Dienste, die durch diesen angebunden werden. \emph{Gestrichelte Linien} zeigen Kommunikationsverbindung zwischen Komponenten über Schnittstellen. \emph{Durchgezogene Linien} zeigen Verbindungen innerhalb eines Systems.
 
-Der zentrale Bestandteil der Anwendung ist der Anwendungsserver, mit dem verschiedene GUIs über Schnittstellen kommunizieren. Das wichtigste GUI ist das browserbasierte Interface, da hiermit alle am Projekt beteiligten Personen arbeiten. Abschnitt \ref{l:entwurf-server} · S.\pageref{l:entwurf-server} beschreibt die Komponenten des Anwendungsserver und Abschnitt \ref{l:entwurf-gui} · S.\pageref{l:entwurf-gui} die Gestaltung des browserbasierten GUIs. In Abschnitt \ref{l:anbindung-gui} · S.\pageref{l:anbindung-gui} wird die Anbindung dieses GUIs an den Anwendungsserver beschrieben.
+Der zentrale Bestandteil der Anwendung ist der Anwendungsserver, mit dem verschiedene GUIs über Schnittstellen kommunizieren. Das wichtigste GUI ist das browserbasierte Interface, da hiermit alle am Projekt beteiligten Personen arbeiten. Abschnitt \ref{l:entwurf-server}~·~S.\pageref{l:entwurf-server} beschreibt die Komponenten des Anwendungsserver und Abschnitt \ref{l:entwurf-gui}~·~S.\pageref{l:entwurf-gui} die Gestaltung des browserbasierten GUIs. In Abschnitt \ref{l:anbindung-gui}~·~S.\pageref{l:anbindung-gui} wird die Anbindung dieses GUIs an den Anwendungsserver beschrieben.
 
-Zur Validierung des Entwurfes wurde ein Querschnitt durch die vorgestellte Architektur als Prototyp umgesetzt, mit dessen Hilfe sich überprüfen lässt, inwieweit sich das vorgeschlagene Konzept praktisch einsetzen lässt und die entworfene Systemarchitektur geeignet ist, die benötigten Funktionen abzubilden. In Abschnitt \ref{l:implementierung-gui} · S.\pageref{l:implementierung-gui} und \ref{l:implementierung-server} · S.\pageref{l:implementierung-server} wird die prototypische Implementierung der GUI bzw. des Anwendungsservers, die auf dem Entwurf basiert, beschrieben.
+Zur Validierung des Entwurfes wurde ein Querschnitt durch die vorgestellte Architektur als Prototyp umgesetzt, mit dessen Hilfe sich überprüfen lässt, inwieweit sich das vorgeschlagene Konzept praktisch einsetzen lässt und die entworfene Systemarchitektur geeignet ist, die benötigten Funktionen abzubilden. In Abschnitt \ref{l:implementierung-gui}~·~S.\pageref{l:implementierung-gui} und \ref{l:implementierung-server}~·~S.\pageref{l:implementierung-server} wird die prototypische Implementierung der GUI bzw. des Anwendungsservers, die auf dem Entwurf basiert, beschrieben.
 
 Im nächsten Abschnitt wird jedoch zuerst das Domänenmodell, das die gemeinsame Grundlage für GUI und Anwendungsserver bildet, beschrieben.
 
@@ -69,7 +69,7 @@ Die einzelnen Objekte werden nachfolgend beschrieben:
 \textsf{\textbf{Sprache}}\\Die Texte jedes Projekts liegen in einer oder mehreren Sprachen vor.
 
 \begin{samepage}
-\textsf{\textbf{Status}}\\Beschreibt die verschiedenen Zustände eines Textbausteins (vgl. Abschnitt \ref{l:konzept-workflow-status} · S.\pageref{l:konzept-workflow-status}).
+\textsf{\textbf{Status}}\\Beschreibt die verschiedenen Zustände eines Textbausteins (vgl. Abschnitt \ref{l:konzept-workflow-status}~·~S.\pageref{l:konzept-workflow-status}).
 
 \begin{enumerate}\itemsep -5pt
 \item \texttt{Neu}, Textbaustein erzeugt
@@ -94,7 +94,7 @@ Die einzelnen Objekte werden nachfolgend beschrieben:
 
 \subsection{Entwurf eines browserbasierten GUI}\label{l:entwurf-gui}
 
-Das browserbasierte GUI der Anwendung ist der wichtigste Zugang zum System, da es von allen Mitarbeitern zu irgendeinem Zeitpunkt verwendet wird. Die Zeit, die der Einzelne damit verbringt kann sich je nach Rolle stark unterscheiden. Neben den sehr unterschiedlichen Anforderungen an das GUI sind die Benutzer auch technisch sehr unterschiedlich stark versiert, wie in den Personas in Kapitel \ref{l:personas} · S.\pageref{l:personas} gezeigt wurde. Diesen Umständen muss bei der Gestaltung Rechnung getragen werden. In Anlehnung an \cite{nielsen} wurden für den Entwurf der browserbasierten GUI folgende Leitlinien gewählt:
+Das browserbasierte GUI der Anwendung ist der wichtigste Zugang zum System, da es von allen Mitarbeitern zu irgendeinem Zeitpunkt verwendet wird. Die Zeit, die der Einzelne damit verbringt kann sich je nach Rolle stark unterscheiden. Neben den sehr unterschiedlichen Anforderungen an das GUI sind die Benutzer auch technisch sehr unterschiedlich stark versiert, wie in den Personas in Kapitel \ref{l:personas}~·~S.\pageref{l:personas} gezeigt wurde. Diesen Umständen muss bei der Gestaltung Rechnung getragen werden. In Anlehnung an \cite{nielsen} wurden für den Entwurf der browserbasierten GUI folgende Leitlinien gewählt:
 
 \begin{enumerate}\itemsep -5pt
 \item Das Wichtigste zuerst: Die aktuelle Aufgabe soll immer im Fokus der Darstellung liegen.
@@ -105,7 +105,7 @@ Das browserbasierte GUI der Anwendung ist der wichtigste Zugang zum System, da e
 
 Da die Anwendung von allen Benutzern gerne verwendet werden soll und vor allem die Usability und die Zeitersparnis ein wichtiger Punkt sind, wie man auch skeptische Mitarbeiter überzeugen kann mit ihren alten Gewohnheiten zu brechen, ist die Beachtung dieser Grundsätze essentiell. Funktionalitäten, die nur von wenigen gebraucht werden, sollten, wenn überhaupt, optional einblendbar sein. Die Konzeption des Systems ermöglicht es leicht, zusätzliche Anwendungen für besondere Benutzergruppen zu schaffen, z.B. Plug-Ins für die speziellen Werkzeuge einzelner Mitarbeiter. Für diese \typoquotes{Power-User} ist eine solche Herangehensweise meistens der bessere Weg.
 
-Anhand der Personas lässt sich ermitteln, wer und in welchem Umfang das browserbasierte GUI verwenden wird. Tabelle \ref{table:webgui-usage-by-persona} · S.\pageref{table:webgui-usage-by-persona} zeigt in der Übersicht, welche Operationen besonders bei der Entwicklung des GUIs beachtet werden müssen. Besonders viel Zeit werden von Konzeptern und von den Mitarbeitern, die die Inhalte erstellen, kontrollieren und freigeben im GUI verbracht, da diese Tätigkeiten bezogen auf die einzelnen Texte des Produkts sehr arbeitsintensiv sind. In den folgenden Wireframes werden dementsprechend die wichtigsten Ansichten des GUIs beschrieben.
+Anhand der Personas lässt sich ermitteln, wer und in welchem Umfang das browserbasierte GUI verwenden wird. Tabelle \ref{table:webgui-usage-by-persona}~·~S.\pageref{table:webgui-usage-by-persona} zeigt in der Übersicht, welche Operationen besonders bei der Entwicklung des GUIs beachtet werden müssen. Besonders viel Zeit werden von Konzeptern und von den Mitarbeitern, die die Inhalte erstellen, kontrollieren und freigeben im GUI verbracht, da diese Tätigkeiten bezogen auf die einzelnen Texte des Produkts sehr arbeitsintensiv sind. In den folgenden Wireframes werden dementsprechend die wichtigsten Ansichten des GUIs beschrieben.
 
 \begin{table}
 \begin{center}
@@ -209,13 +209,13 @@ Wireframe~\ref{chart:gui-kontext} zeigt die Darstellung des GUIs zur Anzeige und
 
 \secbar
 
-Die in diesem Abschnitt gezeigten Wireframes sind die Vorlage für eine mögliche Implementierung. Bei der Umsetzung des Prototyps wurde versucht, dieser Vorlage weitestgehend zu folgen, wie in Abschnitt \ref{l:implementierung-gui} · S.\pageref{l:implementierung-gui} beschrieben wird. Im nächsten Abschnitt wird jedoch zuerst auf die Verbindung des Anwendungsservers mit einem GUI eingegangen.
+Die in diesem Abschnitt gezeigten Wireframes sind die Vorlage für eine mögliche Implementierung. Bei der Umsetzung des Prototyps wurde versucht, dieser Vorlage weitestgehend zu folgen, wie in Abschnitt \ref{l:implementierung-gui}~·~S.\pageref{l:implementierung-gui} beschrieben wird. Im nächsten Abschnitt wird jedoch zuerst auf die Verbindung des Anwendungsservers mit einem GUI eingegangen.
 
 \pagebreak
 
 \subsection{Anbindung des GUI an den Anwendungsserver}\label{l:anbindung-gui}
 
-Die in Abbildung~\ref{chart:komponenten} · S.\pageref{chart:komponenten} \emph{gelb} eingezeichneten Komponenten zeigen den Aufbau eines browserbasierten GUIs. Mittlerweile ist es üblich, klassische Paradigmen aus der Softwareentwicklung auch in browserbasierten Anwendung zu verwenden. Dementsprechend wird die GUI in Form einer MVC-Anwendung implementiert. Die Kommunikation mit dem Anwendungsserver wird in einer eigenen Komponente, dem \emph{API-Adapter}, gekapselt, die über die RESTful"=Schnittstelle JSON-Daten mit dem Anwendungsserver austauscht. Die Repräsentation der Domänendaten erfolgt dabei mithilfe von entsprechenden \emph{Models}, die durch die \emph{Controller} mit den \emph{Views} verbunden werden. Die Models sind nicht zwangsläufig mit den Models auf der Serverseite identisch sondern können Aggregationen sein oder nur Teile der Daten abbilden. Sie orientieren sich an der öffentlichen API des Anwendungsserver, die nicht zwingend die internen Models 1:1 nach außen weiterreicht. Views sind einzelne Bestandteile einer Ansicht. So lassen sich individuelle Bereiche der Darstellung leicht aktualisieren, ohne die ganze Seite neu laden zu müssen -- in \cite[S.1--5 und S.65--72]{maccaw2011javascript} ist dieses Prinzip ausführlich erläutert.
+Die in Abbildung~\ref{chart:komponenten}~·~S.\pageref{chart:komponenten} \emph{gelb} eingezeichneten Komponenten zeigen den Aufbau eines browserbasierten GUIs. Mittlerweile ist es üblich, klassische Paradigmen aus der Softwareentwicklung auch in browserbasierten Anwendung zu verwenden. Dementsprechend wird die GUI in Form einer MVC-Anwendung implementiert. Die Kommunikation mit dem Anwendungsserver wird in einer eigenen Komponente, dem \emph{API-Adapter}, gekapselt, die über die RESTful"=Schnittstelle JSON-Daten mit dem Anwendungsserver austauscht. Die Repräsentation der Domänendaten erfolgt dabei mithilfe von entsprechenden \emph{Models}, die durch die \emph{Controller} mit den \emph{Views} verbunden werden. Die Models sind nicht zwangsläufig mit den Models auf der Serverseite identisch sondern können Aggregationen sein oder nur Teile der Daten abbilden. Sie orientieren sich an der öffentlichen API des Anwendungsserver, die nicht zwingend die internen Models 1:1 nach außen weiterreicht. Views sind einzelne Bestandteile einer Ansicht. So lassen sich individuelle Bereiche der Darstellung leicht aktualisieren, ohne die ganze Seite neu laden zu müssen -- in \cite[S.1--5 und S.65--72]{maccaw2011javascript} ist dieses Prinzip ausführlich erläutert.
 
 Ein Problem beim Datenaustausch mithilfe von JSON-Objekten ist, dass diese üblicherweise nur reine Daten enthalten, da einfach nur Objekte serialisiert werden. Beim Serialisieren werden dann nur die Eigenschaften einer Objekt-Instanz beibehalten, Informationen wie die Klasse oder Relationen zu anderen Objekten werden verworfen. Werden APIs nach diesem Schema verwendet, müssen die Entwickler wissen, hinter welchem Endpunkt sie welche Arten von Daten erwarten. Diese Information wird als Quellcode in der Anwendung hart kodiert. Um zukünftigen Änderungen an der Schnittstelle ohne Änderungen auf Clientseite begegnen zu können, sollten die Antworten der Schnittstelle mit Metainformationen versehen sein, die es dem Client ermöglichen, ohne hart kodierte Zuordnung zwischen Endpunkt und Domänenobjekt auszukommen. 
 
@@ -254,10 +254,10 @@ Alle genannten Komponenten sind umfangreich getestet, funktionieren in allen akt
 
 \begin{center}
 \fbox{\includegraphics[width=\textwidth]{media/screenshots/app.png}}
-\captionof{screenshot}[Browserbasiertes GUI des Prototyps]{Browserbasiertes GUI des Prototyps (vgl. Abschnitt \ref{l:gui-definition} · S.\pageref{l:gui-definition})}\label{chart:gui-prototyp}
+\captionof{screenshot}[Browserbasiertes GUI des Prototyps]{Browserbasiertes GUI des Prototyps (vgl. Abschnitt \ref{l:gui-definition}~·~S.\pageref{l:gui-definition})}\label{chart:gui-prototyp}
 \end{center}
 
-Screenshot~\ref{chart:gui-prototyp} zeigt den GUI-Aufbau des Prototyps beispielhaft in der Ansicht zur Definition des Produkts. Die Anordnung der Elemente des Entwurfs wurde weitgehend beibehalten. Unterschiede resultieren aus im Prototyp nicht implementierte Funktionen, die nicht mit Platzhalter-Elementen dargestellt werden, sondern entfallen. Weitere Screenshots finden sich in Anhang~\ref{l:screenshots} · S.\pageref{l:screenshots}.
+Screenshot~\ref{chart:gui-prototyp} zeigt den GUI-Aufbau des Prototyps beispielhaft in der Ansicht zur Definition des Produkts. Die Anordnung der Elemente des Entwurfs wurde weitgehend beibehalten. Unterschiede resultieren aus im Prototyp nicht implementierte Funktionen, die nicht mit Platzhalter-Elementen dargestellt werden, sondern entfallen. Weitere Screenshots finden sich in Anhang~\ref{l:screenshots}~·~S.\pageref{l:screenshots}.
 
 \subsubsection{Klassendiagramm}
 
@@ -268,7 +268,7 @@ Screenshot~\ref{chart:gui-prototyp} zeigt den GUI-Aufbau des Prototyps beispielh
 
 Abbildung \ref{chart:prototyp-gui-klassendiagramm} zeigt das Klassendiagramm der browserbasierten Anwendung. Zentraler Einstiegspunkt ist die JavaScript-Datei \texttt{main.js}, die die Anwendung initialisiert. Dazu lädt sie mithilfe von \texttt{require.js} die notwendigen Komponenten. Dabei handelt es sich zum einen um die \texttt{AppView}, die grundlegende Zustände der Anwendung verwaltet und den \texttt{AppRouter}, der je nach aktueller Route die jeweilige \texttt{PageView} initialisiert und anzeigt. Die \texttt{PageViews} erzeugen danach wiederum eigenständig die von ihnen benötigten Ansichten (\texttt{ModuleViews}, \texttt{MenuViews} und \texttt{FormViews}) und laden die dafür benötigten Daten mithilfe der \texttt{Models} und \texttt{Collections} -- in \trademark{Backbone.js} sind \emph{Views} eigentlich Controller, eine Trennung zwischen Darstellungslogik und Businesslogik ist nicht vorgesehen. Den HTML-Quellcode zur Darstellung laden die Views ebenfalls selbständig aus den \texttt{Templates} nach. Abhängigkeiten wie JavaScript-Objekte und Templates werden dabei zentral von \trademark{require.js} bereitgestellt, das damit die Aufgabe eines Dependency-Injection-Containers (DI-Container) übernimmt und praktisch auch so verwendet werden kann.
 
-Die Kommunikation mit der API wird durch die \trademark{Backbone.js}-Klassen \texttt{Backbone.Model} und \texttt{Backbone.Collection} abstrahiert, die RESTful-APIs ansprechen können, die dem CRUD"=Paradigma entsprechen. Siehe dazu die Beschreibung der API-Implementierung in Abschnitt \ref{l:api-implementierung} · S.\pageref{l:api-implementierung}.
+Die Kommunikation mit der API wird durch die \trademark{Backbone.js}-Klassen \texttt{Backbone.Model} und \texttt{Backbone.Collection} abstrahiert, die RESTful-APIs ansprechen können, die dem CRUD"=Paradigma entsprechen. Siehe dazu die Beschreibung der API-Implementierung in Abschnitt \ref{l:api-implementierung}~·~S.\pageref{l:api-implementierung}.
 
 \secbar
 
@@ -278,7 +278,7 @@ Das browserbasierte GUI ist zwar eine eigenständige Anwendung, ohne einen Anwen
 
 \subsection{Entwurf des Anwendungsservers}\label{l:entwurf-server}
 
-In diesem Abschnitt werden die in Abbildung~\ref{chart:komponenten} · S.\pageref{chart:komponenten} grau eingefärbten Komponenten des Anwendungsservers beschrieben.
+In diesem Abschnitt werden die in Abbildung~\ref{chart:komponenten}~·~S.\pageref{chart:komponenten} grau eingefärbten Komponenten des Anwendungsservers beschrieben.
 
 \subsubsection{API, Cronjobs, CLI, …}
 
@@ -352,9 +352,9 @@ Oberstes Prinzip bei der Entwicklung des Frameworks war die Modularisierung und 
 
 \subsubsection{API}\label{l:api-implementierung}
 
-Die API wurde RESTful implementiert und deckt alle Funktionen des Anwendungsservers ab. Sie folgt dem CRUD-Paradigma und unterstützt dementsprechend die jeweiligen Methoden: \texttt{POST} zum Erzeugen von Objekten (CREATE), \texttt{GET} zum Lesen von Objekten (READ), \texttt{PUT} zum Aktualisieren bestehender Objekte (UPDATE) und \texttt{DELETE} zum Löschen von Objekten. Generell werden Daten innerhalb der Anfragen als JSON-Objekte kodiert. URL-Parameter oder eine Kombination von beidem sind ebenfalls zulässig. Eine Aufstellung aller implementierten API-Endpunkte findet sich in Anhang \ref{l:api-endpoints} · S.\pageref{l:api-endpoints}.
+Die API wurde RESTful implementiert und deckt alle Funktionen des Anwendungsservers ab. Sie folgt dem CRUD-Paradigma und unterstützt dementsprechend die jeweiligen Methoden: \texttt{POST} zum Erzeugen von Objekten (CREATE), \texttt{GET} zum Lesen von Objekten (READ), \texttt{PUT} zum Aktualisieren bestehender Objekte (UPDATE) und \texttt{DELETE} zum Löschen von Objekten. Generell werden Daten innerhalb der Anfragen als JSON-Objekte kodiert. URL-Parameter oder eine Kombination von beidem sind ebenfalls zulässig. Eine Aufstellung aller implementierten API-Endpunkte findet sich in Anhang \ref{l:api-endpoints}~·~S.\pageref{l:api-endpoints}.
 
-Die ausgelieferten JSON-Objekte enthalten Zusatzinformationen zum Kontext und zu Relationen, wie in Abschnitt \ref{l:anbindung-gui} · S.\pageref{l:anbindung-gui} beschrieben. 
+Die ausgelieferten JSON-Objekte enthalten Zusatzinformationen zum Kontext und zu Relationen, wie in Abschnitt \ref{l:anbindung-gui}~·~S.\pageref{l:anbindung-gui} beschrieben. 
 
 \begin{samepage}
 \begin{verbatim}
@@ -392,7 +392,7 @@ Dieses Listing zeigt als Beispiel das JSON-Objekt eines Containers. In der \text
 \captionof{figure}{Persistierte Objekte im Prototyp}\label{chart:prototype-persistenz}
 \end{center}
 
-Zum Persistieren der Daten kommt \trademark{MongoDB}\footnote{\url{http://www.mongodb.org/}}, eine No-SQL-Datenbank, zum Einsatz. Diese ermöglicht das unkomplizierte Speichern auch komplexer Dokumentenstrukturen als JSON-Objekt. Die Wahl einer nicht-relationalen Datenbank bietet den Vorteil, dass aufwändiges Zusammensetzen und Zerlegen von Dokumenten entfallen kann. In der Datenbank werden die in Abbildung \ref{chart:prototype-persistenz} gezeigten Domänenobjekte gespeichert. Dieses Modell ist deutlich einfacher als das in Abschnitt \ref{l:domänenmodell} · S.\pageref{l:domänenmodell} vorgestellte Domänenmodell, da im Prototyp nur wenige, entscheidende Funktionen implementiert wurden. Das Laden- und Speichern ist durch den Einsatz eines Object-Document-Mappers (ODM) für Doctrine 2 und MongoDB\footnote{\url{https://github.com/doctrine/mongodb-odm}} weitestgehend automatisiert. 
+Zum Persistieren der Daten kommt \trademark{MongoDB}\footnote{\url{http://www.mongodb.org/}}, eine No-SQL-Datenbank, zum Einsatz. Diese ermöglicht das unkomplizierte Speichern auch komplexer Dokumentenstrukturen als JSON-Objekt. Die Wahl einer nicht-relationalen Datenbank bietet den Vorteil, dass aufwändiges Zusammensetzen und Zerlegen von Dokumenten entfallen kann. In der Datenbank werden die in Abbildung \ref{chart:prototype-persistenz} gezeigten Domänenobjekte gespeichert. Dieses Modell ist deutlich einfacher als das in Abschnitt \ref{l:domänenmodell}~·~S.\pageref{l:domänenmodell} vorgestellte Domänenmodell, da im Prototyp nur wenige, entscheidende Funktionen implementiert wurden. Das Laden- und Speichern ist durch den Einsatz eines Object-Document-Mappers (ODM) für Doctrine 2 und MongoDB\footnote{\url{https://github.com/doctrine/mongodb-odm}} weitestgehend automatisiert. 
 
 \subsubsection{Klassendiagramm}
 
@@ -425,7 +425,7 @@ Sobald die Bestandteile des Produkts angelegt wurden kann parallel bereits mit d
 
 In der Ansicht zur Freigabe können die einzelnen Texte überprüft und abgenommen werden. Es wird zwischen den Status für Rechtschreibung, Inhalt und der allgemeinen Freigabe unterschieden. Bei Statusänderungen wird automatisch ein Kommentar erzeugt, der beim Ablehnen durch den Benutzer mit Zusatzinformationen versehen werden kann. Die einzelnen Status werden aggregiert und als Gesamt-Status für das gesamte Projekt sowie zur Übersicht und zum schnellen Zugriff in der Projektstruktur angezeigt.
 
-Als Beispiel für die Verwendung der Projektdaten in externen Systemen lässt sich das Projekt als \emph{Content-Booklet} im HTML- oder PDF-Format exportieren. Dieses Dokument enthält alle Information in strukturierter Form, so wie sie im System angelegt wurden und listet neben den Texten auch die jeweiligen Zusatzinformationen auf. Mithilfe des \emph{Content-Booklet} können Produzenten einfach mit der neuesten Version der Texte für das Produkt versorgt werden und es liefert einen Überblick über alle Bestandteile des Produkts. Ein Ausschnitt aus diesem Booklet findet sich in Anhang \ref{l:booklet} · S.\pageref{l:booklet}.
+Als Beispiel für die Verwendung der Projektdaten in externen Systemen lässt sich das Projekt als \emph{Content-Booklet} im HTML- oder PDF-Format exportieren. Dieses Dokument enthält alle Information in strukturierter Form, so wie sie im System angelegt wurden und listet neben den Texten auch die jeweiligen Zusatzinformationen auf. Mithilfe des \emph{Content-Booklet} können Produzenten einfach mit der neuesten Version der Texte für das Produkt versorgt werden und es liefert einen Überblick über alle Bestandteile des Produkts. Ein Ausschnitt aus diesem Booklet findet sich in Anhang \ref{l:booklet}~·~S.\pageref{l:booklet}.
 
 \secbar
 
