@@ -46,10 +46,6 @@
             <arg value="-O"/>
             <arg value="${composer.phar}"/>
         </exec>
-        <exec executable="php" failonerror="true">
-            <arg value="${composer.phar}"/>
-            <arg value="install"/>
-        </exec>
     </target>
 
     <property name="parameters.yml" value="${basedir}/app/config/parameters.yml"/>
@@ -61,7 +57,7 @@
     <target name="composer" depends="installcomposer" description="Install required dependencies via Composer">
         <exec executable="php" failonerror="true">
             <arg value="${composer.phar}"/>
-            <arg value="update"/>
+            <arg value="install"/>
         </exec>
     </target>
 
