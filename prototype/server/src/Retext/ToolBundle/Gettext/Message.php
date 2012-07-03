@@ -20,5 +20,4 @@ class Message
         if (!empty($this->texts[$lang])) $this->texts[$lang] .= "\n";
         $this->texts[$lang] .= str_replace('\n', "\n", $msgstr);
     }
-
 }

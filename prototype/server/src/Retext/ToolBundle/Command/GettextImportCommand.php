@@ -58,7 +58,7 @@ class GettextImportCommand extends Command
         $root = $this->client->GET($this->client->getRelationHref($project, 'http://jsonld.retext.it/Container', false, 'http://jsonld.retext.it/ontology/root'));
         $output->writeln("<info>OK</info>");
 
-        $file = $dir . $project->defaultLanguage .  DIRECTORY_SEPARATOR . 'LC_MESSAGES' . DIRECTORY_SEPARATOR . $domain . '.po';
+        $file = $dir . $project->defaultLanguage . DIRECTORY_SEPARATOR . 'LC_MESSAGES' . DIRECTORY_SEPARATOR . $domain . '.po';
 
         $messages = Parser::parse(new \SplFileInfo($file));
 
@@ -90,6 +90,7 @@ class GettextImportCommand extends Command
             // Text anlegen
             $textRelation = $this->client->getRelationHref($parent, 'http://jsonld.retext.it/Text', true, 'http://jsonld.retext.it/ontology/child');
             parse_str(parse_url($textRelation, PHP_URL_QUERY), $textRelationParams); // Convert GET to POST
+            if ($message->msgid == 'titel') print_r($message->texts);
             $this->client->POST($textRelation, array_merge($textRelationParams, array('identifier' => $message->msgid, 'text' => $message->texts, 'name' => array_shift($hierarchy))));
             $output->write(".");
         }
