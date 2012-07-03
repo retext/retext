@@ -8,6 +8,10 @@ use Doctrine\ORM\Mapping as Doctrine;
 use JMS\SerializerBundle\Annotation as SerializerBundle;
 
 /**
+ * Ein Kommentar zu einem Text
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ *
  * @MongoDB\Document
  * @Doctrine\HasLifecycleCallbacks
  */
@@ -92,8 +96,6 @@ class Comment extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
     }
 
     /**
-     * Get id
-     *
      * @return string $id
      */
     public function getId()
@@ -126,8 +128,6 @@ class Comment extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
     }
 
     /**
-     * Set project
-     *
      * @param \Retext\ApiBundle\Document\Project $project
      */
     public function setProject(\Retext\ApiBundle\Document\Project $project)
@@ -136,8 +136,6 @@ class Comment extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
     }
 
     /**
-     * Get project
-     *
      * @return \Retext\ApiBundle\Document\Project $project
      */
     public function getProject()
@@ -146,8 +144,6 @@ class Comment extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
     }
 
     /**
-     * Get project id
-     *
      * @return string
      */
     public function getProjectId()
@@ -156,8 +152,6 @@ class Comment extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
     }
 
     /**
-     * Set text
-     *
      * @param \Retext\ApiBundle\Document\Text $text
      */
     public function setText(\Retext\ApiBundle\Document\Text $text)
@@ -166,8 +160,6 @@ class Comment extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
     }
 
     /**
-     * Get text
-     *
      * @return \Retext\ApiBundle\Document\Text $text
      */
     public function getText()
@@ -176,8 +168,6 @@ class Comment extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
     }
 
     /**
-     * Get text id
-     *
      * @return string
      */
     public function getTextId()
@@ -186,8 +176,6 @@ class Comment extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
     }
 
     /**
-     * Set user
-     *
      * @param \Retext\ApiBundle\Document\User $user
      */
     public function setUser(\Retext\ApiBundle\Document\User $user)
@@ -200,8 +188,6 @@ class Comment extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
     }
 
     /**
-     * Get user
-     *
      * @return \Retext\ApiBundle\Document\User $user
      */
     public function getUser()
@@ -210,8 +196,6 @@ class Comment extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
     }
 
     /**
-     * Get user id
-     *
      * @return string
      */
     public function getUserId()
@@ -220,8 +204,6 @@ class Comment extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
     }
 
     /**
-     * Set comment
-     *
      * @param string $comment
      */
     public function setComment($comment)
@@ -230,8 +212,6 @@ class Comment extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
     }
 
     /**
-     * Get comment
-     *
      * @return string $comment
      */
     public function getComment()
@@ -240,9 +220,7 @@ class Comment extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
     }
 
     /**
-     * Set createdAt
-     *
-     * @param date $createdAt
+     * @param \DateTime $createdAt
      */
     public function setCreatedAt($createdAt)
     {
@@ -250,9 +228,7 @@ class Comment extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
     }
 
     /**
-     * Get createdAt
-     *
-     * @return date $createdAt
+     * @return \DateTime $createdAt
      */
     public function getCreatedAt()
     {
@@ -260,9 +236,7 @@ class Comment extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
     }
 
     /**
-     * Set deletedAt
-     *
-     * @param date $deletedAt
+     * @param \DateTime $deletedAt
      */
     public function setDeletedAt($deletedAt)
     {
@@ -270,19 +244,9 @@ class Comment extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
     }
 
     /**
-     * Set userData
+     * Gibt die wichtigsten Felder des Benutzers zurück
      *
-     * @param hash $userData
-     */
-    public function setUserData($userData)
-    {
-        $this->userData = $userData;
-    }
-
-    /**
-     * Get userData
-     *
-     * @return hash $userData
+     * @return object $userData
      */
     public function getUserData()
     {

@@ -6,6 +6,11 @@ use Retext\ApiBundle\Tests\Integration\ApiClient;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * Testet die Schnittstellen zum Registrieren der Benutzer
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 class RegisterControllerTest extends WebTestCase
 {
     /**

@@ -8,6 +8,10 @@ use Doctrine\ORM\Mapping as Doctrine;
 use JMS\SerializerBundle\Annotation as SerializerBundle;
 
 /**
+ * Repräsentiert die Texte.
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ *
  * @MongoDB\Document
  * @Doctrine\HasLifecycleCallbacks
  * @MongoDB\UniqueIndex(keys={"project"="asc", "identifier"="asc"})
@@ -125,8 +129,6 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     private $deletedAt = null;
 
     /**
-     * Get id
-     *
      * @return string $id
      */
     public function getId()
@@ -135,8 +137,6 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     }
 
     /**
-     * Set parent
-     *
      * @param \Retext\ApiBundle\Document\Container $parent
      */
     public function setParent(\Retext\ApiBundle\Document\Container $parent)
@@ -145,8 +145,6 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     }
 
     /**
-     * Get parent
-     *
      * @return \Retext\ApiBundle\Document\Container $parent
      */
     public function getParent()
@@ -155,8 +153,6 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     }
 
     /**
-     * Get parent id
-     *
      * @return string
      */
     public function getParentId()
@@ -165,8 +161,6 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     }
 
     /**
-     * Set project
-     *
      * @param \Retext\ApiBundle\Document\Project $project
      */
     public function setProject(\Retext\ApiBundle\Document\Project $project)
@@ -175,8 +169,6 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     }
 
     /**
-     * Get project
-     *
      * @return \Retext\ApiBundle\Document\Project $project
      */
     public function getProject()
@@ -185,8 +177,6 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     }
 
     /**
-     * Get project id
-     *
      * @return string
      */
     public function getProjectId()
@@ -195,8 +185,6 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     }
 
     /**
-     * Set type
-     *
      * @param \Retext\ApiBundle\Document\TextType $type
      */
     public function setType(\Retext\ApiBundle\Document\TextType $type)
@@ -205,8 +193,6 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     }
 
     /**
-     * Get type
-     *
      * @return \Retext\ApiBundle\Document\TextType $type
      */
     public function getType()
@@ -215,8 +201,6 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     }
 
     /**
-     * Get type id
-     *
      * @return string
      */
     public function getTypeId()
@@ -225,8 +209,6 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     }
 
     /**
-     * Get type id
-     *
      * @return string
      */
     public function getTypeName()
@@ -235,8 +217,6 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     }
 
     /**
-     * Get type id
-     *
      * @return array
      */
     public function getTypeData()
@@ -251,8 +231,6 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     }
 
     /**
-     * Set text
-     *
      * @param array $text
      */
     public function setText(array $text = null)
@@ -261,7 +239,7 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     }
 
     /**
-     * Set text for a langueg
+     * Set text for a language
      *
      * @param string $language
      * @param array $text
@@ -272,8 +250,6 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     }
 
     /**
-     * Get text
-     *
      * @return array $text
      */
     public function getText()
@@ -292,8 +268,6 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     }
 
     /**
-     * Set name
-     *
      * @param string $name
      */
     public function setName($name)
@@ -302,8 +276,6 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     }
 
     /**
-     * Get name
-     *
      * @return string $name
      */
     public function getName()
@@ -322,8 +294,6 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     }
 
     /**
-     * Set deletedAt
-     *
      * @param \DateTime $deletedAt
      */
     public function setDeletedAt(\DateTime $deletedAt)
@@ -352,8 +322,6 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     }
 
     /**
-     * Set commentCount
-     *
      * @param int $commentCount
      */
     public function setCommentCount($commentCount)
@@ -362,8 +330,6 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     }
 
     /**
-     * Get commentCount
-     *
      * @return int $commentCount
      */
     public function getCommentCount()
@@ -372,8 +338,6 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     }
 
     /**
-     * Set spellingApproved
-     *
      * @param boolean $spellingApproved
      */
     public function setSpellingApproved($spellingApproved)
@@ -382,8 +346,6 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     }
 
     /**
-     * Get spellingApproved
-     *
      * @return boolean $spellingApproved
      */
     public function getSpellingApproved()
@@ -392,8 +354,6 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     }
 
     /**
-     * Set contentApproved
-     *
      * @param boolean $contentApproved
      */
     public function setContentApproved($contentApproved)
@@ -402,8 +362,6 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     }
 
     /**
-     * Get contentApproved
-     *
      * @return boolean $contentApproved
      */
     public function getContentApproved()
@@ -412,8 +370,6 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     }
 
     /**
-     * Set approved
-     *
      * @param boolean $approved
      */
     public function setApproved($approved)
@@ -422,8 +378,6 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     }
 
     /**
-     * Get approved
-     *
      * @return boolean $approved
      */
     public function getApproved()

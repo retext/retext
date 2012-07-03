@@ -6,6 +6,12 @@ use Retext\ApiBundle\Document\Project, Retext\ApiBundle\Document\Container;
 
 use Doctrine\ODM\MongoDB\DocumentManager;
 
+/**
+ * Exportiert ein Projekt als Content-Booklet, das alle Texte strukturiert enthält.
+ * Der Export ist als HTML oder PDF möglich.
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 class ContentBooklet
 {
     const CSS = "* { box-sizing: border-box; }

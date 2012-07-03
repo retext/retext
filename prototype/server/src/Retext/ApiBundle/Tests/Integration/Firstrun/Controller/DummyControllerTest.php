@@ -4,6 +4,11 @@ namespace Retext\ApiBundle\Tests\Integration\Firstrun\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * Simpler Test für die Dummy-Schnittstelle
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 class DummyControllerTest extends WebTestCase
 {
     public function testHello()

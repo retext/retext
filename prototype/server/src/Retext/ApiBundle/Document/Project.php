@@ -8,6 +8,10 @@ use Doctrine\ORM\Mapping as Doctrine;
 use JMS\SerializerBundle\Annotation as SerializerBundle;
 
 /**
+ * Ein Projekt. Projekte sind DAS übergeordnete Objekt.
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ *
  * @MongoDB\Document
  * @Doctrine\HasLifecycleCallbacks
  */
@@ -39,6 +43,8 @@ class Project extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
     private $contributors = array();
 
     /**
+     * Projekte haben IMMER einen rootContainer
+     *
      * @MongoDB\ReferenceOne(targetDocument="Retext\ApiBundle\Document\Container", cascade={"persist"}, simple=true)
      * @MongoDB\Index(order="asc")
      * @SerializerBundle\SerializedName("rootContainer")
@@ -70,8 +76,6 @@ class Project extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
     }
 
     /**
-     * Get id
-     *
      * @return string $id
      */
     public function getId()
@@ -80,8 +84,6 @@ class Project extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
     }
 
     /**
-     * Set name
-     *
      * @param string $name
      */
     public function setName($name)
@@ -90,8 +92,6 @@ class Project extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
     }
 
     /**
-     * Get name
-     *
      * @return string $name
      */
     public function getName()
@@ -100,8 +100,6 @@ class Project extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
     }
 
     /**
-     * Set owner
-     *
      * @param \Retext\ApiBundle\Document\User $owner
      */
     public function setOwner(\Retext\ApiBundle\Document\User $owner)
@@ -110,8 +108,6 @@ class Project extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
     }
 
     /**
-     * Get owner
-     *
      * @return \Retext\ApiBundle\Document\User $owner
      */
     public function getOwner()
@@ -141,8 +137,6 @@ class Project extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
     }
 
     /**
-     * Set deletedAt
-     *
      * @param \DateTime $deletedAt
      */
     public function setDeletedAt(\DateTime $deletedAt)
@@ -151,8 +145,6 @@ class Project extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
     }
 
     /**
-     * Set rootContainer
-     *
      * @param \Retext\ApiBundle\Document\Container $rootContainer
      */
     public function setRootContainer(\Retext\ApiBundle\Document\Container $rootContainer)
@@ -161,8 +153,6 @@ class Project extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
     }
 
     /**
-     * Get rootContainer
-     *
      * @return \Retext\ApiBundle\Document\Container $rootContainer
      */
     public function getRootContainer()
@@ -171,8 +161,6 @@ class Project extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mong
     }
 
     /**
-     * Get rootContainer id
-     *
      * @return string
      */
     public function getRootContainerId()

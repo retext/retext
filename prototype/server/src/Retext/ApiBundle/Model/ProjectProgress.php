@@ -6,6 +6,9 @@ use Retext\ApiBundle\Exception\ValidationException;
 use JMS\SerializerBundle\Annotation as SerializerBundle;
 
 /**
+ * Beschriebt den Fortschritt eines Projekts
+ *
+ * @author Markus Tacker <m@tckr.cc>
  */
 class ProjectProgress extends Base
 {
@@ -46,8 +49,6 @@ class ProjectProgress extends Base
     private $total;
 
     /**
-     * Get id
-     *
      * @return string $id
      */
     public function getId()
@@ -56,8 +57,6 @@ class ProjectProgress extends Base
     }
 
     /**
-     * Set project
-     *
      * @param \Retext\ApiBundle\Document\Project $project
      */
     public function setProject(\Retext\ApiBundle\Document\Project $project)
@@ -66,8 +65,6 @@ class ProjectProgress extends Base
     }
 
     /**
-     * Get project
-     *
      * @return \Retext\ApiBundle\Document\Project $project
      */
     public function getProject()
@@ -76,8 +73,6 @@ class ProjectProgress extends Base
     }
 
     /**
-     * Get project id
-     *
      * @return string
      */
     public function getProjectId()
@@ -98,8 +93,6 @@ class ProjectProgress extends Base
     }
 
     /**
-     * Set spellingApproved
-     *
      * @param object $spellingApproved
      */
     public function setSpellingApproved($spellingApproved)
@@ -108,8 +101,6 @@ class ProjectProgress extends Base
     }
 
     /**
-     * Get spellingApproved
-     *
      * @return object $spellingApproved
      */
     public function getSpellingApproved()
@@ -118,8 +109,6 @@ class ProjectProgress extends Base
     }
 
     /**
-     * Set contentApproved
-     *
      * @param object $contentApproved
      */
     public function setContentApproved($contentApproved)
@@ -128,8 +117,6 @@ class ProjectProgress extends Base
     }
 
     /**
-     * Get contentApproved
-     *
      * @return object $contentApproved
      */
     public function getContentApproved()
@@ -138,8 +125,6 @@ class ProjectProgress extends Base
     }
 
     /**
-     * Set approved
-     *
      * @param object $approved
      */
     public function setApproved($approved)
@@ -148,8 +133,6 @@ class ProjectProgress extends Base
     }
 
     /**
-     * Get approved
-     *
      * @return object $approved
      */
     public function getApproved()
@@ -158,8 +141,6 @@ class ProjectProgress extends Base
     }
 
     /**
-     * Set total
-     *
      * @param object $total
      */
     public function setTotal($total)
@@ -168,8 +149,6 @@ class ProjectProgress extends Base
     }
 
     /**
-     * Get total
-     *
      * @return object $total
      */
     public function getTotal()

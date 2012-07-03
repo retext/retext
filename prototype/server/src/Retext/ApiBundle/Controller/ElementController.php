@@ -8,6 +8,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller,
 Symfony\Component\HttpFoundation\Response, Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
+/**
+ * Controller für die Elemente (Container und Texte)
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 class ElementController extends Base
 {
     /**

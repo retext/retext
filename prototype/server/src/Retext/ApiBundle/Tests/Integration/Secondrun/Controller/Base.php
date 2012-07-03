@@ -5,6 +5,11 @@ namespace Retext\ApiBundle\Tests\Integration\Secondrun\Controller;
 use Retext\ApiBundle\Tests\Integration\ApiClient;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * Basisklasse für Integrationstests
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 abstract class Base extends WebTestCase
 {
     /**

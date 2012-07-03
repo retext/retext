@@ -6,6 +6,11 @@ use Retext\ApiBundle\Controller\ApiResponse;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use JMS\SerializerBundle\Serializer\Serializer;
 
+/**
+ * Diese Klasse lauscht auf Exceptions, die innerhalb von Symfony2 als Events propagiert werden und erstellen eine JSON-Fehlermeldung daraus.
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 class Exception
 {
     /**

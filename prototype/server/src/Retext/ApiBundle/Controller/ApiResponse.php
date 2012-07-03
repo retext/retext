@@ -4,6 +4,12 @@ namespace Retext\ApiBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Wrapper für die Symfony2-Response-Klasse mit einigen Zusatzfunktionen.
+ *
+ * @see \Symfony\Component\HttpFoundation\Response
+ * @author Markus Tacker <m@tckr.cc>
+ */
 class ApiResponse extends Response
 {
     public function addHeader($name, $value)

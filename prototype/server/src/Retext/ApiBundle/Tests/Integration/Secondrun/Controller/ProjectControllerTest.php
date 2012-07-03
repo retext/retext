@@ -4,6 +4,11 @@ namespace Retext\ApiBundle\Tests\Integration\Secondrun\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * Testet die Schnittstellen zum manipulieren von Projekten
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 class ProjectControllerTest extends Base
 {
     public static function setUpBeforeClass()

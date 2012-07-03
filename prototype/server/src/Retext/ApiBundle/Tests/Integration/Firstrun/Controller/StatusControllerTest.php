@@ -6,6 +6,11 @@ use Retext\ApiBundle\Tests\Integration\ApiClient;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * Testet die Status-Schnittstelle
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 class StatusControllerTest extends WebTestCase
 {
     public function testStatus()

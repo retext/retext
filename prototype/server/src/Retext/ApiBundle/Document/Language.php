@@ -8,6 +8,8 @@ use Doctrine\ORM\Mapping as Doctrine;
 use JMS\SerializerBundle\Annotation as SerializerBundle;
 
 /**
+ * Ein Sprache, projektspezifisch.
+ *
  * @MongoDB\Document
  * @Doctrine\HasLifecycleCallbacks
  * @MongoDB\UniqueIndex(keys={"project"="asc", "name"="asc"})
@@ -48,8 +50,6 @@ class Language extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mon
     private $deletedAt = null;
 
     /**
-     * Get id
-     *
      * @return string $id
      */
     public function getId()
@@ -58,8 +58,6 @@ class Language extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mon
     }
 
     /**
-     * Set project
-     *
      * @param \Retext\ApiBundle\Document\Project $project
      */
     public function setProject(\Retext\ApiBundle\Document\Project $project)
@@ -68,8 +66,6 @@ class Language extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mon
     }
 
     /**
-     * Get project
-     *
      * @return \Retext\ApiBundle\Document\Project $project
      */
     public function getProject()
@@ -78,8 +74,6 @@ class Language extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mon
     }
 
     /**
-     * Get project id
-     *
      * @return string
      */
     public function getProjectId()
@@ -98,8 +92,6 @@ class Language extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mon
     }
 
     /**
-     * Set name
-     *
      * @param string $name
      */
     public function setName($name)
@@ -108,8 +100,6 @@ class Language extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mon
     }
 
     /**
-     * Get name
-     *
      * @return string $name
      */
     public function getName()
@@ -128,8 +118,6 @@ class Language extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mon
     }
 
     /**
-     * Set deletedAt
-     *
      * @param \DateTime $deletedAt
      */
     public function setDeletedAt(\DateTime $deletedAt)

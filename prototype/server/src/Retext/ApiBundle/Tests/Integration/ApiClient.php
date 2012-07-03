@@ -4,6 +4,11 @@ namespace Retext\ApiBundle\Tests\Integration;
 
 use Symfony\Bundle\FrameworkBundle\Client;
 
+/**
+ * Ein Api-Client, der direkt mit den Controller-Methoden kommuniziert, nicht über HTTP, sondern direkt mithilfe des Frameworks. Wird nur zum Testen verwendet.
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 class ApiClient
 {
     protected $client;

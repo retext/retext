@@ -4,6 +4,11 @@ namespace Retext\ApiBundle\Tests\Integration\Secondrun\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * Testet die Schnittstellen zum manipulieren von Text-Typen
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 class TextTypeControllerTest extends Base
 {
     private static $project;

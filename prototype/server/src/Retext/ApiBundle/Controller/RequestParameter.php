@@ -2,6 +2,11 @@
 
 namespace Retext\ApiBundle\Controller;
 
+/**
+ * Definiert einen erwarteten Parameter in der Anfrage. Kann mit erwartetem Typ und default-Wert versehen werden.
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 class RequestParameter
 {
     const FORMAT_STRING = 1;

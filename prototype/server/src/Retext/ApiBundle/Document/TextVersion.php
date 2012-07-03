@@ -8,6 +8,10 @@ use Doctrine\ORM\Mapping as Doctrine;
 use JMS\SerializerBundle\Annotation as SerializerBundle;
 
 /**
+ * Repräsentiert eine Version des Inhaltes eines Textes
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ *
  * @MongoDB\Document
  * @Doctrine\HasLifecycleCallbacks
  */
@@ -63,8 +67,6 @@ class TextVersion extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\
     }
 
     /**
-     * Get id
-     *
      * @return string $id
      */
     public function getId()
@@ -73,8 +75,6 @@ class TextVersion extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\
     }
 
     /**
-     * Set project
-     *
      * @param \Retext\ApiBundle\Document\Project $project
      */
     public function setProject(\Retext\ApiBundle\Document\Project $project)
@@ -83,8 +83,6 @@ class TextVersion extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\
     }
 
     /**
-     * Get project
-     *
      * @return \Retext\ApiBundle\Document\Project $project
      */
     public function getProject()
@@ -93,8 +91,6 @@ class TextVersion extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\
     }
 
     /**
-     * Get project id
-     *
      * @return string
      */
     public function getProjectId()
@@ -112,8 +108,6 @@ class TextVersion extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\
     }
 
     /**
-     * Set parent
-     *
      * @param \Retext\ApiBundle\Document\Text $parent
      */
     public function setParent(\Retext\ApiBundle\Document\Text $parent)
@@ -122,8 +116,6 @@ class TextVersion extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\
     }
 
     /**
-     * Get parent
-     *
      * @return \Retext\ApiBundle\Document\Text $parent
      */
     public function getParent()
@@ -132,8 +124,6 @@ class TextVersion extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\
     }
 
     /**
-     * Get parent id
-     *
      * @return string
      */
     public function getParentId()
@@ -152,8 +142,6 @@ class TextVersion extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\
     }
 
     /**
-     * Set deletedAt
-     *
      * @param \DateTime $deletedAt
      */
     public function setDeletedAt(\DateTime $deletedAt)
@@ -175,8 +163,6 @@ class TextVersion extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\
     }
 
     /**
-     * Set text
-     *
      * @param array $text
      */
     public function setText(array $text = null)
@@ -196,8 +182,6 @@ class TextVersion extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\
     }
 
     /**
-     * Get text
-     *
      * @return array $text
      */
     public function getText()
@@ -206,8 +190,6 @@ class TextVersion extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\
     }
 
     /**
-     * Set createdAt
-     *
      * @param \DateTime $createdAt
      */
     public function setCreatedAt(\DateTime $createdAt)
@@ -216,8 +198,6 @@ class TextVersion extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\
     }
 
     /**
-     * Get createdAt
-     *
      * @return \DateTime $createdAt
      */
     public function getCreatedAt()

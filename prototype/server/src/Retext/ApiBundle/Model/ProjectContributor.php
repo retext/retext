@@ -6,6 +6,9 @@ use Retext\ApiBundle\Exception\ValidationException;
 use JMS\SerializerBundle\Annotation as SerializerBundle;
 
 /**
+ * Beschreibt einen Projektmitarbeiter
+ *
+ * @author Markus Tacker <m@tckr.cc>
  */
 class ProjectContributor extends Base
 {
@@ -27,8 +30,6 @@ class ProjectContributor extends Base
     private $id;
 
     /**
-     * Get id
-     *
      * @return string $id
      */
     public function getId()
@@ -37,8 +38,6 @@ class ProjectContributor extends Base
     }
 
     /**
-     * Set project
-     *
      * @param \Retext\ApiBundle\Document\Project $project
      */
     public function setProject(\Retext\ApiBundle\Document\Project $project)
@@ -47,8 +46,6 @@ class ProjectContributor extends Base
     }
 
     /**
-     * Get project
-     *
      * @return \Retext\ApiBundle\Document\Project $project
      */
     public function getProject()
@@ -57,8 +54,6 @@ class ProjectContributor extends Base
     }
 
     /**
-     * Get project id
-     *
      * @return string
      */
     public function getProjectId()
@@ -67,8 +62,6 @@ class ProjectContributor extends Base
     }
 
     /**
-     * Set user
-     *
      * @param string $email
      */
     public function setEmail($email)
@@ -77,8 +70,6 @@ class ProjectContributor extends Base
     }
 
     /**
-     * Get user
-     *
      * @return string $email
      */
     public function getEmail()
@@ -89,7 +80,7 @@ class ProjectContributor extends Base
     /**
      * Gibt die Namen der verknüpften Dokumente zurück
      *
-     * @return DocumentRelation
+     * @return \Retext\ApiBundle\Model\DocumentRelation
      */
     public function getRelatedDocuments()
     {

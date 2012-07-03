@@ -8,6 +8,10 @@ use Doctrine\ORM\Mapping as Doctrine;
 use JMS\SerializerBundle\Annotation as SerializerBundle;
 
 /**
+ * Ein Container. Kann weitere Container und Texten enthalten.
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ *
  * @MongoDB\Document
  * @Doctrine\HasLifecycleCallbacks
  */
@@ -70,8 +74,6 @@ class Container extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mo
     private $deletedAt = null;
 
     /**
-     * Get id
-     *
      * @return string $id
      */
     public function getId()
@@ -80,8 +82,6 @@ class Container extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mo
     }
 
     /**
-     * Set parent
-     *
      * @param \Retext\ApiBundle\Document\Container $parent
      */
     public function setParent(\Retext\ApiBundle\Document\Container $parent)
@@ -90,8 +90,6 @@ class Container extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mo
     }
 
     /**
-     * Get parent
-     *
      * @return \Retext\ApiBundle\Document\Container $parent
      */
     public function getParent()
@@ -100,8 +98,6 @@ class Container extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mo
     }
 
     /**
-     * Get parent id
-     *
      * @return string
      */
     public function getParentId()
@@ -110,8 +106,6 @@ class Container extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mo
     }
 
     /**
-     * Set project
-     *
      * @param \Retext\ApiBundle\Document\Project $project
      */
     public function setProject(\Retext\ApiBundle\Document\Project $project)
@@ -120,8 +114,6 @@ class Container extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mo
     }
 
     /**
-     * Get project
-     *
      * @return \Retext\ApiBundle\Document\Project $project
      */
     public function getProject()
@@ -130,8 +122,6 @@ class Container extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mo
     }
 
     /**
-     * Get project id
-     *
      * @return string
      */
     public function getProjectId()
@@ -149,8 +139,6 @@ class Container extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mo
     }
 
     /**
-     * Set name
-     *
      * @param string $name
      */
     public function setName($name)
@@ -159,8 +147,6 @@ class Container extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mo
     }
 
     /**
-     * Get name
-     *
      * @return string $name
      */
     public function getName()
@@ -179,8 +165,6 @@ class Container extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mo
     }
 
     /**
-     * Set deletedAt
-     *
      * @param \DateTime $deletedAt
      */
     public function setDeletedAt(\DateTime $deletedAt)
@@ -189,8 +173,6 @@ class Container extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mo
     }
 
     /**
-     * Set rootContainer
-     *
      * @param boolean $rootContainer
      */
     public function setRootContainer($rootContainer)
@@ -199,8 +181,6 @@ class Container extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mo
     }
 
     /**
-     * Get rootContainer
-     *
      * @return boolean $rootContainer
      */
     public function getRootContainer()
@@ -237,8 +217,6 @@ class Container extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mo
     }
 
     /**
-     * Set childCount
-     *
      * @param int $childCount
      */
     public function setChildCount($childCount)
@@ -247,8 +225,6 @@ class Container extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mo
     }
 
     /**
-     * Get childCount
-     *
      * @return int $childCount
      */
     public function getChildCount()
@@ -257,8 +233,6 @@ class Container extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mo
     }
 
     /**
-     * Set childOrder
-     *
      * @param array $childOrder
      */
     public function setChildOrder(array $childOrder)
@@ -267,8 +241,6 @@ class Container extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mo
     }
 
     /**
-     * Get childOrder
-     *
      * @return array $childOrder
      */
     public function getChildOrder()

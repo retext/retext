@@ -4,6 +4,11 @@ namespace Retext\ApiBundle\Tests\Integration\Secondrun\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * Testet die Schnittstellen zum Manipulieren von Containern
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 class ContainerControllerTest extends Base
 {
     private static $project;

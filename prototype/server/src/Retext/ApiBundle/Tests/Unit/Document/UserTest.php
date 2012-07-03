@@ -4,6 +4,12 @@ namespace Retext\ApiBundle\Tests\Unit\Document;
 
 use Retext\ApiBundle\Document\User;
 
+/**
+ * Tests für den Benutzer.
+ *
+ * @see \Retext\ApiBundle\Tests\Unit\Document\User
+ * @author Markus Tacker <m@tckr.cc>
+ */
 class UserDocumentTest extends \PHPUnit_Framework_TestCase
 {
     public function testHash()

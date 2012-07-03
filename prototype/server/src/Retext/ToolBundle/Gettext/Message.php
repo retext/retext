@@ -2,12 +2,22 @@
 
 namespace Retext\ToolBundle\Gettext;
 
+/**
+ * Repräsentiert eine Gettex-Message
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 class Message
 {
     public $msgid = '';
     public $comment = '';
     public $texts = array();
 
+    /**
+     * Fügt der Message einen Kommentar hinzu
+     *
+     * @param $comment
+     */
     public function addComment($comment)
     {
         if (!empty($this->comment)) $this->comment .= "\n";

@@ -2,6 +2,11 @@
 
 namespace Retext\ToolBundle\Gettext;
 
+/**
+ * Einfacher Parser für Gettext-Dateien
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 class Parser
 {
     /**

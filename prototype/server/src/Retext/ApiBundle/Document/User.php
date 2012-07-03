@@ -8,6 +8,10 @@ use Doctrine\ORM\Mapping as Doctrine;
 use JMS\SerializerBundle\Annotation as SerializerBundle;
 
 /**
+ * Repräsentiert einen Benutzer der Anwendung.
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ *
  * @MongoDB\Document
  * @Doctrine\HasLifecycleCallbacks
  */
@@ -32,9 +36,7 @@ class User extends \Retext\ApiBundle\Model\Base
     protected $password;
 
     /**
-     * Get id
-     *
-     * @return id $id
+     * @return string $id
      */
     public function getId()
     {
@@ -42,8 +44,6 @@ class User extends \Retext\ApiBundle\Model\Base
     }
 
     /**
-     * Set email
-     *
      * @param string $email
      */
     public function setEmail($email)
@@ -52,8 +52,6 @@ class User extends \Retext\ApiBundle\Model\Base
     }
 
     /**
-     * Get email
-     *
      * @return string $email
      */
     public function getEmail()
@@ -62,8 +60,6 @@ class User extends \Retext\ApiBundle\Model\Base
     }
 
     /**
-     * Set password
-     *
      * @param string $password
      */
     public function setPassword($password)
@@ -77,8 +73,6 @@ class User extends \Retext\ApiBundle\Model\Base
     }
 
     /**
-     * Hash a password
-     *
      * @param $password
      * @param $salt
      * @return string
@@ -95,8 +89,6 @@ class User extends \Retext\ApiBundle\Model\Base
     }
 
     /**
-     * Get password
-     *
      * @return string $password
      */
     public function getPassword()

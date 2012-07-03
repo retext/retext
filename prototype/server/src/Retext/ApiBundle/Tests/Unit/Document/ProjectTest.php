@@ -4,6 +4,12 @@ namespace Retext\ApiBundle\Tests\Unit\Document;
 
 use Retext\ApiBundle\Document\Project;
 
+/**
+ * Tests für das Projekt.
+ *
+ * @see \Retext\ApiBundle\Tests\Unit\Document\Project
+ * @author Markus Tacker <m@tckr.cc>
+ */
 class ProjectDocumentTest extends \PHPUnit_Framework_TestCase
 {
     /**

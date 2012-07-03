@@ -6,6 +6,8 @@ use Retext\ApiBundle\Exception\ApiClientException;
 
 /**
  * Ein einfacher HTTP-Client zum Kommunizieren mit der API
+ *
+ * @author Markus Tacker <m@tckr.cc>
  */
 class ApiClient
 {

@@ -4,6 +4,11 @@ namespace Retext\ApiBundle\Model;
 
 use JMS\SerializerBundle\Annotation as SerializerBundle;
 
+/**
+ * Basisklasse für alle Models
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 abstract class Base implements LinkedData
 {
     /**

@@ -4,38 +4,55 @@ namespace Retext\ApiBundle\Model;
 
 use JMS\SerializerBundle\Annotation as SerializerBundle;
 
+/**
+ * Definiert Beziehungen zwischen Dokumenten. Wird für die API verwendet.
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 class DocumentRelation
 {
     /**
+     * Bezeichnet den Kontext dieses Objekts
+     *
      * @SerializerBundle\SerializedName("@context")
      * @var string
      */
     private $context = "http://coderbyheart.de/jsonld/Relation";
 
     /**
+     * Der Kontext des "anderen" Objekts
+     *
      * @var string
      */
     private $relatedcontext;
 
     /**
+     * Die Rolle der Beziehung
+     *
      * @var string
      */
     private $role;
 
     /**
+     * Der Link zum Laden des "anderen" Objekts
+     *
      * @var string
      */
     private $href;
 
     /**
+     * Wahr, wenn es sich bei der Beziehung um eine Liste von Objekten handelt
+     *
      * @var boolean
      */
     private $list = false;
 
     /**
-     * @param \Retext\ApiBundle\Model\Base $doc related document class
+     * Erzeugt eine neue Beziehung auf Basis eines Dokument
+     *
+     * @param \Retext\ApiBundle\Model\Base $doc
      * @static
-     * @return DocumentRelation
+     * @return \Retext\ApiBundle\Model\DocumentRelation $doc
      */
     public static function createFromDoc(Base $doc)
     {
@@ -46,8 +63,10 @@ class DocumentRelation
     }
 
     /**
+     * Erzeugt eine neue Beziehung
+     *
      * @static
-     * @return DocumentRelation
+     * @return \Retext\ApiBundle\Model\DocumentRelation
      */
     public static function create()
     {
@@ -55,6 +74,8 @@ class DocumentRelation
     }
 
     /**
+     * Setzt den Kontext des "anderen" Objekts
+     *
      * @param string $context
      * @return DocumentRelation
      */
@@ -65,6 +86,8 @@ class DocumentRelation
     }
 
     /**
+     * Gibt den Kontext des "anderen" Objekts
+     *
      * @return string
      */
     public function getContext()
@@ -73,6 +96,7 @@ class DocumentRelation
     }
 
     /**
+     * Setzt den Link zum Laden des "anderen" Objekts
      * @param string $href
      * @return DocumentRelation
      */
@@ -83,6 +107,8 @@ class DocumentRelation
     }
 
     /**
+     * Gibt den Link zum Laden des "anderen" Objekts zurück
+     *
      * @return string
      */
     public function getHref()
@@ -91,6 +117,8 @@ class DocumentRelation
     }
 
     /**
+     * Setzt, ob es sich bei der Beziehung um eine Liste von Objekten handelt
+     *
      * @param boolean $list
      * @return DocumentRelation
      */
@@ -101,6 +129,8 @@ class DocumentRelation
     }
 
     /**
+     * Gibt zurück, ob es sich bei der Beziehung um eine Liste von Objekten handelt
+     *
      * @return boolean
      */
     public function getList()
@@ -109,6 +139,8 @@ class DocumentRelation
     }
 
     /**
+     * Setzt den Kontext des "anderen" Objekts
+     *
      * @param string $relatedcontext
      * @return DocumentRelation
      */
@@ -119,6 +151,8 @@ class DocumentRelation
     }
 
     /**
+     * Gibt den Kontext des "anderen" Objekts zurück
+     *
      * @return string
      */
     public function getRelatedcontext()
@@ -127,6 +161,8 @@ class DocumentRelation
     }
 
     /**
+     * Setzt die Rolle der Beziehung
+     *
      * @param string $role
      * @return DocumentRelation
      */
@@ -137,6 +173,8 @@ class DocumentRelation
     }
 
     /**
+     * Gibt die Rolle der Beziehung zurück
+     *
      * @return string
      */
     public function getRole()

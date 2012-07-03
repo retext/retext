@@ -14,14 +14,21 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Mit diesem Command kann von der Komandozeile aus ein Demo-Projekt angelegt werden.
+ *
+ * @author Markus Tacker <m@tckr.cc>
  */
 class GettextImportCommand extends Command
 {
     /**
-     * @var \Retext\ApiBundle\ApiClient
+     * HTTP-Client zum Zugriff auf die API
+     *
+     * @var \Retext\ApiBundle\ApiClient $client
      */
     private $client;
 
+    /**
+     * Configuriert die Anzeige dieses Commands in der Symfony2-Konsole
+     */
     protected function configure()
     {
         $this
@@ -33,6 +40,12 @@ class GettextImportCommand extends Command
             ->setDescription('Befüllt ein Projekt mit Daten aus einer gettext-Datei');
     }
 
+    /**
+     * Führt das Command aus
+     *
+     * @param Symfony\Component\Console\Input\InputInterface $input
+     * @param Symfony\Component\Console\Output\OutputInterface $output
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $dir = $input->getArgument('dir');

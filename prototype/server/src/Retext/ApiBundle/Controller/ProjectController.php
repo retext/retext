@@ -8,6 +8,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller,
 Symfony\Component\HttpFoundation\Response, Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
+/**
+ * Controller für die Projekte
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 class ProjectController extends Base
 {
     /**

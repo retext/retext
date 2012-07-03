@@ -2,6 +2,11 @@
 
 namespace Retext\ApiBundle\Model;
 
+/**
+ * Interface für mit Beziehungen verbundenen Models
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 interface LinkedData
 {
     /**

@@ -4,6 +4,11 @@ namespace Retext\ApiBundle\Tests\Integration\Secondrun\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * Testet die Export-Schnittstelle
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 class ExportControllerTest extends Base
 {
     public static function setUpBeforeClass()

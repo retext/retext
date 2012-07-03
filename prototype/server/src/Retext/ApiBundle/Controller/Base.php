@@ -12,6 +12,11 @@ Symfony\Component\HttpKernel\Exception\HttpException;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
+/**
+ * Basisklasse für alle Controller
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 abstract class Base extends Controller
 {
     /**

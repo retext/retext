@@ -4,6 +4,11 @@ namespace Retext\ApiBundle\Model;
 
 use JMS\SerializerBundle\Annotation as SerializerBundle;
 
+/**
+ * Repräsentiert einen Eintrag in der Bread-Crumb-Navigation
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 class Breadcrumb extends Base
 {
     private $id;

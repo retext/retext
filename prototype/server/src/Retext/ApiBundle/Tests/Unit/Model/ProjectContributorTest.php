@@ -4,6 +4,12 @@ namespace Retext\ApiBundle\Tests\Unit\Model;
 
 use Retext\ApiBundle\Model\ProjectContributor, Retext\ApiBundle\Document\Project;
 
+/**
+ * Tests für den ProjectContributor
+ *
+ * @see \Retext\ApiBundle\Tests\Unit\Model\ProjectContributor
+ * @author Markus Tacker <m@tckr.cc>
+ */
 class ProjectContributorModelTest extends \PHPUnit_Framework_TestCase
 {
     /**

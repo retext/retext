@@ -7,7 +7,9 @@ use Retext\ApiBundle\Document\Project, Retext\ApiBundle\Document\Container;
 use Doctrine\ODM\MongoDB\DocumentManager;
 
 /**
- * Exportiert die Kind-Elemente eines Containers
+ * Exportiert die Kind-Elemente eines Containers.
+ *
+ * @author Markus Tacker <m@tckr.cc>
  */
 class ContainerChildren
 {

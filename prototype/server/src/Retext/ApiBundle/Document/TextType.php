@@ -8,6 +8,10 @@ use Doctrine\ORM\Mapping as Doctrine;
 use JMS\SerializerBundle\Annotation as SerializerBundle;
 
 /**
+ * Repräsentiert Klassen von Texten.
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ *
  * @MongoDB\Document
  * @MongoDB\UniqueIndex(keys={"project"="asc", "name"="asc"})
  * @Doctrine\HasLifecycleCallbacks
@@ -67,8 +71,6 @@ class TextType extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mon
     private $deletedAt = null;
 
     /**
-     * Get id
-     *
      * @return string $id
      */
     public function getId()
@@ -77,8 +79,6 @@ class TextType extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mon
     }
 
     /**
-     * Set project
-     *
      * @param \Retext\ApiBundle\Document\Project $project
      */
     public function setProject(\Retext\ApiBundle\Document\Project $project)
@@ -87,8 +87,6 @@ class TextType extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mon
     }
 
     /**
-     * Get project
-     *
      * @return \Retext\ApiBundle\Document\Project $project
      */
     public function getProject()
@@ -97,8 +95,6 @@ class TextType extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mon
     }
 
     /**
-     * Get project id
-     *
      * @return string
      */
     public function getProjectId()
@@ -116,8 +112,6 @@ class TextType extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mon
     }
 
     /**
-     * Set name
-     *
      * @param string $name
      */
     public function setName($name)
@@ -126,8 +120,6 @@ class TextType extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mon
     }
 
     /**
-     * Get name
-     *
      * @return string $name
      */
     public function getName()
@@ -146,8 +138,6 @@ class TextType extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mon
     }
 
     /**
-     * Set deletedAt
-     *
      * @param \DateTime $deletedAt
      */
     public function setDeletedAt(\DateTime $deletedAt)
@@ -168,8 +158,6 @@ class TextType extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mon
     }
 
     /**
-     * Set description
-     *
      * @param string $description
      */
     public function setDescription($description)
@@ -178,8 +166,6 @@ class TextType extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mon
     }
 
     /**
-     * Get description
-     *
      * @return string $description
      */
     public function getDescription()
@@ -188,8 +174,6 @@ class TextType extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mon
     }
 
     /**
-     * Set fontsize
-     *
      * @param int $fontsize
      */
     public function setFontsize($fontsize)
@@ -198,8 +182,6 @@ class TextType extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mon
     }
 
     /**
-     * Get fontsize
-     *
      * @return int $fontsize
      */
     public function getFontsize()
@@ -208,8 +190,6 @@ class TextType extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mon
     }
 
     /**
-     * Set fontname
-     *
      * @param string $fontname
      */
     public function setFontname($fontname)
@@ -218,8 +198,6 @@ class TextType extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mon
     }
 
     /**
-     * Get fontname
-     *
      * @return string $fontname
      */
     public function getFontname()
@@ -228,8 +206,6 @@ class TextType extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mon
     }
 
     /**
-     * Set multiline
-     *
      * @param boolean $multiline
      */
     public function setMultiline($multiline)
@@ -238,8 +214,6 @@ class TextType extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mon
     }
 
     /**
-     * Get multiline
-     *
      * @return boolean $multiline
      */
     public function getMultiline()
