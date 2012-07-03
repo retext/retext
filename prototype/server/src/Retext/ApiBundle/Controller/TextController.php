@@ -34,14 +34,14 @@ class TextController extends Base
         $text->setName($this->getFromRequest(RequestParameter::create('name')->makeOptional()->defaultsTo(null)));
         $text->setDescription($this->getFromRequest(RequestParameter::create('description')->makeOptional()->defaultsTo(null)));
         $text->setIdentifier($this->getFromRequest(RequestParameter::create('identifier')->makeOptional()->defaultsTo((string)new \MongoId())));
-        $textValue = $this->getFromRequest(RequestParameter::create('text')->makeOptional()->defaultsTo(null));
-        $text->setText($textValue);
+        $textValue = (array)$this->getFromRequest(RequestParameter::create('text')->makeOptional()->makeObject()->defaultsTo(null));
+        foreach ($textValue as $lang => $t) $text->setLanguageText($lang, $t);
         $text->setType($type);
 
         $textVersion = new TextVersion();
         $textVersion->setProject($project);
         $textVersion->setParent($text);
-        $textVersion->setText($textValue);
+        foreach ($textValue as $lang => $t) $textVersion->setLanguageText($lang, $t);
 
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $dm->persist($text);
@@ -89,15 +89,16 @@ class TextController extends Base
         $text->setContentApproved($newContentApproved);
         $text->setApproved($newApproved);
 
-        $newText = $this->getFromRequest(RequestParameter::create('text')->makeOptional()->defaultsTo($text->getText()));
-        if ($newText != $text->getText()) {
+        $textValue = (array)$this->getFromRequest(RequestParameter::create('text')->makeOptional()->makeObject()->defaultsTo(null));
+        if ($textValue != $text->getText()) {
             $textVersion = new TextVersion();
             $textVersion->setProject($text->getProject());
             $textVersion->setParent($text);
-            $textVersion->setText($newText);
+            foreach ($textValue as $lang => $t) $textVersion->setLanguageText($lang, $t);
+
             $dm->persist($textVersion);
         }
-        $text->setText($newText);
+        foreach ($textValue as $lang => $t) $text->setLanguageText($lang, $t);
         $typeName = $this->getFromRequest(RequestParameter::create('type')->makeOptional()->defaultsTo($text->getTypeName()));
         if ($typeName !== null) $text->setType($this->getTypeByName($text->getProject(), $typeName));
 

@@ -51,11 +51,11 @@ class TextControllerTest extends Base
      */
     public function testUpdateText()
     {
-        $text = self::$client->CREATE('/api/text', array('parent' => self::$project->rootContainer, 'name' => 'Copy 1', 'text' => 'LOREM IPSUM!', 'type' => 'Fließtext'));
-        $text = self::$client->UPDATE($text->{'@subject'}, array('text' => 'Lorem Ipsum!'));
+        $text = self::$client->CREATE('/api/text', array('parent' => self::$project->rootContainer, 'name' => 'Copy 1', 'text' => array('de' => 'LOREM IPSUM!'), 'type' => 'Fließtext'));
+        $text = self::$client->UPDATE($text->{'@subject'}, array('text' => array('de' => 'Lorem Ipsum!')));
         $this->checkText($text);
         $this->assertObjectHasAttribute('text', $text);
-        $this->assertEquals('Lorem Ipsum!', $text->text);
+        $this->assertEquals('Lorem Ipsum!', $text->text->de);
         return $text;
     }
 
@@ -66,13 +66,13 @@ class TextControllerTest extends Base
      */
     public function testTextHasUpdateHistory(\stdClass $text)
     {
-        self::$client->UPDATE($text->{'@subject'}, array('text' => 'Lorem Ipsum'));
+        self::$client->UPDATE($text->{'@subject'}, array('text' => array('de' => 'Lorem Ipsum')));
         $history = self::$client->GET($this->getRelationHref($text, 'http://jsonld.retext.it/TextVersion', true));
         $this->assertInternalType('array', $history);
         $this->assertEquals(3, count($history));
-        $this->assertEquals('Lorem Ipsum', $history[0]->text);
-        $this->assertEquals('Lorem Ipsum!', $history[1]->text);
-        $this->assertEquals('LOREM IPSUM!', $history[2]->text);
+        $this->assertEquals('Lorem Ipsum', $history[0]->text->de);
+        $this->assertEquals('Lorem Ipsum!', $history[1]->text->de);
+        $this->assertEquals('LOREM IPSUM!', $history[2]->text->de);
     }
 
     /**

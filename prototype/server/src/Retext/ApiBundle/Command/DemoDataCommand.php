@@ -129,7 +129,7 @@ class DemoDataCommand extends Command
         $output->write("Texte anlegen ");
         foreach ($texte as $text) {
             list($name, $parent, $type, $content) = $text;
-            $text = $this->client->POST('/api/text', array('name' => $name, 'type' => $type, 'parent' => $parent->id, 'text' => $content));
+            $text = $this->client->POST('/api/text', array('name' => $name, 'type' => $type, 'parent' => $parent->id, 'text' => array('de' => $content)));
             // Random status
             $spellingApproved = (bool)rand(0, 1);
             $contentApproved = (bool)rand(0, 1);

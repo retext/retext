@@ -8,6 +8,7 @@ class RequestParameter
     const FORMAT_INTEGER = 2;
     const FORMAT_LIST = 3;
     const FORMAT_BOOLEAN = 4;
+    const FORMAT_OBJECT = 5;
 
     /**
      * @var bool
@@ -119,6 +120,15 @@ class RequestParameter
     public function makeList()
     {
         $this->format = self::FORMAT_LIST;
+        return $this;
+    }
+
+    /**
+     * @return \Retext\ApiBundle\Controller\RequestParameter
+     */
+    public function makeObject()
+    {
+        $this->format = self::FORMAT_OBJECT;
         return $this;
     }
 

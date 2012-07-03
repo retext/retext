@@ -48,14 +48,14 @@
     </tbody>
 </table>
 <h3>Text</h3>
-<% if (model.text != null && model.text.length > 0) { %>
+<% if (model.showText != null && model.showText.length > 0) { %>
 <% if(model.typeData.multiline) { %>
 <blockquote class="multiline">
-    <p><%= model.text.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1</p><p>$2') %></p>
+    <p><%= model.showText.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1</p><p>$2') %></p>
 </blockquote>
 <% } else { %>
 <blockquote>
-    <p><%= model.text %></p>
+    <p><%= model.showText %></p>
 </blockquote>
 <% } %>
 

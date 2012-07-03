@@ -42,6 +42,8 @@ define([
         renderElement:function (element) {
             var list = this.list;
             var postRenderElement = this.postRenderElement;
+            element.set('showLanguage', this.model.get('project').get('defaultLanguage'));
+            element.set('showText', element.get('text')[element.get('showLanguage')]);
             require(['views/modules/element/' + this.mode + '/container', 'views/modules/element/' + this.mode + '/text'], function (ContainerElementView, TextElementView) {
                 var elementView;
                 if (element.get('@context') == 'http://jsonld.retext.it/Container') {

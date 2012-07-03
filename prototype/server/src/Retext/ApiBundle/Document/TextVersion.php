@@ -37,10 +37,10 @@ class TextVersion extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\
     private $parent;
 
     /**
-     * @MongoDB\String
-     * @var int $text
+     * @MongoDB\Hash
+     * @var array $text
      */
-    private $text = null;
+    private $text;
 
     /**
      * @MongoDB\Date
@@ -177,17 +177,28 @@ class TextVersion extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\
     /**
      * Set text
      *
-     * @param string $text
+     * @param array $text
      */
-    public function setText($text)
+    public function setText(array $text = null)
     {
         $this->text = $text;
     }
 
     /**
+     * Set text for a langueg
+     *
+     * @param string $language
+     * @param array $text
+     */
+    public function setLanguageText($language, $text)
+    {
+        $this->text[$language] = $text;
+    }
+
+    /**
      * Get text
      *
-     * @return string $text
+     * @return array $text
      */
     public function getText()
     {

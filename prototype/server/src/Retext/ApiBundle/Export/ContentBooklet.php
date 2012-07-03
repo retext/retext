@@ -70,16 +70,28 @@ class ContentBooklet
             if ($element instanceof \Retext\ApiBundle\Document\Text) {
                 $text = $element->getText();
                 if ($element->getType()->getMultiline()) {
-                    $text = $text = str_replace("\n", "</p><p>", $text);
+                    $text = array_map(function($t)
+                    {
+                        return str_replace("\n", "</p><p>", $t);
+                    }, $text);
                 }
                 $this->body .= sprintf('<hr style="border-color: rgb(%d, %d, %d);">', $gray, $gray, $gray);
                 $this->body .= sprintf('<h%d><em>Text:</em> %s</h%d>', min(6, $level + 1), $element->getName(), min(6, $level + 1));
                 $this->body .= sprintf('<table><colgroup><col width="10%%"><col width="20%%"><col width="70%%"></colgroup><tbody>
-                <tr><th>ID</th><td>%s</td><td rowspan="3"><blockquote><p>%s</p></blockquote></td></tr>
+                <tr><th>ID</th><td>%s</td><td rowspan="3">{TEXT}</td></tr>
                 <tr><th>Typ</th><td>%s (%s, %d%%, %s)</td></tr>
                 </tbody></table>
-                ', $element->getId(), $text, $element->getType()->getName(), $element->getType()->getFontname(), $element->getType()->getFontsize(), $element->getType()->getMultiline() ? 'mehrzeilig' : 'einzeilig');
-
+                ', $element->getId(), $element->getType()->getName(), $element->getType()->getFontname(), $element->getType()->getFontsize(), $element->getType()->getMultiline() ? 'mehrzeilig' : 'einzeilig');
+                $texts = '';
+                if (count($text) < 2) {
+                    $texts = sprintf('<blockquote><p>%s</p></blockquote>', array_shift($text));
+                } else {
+                    foreach($text as $lang => $t) {
+                        $texts .= sprintf('<h%d>%s</h%d>', min(6, $level + 1), $lang, min(6, $level + 1));
+                        $texts .= sprintf('<blockquote><p>%s</p></blockquote>', $t);
+                    }
+                }
+                $this->body = str_replace('{TEXT}', $texts, $this->body);
             } else { // if ($element instanceof \Retext\ApiBundle\Document\Container) {
                 $this->addContainer($element, $parent . ' ' . $container->getName() . ' /', $level + 1);
             }

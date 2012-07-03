@@ -7,6 +7,7 @@ define([
         defaults:{
             id:null,
             name:null,
+            defaultLanguage:null,
             rootContainer:null
         },
         validate:function (attrs) {

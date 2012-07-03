@@ -182,6 +182,10 @@ abstract class Base extends Controller
                     $data = $value;
                     if (!is_array($data)) throw $this->createException(400, 'Bad Request | input ' . $key->getName() . ' must be list');
                     return $data;
+                case RequestParameter::FORMAT_OBJECT:
+                    $data = $value;
+                    if (!is_object($data)) throw $this->createException(400, 'Bad Request | input ' . $key->getName() . ' must be object');
+                    return $data;
                 default:
                     return $value;
             }

@@ -12,16 +12,19 @@ define([
         textBlur:function (ev) {
             var inp = $(ev.target).closest('.text');
             var newText = inp.attr('value');
-            console.log(newText);
             if (_.isEmpty(newText)) newText = null;
-            var oldText = this.model.get('text');
+            var oldText = this.model.get('showText');
             if (_.isEmpty(oldText)) oldText = null;
             if (_.isEqual(newText, oldText)) return;
+            this.model.set('showText', newText);
             var el = $(this.el);
             var progress = el.find('div.gui-saving-progress');
             progress.css('display', 'block');
             var error = el.find('div.gui-saving-error');
-            this.model.save({text:newText}, {
+
+            var updatedText = this.model.get('text');
+            updatedText[this.model.get('showLanguage')] = newText;
+            this.model.save({text:updatedText}, {
                 success:function () {
                     progress.css('display', 'none');
                 },

@@ -38,9 +38,6 @@ class ContainerChildren
             $qb->field('project')->equals(new \MongoId($project->getId()))
                 ->field('parent')->equals(new \MongoId($parent->getId()))
                 ->field('deletedAt')->exists(false);
-            if ($collection === 'Text') {
-                $qb->field('language')->equals($project->getDefaultLanguage()); // TODO: Hier müssen später dann verschiedene Sprachen unterstützt werden
-            }
             $collectionElements = $qb
                 ->getQuery()
                 ->execute();

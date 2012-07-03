@@ -15,6 +15,8 @@ define([
             type:null,
             typeData:{name:null, fontsize:null, fontname:null},
             text:null,
+            showText:null,
+            showLanguage:null,
             commentCount:null,
             spellingApproved:false,
             contentApproved:false,

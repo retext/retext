@@ -70,17 +70,10 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     private $parent;
 
     /**
-     * @MongoDB\String
-     * @var string
+     * @MongoDB\Hash
+     * @var array
      */
-    private $text;
-
-    /**
-     * @MongoDB\String
-     * @var string
-     * @MongoDB\Index(order="asc")
-     */
-    protected $language;
+    private $text = null;
 
     /**
      * @MongoDB\Int
@@ -179,7 +172,6 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     public function setProject(\Retext\ApiBundle\Document\Project $project)
     {
         $this->project = $project;
-        if ($this->language === null) $this->language = $project->getDefaultLanguage();
     }
 
     /**
@@ -261,17 +253,28 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     /**
      * Set text
      *
-     * @param string $text
+     * @param array $text
      */
-    public function setText($text)
+    public function setText(array $text = null)
     {
         $this->text = $text;
     }
 
     /**
+     * Set text for a langueg
+     *
+     * @param string $language
+     * @param array $text
+     */
+    public function setLanguageText($language, $text)
+    {
+        $this->text[$language] = $text;
+    }
+
+    /**
      * Get text
      *
-     * @return string $text
+     * @return array $text
      */
     public function getText()
     {
@@ -285,7 +288,6 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
     public function validate()
     {
         if (empty($this->project)) throw new ValidationException('project', 'empty');
-        if (empty($this->language)) throw new ValidationException('language', 'empty');
         if (empty($this->identifier)) throw new ValidationException('identifier', 'empty');
     }
 
@@ -440,22 +442,6 @@ class Text extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\MongoDB
         if ($this->approved) $approvedCount++;
         $this->approvedProgress = $approvedCount / 3;
         return $this->approvedProgress;
-    }
-
-    /**
-     * @param string $language
-     */
-    public function setLanguage($language)
-    {
-        $this->language = $language;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLanguage()
-    {
-        return $this->language;
     }
 
     /**
