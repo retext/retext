@@ -70,7 +70,7 @@ class ContentBooklet
             if ($element instanceof \Retext\ApiBundle\Document\Text) {
                 $text = $element->getText();
                 if ($element->getType()->getMultiline()) {
-                    $text = array_map(function($t)
+                    $text = empty($text) ? array() : array_map(function($t)
                     {
                         return str_replace("\n", "</p><p>", $t);
                     }, $text);
@@ -84,7 +84,7 @@ class ContentBooklet
                 ', $element->getId(), $element->getType()->getName(), $element->getType()->getFontname(), $element->getType()->getFontsize(), $element->getType()->getMultiline() ? 'mehrzeilig' : 'einzeilig');
                 $texts = '';
                 if (count($text) < 2) {
-                    $texts = sprintf('<blockquote><p>%s</p></blockquote>', array_shift($text));
+                    $texts = sprintf('<blockquote><p>%s</p></blockquote>', empty($text) ? '' : array_shift($text));
                 } else {
                     foreach($text as $lang => $t) {
                         $texts .= sprintf('<h%d>%s</h%d>', min(6, $level + 1), $lang, min(6, $level + 1));
