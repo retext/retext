@@ -15,7 +15,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * Mit diesem Command kann von der Komandozeile aus ein Demo-Projekt angelegt werden.
  */
-class GettextCommand extends Command
+class GettextImportCommand extends Command
 {
     /**
      * @var \Retext\ApiBundle\ApiClient
@@ -25,16 +25,19 @@ class GettextCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('retext:tools:gettext')
+            ->setName('retext:tools:gettext:import')
             ->addArgument('project', InputArgument::REQUIRED, 'API-URL des Projects (@subject)')
-            ->addArgument('file', InputArgument::REQUIRED, 'Gettext-Datei')
+            ->addArgument('dir', InputArgument::REQUIRED, 'Verzeichnis mit Gettext-Dateien')
+            ->addArgument('domain', InputArgument::OPTIONAL, 'Gettext-Domain', 'messages')
             ->addArgument('email', InputArgument::OPTIONAL, 'E-Mail-Adresse des Nutzers', 'm@tckr.cc')
             ->setDescription('Befüllt ein Projekt mit Daten aus einer gettext-Datei');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $file = $input->getArgument('file');
+        $dir = $input->getArgument('dir');
+        if (substr($dir, -1) !== DIRECTORY_SEPARATOR) $dir .= DIRECTORY_SEPARATOR;
+        $domain = $input->getArgument('domain');
         $projectSubject = $input->getArgument('project');
         $email = $input->getArgument('email');
         $this->client = new ApiClient();
@@ -55,15 +58,41 @@ class GettextCommand extends Command
         $root = $this->client->GET($this->client->getRelationHref($project, 'http://jsonld.retext.it/Container', false, 'http://jsonld.retext.it/ontology/root'));
         $output->writeln("<info>OK</info>");
 
+        $file = $dir . $project->defaultLanguage .  DIRECTORY_SEPARATOR . 'LC_MESSAGES' . DIRECTORY_SEPARATOR . $domain . '.po';
+
         $messages = Parser::parse(new \SplFileInfo($file));
-        $textRelation = $this->client->getRelationHref($root, 'http://jsonld.retext.it/Text', true, 'http://jsonld.retext.it/ontology/children');
+
         $output->write("Creating texts ");
         foreach ($messages as $message) {
+
+            // Lege übergeordnete Container an
+            $hierarchy = array_map(function($el)
+            {
+                return trim($el);
+            }, explode('/', $message->comment));
+            $parent = $root;
+            while (count($hierarchy) > 1) {
+                $childName = array_shift($hierarchy);
+                $childRel = $this->client->getRelationHref($parent, 'http://jsonld.retext.it/Container', true, 'http://jsonld.retext.it/ontology/child');
+                $childContainers = $this->client->GET($childRel);
+                $existingChildContainer = array_filter($childContainers, function($childContainer) use($childName)
+                {
+                    return $childContainer->name == $childName;
+                });
+                if (empty($existingChildContainer)) {
+                    parse_str(parse_url($childRel, PHP_URL_QUERY), $containerRelationParams); // Convert GET to POST
+                    $parent = $this->client->POST($childRel, array_merge($containerRelationParams, array('name' => $childName)));
+                } else {
+                    $parent = array_shift($existingChildContainer);
+                }
+            }
+
+            // Text anlegen
+            $textRelation = $this->client->getRelationHref($parent, 'http://jsonld.retext.it/Text', true, 'http://jsonld.retext.it/ontology/child');
             parse_str(parse_url($textRelation, PHP_URL_QUERY), $textRelationParams); // Convert GET to POST
-            $this->client->POST($textRelation, array_merge($textRelationParams, array('identifier' => $message->msgid, 'text' => $message->msgstr, 'name' => $message->comment)));
+            $this->client->POST($textRelation, array_merge($textRelationParams, array('identifier' => $message->msgid, 'text' => $message->texts, 'name' => array_shift($hierarchy))));
             $output->write(".");
         }
-        $output->writeln('');
-        $output->writeln("<info>OK</info>");
+        $output->writeln(" <info>OK</info>");
     }
 }

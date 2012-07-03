@@ -5,8 +5,8 @@ namespace Retext\ToolBundle\Gettext;
 class Message
 {
     public $msgid = '';
-    public $msgstr = '';
     public $comment = '';
+    public $texts = array();
 
     public function addComment($comment)
     {
@@ -14,10 +14,11 @@ class Message
         $this->comment .= $comment;
     }
 
-    public function addString($msgstr)
+    public function addString($lang, $msgstr)
     {
-        if (!empty($this->msgstr)) $this->msgstr .= "\n";
-        $this->msgstr .= str_replace('\n', "\n", $msgstr);
+        if (!isset($this->texts[$lang])) $this->texts[$lang] = '';
+        if (!empty($this->texts[$lang])) $this->texts[$lang] .= "\n";
+        $this->texts[$lang] .= str_replace('\n', "\n", $msgstr);
     }
 
 }
