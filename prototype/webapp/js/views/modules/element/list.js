@@ -30,8 +30,11 @@ define([
                 var el = $(that.el);
                 el.html(ViewTemplate);
                 that.list = el.find('div.view-containers');
+                that.postRender();
             });
             return this;
+        },
+        postRender:function () {
         },
         renderList:function () {
             this.list.empty();
@@ -42,6 +45,7 @@ define([
         renderElement:function (element) {
             var list = this.list;
             var postRenderElement = this.postRenderElement;
+            var preRenderText = _.bind(this.preRenderText, this);
             var project = this.model.get('project');
             require(['views/modules/element/' + this.mode + '/container', 'views/modules/element/' + this.mode + '/text'], function (ContainerElementView, TextElementView) {
                 var elementView;
@@ -50,16 +54,22 @@ define([
                 } else {
                     element.set('showLanguage', project.get('defaultLanguage'));
                     element.set('showText', element.get('text')[element.get('showLanguage')]);
+                    preRenderText(element);
                     elementView = new TextElementView({model:element}).render();
                 }
                 list.append(elementView.el);
                 postRenderElement(elementView);
             });
         },
+        preRenderText:function (element) {
+        },
         postRenderElement:function (elementView) {
         },
         complete:function () {
             this.elements.fetch();
+            this.postComplete();
+        },
+        postComplete:function () {
         },
         selectElement:function (ev) {
             var div = $(ev.target).closest('div.gui-element');

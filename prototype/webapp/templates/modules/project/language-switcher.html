@@ -1,0 +1,12 @@
+<button class="btn" data-toggle="dropdown"><img src="./img/flags/png/<%= selectedLanguage.name %>.png" alt="<%= selectedLanguage.description %>"/> <%= selectedLanguage.description %>
+</button>
+<button class="btn dropdown-toggle" data-toggle="dropdown">
+    <span class="caret"></span>
+</button>
+<ul class="dropdown-menu">
+    <% _.each(languages, function(language) { if(!_.isEqual(language, selectedLanguage)) { %>
+    <li>
+        <a data-id="<%= language.id %>" ><img src="./img/flags/png/<%= language.name %>.png"/> <%= language.description %></a>
+    </li>
+    <% }}); %>
+</ul>
