@@ -16,6 +16,7 @@ define([
             this.tree.url = this.model.get('container').getRelation('http://jsonld.retext.it/Element', true, 'http://jsonld.retext.it/ontology/tree').get('href');
             this.tree.bind("reset", this.render, this);
             Events.on('projectProgressChanged', this.complete, this);
+            Events.on('projectTreeChanged', this.complete, this);
         },
         render:function () {
             var tree = '<ul class="gui-tree">';

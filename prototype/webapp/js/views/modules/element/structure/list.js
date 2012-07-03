@@ -40,12 +40,16 @@ define([
         postRenderElement:function (elementView) {
             $(elementView.el).attr('draggable', 'true');
         },
+        postChange:function (model, info) {
+            Events.trigger('projectProgressChanged');
+        },
         newContainer:function () {
             var containers = this.elements;
             var newContainerModel = this.newContainerModel.clone();
             newContainerModel.save({}, {
                 success:function (model) {
                     containers.add(model);
+                    Events.trigger('projectTreeChanged');
                 }
             });
         },
@@ -55,6 +59,7 @@ define([
             newTextModel.save({}, {
                 success:function (model) {
                     containers.add(model);
+                    Events.trigger('projectTreeChanged');
                 }
             });
         },
@@ -70,6 +75,7 @@ define([
             selectedModel.destroy({
                 success:function () {
                     div.remove();
+                    Events.trigger('projectTreeChanged');
                 }
             });
         },
@@ -113,7 +119,7 @@ define([
             var order = _.map($(this.el).find('div.gui-element'), function (element) {
                 return $(element).data('id');
             });
-            this.model.get('container').save({childOrder:order}, {wait:true, silent:true});
+            this.model.get('container').save({childOrder:order}, {wait:true, silent:true, success: function() { Events.trigger('projectProgressChanged'); }});
         }
     });
 });
