@@ -1,9 +1,14 @@
+/**
+ * Anzeige der Texte in der Prüfen-Ansicht
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'views/modules/element/element',
     'text!templates/modules/element/check/text.html',
     'text!templates/modals/approve.html'
 ], function (ElementView, ViewTemplate, ApproveModalTemplate) {
-    var View = ElementView.extend({
+    return ElementView.extend({
         template:_.template(ViewTemplate),
         modalTemplate:_.template(ApproveModalTemplate),
         className:'gui-element gui-text gui-check-text',
@@ -70,5 +75,4 @@ define([
             }
         }
     });
-    return View;
 });

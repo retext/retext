@@ -1,8 +1,12 @@
+/**
+ * Collection
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'models/menu/item'
 ], function (MenuItem) {
-    var MenuItemCollection = Backbone.Collection.extend({
+    return Backbone.Collection.extend({
         'model':MenuItem
     });
-    return MenuItemCollection;
 });

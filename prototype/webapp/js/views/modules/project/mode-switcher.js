@@ -1,3 +1,8 @@
+/**
+ * Schaltet in der Projektansicht zwischen den vier Bearbeitungsmodi um
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'collections/mode',
     'models/mode',
@@ -20,5 +25,4 @@ define([
             return this;
         }
     });
-})
-;
+});

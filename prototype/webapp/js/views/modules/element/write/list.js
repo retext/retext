@@ -1,3 +1,8 @@
+/**
+ * Anzeige der Elemente in der Schreiben-Ansicht
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'events',
     'views/modules/element/list',

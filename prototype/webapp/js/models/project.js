@@ -1,8 +1,13 @@
+/**
+ * Model
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'remote',
     'models/base'
 ], function (Remote, BaseModel) {
-    var Project = BaseModel.extend({
+    return BaseModel.extend({
         urlRoot:Remote.apiUrlBase + 'project',
         defaults:{
             id:null,
@@ -15,5 +20,4 @@ define([
             if (attrs.name == null || attrs.name.length < 1) return 'name_invalid';
         }
     });
-    return Project;
 });

@@ -1,5 +1,9 @@
+/**
+ * Model
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
 ], function () {
-    var ApiStatus = Backbone.Model.extend();
-    return ApiStatus;
+    return Backbone.Model.extend();
 });

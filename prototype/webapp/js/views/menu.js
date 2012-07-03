@@ -1,3 +1,8 @@
+/**
+ * Kümmert sich um die Anzeige des Hauptmenüs
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'vm',
     'views/menu/group',
@@ -6,7 +11,7 @@ define([
     'models/menu/item',
     'collections/menu/item'
 ], function (Vm, MenuGroupView, MenuGroup, MenuGroupCollection, MenuItem, MenuItemCollection) {
-    var MenuView = Backbone.View.extend({
+    return Backbone.View.extend({
         el:'#mainmenu',
         initialize:function () {
             this.model = new MenuGroupCollection();
@@ -35,5 +40,4 @@ define([
             return this;
         }
     });
-    return MenuView;
 });

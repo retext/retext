@@ -1,7 +1,20 @@
+/**
+ * Basisklasse für alle Models.
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'models/relation'
 ], function (RelationModel) {
-    var BaseModel = Backbone.Model.extend({
+    return Backbone.Model.extend({
+        /**
+         * Sucht nach einer Relation in diesem Model
+         *
+         * @param context
+         * @param list
+         * @param role
+         * @return {*}
+         */
         getRelation:function (context, list, role) {
             if (_.isUndefined(list)) list = false;
             var rel = new RelationModel();
@@ -31,5 +44,4 @@ define([
             return rel;
         }
     });
-    return BaseModel;
 });

@@ -1,3 +1,8 @@
+/**
+ * Zeigt die Änderungshistorie zu einem Text-Block an
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'views/modules/history',
     'text!templates/modules/texthistory.html'

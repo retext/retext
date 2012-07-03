@@ -1,8 +1,12 @@
+/**
+ * Collection
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'models/breadcrumb'
 ], function (Breadcrumb) {
-    var BreadcrumbCollection = Backbone.Collection.extend({
+    return Backbone.Collection.extend({
         model:Breadcrumb
     });
-    return BreadcrumbCollection;
 });

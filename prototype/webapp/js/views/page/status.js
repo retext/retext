@@ -1,10 +1,15 @@
+/**
+ * Zeigt den API-Status an
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'views/page/base',
     'collections/apistatus',
     'models/defaultapistatus',
     'text!templates/page/status.html'
 ], function (PageViewBase, ApiStatusCollection, DefaultApiStatusModel, StatusPageTemplate) {
-    var StatusView = PageViewBase.extend({
+    return PageViewBase.extend({
         template:_.template(StatusPageTemplate),
         initialize:function () {
             this.model = new ApiStatusCollection();
@@ -20,5 +25,4 @@ define([
             this.model.fetch();
         }
     });
-    return StatusView;
 });

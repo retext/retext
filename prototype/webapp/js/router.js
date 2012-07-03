@@ -1,8 +1,13 @@
+/**
+ * Der Router zeigt je nach URL-Fragment die jeweils dafür registrierte View an.
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     "events",
     "vm"
 ], function (Events, Vm) {
-    var AppRouter = Backbone.Router.extend({
+    return Backbone.Router.extend({
         initialize:function (appView) {
             this.appView = appView;
             Events.on('navigate', this.navigate, this);
@@ -35,5 +40,4 @@ define([
             this.showPage('projects/list', {model:{id:projectId, tab:tab}});
         }
     });
-    return AppRouter;
 });

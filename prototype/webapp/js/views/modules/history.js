@@ -1,3 +1,8 @@
+/**
+ * Allgemeine Klasse für die Anzeige von Verläufen
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
 ], function () {
     return Backbone.View.extend({

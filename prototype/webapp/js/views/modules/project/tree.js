@@ -1,3 +1,8 @@
+/**
+ * Zeigt die Baum-Ansicht des Projekts an
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'events',
     'collections/treenode',

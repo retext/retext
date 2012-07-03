@@ -1,3 +1,8 @@
+/**
+ * Model
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'events',
     'models/base'

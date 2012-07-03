@@ -1,3 +1,8 @@
+/**
+ * Zeigt Informationen zu einem Container an
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'text!templates/modules/containerinfo.html'
 ], function (ContainerInfoTemplate) {

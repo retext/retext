@@ -1,5 +1,9 @@
+/**
+ * Objekt zum Erzeugen globaler Events
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
 ], function () {
-    var vent = _.extend({}, Backbone.Events);
-    return vent;
+    return _.extend({}, Backbone.Events);
 });

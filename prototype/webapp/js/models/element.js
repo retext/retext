@@ -1,7 +1,10 @@
+/**
+ * Model
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'models/base'
 ], function (BaseModel) {
-    var Element = BaseModel.extend({
-    });
-    return Element;
+    return BaseModel.extend({});
 });

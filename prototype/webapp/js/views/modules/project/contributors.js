@@ -1,3 +1,8 @@
+/**
+ * Zeigt die Projekt-Mitarbeiter an
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'models/project',
     'collections/projectcontributor',

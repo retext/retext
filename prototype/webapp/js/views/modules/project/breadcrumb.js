@@ -1,8 +1,13 @@
+/**
+ * Zeigt die Breadcrump-Navigation zur aktuellen Eben an
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'collections/breadcrumb',
     'text!templates/modules/project/breadcrumb.html'
 ], function (BreadcrumbCollection, ModuleTemplate) {
-    var Module = Backbone.View.extend({
+    return Backbone.View.extend({
         template:_.template(ModuleTemplate),
         initialize:function () {
             this.breadcrumbCollection = new BreadcrumbCollection();
@@ -18,6 +23,4 @@ define([
             this.breadcrumbCollection.fetch();
         }
     });
-    return Module;
-})
-;
+});

@@ -1,3 +1,8 @@
+/**
+ * Kümmert sich um die Anzeige der Registrierung
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'views/page/base',
     'models/register',

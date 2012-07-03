@@ -1,3 +1,8 @@
+/**
+ * Anzeige der Container in der Übersetzen-Ansicht
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'views/modules/element/element',
     'text!templates/modules/element/write/container.html'

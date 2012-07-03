@@ -1,3 +1,8 @@
+/**
+ * Zeigt den Fortschritt eines Projekts an
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'models/projectprogress',
     'text!templates/modules/project/progress.html'

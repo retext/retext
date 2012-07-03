@@ -1,8 +1,12 @@
+/**
+ * Collection
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'models/menu/group'
 ], function (MenuGroup) {
-    var MenuGroupCollection = Backbone.Collection.extend({
+    return Backbone.Collection.extend({
         'model':MenuGroup
     });
-    return MenuGroupCollection;
 });

@@ -1,10 +1,14 @@
+/**
+ * Model
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
 ], function () {
-    var MenuGroup = Backbone.Model.extend({
+    return Backbone.Model.extend({
         defaults:{
             children:[],
             align:null
         }
     });
-    return MenuGroup;
 });

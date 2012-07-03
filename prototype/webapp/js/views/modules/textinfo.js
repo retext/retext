@@ -1,3 +1,8 @@
+/**
+ * Zeigt Informationen zu einem Text-Block an
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'text!templates/modules/textinfo.html'
 ], function (TextInfoTemplate) {

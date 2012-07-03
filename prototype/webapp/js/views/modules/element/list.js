@@ -1,3 +1,8 @@
+/**
+ * Basis-Klasse für die Auflistung der Elemente in den verschiedenen Bearbeitungsmodi
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'events',
     'collections/element',

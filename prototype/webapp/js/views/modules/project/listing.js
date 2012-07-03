@@ -1,10 +1,15 @@
+/**
+ * Zeigt die Projekte des Nutzers an
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'vm',
     'models/projectprogress',
     'views/modules/project/progress',
     'text!templates/modules/project/listing.html'
 ], function (Vm, ProjectProgressModel, ProjectProgressView, ListingTemplate) {
-    var ProjectListing = Backbone.View.extend({
+    return Backbone.View.extend({
         template:_.template(ListingTemplate),
         initialize:function () {
             this.model.bind("change", this.render, this);
@@ -28,6 +33,4 @@ define([
             this.model.fetch();
         }
     });
-    return ProjectListing;
-})
-;
+});

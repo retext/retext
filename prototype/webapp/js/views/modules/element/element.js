@@ -1,6 +1,11 @@
+/**
+ * Basis-Klasse für die Anzeige der Elemente in den verschiedenen Bearbeitungsmodi
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
 ], function () {
-    var View = Backbone.View.extend({
+    return Backbone.View.extend({
         tagName:'div',
         initialize:function () {
             this.model.bind("change", this.change, this);
@@ -33,5 +38,4 @@ define([
         postChange:function () {
         }
     });
-    return View;
 });

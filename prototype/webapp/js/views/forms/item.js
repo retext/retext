@@ -1,3 +1,8 @@
+/**
+ * Basisklasse für Formulare zum Bearbeiten
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
 ], function () {
     return Backbone.View.extend({

@@ -1,3 +1,8 @@
+/**
+ * Anzeige der Texte in der Schreiben-Ansicht
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'views/modules/element/element',
     'models/text',

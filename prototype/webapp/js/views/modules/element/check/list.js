@@ -1,3 +1,8 @@
+/**
+ * Anzeige des Elemente in der Prüfen-Ansicht
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'events',
     'views/modules/element/list'

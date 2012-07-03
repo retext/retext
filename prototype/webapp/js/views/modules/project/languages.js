@@ -1,3 +1,8 @@
+/**
+ * Zeigt die Sprachen eines Projekts an
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'vm',
     'models/projectlanguage',
@@ -32,7 +37,7 @@ define([
             var theLanguage = this.languages.get(id);
             theLanguage.destroy();
         },
-        languageCreated: function(model) {
+        languageCreated:function (model) {
             this.languages.add(model);
         },
         complete:function () {

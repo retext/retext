@@ -1,3 +1,10 @@
+/**
+ * Einstieg der Anwendung.
+ *
+ * Lädt die AppView und den Router.
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 require.config({
     urlArgs:"bust=" + (new Date()).getTime(),
     paths:{
@@ -16,6 +23,7 @@ require([
     // http://dev.aboutnerd.com/jQuery.dropFile/jquery.dropFile.js
     jQuery.event.props.push('dataTransfer');
 
+    // App initialisieren
     var appView = new AppView();
     new Router(appView);
     appView.render();

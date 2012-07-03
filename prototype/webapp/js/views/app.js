@@ -1,10 +1,15 @@
+/**
+ * Die ist die Haupt-Ansicht, die alle weiteren Ansichten enthält
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'events',
     'vm',
     'views/menu',
     'models/auth'
 ], function (Events, Vm, MenuView, Auth) {
-    var AppView = Backbone.View.extend({
+    return Backbone.View.extend({
         el:$('#app'),
         initialize:function () {
             Events.on('userLogon', this.userLogon, this);
@@ -41,5 +46,4 @@ define([
             }
         }
     });
-    return AppView;
 });

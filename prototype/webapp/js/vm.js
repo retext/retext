@@ -1,3 +1,8 @@
+/**
+ * Der Viewmanager kümmert sich um das Erstellen und zerstören von Views.
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'events'
 ], function (Events) {

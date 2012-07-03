@@ -1,3 +1,8 @@
+/**
+ * Anzeige der Elemente in der Übersetzen-Ansicht
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'vm',
     'collections/projectlanguage',

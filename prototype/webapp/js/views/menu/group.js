@@ -1,8 +1,13 @@
+/**
+ * Eine Gruppe von Menüeinträgen (erzeugt ein Drop-Down-Menü)
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'events',
     'views/menu/item'
 ], function (Events, MenuItemView) {
-    var MenuGroupView = Backbone.View.extend({
+    return Backbone.View.extend({
         'tagName':'ul',
         'className':'nav',
         initialize:function () {
@@ -30,5 +35,4 @@ define([
             this.render();
         }
     });
-    return MenuGroupView;
 });

@@ -1,6 +1,11 @@
+/**
+ * Ein Menüeintrag
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
 ], function () {
-        var MenuItemView = Backbone.View.extend({
+        return Backbone.View.extend({
             'tagName':'li',
             'render':function () {
                 var auth = $(document.body).data('authenticated');
@@ -33,7 +38,6 @@ define([
                 return this;
             }
         });
-        return MenuItemView;
     }
 )
 ;

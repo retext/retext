@@ -1,11 +1,15 @@
+/**
+ * Model
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'models/apistatus'
 ], function (ApiStatus) {
-    var DefaultApiStatus = ApiStatus.extend({
+    return ApiStatus.extend({
         defaults: {
             time: 'unknown',
             version: 'unknown'
         }
     });
-    return DefaultApiStatus;
 });

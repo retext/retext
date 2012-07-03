@@ -1,10 +1,15 @@
+/**
+ * Kümmert sich um die Anzeige des Logins
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'views/page/base',
     'events',
     'models/user',
     'text!templates/page/login.html'
 ], function (PageViewBase, Events, UserModel, LoginPageTemplate) {
-    var LoginView = PageViewBase.extend({
+    return PageViewBase.extend({
         events:{
             'submit form':'submitForm'
         },
@@ -44,5 +49,4 @@ define([
             return this;
         }
     });
-    return LoginView;
 });

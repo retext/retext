@@ -1,3 +1,8 @@
+/**
+ * Formular zum Bearbeiten eines Texts
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'vm',
     'views/forms/item',
@@ -6,7 +11,7 @@ define([
     'text!templates/forms/text.html',
     'collections/texttype'
 ], function (Vm, ItemForm, TexttypeForm, TexttypeModel, ViewTemplate, TextTypeCollection) {
-    var FormView = ItemForm.extend({
+    return ItemForm.extend({
         template:_.template(ViewTemplate),
         initialize:function () {
             this.textTypes = new TextTypeCollection();
@@ -39,5 +44,4 @@ define([
             })}).el);
         }
     });
-    return FormView;
 });

@@ -1,3 +1,8 @@
+/**
+ * Anzeige der Elemente in der Definieren-Ansicht
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'events',
     'views/modules/element/list',
@@ -5,13 +10,7 @@ define([
     'models/text',
     'views/forms/container',
     'views/forms/text'
-    /*
-     'collections/element',
-     'views/modules/element/structure/container',
-     'views/modules/element/structure/text',
-     'text!templates/modules/element/structure/list.html',
-     */
-], function (Events, BaseListView, ContainerModel, TextModel, ContainerForm, TextForm/* ElementCollection, ContainerElementView, TextElementView, ViewTemplate,  */) {
+], function (Events, BaseListView, ContainerModel, TextModel, ContainerForm, TextForm) {
     return BaseListView.extend({
         preferredContext:'edit',
         mode:'structure',
@@ -119,7 +118,9 @@ define([
             var order = _.map($(this.el).find('div.gui-element'), function (element) {
                 return $(element).data('id');
             });
-            this.model.get('container').save({childOrder:order}, {wait:true, silent:true, success: function() { Events.trigger('projectProgressChanged'); }});
+            this.model.get('container').save({childOrder:order}, {wait:true, silent:true, success:function () {
+                Events.trigger('projectProgressChanged');
+            }});
         }
     });
 });

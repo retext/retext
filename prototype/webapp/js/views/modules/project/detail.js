@@ -1,3 +1,8 @@
+/**
+ * Zeigt Informationen zu einem Projekt an
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'vm',
     'models/project',

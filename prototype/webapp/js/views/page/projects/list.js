@@ -1,3 +1,8 @@
+/**
+ * Listet die Projekte des Benutzers auf
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'vm',
     'views/page/base',

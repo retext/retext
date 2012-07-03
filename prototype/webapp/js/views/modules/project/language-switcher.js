@@ -1,3 +1,8 @@
+/**
+ * Sprach-Umschalter. Wird z.B. bei der Übersetzung verwendet.
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'text!templates/modules/project/language-switcher.html'
 ], function (Template) {

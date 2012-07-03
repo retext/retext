@@ -1,11 +1,15 @@
+/**
+ * Model
+ *
+ * @author Markus Tacker <m@tckr.cc>
+ */
 define([
     'models/base'
 ], function (BaseModel) {
-    var Breadcrumb = BaseModel.extend({
+    return BaseModel.extend({
         defaults:{
             id:null,
             name:'Kein Name'
         }
     });
-    return Breadcrumb;
 });
