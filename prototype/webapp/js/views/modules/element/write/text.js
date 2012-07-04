@@ -28,6 +28,7 @@ define([
             var error = el.find('div.gui-saving-error');
 
             var updatedText = this.model.get('text');
+	    if(_.isNull(updatedText)) updatedText = {};
             updatedText[this.model.get('showLanguage')] = newText;
             this.model.save({text:updatedText}, {
                 success:function () {

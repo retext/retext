@@ -58,7 +58,7 @@ define([
                     elementView = new ContainerElementView({model:element}).render();
                 } else {
                     element.set('showLanguage', project.get('defaultLanguage'));
-                    element.set('showText', element.get('text')[element.get('showLanguage')]);
+                    element.set('showText', !_.isNull(element.get('text')) ? element.get('text')[element.get('showLanguage')] : '');
                     preRenderText(element);
                     elementView = new TextElementView({model:element}).render();
                 }
