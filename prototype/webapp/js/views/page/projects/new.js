@@ -27,7 +27,7 @@ define([
                     },
                     success:function (model, request) {
                         $('#project-new-progress').remove();
-                        Events.trigger('navigate', 'project/' + model.id + '/structure/' + model.get('rootContainer'), {trigger:true});
+                        Events.trigger('navigate', 'projects/list/' + model.id, {trigger:true});
                     }
                 }
             );
