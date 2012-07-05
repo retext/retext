@@ -48,17 +48,11 @@
     </tbody>
 </table>
 <h3>Text</h3>
-<% if (model.showText != null && model.showText.length > 0) { %>
-<% if(model.typeData.multiline) { %>
+<% if (_.isEmpty(model.text)) { %><em>Kein Text</em><% } else { %>
+<% _.each(model.text, function(text, lang) { %>
+<h4><%= lang %></h4>
 <blockquote class="multiline">
-    <p><%= model.showText.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1</p><p>$2') %></p>
+    <p><%= text.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1</p><p>$2') %></p>
 </blockquote>
-<% } else { %>
-<blockquote>
-    <p><%= model.showText %></p>
-</blockquote>
-<% } %>
-
-<% } else { %>
-<p><em>Kein Text.</em></p>
+<% }); %>
 <% } %>
