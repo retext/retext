@@ -12,10 +12,17 @@ define([
         template:_.template(ViewTemplate),
         className:'gui-element gui-text gui-write-text',
         events:{
-            'blur .text':'textBlur'
+            'blur .text':'textBlur',
+            'submit form':'submitForm'
         },
         textBlur:function (ev) {
-            var inp = $(ev.target).closest('.text');
+            this.updateText($(ev.target).closest('.text'));
+        },
+        submitForm:function (ev) {
+            ev.preventDefault();
+            this.updateText($(ev.target).closest('form').find('.text'));
+        },
+        updateText:function (inp) {
             var newText = inp.attr('value');
             if (_.isEmpty(newText)) newText = null;
             var oldText = this.model.get('targetText');
