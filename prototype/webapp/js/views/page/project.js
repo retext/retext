@@ -64,8 +64,12 @@ define([
             });
         },
         complete:function () {
-            this.project.fetch(); // Will trigger update an subviews
-            this.parentContainer.fetch();
+            var pc = this.parentContainer;
+            this.project.fetch({
+                success: function() {
+                    pc.fetch();
+                }
+            }); // Will trigger update an subviews
         },
         toggleCol:function (ev) {
             var a = $(ev.target).closest('a');
