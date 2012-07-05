@@ -60,6 +60,8 @@ class TextControllerTest extends Base
         $text = self::$client->UPDATE($text->{'@subject'}, array('text' => array('de' => 'Lorem Ipsum!')));
         $this->checkText($text);
         $this->assertObjectHasAttribute('text', $text);
+        $this->assertInternalType('object', $text->text);
+        $this->assertObjectHasAttribute('text', $text);
         $this->assertEquals('Lorem Ipsum!', $text->text->de);
         return $text;
     }
@@ -164,5 +166,4 @@ class TextControllerTest extends Base
         $this->assertFalse($text->contentApproved);
         $this->assertFalse($text->approved);
     }
-
 }

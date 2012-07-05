@@ -7,7 +7,7 @@ define([
     'remote',
     'models/element'
 ], function (Remote, ElementModel) {
-    var Text = ElementModel.extend({
+    return ElementModel.extend({
         urlRoot:Remote.apiUrlBase + 'text',
         defaults:{
             '@relations':null,
@@ -27,7 +27,10 @@ define([
             contentApproved:false,
             approved:false,
             approvedCount:0
+        },
+        parse:function (response) {
+            if (_.has(response, 'text') && _.isEmpty(response.text)) response.text = null;
+            return response;
         }
     });
-    return Text;
 });
