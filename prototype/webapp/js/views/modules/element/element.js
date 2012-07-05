@@ -7,12 +7,15 @@ define([
 ], function () {
     return Backbone.View.extend({
         tagName:'div',
-        initialize:function () {
+	mode: null,
+        initialize:function (options) {
+		this.model = options.model;
+		this.mode = options.mode;
             this.model.bind("change", this.change, this);
         },
         render:function () {
             var el = $(this.el);
-            el.html(this.template({element:this.model.toJSON()}));
+            el.html(this.template({element:this.model.toJSON(), mode:this.mode}));
             el.data('id', this.model.get('id'));
             this.postRender();
             return this;

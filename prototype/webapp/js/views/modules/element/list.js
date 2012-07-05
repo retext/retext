@@ -52,15 +52,16 @@ define([
             var postRenderElement = this.postRenderElement;
             var preRenderText = _.bind(this.preRenderText, this);
             var project = this.model.get('project');
+		var mode = this.mode;
             require(['views/modules/element/' + this.mode + '/container', 'views/modules/element/' + this.mode + '/text'], function (ContainerElementView, TextElementView) {
                 var elementView;
                 if (element.get('@context') == 'http://jsonld.retext.it/Container') {
-                    elementView = new ContainerElementView({model:element}).render();
+                    elementView = new ContainerElementView({model:element, mode:mode}).render();
                 } else {
                     element.set('showLanguage', project.get('defaultLanguage'));
                     element.set('showText', !_.isNull(element.get('text')) ? element.get('text')[element.get('showLanguage')] : '');
                     preRenderText(element);
-                    elementView = new TextElementView({model:element}).render();
+                    elementView = new TextElementView({model:element, mode: mode}).render();
                 }
                 list.append(elementView.el);
                 postRenderElement(elementView);
