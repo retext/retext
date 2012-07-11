@@ -42,9 +42,12 @@ define([
             this.renderListAfterLanguages();
         },
         preRenderText:function (element) {
-            element.set('sourceText', element.get('text')[this.sourceLanguage.get('name')]);
+            var text = element.get('text');
+            var sourceLanguageName = this.sourceLanguage.get('name');
+            var targetLanguageName = this.targetLanguage.get('name');
+            element.set('sourceText', _.has(text, sourceLanguageName) ? text[sourceLanguageName] : '');
             element.set('sourceLanguage', this.sourceLanguage.toJSON());
-            element.set('targetText', element.get('text')[this.targetLanguage.get('name')]);
+            element.set('targetText', _.has(text, targetLanguageName) ? text[targetLanguageName] : '');
             element.set('targetLanguage', this.targetLanguage.toJSON());
         },
         renderList:function () {
