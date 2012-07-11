@@ -93,7 +93,7 @@ class ContentBooklet
                     $texts = sprintf('<blockquote><p>%s</p></blockquote>', empty($text) ? '' : array_shift($text));
                 } else {
                     foreach($text as $lang => $t) {
-                        $texts .= sprintf('<h%d>%s</h%d>', min(6, $level + 1), $lang, min(6, $level + 1));
+                        $texts .= sprintf('<h%d>%s</h%d>', min(6, $level + 2), $lang, min(6, $level + 2));
                         $texts .= sprintf('<blockquote><p>%s</p></blockquote>', $t);
                     }
                 }
