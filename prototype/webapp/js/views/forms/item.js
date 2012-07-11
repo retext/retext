@@ -48,8 +48,11 @@ define([
                 success:function (updatedModel) {
                     model.set(updatedModel.attributes);
                     that.trigger('saved', model);
+                    that.afterSave();
                 }
             });
+        },
+        afterSave: function() {
         },
         delete:function (ev) {
             ev.preventDefault();

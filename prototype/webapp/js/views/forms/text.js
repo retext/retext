@@ -4,13 +4,14 @@
  * @author Markus Tacker <m@tckr.cc>
  */
 define([
+    'events',
     'vm',
     'views/forms/item',
     'views/forms/texttype',
     'models/texttype',
     'text!templates/forms/text.html',
     'collections/texttype'
-], function (Vm, ItemForm, TexttypeForm, TexttypeModel, ViewTemplate, TextTypeCollection) {
+], function (Events, Vm, ItemForm, TexttypeForm, TexttypeModel, ViewTemplate, TextTypeCollection) {
     return ItemForm.extend({
         template:_.template(ViewTemplate),
         initialize:function () {
@@ -42,6 +43,12 @@ define([
             el.after(Vm.create(this, 'texttype-form', TexttypeForm, {model:_.find(this.textTypes.models, function (textType) {
                 return _.isEqual(model.get('type'), textType.get('name'));
             })}).el);
+        },
+        afterSave:function () {
+            // Neu laden um neue Typen zu bekommen
+            this.render();
+            this.complete();
+            Events.trigger('projectTreeChanged');
         }
     });
 });
