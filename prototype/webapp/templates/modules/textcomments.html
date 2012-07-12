@@ -15,7 +15,7 @@
         <p><%= comment.comment %></p>
 
         <p>
-            <img src="http://www.gravatar.com/avatar/<%= comment.user.emailmd5 %>?s=25&amp;r=g"
+            <img src="http://www.gravatar.com/avatar/<%= comment.user.emailmd5 %>?s=25&amp;r=g&amp;d=retro"
                  alt="<%= comment.user.email %>" class="gravatar">
             <small><a href="mailto:<%= comment.user.email %>"><%= comment.user.email %></a> &middot;
                 <span class="time"><i class="icon-time"></i> <time datetime="<%= comment.createdAt %>"><%=
