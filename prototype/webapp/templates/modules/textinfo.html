@@ -1,0 +1,58 @@
+<h2>Textbaustein</h2>
+<table class="table table-condensed">
+    <colgroup>
+        <col width="40%">
+        <col width="60%">
+    </colgroup>
+    <tbody>
+    <tr>
+        <th>Identifier</th>
+        <td><code><%= model.identifier %></code></td>
+    </tr>
+    <tr>
+        <th>Bezeichnung</th>
+        <td><% if (model.name == null || model.name.length == 0) { %><em>Kein Name</em><% } else { %><%= model.name %><%
+            }
+            %>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<h3>Typ</h3>
+<table class="table table-condensed">
+    <colgroup>
+        <col width="40%">
+        <col width="60%">
+    </colgroup>
+    <tbody>
+    <tr>
+        <th>Bezeichnung</th>
+        <td><%= model.typeData.name %></td>
+    </tr>
+    <tr>
+        <th>Beschreibung</th>
+        <td><%= model.typeData.description %></td>
+    </tr>
+    <tr>
+        <th>Schriftart</th>
+        <td><%= model.typeData.fontname %></td>
+    </tr>
+    <tr>
+        <th>Schriftgröße</th>
+        <td><%= model.typeData.fontsize %>%</td>
+    </tr>
+    <tr>
+        <th>Mehrzeilig?</th>
+        <td><% if(model.typeData.multiline) { %>Ja<% } else { %>Nein<% } %></td>
+    </tr>
+    </tbody>
+</table>
+<h3>Text</h3>
+<% if (_.isEmpty(model.text)) { %><em>Kein Text</em><% } else { %>
+<% _.each(model.text, function(text, lang) { %>
+<h4><%= lang %></h4>
+<blockquote class="multiline">
+    <p><%= text.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1</p><p>$2') %></p>
+</blockquote>
+<% }); %>
+<% } %>

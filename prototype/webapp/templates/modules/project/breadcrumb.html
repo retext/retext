@@ -1,0 +1,15 @@
+<ul class="breadcrumb">
+    <li>
+        <a href="#project/<%= project.id %>/<%= mode %>/<%= project.rootContainer %>"><%= project.name %></a> <% if (breadcrumbs.length > 0) { %><span
+            class="divider">/</span><% }; %>
+    </li>
+    <% _.each(breadcrumbs, function(breadcrumb, idx) { %>
+    <li>
+        <% if (idx < breadcrumbs.length - 1) { %>
+        <a href="#project/<%= project.id %>/<%= mode %>/<%= breadcrumb.id %>"><%= breadcrumb.name %></a> <span class="divider">/</span>
+        <% } else { %>
+        <%= breadcrumb.name %>
+        <% }; %>
+    </li>
+    <% }); %>
+</ul>

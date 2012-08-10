@@ -1,0 +1,67 @@
+<div class="row-fluid gui-cols">
+    <div class="span2 gui-closeable" data-openspan="2" id="project-left" data-align="left">
+
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="btn-group">
+                    <button class="btn" data-toggle="dropdown"><i class="icon-wrench"></i></button>
+                    <button class="btn dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#projects/list/<%= project.id %>/contributors"><i class="icon-user"></i> Mitarbeiter…</a></li>
+                        <li><a href="#projects/list/<%= project.id %>/languages"><i class="icon-random"></i> Sprachen…</a></li>
+                        <li><a href="/api/export/contentbooklet.pdf?project=<%= project.id %>"><i class="icon-download-alt"></i> PDF-Booklet exportieren</a></li>
+                    </ul>
+                </div>
+                <div class="view-project-tree"></div>
+            </div>
+        </div>
+
+    </div>
+    <div class="span7 view-project-main" data-openspan="7" data-currentspan="7">
+
+        <div class="row-fluid">
+            <div class="span9 view-breadcrumb"></div>
+            <div class="span3 view-mode-switcher"></div>
+        </div>
+
+        <div class="view-current-container"></div>
+
+    </div>
+    <div class="span3 gui-closeable" data-openspan="3" data-align="right" id="project-right">
+        <div class="row-fluid">
+            <div class="span12 tabbable">
+                <ul class="nav nav-tabs">
+                    <li><a data-toggle="tab" data-target="#context-tab-info"><i class="icon-info-sign"
+                                                                                title="Details"></i></a></li>
+                    <li><a data-toggle="tab" data-target="#context-tab-edit"><i class="icon-edit"
+                                                                                title="Bearbeiten"></i></a></li>
+                    <li><a data-toggle="tab" data-target="#context-tab-comments"><i class="icon-comment"
+                                                                                    title="Diskussion"></i></a></li>
+                    <li><a data-toggle="tab" data-target="#context-tab-history"><i class="icon-time"
+                                                                                   title="Verlauf"></i></a></li>
+                    <li><a data-toggle="tab" data-target="#context-tab-progress"><i class="icon-tasks"
+                                                                                    title="Fortschritt"></i></a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane view-context-info" id="context-tab-info"></div>
+                    <div class="tab-pane active view-context-edit" id="context-tab-edit"></div>
+                    <div class="tab-pane view-context-comments" id="context-tab-comments"></div>
+                    <div class="tab-pane view-context-history" id="context-tab-history"></div>
+                    <div class="tab-pane view-context-progress" id="context-tab-progress">
+                        <h2>Projekt-Fortschritt</h2>
+
+                        <div class="view-context-project-progress"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<a class="btn btn-small gui-toggle" id="toggleleft" data-col="#project-left" data-closeicon="icon-backward"
+   data-openicon="icon-forward"><i
+        class="icon-backward"></i></a>
+<a class="btn btn-small gui-toggle" id="toggleright" data-col="#project-right" data-closeicon="icon-forward"
+   data-openicon="icon-backward"><i
+        class="icon-forward"></i></a>

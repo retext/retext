@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="name-of-project" default="test">
+    <target name="test"
+            depends="casper"/>
+
+    <target name="clean" description="Cleanup build artifacts">
+        <delete dir="${basedir}/build"/>
+    </target>
+
+    <target name="prepare" depends="clean" description="Prepare for build">
+        <mkdir dir="${basedir}/build"/>
+    </target>
+
+    <target name="casper" depends="prepare" description="Run CasperJS tests">
+        <fail unless="phantomjs.bin">You must specifiy the location of phantomjs</fail>
+        <fail unless="casperjs.path">You must specifiy the location of casperjs</fail>
+        <fail unless="app.host">You must specifiy the app host</fail>
+        <exec executable="${phantomjs.bin}">
+            <arg value="${casperjs.path}/bin/bootstrap.js"/>
+            <arg value="--casper-path=${casperjs.path}"/>
+            <arg value="--cli"/>
+            <arg value="test"/>
+            <arg path="${basedir}/tests/"/>
+            <arg value="--xunit=${basedir}/build/xunit.xml"/>
+            <arg value="--direct" />
+            <arg value="--log-level=debug" />
+            <arg value="--url=${app.host}"/>
+        </exec>
+    </target>
+
+    <target name="setupserver" description="inits the server (would be run by root)">
+        <fail unless="app.user">You must specifiy the webserver user</fail>
+        <exec executable="sudo">
+            <arg value="rm"/>
+            <arg value="-r"/>
+            <arg value="${basedir}/../server/app/cache/dev"/>
+            <arg value="${basedir}/../server/app/logs/dev.log"/>
+        </exec>
+        <exec executable="sudo">
+            <arg value="chmod"/>
+            <arg value="777"/>
+            <arg value="${basedir}/../server/app"/>
+            <arg value="${basedir}/../server/app/cache"/>
+            <arg value="${basedir}/../server/app/logs"/>
+        </exec>
+        <exec executable="ant">
+            <arg value="-f"/>
+            <arg value="${basedir}/../server/build.xml"/>
+            <arg value="composer"/>
+        </exec>
+        <exec executable="sudo">
+            <arg value="chown"/>
+            <arg value="-R"/>
+            <arg value="${app.user}:"/>
+            <arg value="${basedir}/../server/app"/>
+        </exec>
+    </target>
+
+</project>

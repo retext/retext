@@ -1,0 +1,50 @@
+digraph G {
+rankdir=BT
+
+node [ shape=record ]
+
+subgraph cluster0 {
+label="I/O-Komponente"
+
+FileFormat [ label="{FileFormat\n&lt;&lt;abstract&gt;&gt;|}" ]
+OneWay  [ label="{OneWay\n&lt;&lt;abstract&gt;&gt;|}" ]
+TwoWay [ label="{TwoWay\n&lt;&lt;abstract&gt;&gt;|}" ]
+XML [ label="{XML|}" ]
+Gettext [ label="{gettext|}" ]
+PDF [ label="{PDF|}" ]
+Word [ label="{Word|}" ]
+
+
+TransportType [ label="{TransportType\n&lt;&lt;abstract&gt;&gt;|}" ]
+Push [ label="{Push|}" ]
+Pull [ label="{Pull|}" ]
+Email [ label="{E-Mail|}" ]
+FTP [ label="{FTP|}" ]
+ExportType [ label="{ExportType\n&lt;&lt;abstract&gt;&gt;|}" ]
+
+node [ shape=point color="#5abbe6" ]
+edge [ arrowhead=onormal headport=s tailport=n color="#5abbe6" ]
+
+TwoWayMerge -> TwoWay
+OneWayMerge -> OneWay
+FileFormatMerge -> FileFormat
+TransportTypeMerge -> TransportType
+ExportTypeMerge -> ExportType
+
+edge [ arrowhead=none ]
+
+OneWay -> FileFormatMerge
+TwoWay -> FileFormatMerge
+XML -> TwoWayMerge
+Gettext -> TwoWayMerge
+PDF -> OneWayMerge
+Word -> OneWayMerge
+Push -> ExportTypeMerge
+Pull -> ExportTypeMerge
+FTP -> TransportTypeMerge
+Email -> TransportTypeMerge
+}
+
+
+
+}

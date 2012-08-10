@@ -1,0 +1,8 @@
+*.aux
+*.bbl
+*.blg
+*.lo*
+*.out
+*.toc
+*.bak
+Thesis-Externe.pdf

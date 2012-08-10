@@ -1,0 +1,145 @@
+digraph G {
+rankdir=BT
+
+node [ shape=record ]
+
+Base [ label="{Base\n«abstract»|}" ]
+BaseModel [ label="{Base\n«abstract»|}" ]
+BaseException [ label="{Base\n«abstract»|}" ]
+ValidationException [ label="{ValidationException|}" ]
+ConcreteController [ shape=folder label="Controller\n\lContainer\lDummy\lElement\lExport\lLogin\lProject\lRegister\lSatus\lText\lTextType\l" ]
+ContainerChildren [ label="{ContainerChildren|}" ]
+ContentBooklet [ label="{ContentBooklet|}" ]
+RequestParameter [ label="{RequestParameter|}" ]
+ApiResponse [ label="{ApiResponse|}" ]
+ApiClient [ label="{ApiClient|}" ]
+Document [ label="Documents\n\nProjekt\lContainer\lText\lTextType\lTextVersion\lComment\lUser\l" shape=folder ]
+Model [ label="Models\n\nBreadcrumb\lDocumentRelation\lElement\lLinkedData\lProjectProgress\lTreeNode\l" shape=folder ]
+DemoDataCommand [ label="{DemoDataCommand|}" ]
+Sf2DI [ label="{DI-Container|}" ]
+Sf2Controller [ label="{Controller\n«abstract»|}" ]
+D2ODM [ label="{ODM|}" ]
+Sf2Command [ label="{Command\n«abstract»|}" ]
+
+node [ shape=none style=filled color="#FCF3BF" fontcolor="#666666" fontsize=10 ]
+
+DocumentComment [ label="Persistierte Models" ]
+DemoDataCommandComment [ label="Importiert Demo-Daten über\n die REST-Schnittstelle" ]
+ApiResponseComment [ label="Abstrahiert API-Kommunikation\naus den Controllern" ]
+RequestParameterComment [ label="Abstrahiert das\nAuslesen von\nAnfrage-Parametern" ]
+ContainerChildrenComment [ label="Hilfsklasse zum\nErstellen von\nBaumstrukturen des\nProjekts" ]
+ContentBookletComment [ label="Exportiert das\ngesamte Projekt\nals Booklet" ]
+ModelComment [ label="Nicht-persistente Models" ]
+D2ODMComment [ label="Doctrine MongoDB\nObject Document Mapper"]
+ApiClientComment [ label="Einfacher REST-Client\nzum Zugriff auf die API" ]
+
+subgraph cluster0 {
+label="Controller"
+
+Base
+ConcreteController
+ApiResponse
+ApiResponseComment
+RequestParameter
+RequestParameterComment
+}
+
+subgraph cluster1 {
+label="Export"
+
+ContainerChildren
+ContentBooklet
+ContentBookletComment
+ContainerChildrenComment
+
+}
+
+subgraph cluster3 {
+label="Exception"
+BaseException
+ValidationException
+}
+
+subgraph cluster4 {
+label="Document"
+Document
+DocumentComment
+}
+
+subgraph cluster5 {
+label="Model"
+Model
+ModelComment
+BaseModel
+
+}
+
+subgraph cluster6 {
+label="Command"
+DemoDataCommand
+DemoDataCommandComment
+}
+
+subgraph cluster7 {
+label="Symfony2"
+Sf2DI
+Sf2Controller
+Sf2Command
+}
+
+subgraph cluster8 {
+label="Doctrine2"
+D2ODM
+}
+
+
+# Association
+edge [ arrowhead=none color="#999999" ]
+Document -> ConcreteController
+Model -> ConcreteController
+Document -> ValidationException
+Model -> ValidationException
+Sf2DI -> ConcreteController
+Sf2DI -> ContentBooklet
+Sf2DI -> ContainerChildren
+Sf2DI -> D2ODM
+Sf2DI -> DemoDataCommand
+D2ODM -> Document
+
+# Aggregation
+# Aggregation can occur when a class is a collection or container of other classes, but where the contained classes do not have a strong life cycle dependency on the container—essentially, if the container is destroyed, its contents are not.
+# In UML, it is graphically represented as a hollow diamond shape on the containing class end of the tree with lines that connect contained classes to the containing class.
+edge [ arrowhead=odiamond ]
+# Document -> ConcreteController [ taillabel="1" headlabel="0..n" ]
+
+# Composition
+# Composition usually has a strong life cycle dependency between instances of the container class and instances of the contained class(es): If the container is destroyed, normally every instance that it contains is destroyed as well.
+# The UML graphical representation of a composition relationship is a filled diamond shape on the containing class end of the tree of lines that connect contained class(es) to the containing class.
+edge [ arrowhead=diamond ]
+ApiClient -> DemoDataCommand [ taillabel="1" headlabel="1" ]
+ApiResponse -> Base [ taillabel="1" headlabel="1" ]
+RequestParameter -> Base [ taillabel="0..n" headlabel="1" ]
+
+# Generalization
+node [ shape=point color="#5abbe6" ]
+edge [ arrowtail=none arrowhead=onormal color="#5abbe6" fontcolor="#5abbe6" weight=10 headport=s tailport=n ]
+Document -> BaseModel
+Model -> BaseModel
+ConcreteController -> Base -> Sf2Controller
+ValidationException -> BaseException
+DemoDataCommand -> Sf2Command
+
+# Notizen
+edge [ arrowhead=none penwidth=4 weight=0 color="#FCF3BF" headport=none tailport=none ]
+
+DocumentComment -> Document
+DemoDataCommandComment -> DemoDataCommand
+ContainerChildrenComment -> ContainerChildren
+ContentBookletComment -> ContentBooklet
+ModelComment -> Model
+ApiResponseComment -> ApiResponse
+D2ODMComment -> D2ODM
+ApiClientComment -> ApiClient
+RequestParameterComment -> RequestParameter
+
+}

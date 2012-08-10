@@ -4,3 +4,15 @@
 [submodule "friends/vendor/twig"]
 	path = friends/vendor/twig
 	url = git://github.com/fabpot/Twig.git
+[submodule "prototype/webapp/vendor/backbone"]
+	path = prototype/webapp/vendor/backbone
+	url = https://github.com/documentcloud/backbone.git
+[submodule "prototype/webapp/vendor/bootstrap"]
+	path = prototype/webapp/vendor/bootstrap
+	url = https://github.com/twitter/bootstrap.git
+[submodule "prototype/webapp/vendor/underscore"]
+	path = prototype/webapp/vendor/underscore
+	url = https://github.com/documentcloud/underscore.git
+[submodule "prototype/webapp/vendor/timeago"]
+	path = prototype/webapp/vendor/timeago
+	url = https://github.com/rmm5t/jquery-timeago.git

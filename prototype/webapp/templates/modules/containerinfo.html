@@ -1,0 +1,20 @@
+<h2>Container</h2>
+<table class="table table-condensed">
+    <colgroup>
+        <col width="40%">
+        <col width="60%">
+    </colgroup>
+    <tbody>
+    <tr>
+        <th>Bezeichnung</th>
+        <td><% if (model.name == null || model.name.length == 0) { %><em>Kein Name</em><% } else { %><%= model.name %><%
+            }
+            %>
+        </td>
+    </tr>
+    <tr>
+        <th>Unterelemente</th>
+        <td><%= model.childCount %></td>
+    </tr>
+    </tbody>
+</table>

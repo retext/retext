@@ -1,0 +1,22 @@
+<% _.each(models, function(version) { %>
+<li>
+    <span class="time"><i class="icon-time"></i> <time datetime="<%= version.createdAt %>"><%= version.createdAt %>
+    </time></span>
+    <dl>
+        <dt>Text</dt>
+        <dd><% if (_.isEmpty(version.text)) { %><em>Kein Text</em><% } else { %>
+            <% if(_.size(version.text) < 2) { %>
+            <% _.each(version.text, function(text) { %><%= text %><% }); %>
+            <% } else { %>
+            <dl>
+                <% _.each(version.text, function(text, lang) { %>
+                <dt><%= lang %></dt>
+                <dd><%= text %></dd>
+                <% }); %>
+            </dl>
+            <% } %>
+            <% } %>
+        </dd>
+    </dl>
+</li>
+<% }); %>

@@ -19,8 +19,6 @@ subgraph c1 {
   GuiViews [ label="Views" shape=folder ]
 }
 
-
-
 subgraph c2 {
   rank=same
   r2 [ label="Browser-GUI" shape=none style=solid ]
@@ -39,8 +37,7 @@ node [ fillcolor="#5abbe6" ]
 subgraph c4 {
   rank=same
   r4 [ label="Externe\nTools" shape=none style=solid ]
-  
-PlugIns [ shape=component label="Plug-Ins,\nApps, …" ]
+  PlugIns [ shape=component label="Plug-Ins,\nApps, …" ]
 }
 
 node [ fillcolor="#cccccc" penwidth=1 ]
@@ -48,20 +45,20 @@ node [ fillcolor="#cccccc" penwidth=1 ]
 subgraph c5 {
   rank=same
   r5 [ style=invis ]
+  API [ shape=component ]
   Shell [ shape=component label="Cronjobs,\nCLI, …" ]
 }
 
 subgraph c6 {
   rank=same
   r6 [ style=invis ]
-  API [ shape=component ]
+  Controller [ shape=folder ]
 }
 
 subgraph c7 {
   rank=same
-  r7 [ style=invis ]
-  Controller [ shape=folder ]
-  Models [ shape=folder ]
+  r7 [ label="Anwendungs-\nserver" shape=none style=solid ]
+  Models [ shape=folder ]    
 }
 
 subgraph c75 {
@@ -93,8 +90,8 @@ subgraph extern {
   extern [ label="Externe\nSysteme" shape=none style=solid ]
   RDBMS [ shape=component ]
   jobserver [ shape=component label="Job-Server" ]
-  iosub [ shape=component label="I/O-Systeme\nLokal & Remote" ]
-  Services [ shape=component label="Services\nLokal & Remote" ]
+  Services [ shape=component label="Services\nLokal & Remote" ]  
+iosub [ shape=component label="I/O-Systeme\nLokal & Remote" ]
 }
 
 
@@ -104,8 +101,6 @@ ruser -> r1 -> r2 -> r3 -> r4 -> r5 -> r6 -> r7 -> r75 -> r8 -> r9 -> extern
 
 edge [ style=solid dir=none arrowhead=none ]
 
-di -> Controller
-
 edge [ tailport=none ]
 
 di -> Persistenz
@@ -113,23 +108,17 @@ di -> IO
 di -> Jobs
 di -> Workflow
 di -> ServiceAdapter
+di -> API [ weight=10 ]
+di -> Controller
 
 edge [ headport=none tailport=none ]
 
-API -> Controller [ weight=10 ]
-Persistenz -> Models
-Controller -> Models
-Jobs -> Models
-IO -> Models
-
 GuiController -> ApiAdapter
 GuiController -> GuiViews
-GuiModels -> GuiViews
-GuiModels -> GuiController
 Persistenz -> orm
 
 edge [ color="#AC9573" style=dashed arrowhead=normal arrowtail=normal fontcolor="#AC9573" ]
-jobserver -> Jobs [ label="Proprietäre\nProtokolle" ]
+jobserver -> Jobs [ label="  Proprietäre\nProtokolle" ]
 RDBMS -> orm
 IO -> iosub
 ServiceAdapter -> Services
@@ -139,10 +128,17 @@ edge [ arrowhead=normal dir=both color="#5abbe6" fontcolor="#5abbe6" ]
 user -> PlugIns
 user -> GuiViews [ label="Interaktion" ]
 
-edge [ color="#66cd00" fontcolor="#66cd00" ]
+edge [ color="#66cd00" fontcolor="#66cd00" headport=n ]
 ApiAdapter -> API [ label=" REST\n JSON" ]
 PlugIns -> API
 Shell -> API
 
+edge [ weight=none headport=none style=solid color=black arrowhead=none arrowtail=none ]
+Persistenz -> Models
+Controller -> Models
+Jobs -> Models
+IO -> Models
+GuiViews -> GuiModels
+GuiModels -> GuiController
 
 }

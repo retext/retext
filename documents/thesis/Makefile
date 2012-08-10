@@ -1,4 +1,4 @@
-all: Konzept.pdf Aufbau-und-Zeitplan.pdf Thesis.pdf
+all: Konzept.pdf Aufbau-und-Zeitplan.pdf Thesis.pdf Zusammenfassung.pdf Thesis-Externe.pdf
 
 Konzept.pdf: Konzept.tex
 #	-xelatex -interaction=nonstopmode Konzept.tex
@@ -12,18 +12,23 @@ Aufbau-und-Zeitplan.pdf: Aufbau-und-Zeitplan.tex
 
 Thesis.pdf: Thesis.tex parts/*.tex parts/*.bib media/*.pdf base.tex
 	-xelatex -interaction=nonstopmode Thesis.tex
-	-bibtex Thesis.aux
+	bibtex Thesis1
+	bibtex Thesis2
 	-xelatex -interaction=nonstopmode Thesis.tex
 	xelatex -interaction=nonstopmode Thesis.tex
 
-Thesis-kindle.pdf: Thesis-kindle.tex parts/*.tex parts/*.bib media/*.pdf base.tex
-	-xelatex -interaction=nonstopmode Thesis-kindle.tex
-	-bibtex Thesis-kindle.aux
-	-xelatex -interaction=nonstopmode Thesis-kindle.tex
-	xelatex -interaction=nonstopmode Thesis-kindle.tex
+Thesis-Externe.pdf: Thesis-Externe.tex parts/*.tex parts/*.bib media/*.pdf base.tex
+	-xelatex -interaction=nonstopmode Thesis-Externe.tex
+	bibtex Thesis-Externe1
+	bibtex Thesis-Externe2
+	-xelatex -interaction=nonstopmode Thesis-Externe.tex
+	xelatex -interaction=nonstopmode Thesis-Externe.tex
+
+Zusammenfassung.pdf: Zusammenfassung.tex base.tex parts/zusammenfassung.tex
+	xelatex -interaction=nonstopmode Zusammenfassung.tex
 
 clean:
-	-/bin/rm *.lof *.log *.lot *.aux *.bbl *.toc *.blg *.dvi *~ *.out
+	-/bin/rm *.aux *.bbl *.toc *.blg *.dvi *~ *.out *.lo*
 	-find ./ -type f -name \*.bak | xargs rm
 
 dropbox:
