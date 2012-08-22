@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+{% block title %}Contact | {% endblock %}
+{% block content %}
+<article>
+    <div class="row-fluid">
+        <div class="span6 offset3" itemscope itemtype="http://schema.org/Person" id="contact">
+            <h2>Contact</h2>
+
+            <p>
+                <small><a href="http://retext.it/">re:text</a> is brought to your browser by</small>
+                <br><br>
+
+                <a href="http://tckr.cc/" rel="author" itemprop="url"><strong itemprop="name">Markus Tacker</strong></a><br>
+                        <span itemprop="memberOf" itemscope="" itemtype="http://schema.org/Organization"><a
+                                href="http://coderbyheart.de/" itemprop="url" rel="me"> <span itemprop="name">coder::by(<i
+                                class="coderbyheart">♥</i>);</span></a><span itemprop="description" class="hidden">I am a freelance web application developer from Germany. I ♥ code.</span></span><span
+                    itemprop="jobTitle" class="hidden">conception and development of complex web-based applications, technical project management
+                </span>
+            </p>
+            <p>
+                        <span itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
+                        <span itemprop="streetAddress">Senefelderstr. 63</span><br>
+                        <span itemprop="postalCode">63069</span>
+                        <span itemprop="addressLocality">Offenbach</span>
+                                    <span class="hidden"><span itemprop="addressRegion">Hessen</span>,
+                                        <span itemprop="addressCountry">Deutschland</span></span></span>
+            </p>
+
+            <p>
+                <a href="mailto:m@tckr.cc" itemprop="email"><i class="icon-envelope-alt"></i> m@tckr.cc</a><br>
+                <a href="tel:+491796678859"><i class="icon-phone"></i> +49 (0) 179 667 88 59</a>
+            </p>
+
+            <dl lang="de">
+               <dt>
+                   <abbr title="Umsatzsteuer-Identifikationsnummer gemäß §27 a Umsatzsteuergesetz">UStID</abbr>
+               </dt>
+                <dd>DE236824699</dd>
+                <dt><abbr title="Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV">Inhaltlich verantwortlich</abbr></dt>
+                <dd>Markus Tacker<br><small>Anschrift s.o.</small></dd>
+            </dl>
+        </div>
+    </div>
+</article>
+{% endblock %}

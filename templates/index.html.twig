@@ -1,0 +1,47 @@
+{% extends "base.html.twig" %}
+{% block content %}
+<article>
+    <div class="row-fluid">
+        <div class="span6">
+            <h2>Hello, nice to meet <em>you</em>.</h2>
+
+            <p>I tackle common hassles you encounter while creating texts for your on- and offline projects.</p>
+
+            <p>I manage the compilation, organisation, spell checking, customer approval, translation, versioning
+                and roll out—I even integrate into your preferred tool via plug-ins or export via my API.</p>
+
+            <p>Looking forward to meeting you in 2012.</p>
+
+            <p>P.S.: To get early access to <em>re:text</em>, why don't you <a href="#signupform">sign up</a> now?!</p>
+        </div>
+
+        <div class="span6" itemscope itemtype="http://schema.org/Product">
+            <h2>About <em itemprop="name">re:text</em></h2>
+
+            <p>When it comes to the <em>creation of texts</em> for information and communication media products the one
+                solution used to manage the compilation, creation, approval, translation, and transferal into the final
+                product of these texts is <em>Word and Excel</em>&ndash;software which is <em>not suited well</em> for
+                the asynchronous workflow in creative agencies and software development companies where a lot of people
+                have a say in what meaning texts convey or what restrictions apply to them.</p>
+
+            <p itemprop="description"><a href="http://retext.it/" itemprop="url"><em>re:text</em></a> is a web based
+                management platform <em>specifically tailored</em> for texts and the needs of every project participant
+                regarding to text. This enables the parallel work on texts, direct feedback, trackable and error free
+                changes, clear approval, and much more which isn't possible with Word or Excel. The application provides
+                a RESTful API to export theses texts into the tools used to create the media products be it the Adobe
+                Creative Suite or an ant build script. </p>
+
+            <div class="well well-small">
+                Want to learn more?!<br><a href="/features">Check out all the <i class="icon-check"></i>
+                features!</a>
+            </div>
+            <p class="hidden">re:text is made by <span itemprop="manufacturer" itemscope
+                                                       itemtype="http://schema.org/Organization"><a
+                    href="http://coderbyheart.de/" itemprop="url" rel="me"> <span
+                    itemprop="name">coder::by(♥);</span></a><span itemprop="description" class="hidden">I am a freelance web application developer from Germany. I ♥ code.</span></span>
+            </p>
+            <a href="/assets/img/logo.png" class="hidden" itemprop="image"></a>
+        </div>
+    </div>
+</article>
+{% endblock %}

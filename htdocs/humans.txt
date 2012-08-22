@@ -1,0 +1,9 @@
+Made by:
+    Markus Tacker <m@tckr.cc>       http://tckr.cc
+
+Made with:
+    Twitter bootstrap               http://twitter.github.com/bootstrap/
+    FAMFAMFAM FLAG ICONS            http://www.famfamfam.com/lab/icons/flags/
+
+Big thanks to:
+    Jane Stafford                   http://www.flickr.com/photos/smithsonian/6891657541/

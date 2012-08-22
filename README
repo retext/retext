@@ -1,0 +1,12 @@
+## INSTALLATION
+
+### Composer installieren
+
+$ curl -s http://getcomposer.org/installer | php
+$ ./composer.phar install
+
+### Anwendung konfigurieren
+
+$ cp data/config.ini.dist data/config.ini
+Datei data/config.ini anpassen.
+

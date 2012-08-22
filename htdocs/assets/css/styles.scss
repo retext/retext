@@ -1,0 +1,292 @@
+/* Colors */
+
+$bg: #f5f5f5;
+$wellbg: #fefefe;
+$blue: #0095F2;
+$orange: #f15e00;
+$grey: #4c4c4c;
+$darkgrey: #303030;
+
+/* Mixins */
+
+@mixin gradient($from, $to){
+/* fallback/image non-cover color */
+  background-color: $from;
+
+/* Firefox 3.6+ */
+  background-image: -moz-linear-gradient($from, $to);
+
+/* Safari 4+, Chrome 1+ */
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from($from), to($to));
+
+/* Safari 5.1+, Chrome 10+ */
+  background-image: -webkit-linear-gradient($from, $to);
+
+/* Opera 11.10+ */
+  background-image: -o-linear-gradient($from, $to);
+
+/*
+background: -moz-linear-gradient(top, #152c74 0%, #111111 3%, #333333 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #152c74), color-stop(3%, #111111), color-stop(100%, #333333));
+  background: -webkit-linear-gradient(top, #152c74 0%, #111111 3%, #333333 100%);
+  background: -o-linear-gradient(top, #152c74 0%, #111111 3%, #333333 100%);
+  background: -ms-linear-gradient(top, #152c74 0%, #111111 3%, #333333 100%);
+background: linear-gradient(top, #152c74 0%, #111111 3%, #333333 100%);
+*/
+
+/* IE */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = quote($from), endColorstr = quote($to), GradientType = 0);
+
+/* Standard */
+  background-image: linear-gradient($from, $to);
+}
+
+/** Helpers **/
+
+// http://nicolasgallagher.com/micro-clearfix-hack/
+.clearfix:before,
+.clearfix:after {
+  content: "";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.hidden {
+  display: none;
+}
+
+.textcenter {
+  text-align: center;
+}
+
+.nolist {
+  list-style: none;
+  padding: 0;
+}
+
+.mobile {
+}
+
+.desktop {
+  display: none;
+}
+
+.right {
+  text-align: right;
+}
+
+.center {
+  text-align: center;
+}
+
+/* Base */
+body {
+  background-color: $grey;
+  background-image: url("../assets/img/bg.png");
+  font-family: Bitter, sans-serif;
+}
+
+a {
+  color: $blue;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:hover {
+  color: lighten($blue, 10);
+}
+
+.tooltip {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#wrap {
+  background-image: url("../assets/img/bg2.png");
+  background-repeat: repeat-x;
+  width: 100%;
+  min-height: 300px;
+}
+
+/* Header */
+
+header {
+  @include gradient(#ffffff, #e7e7e7);
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+  min-height: 50px;
+
+  h1 {
+    float: left;
+  }
+
+  h2 {
+    height: 1.5em;
+    float: left;
+    font-size: 1.5em;
+    font-weight: normal;
+    margin-top: 0.75em;
+    color: $bg;
+    text-shadow: 1px 0 2px rgba(0, 0, 0, 0.34), 1px 1px 0 rgba(0, 0, 0, 0.39), -1px -1px 0px rgba(0, 0, 0, 0.12);
+  }
+
+  img.logo {
+    margin: 0 0.5em 0 0;
+    width: 150px;
+    height: (67/200*150px);
+  }
+
+  nav {
+    text-align: right;
+    text-shadow: rgba($darkgrey, 0.2) 1px 1px 2px;
+    a {
+      margin: 1.75em 0 0 1em;
+      padding: 0.2em 0.4em 0.1em 0.4em;
+      display: inline-block;
+      color: $grey;
+      strong {
+        color: $orange;
+      }
+    }
+    a.boxed {
+      background-color: $wellbg;
+      border-radius: 5px;
+      box-shadow: rgba(0, 0, 0, 0.25) -1px -1px 0, $bg 1px 1px 0;
+    }
+    a.boxed:hover {
+      background-color: $grey;
+      color: $bg;
+      box-shadow: rgba(0, 0, 0, 0.25) 1px 1px 0, $bg -1px -1px 0;
+    }
+  }
+}
+
+/* Meta */
+#meta {
+  text-align: right;
+  font-family: Arial, Helvetica, sans-serif;
+  a, .sep {
+    color: $bg;
+    margin: 1em 0 1em 1em;
+    display: inline-block;
+  }
+  a.dim, .sep {
+    color: darken($bg, 60);
+  }
+  a:hover {
+    color: lighten($blue, 10);
+  }
+}
+
+/* Footer */
+footer {
+  margin: 2em 0;
+  color: lighten($grey, 15);
+  text-shadow: $darkgrey 1px 1px 0;
+
+  a {
+    color: mix($blue, $grey);
+  }
+  h2, p {
+    margin-bottom: 0.5em;
+  }
+  h2 {
+    font-size: 1.25em;
+    text-shadow: $grey 1px 1px 0, $darkgrey -1px -1px 0;
+  }
+  hr {
+    border: 0;
+    border-bottom: 1px solid $grey;
+    border-top: 1px solid $darkgrey;
+  }
+}
+
+/* Content */
+#content {
+  background-color: $bg;
+  box-shadow: black 1px 1px 10px;
+  position: relative;
+  color: $grey;
+  hr {
+    border: 0;
+    border-bottom: 1px dotted lighten($grey, 50);
+  }
+  hr.sep {
+    border: 0;
+    height: 0.5em;
+  }
+  article {
+    padding: 1em 2em;
+    text-shadow: rgba($darkgrey, 0.2) 1px 1px 2px;
+    em {
+      color: $orange;
+      font-style: normal;
+    }
+    h2 {
+      border-bottom: 1px dotted lighten($grey, 50);
+      margin: 1em 0 0.75em 0;
+      padding-bottom: 0.5em;
+    }
+    p {
+      line-height: 1.75em;
+    }
+    .multiline {
+      line-height: 1.15em;
+    }
+  }
+  aside.band {
+    margin-top: 1em;
+    padding: 1em 2em;
+    background-color: mix($bg, $blue, 90);
+    border-top: 1px solid darken($bg, 25);
+    h2 {
+      margin: 0;
+      border: 0;
+    }
+  }
+}
+
+#teaser {
+  div.text {
+    font-weight: bold;
+    color: $bg;
+    position: absolute;
+    right: 42px;
+    top: 42px;
+    text-shadow: rgba(0, 0, 0, 0.7) 1px 1px 1px, rgba(0, 0, 0, 0.25) -1px -1px 0;
+    text-align: right;
+    em {
+      color: $orange;
+      font-style: normal;
+    }
+    p.question {
+      font-size: 4em;
+      line-height: 1em;
+    }
+    p.answer {
+      font-size: 2em;
+      line-height: 1em;
+    }
+    .action {
+    }
+  }
+  img.typist {
+    border-bottom: 1px solid lighten($grey, 40);
+  }
+}
+
+#connect {
+  .icon {
+    $iconcolor: mix($grey, mix($bg, $blue, 90), 10);
+    $highlight: lighten($iconcolor, 10);
+    $lowlight: darken($iconcolor, 10);
+    text-align: center;
+    font-size: 2em;
+    color: $iconcolor;
+    text-shadow: $lowlight -1px -1px 0, $highlight 1px 1px 0;
+    margin-top: 0.5em;
+  }
+}
