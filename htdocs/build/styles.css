@@ -194,7 +194,8 @@ footer {
     font-size: 2em;
     line-height: 1em; }
 #teaser img.typist {
-  border-bottom: 1px solid #b2b2b2; }
+  border-bottom: 1px solid #b2b2b2;
+  width: 100%; }
 
 #connect .icon {
   text-align: center;
