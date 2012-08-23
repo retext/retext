@@ -1,12 +1,6 @@
 {
-    "hash": "a931095c2249b58cba9ec3846221a664",
+    "hash": "e035432a23b8da4e1d697a84ef33ced1",
     "packages": [
-        {
-            "package": "monolog/monolog",
-            "version": "dev-master",
-            "source-reference": "1.2.0",
-            "commit-date": "1345310833"
-        },
         {
             "package": "pimple/pimple",
             "version": "dev-master",
@@ -78,18 +72,6 @@
             "version": "dev-master",
             "source-reference": "v2.1.0-RC1",
             "commit-date": "1343744077"
-        },
-        {
-            "package": "symfony/validator",
-            "version": "dev-master",
-            "alias-pretty-version": "2.1.x-dev",
-            "alias-version": "2.1.9999999.9999999-dev"
-        },
-        {
-            "package": "symfony/validator",
-            "version": "dev-master",
-            "source-reference": "2794f1d7bfea5c017c50f870ca1bf2dd1c363f03",
-            "commit-date": "1344856683"
         },
         {
             "package": "twig/twig",
