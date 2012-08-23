@@ -35,7 +35,11 @@ background: linear-gradient(top, #152c74 0%, #111111 3%, #333333 100%);
 */
 
 /* IE */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = quote($from), endColorstr = quote($to), GradientType = 0);
+  filter: unquote("progid:DXImageTransform.Microsoft.gradient(startColorstr='")
++ $from
++ unquote("', endColorstr='")
++ $to
++ unquote("',GradientType=0)");
 
 /* Standard */
   background-image: linear-gradient($from, $to);

@@ -77,7 +77,7 @@ header {
   background: linear-gradient(top, #152c74 0%, #111111 3%, #333333 100%);
   */
   /* IE */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = quote($from), endColorstr = quote($to), GradientType = 0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='white', endColorstr='#e7e7e7',GradientType=0);
   /* Standard */
   background-image: linear-gradient(white, #e7e7e7);
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
