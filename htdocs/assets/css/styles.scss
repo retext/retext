@@ -112,6 +112,11 @@ a:hover {
   min-height: 300px;
 }
 
+em {
+  color: $orange;
+  font-style: normal;
+}
+
 /* Header */
 
 header {
@@ -120,23 +125,19 @@ header {
   min-height: 50px;
 
   h1 {
-    float: left;
-  }
-
-  h2 {
-    height: 1.5em;
-    float: left;
-    font-size: 1.5em;
-    font-weight: normal;
-    margin-top: 0.75em;
     color: $bg;
     text-shadow: 1px 0 2px rgba(0, 0, 0, 0.34), 1px 1px 0 rgba(0, 0, 0, 0.39), -1px -1px 0px rgba(0, 0, 0, 0.12);
-  }
-
-  img.logo {
-    margin: 0 0.5em 0 0;
-    width: 150px;
-    height: (67/200*150px);
+    margin-left: 0.5em;
+    small {
+      font-weight: normal;
+      font-size: 0.625em;
+      color: $bg;
+      display: block;
+    }
+    img.logo {
+      width: 100px;
+      height: (67/200*100px);
+    }
   }
 
   nav {
@@ -165,7 +166,7 @@ header {
 }
 
 /* Meta */
-#meta {
+nav.meta {
   text-align: right;
   font-family: Arial, Helvetica, sans-serif;
   a, .sep {
@@ -179,6 +180,10 @@ header {
   a:hover {
     color: lighten($blue, 10);
   }
+}
+
+nav.meta.visible-phone {
+  text-align: center;
 }
 
 /* Footer */
@@ -219,12 +224,8 @@ footer {
     height: 0.5em;
   }
   article {
-    padding: 1em 2em;
     text-shadow: rgba($darkgrey, 0.2) 1px 1px 2px;
-    em {
-      color: $orange;
-      font-style: normal;
-    }
+    padding: 0.5em 0.5em;
     h2 {
       border-bottom: 1px dotted lighten($grey, 50);
       margin: 1em 0 0.75em 0;
@@ -239,7 +240,7 @@ footer {
   }
   aside.band {
     margin-top: 1em;
-    padding: 1em 2em;
+    padding: 0.5em 0.5em;
     background-color: mix($bg, $blue, 90);
     border-top: 1px solid darken($bg, 25);
     h2 {
@@ -251,26 +252,23 @@ footer {
 
 #teaser {
   div.text {
+    right: 21px;
+    top: 21px;
     font-weight: bold;
     color: $bg;
     position: absolute;
-    right: 42px;
-    top: 42px;
     text-shadow: rgba(0, 0, 0, 0.7) 1px 1px 1px, rgba(0, 0, 0, 0.25) -1px -1px 0;
     text-align: right;
-    em {
-      color: $orange;
-      font-style: normal;
-    }
     p.question {
-      font-size: 4em;
       line-height: 1em;
+      font-size: 2em;
     }
     p.answer {
-      font-size: 2em;
       line-height: 1em;
+      font-size: 1em;
     }
-    .action {
+    img.logo {
+      width: 60px;
     }
   }
   img.typist {
@@ -289,5 +287,95 @@ footer {
     color: $iconcolor;
     text-shadow: $lowlight -1px -1px 0, $highlight 1px 1px 0;
     margin-top: 0.5em;
+  }
+}
+
+/* Media Queries */
+body {
+  padding: 0;
+}
+
+/* Landscape phones and down */
+@media (max-width: 480px) {
+}
+
+@media (max-width: 767px) {
+  .row-fluid [class*="offset"]:first-child {
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .desktop-right {
+    text-align: right;
+  }
+
+  #content {
+    article {
+      padding: 1em 2em;
+    }
+    aside.band {
+      padding: 1em 2em;
+    }
+  }
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 978px) {
+
+}
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 979px) {
+  header {
+    img.logo {
+      width: 150px;
+      height: (67/200*150px);
+    }
+    h1 {
+      small {
+        display: inline;
+        margin: 0;
+        font-size: 0.6275em;
+      }
+    }
+  }
+
+  #teaser {
+
+    div.text {
+      right: 42px;
+      top: 42px;
+      p.question {
+        font-size: 3em;
+      }
+      p.answer {
+        font-size: 1.5em;
+      }
+      img.logo {
+        width: 100px;
+      }
+    }
+
+  }
+
+}
+
+/* Large desktop */
+@media (min-width: 1200px) {
+
+  #teaser {
+    div.text {
+      p.question {
+        font-size: 4em;
+      }
+      p.answer {
+        font-size: 2em;
+      }
+      img.logo {
+        width: 152px;
+      }
+    }
+
   }
 }

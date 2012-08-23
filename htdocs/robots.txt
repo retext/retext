@@ -1,1 +1,8 @@
 User-agent: *
+Disallow: /responsive.html
+Disallow: /google534e2a332f2949cc.html
+Disallow: /assets
+Disallow: /build
+Disallow: /vendor
+Allow: /
+

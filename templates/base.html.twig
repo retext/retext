@@ -10,9 +10,9 @@
 
     <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/docs/assets/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/docs/assets/css/bootstrap-responsive.css">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Bitter">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Bitter:400,700">
     <link rel="stylesheet" type="text/css" href="/vendor/awesomefont/css/font-awesome.css">
-    <link rel="stylesheet" type="text/css" href="/build/styles.css">
+    <link rel="stylesheet" type="text/css" href="/build/styles.css?v{{ "now"|date("U") }}">
 
     <!--[if lt IE 9]>
     <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -29,12 +29,12 @@
             <div class="row">
                 <div class="span6">
                     <h1>
-                        <a href="/" rel="index"><img src="/assets/img/logo-200px.png" alt="re:text" class="logo"></a>
+                        <a href="/" rel="index"><img src="/assets/img/logo-200px.png" alt="re:text"
+                                                     class="logo"></a>
+                        <small><span class="hidden"><em>re:text</em> &ndash; </span>text workflow done right</small>
                     </h1>
-
-                    <h2>text workflow done right</h2>
                 </div>
-                <nav class="span6">
+                <nav class="span6 hidden-phone">
                     <a href="#signupform" class="boxed"><strong><i class="icon-user"></i> Request Invite</strong></a>
                     <a href="/features" class="boxed"><i class="icon-check"></i> Features</a>
                     <a href="/pricing" class="boxed"><i class="icon-shopping-cart"></i> Pricing</a>
@@ -45,7 +45,7 @@
         </div>
     </header>
 
-    <nav id="meta" class="container">
+    <nav class="meta visible-desktop visible-tablet container">
         <a href="/contact" class="dim">Contact</a>
         <a href="/privacy" class="dim">Privacy</a>
         <span class="sep">|</span>
@@ -54,8 +54,15 @@
         </a>
     </nav>
 
+    <nav class="meta visible-phone">
+        <a href="/features">Features</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/contact" class="dim">Contact</a>
+        <a href="/privacy" class="dim">Privacy</a>
+    </nav>
+
     <div class="container" id="content">
-        <aside id="teaser">
+        <aside id="teaser" class="hidden-phone">
             <img class="typist" src="/assets/img/typist.jpg" alt="">
 
             <div class="text">
@@ -65,7 +72,7 @@
                 </p>
 
                 <p class="answer">Relax and say hello to <img src="/assets/img/logo-white.png" alt="re:text"
-                                                              width="152">
+                                                              width="152" class="logo">
                 </p>
 
                 <form method="POST" class="action form-inline"
@@ -93,22 +100,27 @@
                 <div class="span3">
                     <h2>Get in touch!</h2>
                 </div>
-                <div class="span3 icon">
+                <div class="span3 icon visible-desktop">
                     <i class="icon-twitter"></i>
                 </div>
-                <div class="span3 icon">
+                <div class="span3 icon visible-desktop">
                     <i class="icon-facebook"></i>
                 </div>
-                <div class="span3 icon">
+                <div class="span3 icon visible-desktop">
                     <i class="icon-google-plus"></i>
                 </div>
             </div>
+
+
             <div class="row-fluid">
                 <div class="span3">
+                    {% include "signupform.html.twig" %}
+                    <hr class="visible-phone">
                     <p>To receive updates you can follow <a href="http://twitter.com/retext"
                                                             rel="author">@retext</a>, add <a
                             href="https://plus.google.com/115166034715523659283" rel="publisher">+re:text</a> to your
                         circles or become a fan on <a href="https://www.facebook.com/retext">facebook</a>.</p>
+                    <hr class="visible-phone">
                 </div>
                 <div class="span3">
                     <a href="https://twitter.com/retext" class="twitter-follow-button" data-show-count="false"
@@ -118,12 +130,14 @@
                        data-url="http://retext.it/"
                        data-text="Fed up with managing texts for your projects with Word and Excel? Try re:text – text workflow done right."
                        data-size="large">Tweet</a>
+                    <hr class="visible-phone">
                 </div>
                 <div class="span3">
                     <div class="fb-like" data-href="https://www.facebook.com/retext" data-send="false"
                          data-width="250" data-show-faces="true" data-action="recommend"
                          data-colorscheme="light"
                          data-font="arial"></div>
+                    <hr class="visible-phone">
                 </div>
 
                 <div class="span3">
@@ -131,6 +145,7 @@
                          data-href="http://plus.google.com/115166034715523659283"></div>
                 </div>
             </div>
+
         </aside>
         {% endblock %}
     </div>

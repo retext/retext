@@ -52,6 +52,10 @@ a:hover {
   width: 100%;
   min-height: 300px; }
 
+em {
+  color: #f15e00;
+  font-style: normal; }
+
 /* Header */
 header {
   /* fallback/image non-cover color */
@@ -79,19 +83,17 @@ header {
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
   min-height: 50px; }
   header h1 {
-    float: left; }
-  header h2 {
-    height: 1.5em;
-    float: left;
-    font-size: 1.5em;
-    font-weight: normal;
-    margin-top: 0.75em;
     color: #f5f5f5;
-    text-shadow: 1px 0 2px rgba(0, 0, 0, 0.34), 1px 1px 0 rgba(0, 0, 0, 0.39), -1px -1px 0px rgba(0, 0, 0, 0.12); }
-  header img.logo {
-    margin: 0 0.5em 0 0;
-    width: 150px;
-    height: 50.25px; }
+    text-shadow: 1px 0 2px rgba(0, 0, 0, 0.34), 1px 1px 0 rgba(0, 0, 0, 0.39), -1px -1px 0px rgba(0, 0, 0, 0.12);
+    margin-left: 0.5em; }
+    header h1 small {
+      font-weight: normal;
+      font-size: 0.625em;
+      color: #f5f5f5;
+      display: block; }
+    header h1 img.logo {
+      width: 100px;
+      height: 33.5px; }
   header nav {
     text-align: right;
     text-shadow: rgba(48, 48, 48, 0.2) 1px 1px 2px; }
@@ -112,17 +114,20 @@ header {
       box-shadow: rgba(0, 0, 0, 0.25) 1px 1px 0, #f5f5f5 -1px -1px 0; }
 
 /* Meta */
-#meta {
+nav.meta {
   text-align: right;
   font-family: Arial, Helvetica, sans-serif; }
-  #meta a, #meta .sep {
+  nav.meta a, nav.meta .sep {
     color: #f5f5f5;
     margin: 1em 0 1em 1em;
     display: inline-block; }
-  #meta a.dim, #meta .sep {
+  nav.meta a.dim, nav.meta .sep {
     color: #5c5c5c; }
-  #meta a:hover {
+  nav.meta a:hover {
     color: #26acff; }
+
+nav.meta.visible-phone {
+  text-align: center; }
 
 /* Footer */
 footer {
@@ -154,11 +159,8 @@ footer {
     border: 0;
     height: 0.5em; }
   #content article {
-    padding: 1em 2em;
-    text-shadow: rgba(48, 48, 48, 0.2) 1px 1px 2px; }
-    #content article em {
-      color: #f15e00;
-      font-style: normal; }
+    text-shadow: rgba(48, 48, 48, 0.2) 1px 1px 2px;
+    padding: 0.5em 0.5em; }
     #content article h2 {
       border-bottom: 1px dotted #cccccc;
       margin: 1em 0 0.75em 0;
@@ -169,7 +171,7 @@ footer {
       line-height: 1.15em; }
   #content aside.band {
     margin-top: 1em;
-    padding: 1em 2em;
+    padding: 0.5em 0.5em;
     background-color: #dcebf4;
     border-top: 1px solid #b5b5b5; }
     #content aside.band h2 {
@@ -177,22 +179,21 @@ footer {
       border: 0; }
 
 #teaser div.text {
+  right: 21px;
+  top: 21px;
   font-weight: bold;
   color: #f5f5f5;
   position: absolute;
-  right: 42px;
-  top: 42px;
   text-shadow: rgba(0, 0, 0, 0.7) 1px 1px 1px, rgba(0, 0, 0, 0.25) -1px -1px 0;
   text-align: right; }
-  #teaser div.text em {
-    color: #f15e00;
-    font-style: normal; }
   #teaser div.text p.question {
-    font-size: 4em;
-    line-height: 1em; }
+    line-height: 1em;
+    font-size: 2em; }
   #teaser div.text p.answer {
-    font-size: 2em;
-    line-height: 1em; }
+    line-height: 1em;
+    font-size: 1em; }
+  #teaser div.text img.logo {
+    width: 60px; }
 #teaser img.typist {
   border-bottom: 1px solid #b2b2b2;
   width: 100%; }
@@ -203,3 +204,48 @@ footer {
   color: #cddbe3;
   text-shadow: #acc3d1 -1px -1px 0, #eef3f5 1px 1px 0;
   margin-top: 0.5em; }
+
+/* Media Queries */
+body {
+  padding: 0; }
+
+/* Landscape phones and down */
+@media (max-width: 767px) {
+  .row-fluid [class*="offset"]:first-child {
+    margin-left: 0; } }
+@media (min-width: 768px) {
+  .desktop-right {
+    text-align: right; }
+
+  #content article {
+    padding: 1em 2em; }
+  #content aside.band {
+    padding: 1em 2em; } }
+/* Landscape phone to portrait tablet */
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 979px) {
+  header img.logo {
+    width: 150px;
+    height: 50.25px; }
+  header h1 small {
+    display: inline;
+    margin: 0;
+    font-size: 0.6275em; }
+
+  #teaser div.text {
+    right: 42px;
+    top: 42px; }
+    #teaser div.text p.question {
+      font-size: 3em; }
+    #teaser div.text p.answer {
+      font-size: 1.5em; }
+    #teaser div.text img.logo {
+      width: 100px; } }
+/* Large desktop */
+@media (min-width: 1200px) {
+  #teaser div.text p.question {
+    font-size: 4em; }
+  #teaser div.text p.answer {
+    font-size: 2em; }
+  #teaser div.text img.logo {
+    width: 152px; } }
