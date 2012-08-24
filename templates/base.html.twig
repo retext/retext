@@ -17,11 +17,20 @@
     <!--[if lt IE 9]>
     <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <!--[if IE]>
+    <!--[if lt IE 8]>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+    <style>
+	iframe.chromeFrameInstallDefaultStyle { z-index: 99; }
+    </style>
     <![endif]-->
     <!--[if IE 7]>
     <link rel="stylesheet" type="text/css" href="/vendor/awesomefont/css/font-awesome-ie7.css">
+    <![endif]-->
+    <!--[if IE]>
+    <style>
+	/* TODO: Move to extra file. */
+        header h1 small { color: #404040; }
+    </style>
     <![endif]-->
 </head>
 <body>
