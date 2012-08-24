@@ -7,4 +7,7 @@ $(document).ready(function () {
     $('[href=#signupform]').click(function () {
         inp.focus();
     });
+    if (typeof CFInstall !== "undefined") {
+        CFInstall.check();
+    }
 });
