@@ -1,0 +1,29 @@
+<div class="row-fluid">
+    <div class="span12">
+        <div class="progress progress-striped active hidden">
+            <div class="bar" style="width: 50%;"></div>
+        </div>
+        <form action="" class="inline">
+            <input type="text" name="comment" required placeholder="Dein Kommentar …">
+        </form>
+    </div>
+</div>
+<% _.each(models, function(comment) { %>
+<div class="row-fluid">
+    <div class="span12">
+
+        <p><%= comment.comment %></p>
+
+        <p>
+            <img src="http://www.gravatar.com/avatar/<%= comment.user.emailmd5 %>?s=25&amp;r=g&amp;d=retro"
+                 alt="<%= comment.user.email %>" class="gravatar">
+            <small><a href="mailto:<%= comment.user.email %>"><%= comment.user.email %></a> &middot;
+                <span class="time"><i class="icon-time"></i> <time datetime="<%= comment.createdAt %>"><%=
+                    comment.createdAt %>
+                </time></span></small>
+        </p>
+
+        <hr>
+    </div>
+</div>
+<% }); %>

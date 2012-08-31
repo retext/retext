@@ -1,0 +1,24 @@
+[submodule "htdocs/vendor/backbone"]
+	path = htdocs/vendor/backbone
+	url = https://github.com/documentcloud/backbone.git
+[submodule "htdocs/vendor/underscore"]
+	path = htdocs/vendor/underscore
+	url = https://github.com/documentcloud/underscore.git
+[submodule "htdocs/vendor/flags"]
+	path = htdocs/vendor/flags
+	url = https://github.com/tkrotoff/famfamfam_flags.git
+[submodule "htdocs/vendor/awesomefont"]
+	path = htdocs/vendor/awesomefont
+	url = https://github.com/FortAwesome/Font-Awesome.git
+[submodule "htdocs/vendor/require"]
+	path = htdocs/vendor/require
+	url = https://github.com/jrburke/requirejs.git
+[submodule "htdocs/vendor/require-text"]
+	path = htdocs/vendor/require-text
+	url = https://github.com/requirejs/text.git
+[submodule "htdocs/vendor/bootstrap"]
+	path = htdocs/vendor/bootstrap
+	url = git@github.com:retext/bootstrap.git
+[submodule "htdocs/vendor/jquery-timeago"]
+	path = htdocs/vendor/jquery-timeago
+	url = https://github.com/rmm5t/jquery-timeago.git

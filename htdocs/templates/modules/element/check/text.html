@@ -1,0 +1,63 @@
+<span class="flag">
+    <span class="name" data-attribute="name" data-empty="<em>Kein Name</em>"><% if(element.name == null || element.name.length == 0) { %><em>Kein Name</em><% } else { %><%= element.name %><% } %></span>
+</span>
+<div class="row-fluid" data-icon-ok="icon-ok-sign" data-icon-notok="icon-remove-sign"
+     data-icon-undecided="icon-question-sign">
+
+    <div class="span4 center"><q class="text" data-attribute="showText" data-empty="<em>Kein Text</em>"><% if(element.showText == null || element.showText.length == 0) { %><em>Kein Text</em><% } else { %><%= element.showText %><% } %></q></div>
+    <div class="span2 center"><span data-attribute="commentCount" data-empty="&mdash;"><%= element.commentCount %></span></div>
+    <div class="span2">
+        <div class="btn-group">
+            <button class="btn btn-small" data-toggle="dropdown">
+                <% if(element.spellingApproved) { %>
+                <i class="icon-ok-sign" title="Akzeptiert"></i>
+                <% } else { %>
+                <i class="icon-remove-sign" title="Abgelehnt"></i>
+                <% } %>
+            </button>
+            <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a data-state-name="spellingApproved" data-state-value="true" title="Rechtschreibung akzeptieren"><i class="icon-ok-sign" title="Akzeptiert"></i> Akzeptieren</a></li>
+                <li><a data-state-name="spellingApproved" data-state-value="false" title="Rechtschreibung ablehnen"><i class="icon-remove-sign" title="Abgelehnt"></i> Ablehnen</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="span2">
+        <div class="btn-group">
+            <button class="btn btn-small" data-toggle="dropdown">
+                <% if(element.contentApproved) { %>
+                <i class="icon-ok-sign" title="Akzeptiert"></i>
+                <% } else { %>
+                <i class="icon-remove-sign" title="Abgelehnt"></i>
+                <% } %>
+            </button>
+            <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a data-state-name="contentApproved" data-state-value="true" title="Inhalt akzeptieren"><i class="icon-ok-sign" title="Akzeptiert"></i> Akzeptieren</a></li>
+                <li><a data-state-name="contentApproved" data-state-value="false" title="Inhalt ablehnen"><i class="icon-remove-sign" title="Abgelehnt"></i> Ablehnen</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="span2">
+        <div class="btn-group">
+            <button class="btn btn-small" data-toggle="dropdown">
+                <% if(element.approved) { %>
+                <i class="icon-ok-sign" title="Akzeptiert"></i>
+                <% } else { %>
+                <i class="icon-remove-sign" title="Abgelehnt"></i>
+                <% } %>
+            </button>
+            <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a data-state-name="approved" data-state-value="true" title="Text freigeben"><i class="icon-ok-sign" title="Akzeptiert"></i> Akzeptieren</a> </li>
+                <li><a data-state-name="approved" data-state-value="false" title="Text nicht freigeben"><i class="icon-remove-sign" title="Abgelehnt"></i> Ablehnen</a> </li>
+            </ul>
+        </div>
+    </div>
+</div>

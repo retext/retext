@@ -1,0 +1,13 @@
+<fieldset>
+    <legend>Sprache hinzufügen</legend>
+    <label for="language.name">Kürzel der Sprache</label>
+    <input type="text" id="language.name" name="name" placeholder="z.B. „es“" pattern="[a-z]{2}" maxlength="2">
+    <label for="language.description">Beschreibung der Sprache</label>
+    <input type="text" name="description" id="language.description" value="<%= model.description %>"
+           placeholder="z.B. „Spanisch“">
+    <br>
+    <button type="submit" class="btn btn-primary gui-save"><i class="icon icon-plus icon-white"></i><i
+            class="icon-random icon-white"></i>
+        Sprache hinzufügen
+    </button>
+</fieldset>

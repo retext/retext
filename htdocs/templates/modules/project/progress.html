@@ -1,0 +1,11 @@
+<dl>
+    <% _.each(progresses, function(progress) { %>
+    <dt class="<%= progress.id %>"><%= progress.label %> <small class="numbers">(<%= progress.completed %>/<%= progress.total %>)</small></dt>
+    <dd class="<%= progress.id %>">
+        <div class="progress <% if(progress.percent < 15) { %>progress-danger<% } else if(progress.percent < 75) { %>progress-warning<% } else if (progress.percent == 100) { %>progress-success<% } %>">
+            <div class="bar"
+                 style="width: <%= progress.percent %>%;"></div>
+        </div>
+    </dd>
+    <% }); %>
+</dl>

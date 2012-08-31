@@ -1,0 +1,53 @@
+<div class="row-fluid">
+    <div class="span12">
+        <h2><%= model.name %></h2>
+    </div>
+</div>
+<hr>
+<div class="row-fluid">
+    <div class="span12 tabbable">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" data-target="#project-tab-progress"
+                                  href="#projects/list/<%= model.id %>/progress"><i class="icon-tasks"
+                                                                                    title="Fortschritt"></i></a>
+            </li>
+            <li><a data-toggle="tab" data-target="#project-tab-contributors"
+                   href="#projects/list/<%= model.id %>/contributors"><i class="icon-user" title="Mitarbeiter"></i></a>
+            </li>
+            <li><a data-toggle="tab" data-target="#project-tab-languages"
+                   href="#projects/list/<%= model.id %>/languages"><i class="icon-random" title="Sprachen"></i></a>
+            </li>
+            <li><a data-toggle="tab" data-target="#project-tab-info"
+                   href="#projects/list/<%= model.id %>/info"><i class="icon-info-sign" title="Info"></i></a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="project-tab-progress">
+                <h3>Fortschritt</h3>
+
+                <div class="view-project-progress"></div>
+            </div>
+            <div class="tab-pane" id="project-tab-contributors">
+                <h3>Mitarbeiter</h3>
+
+                <div class="view-project-contributors"></div>
+            </div>
+            <div class="tab-pane" id="project-tab-languages">
+                <h3>Sprachen</h3>
+
+                <div class="view-project-languages"></div>
+            </div>
+            <div class="tab-pane" id="project-tab-info">
+                <h3>Info</h3>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>API-URL</th>
+                            <td><a href="<%= window.location.protocol %>//<%= window.location.host %><%= model['@subject'] %>"><%= window.location.protocol %>//<%= window.location.host %><%= model['@subject'] %></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

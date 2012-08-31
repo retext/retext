@@ -1,0 +1,22 @@
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Kürzel</th>
+        <th>Beschreibung</th>
+        <th>Aktion</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% _.each(languages, function(language) { %>
+    <tr>
+        <td><img src="./img/flags/png/<%= language.name %>.png"/> <%= language.name %></td>
+        <td><%= language.description %></td>
+        <td>
+            <button class="btn btn-danger" data-id="<%= language.id %>"><i class="icon-white icon-trash"></i></button>
+        </td>
+    </tr>
+    <% }); %>
+    </tbody>
+</table>
+<form action="" class="form">
+</form>
