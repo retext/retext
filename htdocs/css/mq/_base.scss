@@ -1,0 +1,57 @@
+// Media Queries
+body {
+  padding: 0;
+}
+
+// Landscape phones and down
+@media (max-width: 480px) {
+}
+
+@media (max-width: 767px) {
+  .row-fluid [class*="offset"]:first-child {
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .desktop-right {
+    text-align: right;
+  }
+
+  #content {
+    article {
+      padding: 1em 2em;
+    }
+    aside.band {
+      padding: 1em 2em;
+    }
+  }
+}
+
+// Landscape phone to portrait tablet
+@media (max-width: 978px) {
+
+}
+
+// Portrait tablet to landscape and desktop
+@media (min-width: 979px) {
+  header {
+    img.logo {
+      width: 150px;
+      height: (67/200*150px);
+    }
+    h1 {
+      small {
+        display: inline;
+        margin: 0;
+        font-size: 0.6275em;
+      }
+    }
+  }
+
+}
+
+// Large desktop
+@media (min-width: 1200px) {
+
+}

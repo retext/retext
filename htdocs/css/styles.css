@@ -1,0 +1,289 @@
+.clearfix:before,
+.clearfix:after {
+  content: "";
+  display: table; }
+
+.clearfix:after {
+  clear: both; }
+
+.hidden {
+  display: none; }
+
+.textcenter {
+  text-align: center; }
+
+.nolist {
+  list-style: none;
+  padding: 0; }
+
+.desktop {
+  display: none; }
+
+.right {
+  text-align: right; }
+
+.center {
+  text-align: center; }
+
+.status-ok-color, #leftbar ul.elements a:hover .status-ok {
+  color: #6ed06e; }
+
+.status-inprogress-color, #leftbar ul.elements a:hover .status-inprogress {
+  color: #e8b33a; }
+
+.status-missing-color, #leftbar ul.elements a:hover .status-missing {
+  color: #e4333a; }
+
+body {
+  background-color: #4c4c4c;
+  background-image: url("../img/bg.png");
+  font-family: Bitter, sans-serif; }
+
+a {
+  color: #0095f2; }
+
+a:hover {
+  text-decoration: none; }
+
+a:hover {
+  color: #26acff; }
+
+.tooltip {
+  font-family: Arial, Helvetica, sans-serif; }
+
+#wrap {
+  background-image: url("../img/bg2.png");
+  background-repeat: repeat-x;
+  width: 100%;
+  min-height: 300px; }
+
+em {
+  color: #f38630;
+  font-style: normal; }
+
+header {
+  background-color: white;
+  background-image: -moz-linear-gradient(white, #e6e6e6);
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(white), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(white, #e6e6e6);
+  background-image: -o-linear-gradient(white, #e6e6e6);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='white', endColorstr='#e6e6e6',GradientType=0);
+  background-image: linear-gradient(white, #e6e6e6);
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+  min-height: 50px; }
+  header h1 {
+    color: #fefefe;
+    text-shadow: 1px 0 2px rgba(0, 0, 0, 0.34), 1px 1px 0 rgba(0, 0, 0, 0.39), -1px -1px 0px rgba(0, 0, 0, 0.12);
+    margin-left: 0.5em; }
+    header h1 small {
+      font-weight: normal;
+      font-size: 0.625em;
+      color: #fefefe;
+      display: block; }
+    header h1 img.logo {
+      width: 100px;
+      height: 33.5px; }
+  header nav {
+    text-align: right;
+    text-shadow: rgba(48, 48, 48, 0.2) 1px 1px 2px; }
+    header nav a {
+      margin: 1.75em 0 0 1em;
+      padding: 0.2em 0.4em 0.1em 0.4em;
+      display: inline-block;
+      color: #4c4c4c; }
+      header nav a strong {
+        color: #f38630; }
+    header nav a.boxed {
+      background-color: #fefefe;
+      border-radius: 5px;
+      box-shadow: rgba(0, 0, 0, 0.25) -1px -1px 0, #fefefe 1px 1px 0; }
+    header nav a.boxed:hover {
+      background-color: #4c4c4c;
+      color: #fefefe;
+      box-shadow: rgba(0, 0, 0, 0.25) 1px 1px 0, #fefefe -1px -1px 0; }
+
+nav.meta {
+  text-align: right;
+  font-family: Arial, Helvetica, sans-serif; }
+  nav.meta a, nav.meta .sep {
+    color: #fefefe;
+    margin: 1em 0 1em 1em;
+    display: inline-block; }
+  nav.meta a.dim, nav.meta .sep {
+    color: #656565; }
+  nav.meta a:hover {
+    color: #26acff; }
+
+nav.meta.visible-phone {
+  text-align: center; }
+
+footer {
+  margin: 2em 0;
+  color: #727272;
+  text-shadow: #303030 1px 1px 0; }
+  footer a {
+    color: #26709f; }
+  footer h2, footer p {
+    margin-bottom: 0.5em; }
+  footer h2 {
+    font-size: 1.25em;
+    text-shadow: #4c4c4c 1px 1px 0, #303030 -1px -1px 0; }
+  footer hr {
+    border: 0;
+    border-bottom: 1px solid #4c4c4c;
+    border-top: 1px solid #303030; }
+
+#content {
+  background-color: #fefefe;
+  box-shadow: black 1px 1px 10px;
+  position: relative;
+  color: #4c4c4c; }
+  #content hr {
+    border: 0;
+    border-bottom: 1px dotted #cccccc; }
+  #content hr.sep {
+    border: 0;
+    height: 0.5em; }
+  #content article {
+    text-shadow: rgba(48, 48, 48, 0.2) 1px 1px 2px;
+    padding: 0.5em 0.5em; }
+    #content article h2 {
+      border-bottom: 1px dotted #cccccc;
+      margin: 1em 0 0.75em 0;
+      padding-bottom: 0.5em; }
+    #content article p {
+      line-height: 1.75em; }
+    #content article .multiline {
+      line-height: 1.15em; }
+  #content aside.band {
+    margin-top: 1em;
+    padding: 0.5em 0.5em;
+    background-color: #e4f3fc;
+    border-top: 1px solid #bebebe; }
+    #content aside.band h2 {
+      margin: 0;
+      border: 0; }
+
+#leftbar {
+  font-family: Arial, sans-serif;
+  background-color: #343434;
+  color: #9b9b9b; }
+  #leftbar a {
+    color: #9b9b9b; }
+  #leftbar a:hover {
+    color: white; }
+  #leftbar h2 {
+    background-color: white;
+    background-image: -moz-linear-gradient(white, #e6e6e6);
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(white), to(#e6e6e6));
+    background-image: -webkit-linear-gradient(white, #e6e6e6);
+    background-image: -o-linear-gradient(white, #e6e6e6);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='white', endColorstr='#e6e6e6',GradientType=0);
+    background-image: linear-gradient(white, #e6e6e6);
+    color: #4c4c4c;
+    font-size: 1.125em; }
+    #leftbar h2 a {
+      color: #4c4c4c; }
+    #leftbar h2 a:hover {
+      color: #7f7f7f; }
+  #leftbar h2, #leftbar h3, #leftbar h4, #leftbar h5, #leftbar h6 {
+    padding: 0 0.5em;
+    margin: 0;
+    line-height: 2.5em; }
+    #leftbar h2 a, #leftbar h3 a, #leftbar h4 a, #leftbar h5 a, #leftbar h6 a {
+      float: right; }
+  #leftbar .inset {
+    background-color: #2f2f2f;
+    border-top: 1px solid #2a2a2a;
+    border-bottom: 1px solid #3e3e3e; }
+    #leftbar .inset h4 {
+      border: none;
+      background-color: transparent; }
+  #leftbar h3, #leftbar h4, #leftbar h5, #leftbar h6 {
+    font-size: 0.875em;
+    text-transform: uppercase;
+    background-color: #3e3e3e;
+    border-top: 1px solid #484848;
+    border-bottom: 1px solid #343434; }
+  #leftbar ul {
+    list-style: none;
+    margin: 0; }
+    #leftbar ul li {
+      padding: 0.25em 0.5em; }
+      #leftbar ul li .badge {
+        float: right;
+        background-color: #4e4e4e;
+        -webkit-border-radius: 3px 3px;
+        -moz-border-radius: 1;
+        -khtml-border-radius: 1;
+        border-radius: 1;
+        color: rgba(155, 155, 155, 0.85); }
+    #leftbar ul li.active {
+      background-color: #4e8ef7;
+      background-image: -moz-linear-gradient(#4e8ef7, #3a82f7);
+      background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#4e8ef7), to(#3a82f7));
+      background-image: -webkit-linear-gradient(#4e8ef7, #3a82f7);
+      background-image: -o-linear-gradient(#4e8ef7, #3a82f7);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4e8ef7', endColorstr='#3a82f7',GradientType=0);
+      background-image: linear-gradient(#4e8ef7, #3a82f7);
+      color: white; }
+      #leftbar ul li.active .badge {
+        background-color: #366cc5;
+        border-top: 1px solid #0953cc;
+        border-left: 1px solid #0953cc;
+        border-bottom: 1px solid #75a7f9;
+        border-right: 1px solid #75a7f9;
+        color: rgba(255, 255, 255, 0.85); }
+      #leftbar ul li.active a {
+        color: white; }
+  #leftbar button.btn-none {
+    background-color: #343434;
+    border: 0;
+    color: #9b9b9b; }
+  #leftbar button.btn-none:hover {
+    color: white; }
+  #leftbar ul.elements {
+    font-size: 0.875em;
+    line-height: 1em;
+    padding: 1em 0.5em 1em 0.5em; }
+    #leftbar ul.elements .container {
+      font-style: italic; }
+      #leftbar ul.elements .container .count {
+        color: rgba(155, 155, 155, 0.25);
+        float: right;
+        font-style: normal; }
+    #leftbar ul.elements .status {
+      color: rgba(155, 155, 155, 0.25); }
+    #leftbar ul.elements li {
+      padding: 0; }
+    #leftbar ul.elements a:hover .count {
+      color: white; }
+    #leftbar ul.elements ul {
+      padding: 0 0 0 0.5em;
+      border-left: 1px solid rgba(155, 155, 155, 0.5);
+      margin-left: 0.6em; }
+  #leftbar form {
+    margin: 0; }
+
+body {
+  padding: 0; }
+
+@media (max-width: 767px) {
+  .row-fluid [class*="offset"]:first-child {
+    margin-left: 0; } }
+@media (min-width: 768px) {
+  .desktop-right {
+    text-align: right; }
+
+  #content article {
+    padding: 1em 2em; }
+  #content aside.band {
+    padding: 1em 2em; } }
+@media (min-width: 979px) {
+  header img.logo {
+    width: 150px;
+    height: 50.25px; }
+  header h1 small {
+    display: inline;
+    margin: 0;
+    font-size: 0.6275em; } }

@@ -36,8 +36,21 @@ define([
         Events.trigger('viewCreated:' + name);
         return view;
     };
+    var updateExtras = function (el) {
+        // Enable tooltips
+        $(el).find('[rel=tooltip]').tooltip();
+        $(el).find('label[title]').tooltip();
+        // Extender dropdowns
+        $('.extender-toggle').each(function (idx, el) {
+            var el = $(el);
+            el.click(function (ev) {
+                $(el.data('target')).toggleClass('hidden');
+            });
+        });
+    };
     return {
         create:create,
-        destroy:destroy
+        destroy:destroy,
+        updateExtras:updateExtras
     };
 });

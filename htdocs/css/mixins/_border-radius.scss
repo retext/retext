@@ -1,0 +1,8 @@
+// Border-Radius Mixin
+
+@mixin border-radius($radius){
+  -webkit-border-radius: $radius $radius;
+  -moz-border-radius: $radius / $radius;
+  -khtml-border-radius: $radius / $radius;
+  border-radius: $radius / $radius;
+}

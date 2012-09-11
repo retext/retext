@@ -1,0 +1,12 @@
+Made by:
+    Markus Tacker <m@tckr.cc>       http://tckr.cc
+
+Made with:
+    Twitter bootstrap               http://twitter.github.com/bootstrap/
+    FAMFAMFAM FLAG ICONS            http://www.famfamfam.com/lab/icons/flags/
+    Font Awesome                    http://fortawesome.github.com/Font-Awesome
+    Underscore.js                   http://underscorejs.org/
+    Backbone.js                     http://backbonejs.org/
+    RequireJS                       http://requirejs.org/
+    jQuery Timeago                  https://github.com/rmm5t/jquery-timeago
+
