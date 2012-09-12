@@ -1,167 +1,219 @@
-// Base
-body {
-  background-color: $grey;
-  background-image: url("../img/bg.png");
-  font-family: Bitter, sans-serif;
+.gui-element {
+  margin: 0.5em 0 0.5em 0;
+  padding: 1em;
+  color: $text;
+  position: relative;
 }
 
-a {
-  color: $blue;
+.gui-element .meta, .gui-element .info {
+  position: absolute;
+  right: 1%;
+  top: 20%;
+  line-height: 2em;
 }
 
-a:hover {
-  text-decoration: none;
+.gui-element.selected {
+  background-color: $bg;
+  border-color: $orange;
+  color: $text_selected;
 }
 
-a:hover {
-  color: lighten($blue, 10);
+.gui-element .meta {
+  display: none;
 }
 
-.tooltip {
-  font-family: Arial, Helvetica, sans-serif;
+.gui-element:hover .meta {
+  display: block;
 }
 
-#wrap {
-  background-image: url("../img/bg2.png");
-  background-repeat: repeat-x;
+.gui-element:hover .info {
+  display: none;
+}
+
+.gui-element.dragging {
+  border-style: dashed;
+  border-color: $drag_border;
+  background-color: whiteSmoke;
+  color: $drag_color;
+}
+
+.gui-drop-preview {
+  height: 2em;
+  border-radius: 2px;
+  border: 2px dashed $drag_preview_border;
+  margin-bottom: 1em;
+  background-color: $drag_preview_color;
+}
+
+// Container
+
+.gui-container {
+  border-radius: 2px;
+  background-color: $container_color;
+  border: 1px dotted $container_border;
+}
+
+// Text
+
+.gui-text {
+  border-radius: 10px;
+  background-color: $textel_bg;
+  border: 3px solid $textel_color;
+  margin-top: 2em;
+  margin-bottom: 1.5em;
+}
+
+.gui-text .flag {
+  position: absolute;
+  top: -18px;
+  left: 1%;
+  border: 1px solid $textel_color;
+  background-color: $textel_bg;
+  border-radius: 4px;
+  padding: 0.25em 0.5em;
+}
+
+.gui-text q:before {
+  content: "„";
+}
+
+.gui-text q:after {
+  content: "“";
+}
+
+// WRITE text
+
+.gui-write-text form {
+  margin: 0;
+}
+
+.gui-write-text input, .gui-write-text textarea {
   width: 100%;
-  min-height: 300px;
 }
 
-em {
-  color: $orange;
-  font-style: normal;
+.gui-write-text .gui-saving-progress, .gui-write-text .gui-saving-error {
+  display: none;
 }
 
-// Header
+// Check Text
+
+.gui-check-header {
+  margin-left: 1em;
+}
+
+.gui-check-text .btn-group {
+  float: right;
+}
+
+.gui-check-text.progress-danger {
+  background-color: $danger_bg;
+}
+
+.gui-check-text.progress-warning {
+  background-color: $warning_bg;
+}
+
+.gui-check-text.progress-success {
+  background-color: $success_bg;
+}
+
+.gui-check-text q.text {
+  display: inline-block;
+  height: 1.5em;
+  overflow: hidden;
+}
+
+// Misc
+
+#toggleleft {
+  position: absolute;
+  top: 25%;
+  left: 0;
+}
+
+#toggleright {
+  position: absolute;
+  top: 25%;
+  right: 0;
+}
+
+// History
+
+ul.texthistory {
+  margin: 0;
+}
+
+ul.texthistory li {
+  list-style: none;
+  border-bottom: 1px solid $hr;
+}
+
+ul.texthistory li:last-child {
+  border: none;
+}
+
+ul.texthistory span.time {
+  float: right;
+  font-style: italic;
+}
+
+.textcomments .gravatar {
+  margin-right: 1em;
+}
+
+// Darstellung des Projekt-Fortschritts
+
+.projectprogress.compact dt, .projectprogress.compact dd {
+  display: none;
+}
+
+.projectprogress.compact dd.total {
+  display: block;
+}
+
+// Text Info
+blockquote.multiline p {
+  margin-bottom: 1em;
+}
+
+blockquote.multiline p:after {
+  content: " ¶";
+  color: $dim;
+}
+
+// Tree
+.projecttree ul {
+  list-style: none;
+  margin: 0 0 0 1.5em;
+}
+
+.projecttree ul.hide-texts li.gui-text-node {
+  display: none;
+}
+
+.projecttree label.checkbox {
+  float: right;
+}
+
+// Content header
 header {
   @include gradient(lighten($header_bg, 5), darken($header_bg, 5));
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
-  min-height: 50px;
-
-  h1 {
-    color: $bg;
-    text-shadow: 1px 0 2px rgba(0, 0, 0, 0.34), 1px 1px 0 rgba(0, 0, 0, 0.39), -1px -1px 0px rgba(0, 0, 0, 0.12);
-    margin-left: 0.5em;
-    small {
-      font-weight: normal;
-      font-size: 0.625em;
-      color: $bg;
-      display: block;
-    }
-    img.logo {
-      width: 100px;
-      height: (67/200*100px);
-    }
-  }
-
-  nav {
-    text-align: right;
-    text-shadow: rgba($darkgrey, 0.2) 1px 1px 2px;
-    a {
-      margin: 1.75em 0 0 1em;
-      padding: 0.2em 0.4em 0.1em 0.4em;
-      display: inline-block;
-      color: $grey;
-      strong {
-        color: $orange;
-      }
-    }
-    a.boxed {
-      background-color: $wellbg;
-      border-radius: 5px;
-      box-shadow: rgba(0, 0, 0, 0.25) -1px -1px 0, $bg 1px 1px 0;
-    }
-    a.boxed:hover {
-      background-color: $grey;
-      color: $bg;
-      box-shadow: rgba(0, 0, 0, 0.25) 1px 1px 0, $bg -1px -1px 0;
-    }
-  }
-}
-
-// Meta
-nav.meta {
-  text-align: right;
-  font-family: Arial, Helvetica, sans-serif;
-  a, .sep {
-    color: $bg;
-    margin: 1em 0 1em 1em;
-    display: inline-block;
-  }
-  a.dim, .sep {
-    color: darken($bg, 60);
-  }
-  a:hover {
-    color: lighten($blue, 10);
-  }
-}
-
-nav.meta.visible-phone {
-  text-align: center;
-}
-
-// Footer
-footer {
-  margin: 2em 0;
-  color: lighten($grey, 15);
-  text-shadow: $darkgrey 1px 1px 0;
-
-  a {
-    color: mix($blue, $grey);
-  }
-  h2, p {
-    margin-bottom: 0.5em;
-  }
-  h2 {
-    font-size: 1.25em;
-    text-shadow: $grey 1px 1px 0, $darkgrey -1px -1px 0;
-  }
-  hr {
-    border: 0;
-    border-bottom: 1px solid $grey;
-    border-top: 1px solid $darkgrey;
-  }
-}
-
-// Content
-#content {
-  background-color: $bg;
-  box-shadow: black 1px 1px 10px;
-  position: relative;
+  border-right: 1px solid darken($header_bg, 10);
+  border-bottom: 1px solid darken($header_bg, 10);
+  border-left: 1px solid lighten($header_bg, 10);
+  border-top: 1px solid lighten($header_bg, 10);
+  height: 40px;
   color: $grey;
-  hr {
-    border: 0;
-    border-bottom: 1px dotted lighten($grey, 50);
+  h2 {
+    font-size: $f18pt;
+    padding: 0 0.5em;
+    margin: 0;
   }
-  hr.sep {
-    border: 0;
-    height: 0.5em;
+  a.dim {
+    color: mix($grey, $blue, 75);
   }
-  article {
-    text-shadow: rgba($darkgrey, 0.2) 1px 1px 2px;
-    padding: 0.5em 0.5em;
-    h2 {
-      border-bottom: 1px dotted lighten($grey, 50);
-      margin: 1em 0 0.75em 0;
-      padding-bottom: 0.5em;
-    }
-    p {
-      line-height: 1.75em;
-    }
-    .multiline {
-      line-height: 1.15em;
-    }
-  }
-  aside.band {
-    margin-top: 1em;
-    padding: 0.5em 0.5em;
-    background-color: mix($bg, $blue, 90);
-    border-top: 1px solid darken($bg, 25);
-    h2 {
-      margin: 0;
-      border: 0;
-    }
+  a.dim:hover {
+    color: $blue;
   }
 }
 

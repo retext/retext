@@ -1,0 +1,66 @@
+// Content
+#content {
+  float: left;
+  width: 60%;
+  hr {
+    border: 0;
+    border-bottom: 1px dotted lighten($grey, 50);
+  }
+  hr.sep {
+    border: 0;
+    height: 0.5em;
+  }
+  article {
+    text-shadow: rgba($darkgrey, 0.2) 1px 1px 2px;
+    padding: 0.5em 0.5em;
+    h2 {
+      border-bottom: 1px dotted lighten($grey, 50);
+      margin: 1em 0 0.75em 0;
+      padding-bottom: 0.5em;
+    }
+    p {
+      line-height: 1.75em;
+    }
+    .multiline {
+      line-height: 1.15em;
+    }
+  }
+  aside.band {
+    margin-top: 1em;
+    padding: 0.5em 0.5em;
+    background-color: mix($bg, $blue, 90);
+    border-top: 1px solid darken($bg, 25);
+    h2 {
+      margin: 0;
+      border: 0;
+    }
+  }
+  header {
+    border-left: 1px solid lighten($header_bg, 10);
+    border-right: 1px solid darken($header_bg, 10);
+    nav.breadcrumb {
+      color: $grey;
+      ul {
+        list-style: none;
+        margin: 0 0 0 1em;
+        li {
+          float: left;
+          line-height: 40px;
+        }
+        li:after {
+          content: "/";
+          padding: 0 0.5em;
+          color: rgba($grey, 0.5);
+        }
+        li:last-child:after {
+          content: "";
+        }
+      }
+    }
+    .btn-group {
+      float: right;
+      font-family: Arial, sans-serif;
+      margin: 6px 10px 0 0;
+    }
+  }
+}

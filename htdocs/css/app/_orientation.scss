@@ -1,33 +1,25 @@
-// Leftbar
+// Orientation bar
 $lb_bg: #343434;
 $lb_color: #9b9b9b;
 $lb_hx_bg: lighten($lb_bg, 4);
 $lb_highlight_bg: #4488f7;
 $lb_highlight_color: #fff;
 
-#leftbar {
-  font-family: Arial, sans-serif;
-  background-color: $lb_bg;
-  color: $lb_color;
+#orientation {
+  float: left;
+  width: 20%;
 
-  a {
+  .invert {
+    background-color: $lb_bg;
     color: $lb_color;
-  }
-
-  a:hover {
-    color: $lb_highlight_color;
-  }
-
-  h2 {
-    @include gradient(lighten($header_bg, 5), darken($header_bg, 5));
-    color: $grey;
     a {
-      color: $grey;
+      color: $lb_color;
     }
+
     a:hover {
-      color: lighten($grey, 20);
+      color: $lb_highlight_color;
     }
-    font-size: $f18pt;
+    font-family: Arial, sans-serif;
   }
 
   h2, h3, h4, h5, h6 {
@@ -36,7 +28,6 @@ $lb_highlight_color: #fff;
     a {
       float: right;
     }
-    line-height: 2.5em;
 
   }
 
@@ -51,6 +42,7 @@ $lb_highlight_color: #fff;
   }
 
   h3, h4, h5, h6 {
+    line-height: 2.5em;
     font-size: $f14pt;
     text-transform: uppercase;
     background-color: $lb_hx_bg;
@@ -139,6 +131,10 @@ $lb_highlight_color: #fff;
   form {
     // Default margin-bottom is 20px
     margin: 0;
+
+  }
+
+  header {
 
   }
 }

@@ -22,7 +22,7 @@
 </head>
 <body>
 <div id="wrap">
-    <header>
+    <header id="pagehead">
         <div class="container">
             <div class="row-fluid">
                 <div class="span6">
@@ -42,12 +42,15 @@
         <a href="http://retext.it/contact" class="dim">Contact</a> <a href="http://retext.it/privacy" class="dim">Privacy</a>
         <span class="sep">|</span> <a href="#"> <i class="icon-lock"></i> Login </a>
     </nav>
-    <div class="container" id="content">
-        <div class="row-fluid">
-            <aside id="leftbar" class="span3">
+    <div id="app" class="container">
+        <aside id="orientation">
+            <header>
                 <h2>
-                    Demo-Projekt <a href="#" title="Projekt auswählen" rel="tooltip"><i class="icon-random"></i></a>
+                    Demo-Projekt <a href="#" title="Projekt auswählen" rel="tooltip" class="dim"><i class="icon-random"></i></a>
                 </h2>
+            </header>
+
+            <div class="invert">
 
                 <h3>
                     Projektstruktur
@@ -94,7 +97,8 @@
                 <ul class="elements">
                     <li>
                         <a href="#" class="container"><i class="icon-folder-close"></i> Globale Elemente
-                            <span class="status status-inprogress"><i class="icon-ok-sign"></i><small>20%</small></span><span class="count text"><i class="icon-folder-close"></i>5</span>
+                        <span class="status status-inprogress"><i class="icon-ok-sign"></i><small>20%
+                        </small></span><span class="count text"><i class="icon-folder-close"></i>5</span>
                             <span class="count text"><i class="icon-align-left"></i>1</span></a>
                         <ul class="hidden">
                             <li>
@@ -382,16 +386,42 @@
                         <a href="#"> <i class="icon-play"></i> Veröffentlichen </a>
                     </li>
                 </ul>
-            </aside>
-            <article class="span9">
-                <h2>Content.</h2>
-            </article>
-        </div>
-    </div>
+            </div>
+        </aside>
+        <article id="content">
+            <header>
+                <nav class="breadcrumb">
+                    <ul>
+                        <li><a href="#" class="dim"><i class="icon-home"></i></a></li>
+                        <li><a href="#" class="dim">Seiten</a></li>
+                        <li><a href="#" class="dim">Startseite</a></li>
+                        <li>Intro</li>
+                    </ul>
+                </nav>
+                <div class="btn-group">
+                    <a class="btn btn-small btn-inverse dropdown-toggle" data-toggle="dropdown" href="#"> <i class="icon-pencil"></i>
+                        Schreiben <span class="caret"></span> </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><i class="icon-check"></i> Prüfen</a></li>
+                        <li><a href="#"><i class="icon-list-alt"></i> Strukturieren</a></li>
+                        <li><a href="#"><i class="icon-globe"></i> Übersetzen</a></li>
+                    </ul>
+                </div>
 
-    <footer class="container-fluid">
-        <p class="center">&copy; 2011&ndash;2012 <a href="http://tckr.cc/en" rel="author">Markus Tacker</a></p>
-    </footer>
+            </header>
+            <h2>Content.</h2>
+        </article>
+        <aside id="context">
+            <header>
+                <h2>Context</h2>
+            </header>
+        </aside>
+    </div>
+</div>
+
+<footer class="container-fluid">
+    <p class="center">&copy; 2011&ndash;2012 <a href="http://tckr.cc/en" rel="author">Markus Tacker</a></p>
+</footer>
 </div>
 <script type="text/javascript">
     var _gaq = _gaq || [];

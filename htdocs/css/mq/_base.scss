@@ -35,7 +35,7 @@ body {
 
 // Portrait tablet to landscape and desktop
 @media (min-width: 979px) {
-  header {
+  #pagehead {
     img.logo {
       width: 150px;
       height: (67/200*150px);
