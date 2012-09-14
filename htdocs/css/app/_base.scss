@@ -1,14 +1,18 @@
 .gui-element {
-  margin: 0.5em 0 0.5em 0;
-  padding: 1em;
+  padding: 0.5em 0.5em;
   color: $text;
   position: relative;
+  margin: 0.5em 0;
+}
+
+.gui-element:hover {
+  border-color: $blue !important;
 }
 
 .gui-element .meta, .gui-element .info {
   position: absolute;
   right: 1%;
-  top: 20%;
+  top: 10%;
   line-height: 2em;
 }
 
@@ -48,19 +52,26 @@
 // Container
 
 .gui-container {
-  border-radius: 2px;
-  background-color: $container_color;
-  border: 1px dotted $container_border;
+  border-radius: 5px;
+  @include gradient(darken($textel_bg, 2), lighten($textel_bg, 2));
+  border-bottom: 1px solid rgba($grey, 0.25);
+  border-right: 1px solid rgba($grey, 0.25);
+  border-left: 1px solid rgba($grey, 0.5);
+  border-top: 1px solid rgba($grey, 0.5);
+  box-shadow: inset 2px 2px 6px rgba($text, 0.25);
+  text-shadow: 2px 2px 4px rgba($text, 0.5);
 }
 
 // Text
 
 .gui-text {
-  border-radius: 10px;
-  background-color: $textel_bg;
-  border: 3px solid $textel_color;
-  margin-top: 2em;
-  margin-bottom: 1.5em;
+  border-radius: 5px;
+  @include gradient(lighten($textel_bg, 2), darken($textel_bg, 2));
+  box-shadow: 2px 2px 6px rgba($text, 0.5);
+  border-top: 1px solid rgba($grey, 0.25);
+  border-left: 1px solid rgba($grey, 0.25);
+  border-right: 1px solid rgba($grey, 0.5);
+  border-bottom: 1px solid rgba($grey, 0.5);
 }
 
 .gui-text .flag {
@@ -209,11 +220,161 @@ header {
     padding: 0 0.5em;
     margin: 0;
   }
-  a.dim {
-    color: mix($grey, $blue, 75);
-  }
-  a.dim:hover {
-    color: $blue;
+  nav.button-switcher {
+    float: right;
+    margin: 0.5em 0.5em 0 0;
+    ul {
+      list-style: none;
+      li {
+        float: left;
+        margin-left: 0.5em;
+        .btn {
+          padding: 0 0.25em;
+          font-size: 1.5em;
+          line-height: 1.25em;
+        }
+      }
+    }
   }
 }
 
+// Asides
+
+aside {
+  font-family: Arial, sans-serif;
+
+  h2, h3, h4, h5, h6 {
+    padding: 0 0.5em;
+    margin: 0;
+    a {
+      float: right;
+    }
+  }
+
+  h3, h4, h5, h6, legend {
+    line-height: 2.5em;
+    font-size: $f14pt;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  h3 + nav {
+    ul {
+      list-style: none;
+      margin: 0;
+      li {
+        padding: 0.25em 0.5em;
+        .badge {
+          float: right;
+          @include border-radius(3px);
+        }
+      }
+    }
+  }
+
+  form {
+    // Default margin-bottom is 20px
+    margin: 0 0.5em;
+  }
+  legend {
+    margin: 0;
+    padding: 0;
+    border: 0;
+
+    a {
+      float: right;
+    }
+
+    a.small-text {
+      text-transform: none;
+      font-weight: normal;
+    }
+  }
+  fieldset {
+    margin: 0 0 0.5em 0;
+    padding: 0 0 0.5em 0;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+  }
+  fieldset:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+}
+
+// Colors
+aside .aside-body {
+  h3, h4, h5, h6 {
+    background-color: darken($bg, 4);
+    border-top: 1px solid lighten($bg, 8);
+    border-bottom: 1px solid darken($bg, 8);
+  }
+  legend {
+    color: lighten($text, 20);
+  }
+  fieldset {
+    border-color: rgba($text, 0.2);
+  }
+}
+
+aside.inverse .aside-body {
+  background-color: $aside_bg;
+  color: $aside_color;
+  a, legend {
+    color: $aside_color;
+  }
+  a:hover {
+    color: $aside_highlight_color;
+  }
+  .dim {
+    color: darken($aside_color, 20);
+  }
+  legend {
+    color: darken($aside_color, 20);
+  }
+  fieldset {
+    border-color: rgba($aside_color, 0.2);
+  }
+
+  .inset {
+    background-color: darken($aside_bg, 2);
+    border-top: 1px solid darken($aside_bg, 4);
+    border-bottom: 1px solid lighten($aside_bg, 4);
+    h4 {
+      border: none;
+      background-color: transparent;
+    }
+  }
+
+  h3, h4, h5, h6 {
+    background-color: $aside_hx_bg;
+    border-top: 1px solid lighten($aside_hx_bg, 4);
+    border-bottom: 1px solid darken($aside_hx_bg, 4);
+  }
+
+  h3 + nav {
+    ul {
+      li {
+        .badge {
+          background-color: lighten($aside_bg, 10);
+          color: rgba($aside_color, 0.85);
+        }
+      }
+      li.active {
+        @include gradient(lighten($aside_highlight_bg, 2), darken($aside_highlight_bg, 2));
+        color: $aside_highlight_color;
+        .badge {
+          background-color: mix($aside_highlight_bg, #000, 80);
+          border-top: 1px solid darken($aside_highlight_bg, 20);
+          border-left: 1px solid darken($aside_highlight_bg, 20);
+          border-bottom: 1px solid lighten($aside_highlight_bg, 10);
+          border-right: 1px solid lighten($aside_highlight_bg, 10);
+          color: rgba($aside_highlight_color, 0.85);
+        }
+        a {
+          color: $aside_highlight_color;
+        }
+      }
+    }
+  }
+}

@@ -1,107 +1,24 @@
 // Orientation bar
-$lb_bg: #343434;
-$lb_color: #9b9b9b;
-$lb_hx_bg: lighten($lb_bg, 4);
-$lb_highlight_bg: #4488f7;
-$lb_highlight_color: #fff;
-
 #orientation {
   float: left;
-  width: 20%;
-
-  .invert {
-    background-color: $lb_bg;
-    color: $lb_color;
-    a {
-      color: $lb_color;
-    }
-
-    a:hover {
-      color: $lb_highlight_color;
-    }
-    font-family: Arial, sans-serif;
-  }
-
-  h2, h3, h4, h5, h6 {
-    padding: 0 0.5em;
-    margin: 0;
-    a {
-      float: right;
-    }
-
-  }
-
-  .inset {
-    background-color: darken($lb_bg, 2);
-    border-top: 1px solid darken($lb_bg, 4);
-    border-bottom: 1px solid lighten($lb_bg, 4);
-    h4 {
-      border: none;
-      background-color: transparent;
-    }
-  }
-
-  h3, h4, h5, h6 {
-    line-height: 2.5em;
-    font-size: $f14pt;
-    text-transform: uppercase;
-    background-color: $lb_hx_bg;
-    border-top: 1px solid lighten($lb_hx_bg, 4);
-    border-bottom: 1px solid darken($lb_hx_bg, 4);
-  }
-
-  ul {
-    list-style: none;
-    margin: 0;
-    li {
-      padding: 0.25em 0.5em;
-      .badge {
-        float: right;
-        background-color: lighten($lb_bg, 10);
-        @include border-radius(3px);
-        color: rgba($lb_color, 0.85);
-      }
-    }
-    li.active {
-      @include gradient(lighten($lb_highlight_bg, 2), darken($lb_highlight_bg, 2));
-      color: $lb_highlight_color;
-      .badge {
-        background-color: mix($lb_highlight_bg, #000, 80);
-        border-top: 1px solid darken($lb_highlight_bg, 20);
-        border-left: 1px solid darken($lb_highlight_bg, 20);
-        border-bottom: 1px solid lighten($lb_highlight_bg, 10);
-        border-right: 1px solid lighten($lb_highlight_bg, 10);
-        color: rgba($lb_highlight_color, 0.85);
-      }
-      a {
-        color: $lb_highlight_color;
-      }
-    }
-  }
-
-  button.btn-none {
-    background-color: $lb_bg;
-    border: 0;
-    color: $lb_color;
-  }
-  button.btn-none:hover {
-    color: $lb_highlight_color;
-  }
+  width: 25%;
 
   ul.elements {
     font-size: $f14pt;
     line-height: 1em;
+    list-style: none;
+    margin: 0;
     .container {
       font-style: italic;
       .count {
-        color: rgba($lb_color, 0.25);
+        color: rgba($aside_color, 0.25);
         float: right;
         font-style: normal;
       }
 
     }
     .status {
-      color: rgba($lb_color, 0.25);
+      color: rgba($aside_color, 0.25);
     }
     li {
       padding: 0;
@@ -117,24 +34,28 @@ $lb_highlight_color: #fff;
         @extend .status-missing-color;
       }
       .count {
-        color: $lb_highlight_color;
+        color: $aside_highlight_color;
       }
     }
     ul {
       padding: 0 0 0 0.5em;
-      border-left: 1px solid rgba($lb_color, 0.5);
+      border-left: 1px solid rgba($aside_color, 0.5);
       margin-left: 0.6em;
+      list-style: none;
     }
     padding: 1em 0.5em 1em 0.5em;
   }
 
-  form {
-    // Default margin-bottom is 20px
-    margin: 0;
-
-  }
-
-  header {
-
+  dl.projectprogress {
+    margin: 0 0.5em;
+    font-size: $f14pt;
+    dd {
+      margin: 0;
+      .progress {
+        margin: 0;
+        height: 15px;
+      }
+      margin-bottom: 0.5em;
+    }
   }
 }

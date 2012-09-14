@@ -11,10 +11,14 @@ a {
 
 a:hover {
   text-decoration: none;
+  color: lighten($blue, 10);
 }
 
-a:hover {
-  color: lighten($blue, 10);
+a.dim {
+  color: mix($grey, $blue, 75);
+}
+a.dim:hover {
+  color: $blue;
 }
 
 .tooltip {

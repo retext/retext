@@ -45,7 +45,13 @@ define([
             var el = $(el);
             el.click(function (ev) {
                 $(el.data('target')).toggleClass('hidden');
+                var hiddenIcons = el.find('i.hidden');
+                if (hiddenIcons.length > 0) {
+                    el.find('i').toggleClass('hidden');
+                }
+                console.log(el.find('i'));
             });
+
         });
     };
     return {

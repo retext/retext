@@ -1,4 +1,7 @@
 #context {
   float: left;
-  width: 20%;
+  width: 25%;
+
+  @include gradient(darken($bg, 2), $bg);
+  color: lighten($text, 10);
 }

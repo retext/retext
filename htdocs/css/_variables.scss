@@ -8,7 +8,7 @@ $grey: #4c4c4c;
 $darkgrey: #303030;
 
 $orange: #F38630;
-$text: #F38630;
+$text: $grey;
 $text_selected: #333;
 $dim: #c0c0c0;
 $bg: #fefefe;
@@ -20,6 +20,13 @@ $drag_preview_color: #b1fcaa;
 
 $container_color: #E8F6FF;
 $container_border: #535353;
+
+// Aside
+$aside_bg: #343434;
+$aside_color: #9b9b9b;
+$aside_hx_bg: lighten($aside_bg, 4);
+$aside_highlight_bg: #4488f7;
+$aside_highlight_color: #fff;
 
 $textel_bg: #F0F0F0;
 $textel_color: #999;

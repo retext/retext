@@ -1,7 +1,7 @@
 // Content
 #content {
   float: left;
-  width: 60%;
+  width: 50%;
   hr {
     border: 0;
     border-bottom: 1px dotted lighten($grey, 50);
@@ -38,6 +38,7 @@
   header {
     border-left: 1px solid lighten($header_bg, 10);
     border-right: 1px solid darken($header_bg, 10);
+    margin-bottom: 1em;
     nav.breadcrumb {
       color: $grey;
       ul {
@@ -56,11 +57,6 @@
           content: "";
         }
       }
-    }
-    .btn-group {
-      float: right;
-      font-family: Arial, sans-serif;
-      margin: 6px 10px 0 0;
     }
   }
 }

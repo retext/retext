@@ -12,7 +12,8 @@
 }
 
 .hidden {
-  display: none;
+  display: none !important;
+  // !important weil andere CSS-Regelen selber display setzen können
 }
 
 .textcenter {
@@ -38,6 +39,11 @@
 .center {
   text-align: center;
 }
+
+.align-right {
+  float: right;
+}
+
 
 // Color
 
