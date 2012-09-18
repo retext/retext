@@ -2,8 +2,24 @@
   background-color: $bg;
   box-shadow: black 1px 1px 10px;
   position: relative;
-@import "app/base";
-@import "app/orientation";
-@import "app/content";
-@import "app/context";
+  @import "app/base";
+  @import "app/orientation";
+  @import "app/content";
+  @import "app/context";
+
+}
+
+#app.login {
+  width: 400px;
+  header {
+    h2 {
+      padding-left: 1em;
+    }
+  }
+  form {
+    padding: 1em 1em 0 1em;
+  }
+  input[type=email], input[type=password] {
+    width: 96%;
+  }
 }

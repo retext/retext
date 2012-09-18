@@ -7,8 +7,9 @@ define([
     'events',
     'vm',
     'views/menu',
+    'views/menu/meta',
     'models/auth'
-], function (Events, Vm, MenuView, Auth) {
+], function (Events, Vm, MenuView, MetaMenuView, Auth) {
     return Backbone.View.extend({
         el:$('#app'),
         initialize:function () {
@@ -18,6 +19,7 @@ define([
         },
         render:function () {
             Vm.create(this, 'mainmenu', MenuView);
+            Vm.create(this, 'metamenu', MetaMenuView, {el:$('#meta')});
         },
         userLogon:function () {
             $(document.body).data('authenticated', true);
@@ -29,15 +31,17 @@ define([
         },
         // Check if already authorized
         complete:function () {
-            var authorized = new Auth();
-            authorized.fetch(
-                {
-                    success:function (model, response) {
-                        if (model.get('authorized')) {
-                            Events.trigger('userLogon');
-                        }
-                    }
-                });
+            /*
+             var authorized = new Auth();
+             authorized.fetch(
+             {
+             success:function (model, response) {
+             if (model.get('authorized')) {
+             Events.trigger('userLogon');
+             }
+             }
+             });
+             */
         },
         // Log all events
         logEvents:function (eventName) {

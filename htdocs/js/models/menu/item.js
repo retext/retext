@@ -7,6 +7,7 @@ define([
 ], function (MenuItemCollection) {
     return Backbone.Model.extend({
         defaults:{
+            href:'#',
             active:false,
             children:[],
             icon:false,
