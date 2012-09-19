@@ -29,7 +29,7 @@ class LoginController extends Base
             $this->getRequest()->getSession()->set('User', $user);
             return $this->createResponse($user);
         }
-        throw $this->createForbiddenException();
+        throw $this->createForbiddenException('Login failed.', \Retext\ApiBundle\Exception\Base::CODE_LOGIN_FAILED);
     }
 
     /**

@@ -39,6 +39,12 @@ class RegisterControllerTest extends WebTestCase
      */
     public function testLogin()
     {
+        $response = $this->client->doRequest('POST', '/login', array('email' => 'phpunit@retext.it', 'password' => 'invalidpass'), 403);
+        $this->assertObjectHasAttribute('message', $response);
+        $this->assertEquals($response->message, 'Login failed.');
+        $this->assertObjectHasAttribute('code', $response);
+        $this->assertEquals($response->code, \Retext\ApiBundle\Exception\Base::CODE_LOGIN_FAILED);
+
         $user = $this->client->POST('/login', array('email' => 'phpunit@retext.it', 'password' => 'phpunit@retext.it'));
 
         $this->assertObjectHasAttribute('email', $user);
@@ -57,7 +63,11 @@ class RegisterControllerTest extends WebTestCase
      */
     public function testBadLogin()
     {
-        $this->client->doRequest('POST', '/login', array('email' => 'phpunit@retext.it', 'password' => 'invalid'), 403);
+        $response = $this->client->doRequest('POST', '/login', array('email' => 'phpunit@retext.it', 'password' => 'invalid'), 403);
+        $this->assertObjectHasAttribute('message', $response);
+        $this->assertEquals($response->message, 'Login failed.');
+        $this->assertObjectHasAttribute('code', $response);
+        $this->assertEquals($response->code, \Retext\ApiBundle\Exception\Base::CODE_LOGIN_FAILED);
     }
 
     /**
