@@ -4,5 +4,11 @@ app/cache/*
 app/logs/*
 build/
 vendor
-bin
 composer.phar
+cache.properties
+app/config/parameters.yml
+mongodb
+web/app
+web/.htaccess
+composer.lock
+.idea

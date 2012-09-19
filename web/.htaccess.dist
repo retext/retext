@@ -1,0 +1,11 @@
+<IfModule rewrite_module>
+    RewriteEngine On
+
+    <IfModule alias_module>
+        RewriteBase /
+    </IfModule>
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !/app/
+    RewriteRule ^(.*)$ app.php [QSA,L]
+</IfModule>
