@@ -5,6 +5,8 @@ framework:
     test: ~
     session:
         storage_id: session.storage.mock_file
+    profiler:
+        enable: false
 
 web_profiler:
     toolbar: false
@@ -15,4 +17,4 @@ swiftmailer:
 
 # MongoDB configuration
 doctrine_mongodb:
-    default_database: retext-test
+    default_database: %mongodb_default_db%-test

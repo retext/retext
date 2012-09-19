@@ -1,2 +1,4 @@
 parameters:
     secret: <secret>
+    mongodb_server:    <mongodb_server>
+    mongodb_default_db: <mongodb_default_db>

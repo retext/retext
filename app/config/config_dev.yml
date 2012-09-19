@@ -24,3 +24,7 @@ assetic:
 
 #swiftmailer:
 #    delivery_address: me@example.com
+
+# MongoDB configuration
+doctrine_mongodb:
+    default_database: %mongodb_default_db%-dev
