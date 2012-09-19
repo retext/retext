@@ -36,46 +36,46 @@ class DemoDataCommand extends Command
         $email = $input->getArgument('email');
 
         $output->write("Prüfe Verbindung … ");
-        $status = $this->client->GET('/api/status');
+        $status = $this->client->GET('/status');
         assert('$status->version == 1;');
         $output->writeln("<info>OK</info>");
 
         // Create User
         $output->write("Lege Nutzer $email an … ");
-        $this->client->POST('/api/user', array('email' => $email));
+        $this->client->POST('/user', array('email' => $email));
         $output->writeln("<info>OK</info>");
 
         // Login
         $output->write("Login … ");
-        $this->client->POST('/api/login', array('email' => $email, 'password' => $email));
+        $this->client->POST('/login', array('email' => $email, 'password' => $email));
         $output->writeln("<info>OK</info>");
 
         // Create Project
         $output->write("Projekt anlegen … ");
-        $project = $this->client->POST('/api/project', array("name" => "mi.info 11.12"));
+        $project = $this->client->POST('/project', array("name" => "mi.info 11.12"));
         $output->writeln("<info>OK</info>");
 
         // Create Container
         $output->write("Container anlegen ");
-        $titel = $this->client->POST('/api/container', array("name" => "Titel", 'parent' => $project->rootContainer));
+        $titel = $this->client->POST('/container', array("name" => "Titel", 'parent' => $project->rootContainer));
         $output->write(".");
-        $vorwort = $this->client->POST('/api/container', array("name" => "Vorwort", 'parent' => $project->rootContainer));
+        $vorwort = $this->client->POST('/container', array("name" => "Vorwort", 'parent' => $project->rootContainer));
         $output->write(".");
-        $kurzinfo = $this->client->POST('/api/container', array("name" => "Kurzinfo", 'parent' => $project->rootContainer));
+        $kurzinfo = $this->client->POST('/container', array("name" => "Kurzinfo", 'parent' => $project->rootContainer));
         $output->write(".");
-        $trennblatt = $this->client->POST('/api/container', array("name" => "Trennblatt", 'parent' => $kurzinfo->id));
+        $trennblatt = $this->client->POST('/container', array("name" => "Trennblatt", 'parent' => $kurzinfo->id));
         $output->write(".");
-        $studiengang = $this->client->POST('/api/container', array("name" => "Studiengang", 'parent' => $kurzinfo->id));
+        $studiengang = $this->client->POST('/container', array("name" => "Studiengang", 'parent' => $kurzinfo->id));
         $output->write(".");
-        $mi = $this->client->POST('/api/container', array("name" => "Medieninformatik", 'parent' => $kurzinfo->id));
+        $mi = $this->client->POST('/container', array("name" => "Medieninformatik", 'parent' => $kurzinfo->id));
         $output->write(".");
-        $p13 = $this->client->POST('/api/container', array("name" => "Studienprogramm 1-3", 'parent' => $kurzinfo->id));
+        $p13 = $this->client->POST('/container', array("name" => "Studienprogramm 1-3", 'parent' => $kurzinfo->id));
         $output->write(".");
-        $p46 = $this->client->POST('/api/container', array("name" => "Studienprogramm 4-6", 'parent' => $kurzinfo->id));
+        $p46 = $this->client->POST('/container', array("name" => "Studienprogramm 4-6", 'parent' => $kurzinfo->id));
         $output->write(".");
-        $wpf = $this->client->POST('/api/container', array("name" => "Wahlpflichtfächer", 'parent' => $kurzinfo->id));
+        $wpf = $this->client->POST('/container', array("name" => "Wahlpflichtfächer", 'parent' => $kurzinfo->id));
         $output->write(".");
-        $agb = $this->client->POST('/api/container', array("name" => "Kleingedrucktes", 'parent' => $kurzinfo->id));
+        $agb = $this->client->POST('/container', array("name" => "Kleingedrucktes", 'parent' => $kurzinfo->id));
         $output->write(".");
         $output->writeln(" <info>OK</info>");
         $blindText = 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.';
@@ -129,7 +129,7 @@ class DemoDataCommand extends Command
         $output->write("Texte anlegen ");
         foreach ($texte as $text) {
             list($name, $parent, $type, $content) = $text;
-            $text = $this->client->POST('/api/text', array('name' => $name, 'type' => $type, 'parent' => $parent->id, 'text' => array('de' => $content)));
+            $text = $this->client->POST('/text', array('name' => $name, 'type' => $type, 'parent' => $parent->id, 'text' => array('de' => $content)));
             // Random status
             $spellingApproved = (bool)rand(0, 1);
             $contentApproved = (bool)rand(0, 1);

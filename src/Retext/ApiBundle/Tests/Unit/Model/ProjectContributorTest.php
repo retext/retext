@@ -23,6 +23,6 @@ class ProjectContributorModelTest extends \PHPUnit_Framework_TestCase
         $projectContributor = new ProjectContributor();
         $projectContributor->setProject($project);
         $projectContributor->setEmail('hans@wurst.de');
-        $this->assertEquals('/api/project/1234/contributor/hans@wurst.de', $projectContributor->getSubject());
+        $this->assertEquals('/project/1234/contributor/hans@wurst.de', $projectContributor->getSubject());
     }
 }

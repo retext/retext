@@ -47,7 +47,7 @@ abstract class Base implements LinkedData
      */
     public function getSubject()
     {
-        $this->subject = '/api/' . strtolower($this->getContextName());
+        $this->subject = '/' . strtolower($this->getContextName());
         if (strlen($this->getId()) > 0) $this->subject .= '/' . $this->getId();
         return $this->subject;
     }

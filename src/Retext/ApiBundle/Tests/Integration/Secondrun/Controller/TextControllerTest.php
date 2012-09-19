@@ -16,9 +16,9 @@ class TextControllerTest extends Base
     public static function setUpBeforeClass()
     {
         parent::setUpBeforeClass();
-        self::$client->CREATE('/api/user', array('email' => 'phpunit+text@retext.it'));
-        self::$client->POST('/api/login', array('email' => 'phpunit+text@retext.it', 'password' => 'phpunit+text@retext.it'));
-        self::$project = self::$client->CREATE('/api/project', array('name' => 'Text-Test-Project'));
+        self::$client->CREATE('/user', array('email' => 'phpunit+text@retext.it'));
+        self::$client->POST('/login', array('email' => 'phpunit+text@retext.it', 'password' => 'phpunit+text@retext.it'));
+        self::$project = self::$client->CREATE('/project', array('name' => 'Text-Test-Project'));
     }
 
     /**
@@ -27,12 +27,12 @@ class TextControllerTest extends Base
      */
     public function testCreateText()
     {
-        $hl = self::$client->CREATE('/api/text', array('parent' => self::$project->rootContainer, 'name' => 'Dies ist eine Überschrift', 'type' => 'Überschrift'));
+        $hl = self::$client->CREATE('/text', array('parent' => self::$project->rootContainer, 'name' => 'Dies ist eine Überschrift', 'type' => 'Überschrift'));
         $this->checkText($hl);
-        $sl = self::$client->CREATE('/api/text', array('parent' => self::$project->rootContainer, 'name' => 'Dies ist eine Unter-Überschrift', 'type' => 'Unter-Überschrift'));
+        $sl = self::$client->CREATE('/text', array('parent' => self::$project->rootContainer, 'name' => 'Dies ist eine Unter-Überschrift', 'type' => 'Unter-Überschrift'));
         $this->checkText($sl);
-        $text1 = self::$client->CREATE('/api/text', array('parent' => self::$project->rootContainer, 'name' => 'Lorem Ipsum', 'type' => 'Fließtext'));
-        $text2 = self::$client->CREATE('/api/text', array('parent' => self::$project->rootContainer, 'name' => 'Lorem Ipsum 2', 'type' => 'Fließtext'));
+        $text1 = self::$client->CREATE('/text', array('parent' => self::$project->rootContainer, 'name' => 'Lorem Ipsum', 'type' => 'Fließtext'));
+        $text2 = self::$client->CREATE('/text', array('parent' => self::$project->rootContainer, 'name' => 'Lorem Ipsum 2', 'type' => 'Fließtext'));
         $this->checkText($text1);
         $this->checkText($text2);
     }
@@ -56,7 +56,7 @@ class TextControllerTest extends Base
      */
     public function testUpdateText()
     {
-        $text = self::$client->CREATE('/api/text', array('parent' => self::$project->rootContainer, 'name' => 'Copy 1', 'text' => array('de' => 'LOREM IPSUM!'), 'type' => 'Fließtext'));
+        $text = self::$client->CREATE('/text', array('parent' => self::$project->rootContainer, 'name' => 'Copy 1', 'text' => array('de' => 'LOREM IPSUM!'), 'type' => 'Fließtext'));
         $text = self::$client->UPDATE($text->{'@subject'}, array('text' => array('de' => 'Lorem Ipsum!')));
         $this->checkText($text);
         $this->assertObjectHasAttribute('text', $text);
@@ -114,12 +114,12 @@ class TextControllerTest extends Base
      */
     public function testProjectProgress()
     {
-        $project = self::$client->CREATE('/api/project', array('name' => 'Test-Project für Progress'));
-        $t1 = self::$client->CREATE('/api/text', array('parent' => $project->rootContainer, 'name' => 'Text1'));
-        $t2 = self::$client->CREATE('/api/text', array('parent' => $project->rootContainer, 'name' => 'Text2'));
-        $t3 = self::$client->CREATE('/api/text', array('parent' => $project->rootContainer, 'name' => 'Text3'));
-        self::$client->CREATE('/api/text', array('parent' => $project->rootContainer, 'name' => 'Text4'));
-        self::$client->CREATE('/api/text', array('parent' => $project->rootContainer, 'name' => 'Text4'));
+        $project = self::$client->CREATE('/project', array('name' => 'Test-Project für Progress'));
+        $t1 = self::$client->CREATE('/text', array('parent' => $project->rootContainer, 'name' => 'Text1'));
+        $t2 = self::$client->CREATE('/text', array('parent' => $project->rootContainer, 'name' => 'Text2'));
+        $t3 = self::$client->CREATE('/text', array('parent' => $project->rootContainer, 'name' => 'Text3'));
+        self::$client->CREATE('/text', array('parent' => $project->rootContainer, 'name' => 'Text4'));
+        self::$client->CREATE('/text', array('parent' => $project->rootContainer, 'name' => 'Text4'));
         $progress = self::$client->GET($this->getRelationHref($project, 'http://jsonld.retext.it/ProjectProgress'));
         foreach (array('total', 'approved', 'contentApproved', 'spellingApproved') as $type) {
             $this->assertEquals(0, $progress->$type->yes);

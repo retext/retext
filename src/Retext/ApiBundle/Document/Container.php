@@ -211,7 +211,7 @@ class Container extends \Retext\ApiBundle\Model\Base implements \Doctrine\ODM\Mo
             \Retext\ApiBundle\Model\DocumentRelation::createFromDoc($container)->setHref($container->getSubject() . '?parent=' . $this->getId())->setList(true)->setRole('http://jsonld.retext.it/ontology/child'),
             \Retext\ApiBundle\Model\DocumentRelation::createFromDoc($text)->setHref($text->getSubject() . '?parent=' . $this->getId())->setList(true),
             \Retext\ApiBundle\Model\DocumentRelation::createFromDoc($breadcrumb)->setHref($this->getSubject() . '/breadcrumb')->setList(true),
-            \Retext\ApiBundle\Model\DocumentRelation::create()->setRelatedcontext('http://jsonld.retext.it/Element')->setList(true)->setRole('http://jsonld.retext.it/ontology/child')->setHref('/api/element?parent=' . $this->getId()),
+            \Retext\ApiBundle\Model\DocumentRelation::create()->setRelatedcontext('http://jsonld.retext.it/Element')->setList(true)->setRole('http://jsonld.retext.it/ontology/child')->setHref('/element?parent=' . $this->getId()),
             \Retext\ApiBundle\Model\DocumentRelation::create()->setRelatedcontext('http://jsonld.retext.it/Element')->setList(true)->setRole('http://jsonld.retext.it/ontology/tree')->setHref($this->getSubject() . '/tree'),
         );
     }

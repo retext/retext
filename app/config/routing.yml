@@ -1,11 +1,4 @@
 RetextApiBundle:
     resource: "@RetextApiBundle/Controller/"
     type:     annotation
-    prefix:   /api
-
-root:
-    pattern: /
-    defaults:
-        _controller: FrameworkBundle:Redirect:urlRedirect
-        path: /app
-        permanent: true
+    prefix:   /

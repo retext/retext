@@ -14,8 +14,8 @@ class ProjectControllerTest extends Base
     public static function setUpBeforeClass()
     {
         parent::setUpBeforeClass();
-        self::$client->CREATE('/api/user', array('email' => 'phpunit+project@retext.it'));
-        self::$client->POST('/api/login', array('email' => 'phpunit+project@retext.it', 'password' => 'phpunit+project@retext.it'));
+        self::$client->CREATE('/user', array('email' => 'phpunit+project@retext.it'));
+        self::$client->POST('/login', array('email' => 'phpunit+project@retext.it', 'password' => 'phpunit+project@retext.it'));
     }
 
     /**
@@ -24,7 +24,7 @@ class ProjectControllerTest extends Base
      */
     public function testCreateProject()
     {
-        $project = self::$client->CREATE('/api/project', array('name' => 'Test-Project äöß'));
+        $project = self::$client->CREATE('/project', array('name' => 'Test-Project äöß'));
         $this->assertEquals('http://jsonld.retext.it/Project', $project->{'@context'});
         $this->assertObjectHasAttribute('name', $project);
         $this->assertEquals('Test-Project äöß', $project->name);
@@ -33,7 +33,7 @@ class ProjectControllerTest extends Base
         $this->assertObjectHasAttribute('name', $project);
         $this->assertEquals('Test-Project äöß', $project->name);
 
-        $projects = self::$client->GET('/api/project');
+        $projects = self::$client->GET('/project');
         $this->assertInternalType('array', $projects);
         $this->assertEquals(1, count($projects));
 
@@ -47,7 +47,7 @@ class ProjectControllerTest extends Base
      */
     public function testContributors()
     {
-        $project = self::$client->CREATE('/api/project', array('name' => 'Test-Contributor-Project'));
+        $project = self::$client->CREATE('/project', array('name' => 'Test-Contributor-Project'));
         $contributorRel = $this->getRelationHref($project, 'http://jsonld.retext.it/ProjectContributor', true);
         $contributors = self::$client->GET($contributorRel);
         $this->assertInternalType('array', $contributors);
@@ -76,12 +76,12 @@ class ProjectControllerTest extends Base
         $this->assertTrue($searchUser($klaus, $contributors));
 
         // Hans registrieren
-        self::$client->CREATE('/api/user', array('email' => $hans));
-        self::$client->POST('/api/login', array('email' => $hans, 'password' => $hans));
+        self::$client->CREATE('/user', array('email' => $hans));
+        self::$client->POST('/login', array('email' => $hans, 'password' => $hans));
         self::$client->GET($project->{'@subject'}); // Should work
 
         // Hans löschen
-        self::$client->POST('/api/login', array('email' => 'phpunit+project@retext.it', 'password' => 'phpunit+project@retext.it'));
+        self::$client->POST('/login', array('email' => 'phpunit+project@retext.it', 'password' => 'phpunit+project@retext.it'));
         $hansMatch = array_filter($contributors, function($el) use($hans)
         {
             return $el->email == $hans;
@@ -95,12 +95,12 @@ class ProjectControllerTest extends Base
         $this->assertFalse($searchUser($hans, $contributors));
 
         // Hans Rechte checken
-        self::$client->POST('/api/login', array('email' => $hans, 'password' => $hans));
+        self::$client->POST('/login', array('email' => $hans, 'password' => $hans));
         self::$client->doRequest('GET', $project->{'@subject'}, null, 404); // Should not work
 
         // Fritz Rechte checken
-        self::$client->CREATE('/api/user', array('email' => $fritz));
-        self::$client->POST('/api/login', array('email' => $fritz, 'password' => $fritz));
+        self::$client->CREATE('/user', array('email' => $fritz));
+        self::$client->POST('/login', array('email' => $fritz, 'password' => $fritz));
         self::$client->doRequest('GET', $project->{'@subject'}); // Should work
 
     }
@@ -111,7 +111,7 @@ class ProjectControllerTest extends Base
      */
     public function testLanguages()
     {
-        $project = self::$client->CREATE('/api/project', array('name' => 'Test-Language-Project'));
+        $project = self::$client->CREATE('/project', array('name' => 'Test-Language-Project'));
         $languageRel = $this->getRelationHref($project, 'http://jsonld.retext.it/Language', true);
         $languages = self::$client->GET($languageRel);
         $this->assertInternalType('array', $languages);

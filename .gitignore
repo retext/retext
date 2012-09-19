@@ -12,3 +12,4 @@ web/app
 web/.htaccess
 composer.lock
 .idea
+web/app.php

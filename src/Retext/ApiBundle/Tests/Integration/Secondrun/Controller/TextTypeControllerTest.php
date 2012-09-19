@@ -16,9 +16,9 @@ class TextTypeControllerTest extends Base
     public static function setUpBeforeClass()
     {
         parent::setUpBeforeClass();
-        self::$client->CREATE('/api/user', array('email' => 'phpunit+texttype@retext.it'));
-        self::$client->POST('/api/login', array('email' => 'phpunit+texttype@retext.it', 'password' => 'phpunit+texttype@retext.it'));
-        self::$project = self::$client->CREATE('/api/project', array('name' => 'TextType-Test-Project'));
+        self::$client->CREATE('/user', array('email' => 'phpunit+texttype@retext.it'));
+        self::$client->POST('/login', array('email' => 'phpunit+texttype@retext.it', 'password' => 'phpunit+texttype@retext.it'));
+        self::$project = self::$client->CREATE('/project', array('name' => 'TextType-Test-Project'));
     }
 
     /**
@@ -27,7 +27,7 @@ class TextTypeControllerTest extends Base
      */
     public function testGetType()
     {
-        $hl = self::$client->CREATE('/api/text', array('parent' => self::$project->rootContainer, 'name' => 'Dies ist eine Überschrift', 'type' => 'Überschrift'));
+        $hl = self::$client->CREATE('/text', array('parent' => self::$project->rootContainer, 'name' => 'Dies ist eine Überschrift', 'type' => 'Überschrift'));
         $type = self::$client->GET($this->getRelationHref($hl, 'http://jsonld.retext.it/TextType', false));
         $this->assertObjectHasAttribute('@context', $type);
         $this->assertEquals('http://jsonld.retext.it/TextType', $type->{'@context'});

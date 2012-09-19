@@ -29,7 +29,7 @@ class RegisterControllerTest extends WebTestCase
      */
     public function testRegister()
     {
-        $this->client->CREATE('/api/user', array('email' => 'phpunit@retext.it'));
+        $this->client->CREATE('/user', array('email' => 'phpunit@retext.it'));
     }
 
     /**
@@ -39,7 +39,7 @@ class RegisterControllerTest extends WebTestCase
      */
     public function testLogin()
     {
-        $user = $this->client->POST('/api/login', array('email' => 'phpunit@retext.it', 'password' => 'phpunit@retext.it'));
+        $user = $this->client->POST('/login', array('email' => 'phpunit@retext.it', 'password' => 'phpunit@retext.it'));
 
         $this->assertObjectHasAttribute('email', $user);
         $this->assertObjectNotHasAttribute('password', $user);
@@ -57,7 +57,7 @@ class RegisterControllerTest extends WebTestCase
      */
     public function testBadLogin()
     {
-        $this->client->doRequest('POST', '/api/login', array('email' => 'phpunit@retext.it', 'password' => 'invalid'), 403);
+        $this->client->doRequest('POST', '/login', array('email' => 'phpunit@retext.it', 'password' => 'invalid'), 403);
     }
 
     /**
@@ -67,8 +67,8 @@ class RegisterControllerTest extends WebTestCase
      */
     public function testAuthStatus()
     {
-        $this->client->POST('/api/login', array('email' => 'phpunit@retext.it', 'password' => 'phpunit@retext.it'));
-        $auth = $this->client->GET('/api/auth');
+        $this->client->POST('/login', array('email' => 'phpunit@retext.it', 'password' => 'phpunit@retext.it'));
+        $auth = $this->client->GET('/auth');
         $cookies = $this->client->getResponse()->getHeaderCookies();
         $this->assertEquals(1, count($cookies));
         $this->assertEquals('MOCKSESSID', $cookies[0]->getName());
@@ -84,9 +84,9 @@ class RegisterControllerTest extends WebTestCase
      */
     public function testLogout()
     {
-        $this->client->POST('/api/login', array('email' => 'phpunit@retext.it', 'password' => 'phpunit@retext.it'));
-        $this->client->doRequest('POST', '/api/logout', null, 204);
-        $auth = $this->client->GET('/api/auth');
+        $this->client->POST('/login', array('email' => 'phpunit@retext.it', 'password' => 'phpunit@retext.it'));
+        $this->client->doRequest('POST', '/logout', null, 204);
+        $auth = $this->client->GET('/auth');
         $this->assertObjectHasAttribute('authorized', $auth);
         $this->assertFalse($auth->authorized);
     }

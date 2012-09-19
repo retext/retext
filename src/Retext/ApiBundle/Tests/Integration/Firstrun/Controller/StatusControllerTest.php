@@ -16,7 +16,7 @@ class StatusControllerTest extends WebTestCase
     public function testStatus()
     {
         $client = new ApiClient(static::createClient());
-        $status = $client->GET('/api/status');
+        $status = $client->GET('/status');
         $this->assertObjectHasAttribute('time', $status);
     }
 }
