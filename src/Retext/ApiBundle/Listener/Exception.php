@@ -3,7 +3,9 @@
 namespace Retext\ApiBundle\Listener;
 
 use Retext\ApiBundle\Controller\ApiResponse;
-use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
+use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent,
+    Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException,
+    Symfony\Component\HttpFoundation\Response;
 use JMS\SerializerBundle\Serializer\Serializer;
 
 /**
@@ -26,6 +28,12 @@ class Exception
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
         $exception = $event->getException();
+
+        // Allow OPTIONS-Requests
+        if ($exception instanceof MethodNotAllowedHttpException && $event->getRequest()->getMethod() === 'OPTIONS') {
+            $event->setResponse(new Response());
+            return;
+        }
 
         $response = new ApiResponse();
         $response->addHeader('Content-Type', 'application/json');

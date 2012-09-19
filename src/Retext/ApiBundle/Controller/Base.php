@@ -28,13 +28,6 @@ abstract class Base extends Controller
         $request = $this->getRequest();
         $response = new ApiResponse();
 
-        /* CORS stuff
-            ->addHeader('Access-Control-Allow-Origin', $this->getRequest()->headers->get('Origin'))
-            ->addHeader('Access-Control-Allow-Credentials', 'true')
-            ->addHeader('Access-Control-Max-Age', '604800')
-            ->addHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS')
-            ->addHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
-        */
         if ($data !== null) {
             if (!in_array('application/json', $request->getAcceptableContentTypes())) throw $this->createException(406, 'Not Acceptable | You must accept application/json');
             $response->addHeader('Content-Type', 'application/json');
@@ -68,18 +61,23 @@ abstract class Base extends Controller
 
     /**
      * @return \Symfony\Component\HttpKernel\Exception\HttpException
+     * @param int $httpStatusCode
+     * @param string $message
+     * @param int $code
      */
-    public function createException($code, $message)
+    public function createException($httpStatusCode, $message, $code = null)
     {
-        return new HttpException($code, $message, null, array('Content-Type' => 'application/json'));
+        return new HttpException($httpStatusCode, $message, null, array('Content-Type' => 'application/json'), (int)$code);
     }
 
     /**
      * @return \Symfony\Component\HttpKernel\Exception\HttpException
+     * @param string $message
+     * @param int $code
      */
-    public function createForbiddenException($message = null)
+    public function createForbiddenException($message = null, $code = null)
     {
-        return $this->createException(403, $message == null ? 'Forbidden' : $message);
+        return $this->createException(403, $message == null ? 'Forbidden' : $message, $code);
     }
 
 
@@ -118,12 +116,10 @@ abstract class Base extends Controller
         $request = $this->getRequest();
 
         if ($request->getMethod() === 'GET') {
-            $hasKey = function(RequestParameter $key) use($request)
-            {
+            $hasKey = function (RequestParameter $key) use ($request) {
                 return $request->query->has($key->getName());
             };
-            $getKeyValue = function(RequestParameter $key) use($request)
-            {
+            $getKeyValue = function (RequestParameter $key) use ($request) {
                 return $request->query->get($key->getName());
             };
         } else {
@@ -131,19 +127,16 @@ abstract class Base extends Controller
             $data = json_decode($request->getContent());
             if ($data === null) $data = new \stdClass();
             if (is_array($data)) throw $this->createException(400, 'Bad Request | Must send object, array sent.');
-            $hasKey = function(RequestParameter $key) use($data)
-            {
+            $hasKey = function (RequestParameter $key) use ($data) {
                 return property_exists($data, $key->getName());
             };
-            $getKeyValue = function(RequestParameter $key) use($data)
-            {
+            $getKeyValue = function (RequestParameter $key) use ($data) {
                 return $data->{$key->getName()};
             };
 
         }
 
-        $getKey = function($key) use($hasKey, $getKeyValue)
-        {
+        $getKey = function ($key) use ($hasKey, $getKeyValue) {
             if (!($key instanceof RequestParameter)) {
                 /** @var \Retext\ApiBundle\Controller\RequestParameter $key  */
                 $key = RequestParameter::create($key);
@@ -157,14 +150,12 @@ abstract class Base extends Controller
             $value = $getKeyValue($key);
 
             if ($key->isBoolean()) {
-                $isEmpty = function($value)
-                {
+                $isEmpty = function ($value) {
                     if (is_bool($value)) return false;
                     return strlen($value) === 0;
                 };
             } else {
-                $isEmpty = function($value)
-                {
+                $isEmpty = function ($value) {
                     return empty($value);
                 };
             }
@@ -214,13 +205,11 @@ abstract class Base extends Controller
     protected function getProject($project_id)
     {
         $user = $this->getUser();
-        $projectByOwner = $this->getDocumentOrNUll('Project', $project_id, function(\Doctrine\ODM\MongoDB\Query\Builder $qb) use($user)
-        {
+        $projectByOwner = $this->getDocumentOrNUll('Project', $project_id, function (\Doctrine\ODM\MongoDB\Query\Builder $qb) use ($user) {
             $qb->field('owner')->equals(new \MongoId($user->getId()));
         });
         if ($projectByOwner) return $projectByOwner;
-        $projectByContributor = $this->getDocument('Project', $project_id, function(\Doctrine\ODM\MongoDB\Query\Builder $qb) use($user)
-        {
+        $projectByContributor = $this->getDocument('Project', $project_id, function (\Doctrine\ODM\MongoDB\Query\Builder $qb) use ($user) {
             $qb->field('contributors')->all(array($user->getEmail()));
         });
         if ($projectByContributor) return $projectByContributor;
@@ -232,8 +221,7 @@ abstract class Base extends Controller
      */
     protected function getUserByEmail($email)
     {
-        return $this->getDocument('User', null, function(\Doctrine\ODM\MongoDB\Query\Builder $qb) use($email)
-        {
+        return $this->getDocument('User', null, function (\Doctrine\ODM\MongoDB\Query\Builder $qb) use ($email) {
             $qb->field('email')->equals($email);
         });
     }

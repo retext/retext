@@ -9,5 +9,5 @@ namespace Retext\ApiBundle\Exception;
  */
 class Base extends \Exception
 {
-
+    const CODE_LOGIN_FAILED = 1;
 }
