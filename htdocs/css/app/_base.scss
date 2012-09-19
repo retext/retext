@@ -1,3 +1,9 @@
+article {
+  background-color: $bg;
+  box-shadow: black 1px 1px 10px;
+  position: relative;
+}
+
 .gui-element {
   padding: 0.5em 0.5em;
   color: $text;

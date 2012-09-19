@@ -6,6 +6,7 @@
 define([
 ], function () {
     return Backbone.View.extend({
-        el:$('#app')
+        tagName:'article',
+        className:'container'
     });
 });

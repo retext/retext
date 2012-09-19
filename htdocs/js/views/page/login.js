@@ -10,6 +10,7 @@ define([
     'text!templates/page/login.html'
 ], function (PageViewBase, Events, UserModel, LoginPageTemplate) {
     return PageViewBase.extend({
+        className:'container compact',
         events:{
             'submit form':'submitForm'
         },

@@ -144,6 +144,22 @@ footer {
     border: 0;
     border-bottom: 1px solid #4c4c4c;
     border-top: 1px solid #303030; }
+  footer a.back i.icon-share-alt {
+    font-size: 2em;
+    color: #3A3A3A;
+    text-shadow: #333333 0px -2px 1px, #666666 0px 1px 1px;
+    margin-top: 2em;
+    display: inline-block; }
+  footer a.back i.icon-share-alt:before {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1); }
+
+.popover {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  text-align: left;
+  font-size: 0.875em; }
 
 body {
   padding: 0; }
@@ -167,365 +183,364 @@ body {
     display: inline;
     margin: 0;
     font-size: 0.6275em; } }
-#app {
+#app article {
   background-color: #fefefe;
   box-shadow: black 1px 1px 10px;
   position: relative; }
-  #app .gui-element {
-    padding: 0.5em 0.5em;
-    color: #4c4c4c;
-    position: relative;
-    margin: 0.5em 0; }
-  #app .gui-element:hover {
-    border-color: #0095f2 !important; }
-  #app .gui-element .meta, #app .gui-element .info {
-    position: absolute;
-    right: 1%;
-    top: 10%;
-    line-height: 2em; }
-  #app .gui-element.selected {
-    background-color: #fefefe;
-    border-color: #f38630;
-    color: #333333; }
-  #app .gui-element .meta {
-    display: none; }
-  #app .gui-element:hover .meta {
-    display: block; }
-  #app .gui-element:hover .info {
-    display: none; }
-  #app .gui-element.dragging {
-    border-style: dashed;
-    border-color: #c4c4c4;
-    background-color: whiteSmoke;
-    color: #a0a0a0; }
-  #app .gui-drop-preview {
-    height: 2em;
-    border-radius: 2px;
-    border: 2px dashed #5bba3d;
-    margin-bottom: 1em;
-    background-color: #b1fcaa; }
-  #app .gui-container {
-    border-radius: 5px;
-    background-color: #ebebeb;
-    background-image: -moz-linear-gradient(#ebebeb, whitesmoke);
-    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ebebeb), to(whitesmoke));
-    background-image: -webkit-linear-gradient(#ebebeb, whitesmoke);
-    background-image: -o-linear-gradient(#ebebeb, whitesmoke);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ebebeb', endColorstr='whitesmoke',GradientType=0);
-    background-image: linear-gradient(#ebebeb, whitesmoke);
-    border-bottom: 1px solid rgba(76, 76, 76, 0.25);
-    border-right: 1px solid rgba(76, 76, 76, 0.25);
-    border-left: 1px solid rgba(76, 76, 76, 0.5);
-    border-top: 1px solid rgba(76, 76, 76, 0.5);
-    box-shadow: inset 2px 2px 6px rgba(76, 76, 76, 0.25);
-    text-shadow: 2px 2px 4px rgba(76, 76, 76, 0.5); }
-  #app .gui-text {
-    border-radius: 5px;
-    background-color: whitesmoke;
-    background-image: -moz-linear-gradient(whitesmoke, #ebebeb);
-    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(whitesmoke), to(#ebebeb));
-    background-image: -webkit-linear-gradient(whitesmoke, #ebebeb);
-    background-image: -o-linear-gradient(whitesmoke, #ebebeb);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='whitesmoke', endColorstr='#ebebeb',GradientType=0);
-    background-image: linear-gradient(whitesmoke, #ebebeb);
-    box-shadow: 2px 2px 6px rgba(76, 76, 76, 0.5);
-    border-top: 1px solid rgba(76, 76, 76, 0.25);
-    border-left: 1px solid rgba(76, 76, 76, 0.25);
-    border-right: 1px solid rgba(76, 76, 76, 0.5);
-    border-bottom: 1px solid rgba(76, 76, 76, 0.5); }
-  #app .gui-text .flag {
-    position: absolute;
-    top: -18px;
-    left: 1%;
-    border: 1px solid #999999;
-    background-color: #f0f0f0;
-    border-radius: 4px;
-    padding: 0.25em 0.5em; }
-  #app .gui-text q:before {
-    content: "„"; }
-  #app .gui-text q:after {
-    content: "“"; }
-  #app .gui-write-text form {
+#app .gui-element {
+  padding: 0.5em 0.5em;
+  color: #4c4c4c;
+  position: relative;
+  margin: 0.5em 0; }
+#app .gui-element:hover {
+  border-color: #0095f2 !important; }
+#app .gui-element .meta, #app .gui-element .info {
+  position: absolute;
+  right: 1%;
+  top: 10%;
+  line-height: 2em; }
+#app .gui-element.selected {
+  background-color: #fefefe;
+  border-color: #f38630;
+  color: #333333; }
+#app .gui-element .meta {
+  display: none; }
+#app .gui-element:hover .meta {
+  display: block; }
+#app .gui-element:hover .info {
+  display: none; }
+#app .gui-element.dragging {
+  border-style: dashed;
+  border-color: #c4c4c4;
+  background-color: whiteSmoke;
+  color: #a0a0a0; }
+#app .gui-drop-preview {
+  height: 2em;
+  border-radius: 2px;
+  border: 2px dashed #5bba3d;
+  margin-bottom: 1em;
+  background-color: #b1fcaa; }
+#app .gui-container {
+  border-radius: 5px;
+  background-color: #ebebeb;
+  background-image: -moz-linear-gradient(#ebebeb, whitesmoke);
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ebebeb), to(whitesmoke));
+  background-image: -webkit-linear-gradient(#ebebeb, whitesmoke);
+  background-image: -o-linear-gradient(#ebebeb, whitesmoke);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ebebeb', endColorstr='whitesmoke',GradientType=0);
+  background-image: linear-gradient(#ebebeb, whitesmoke);
+  border-bottom: 1px solid rgba(76, 76, 76, 0.25);
+  border-right: 1px solid rgba(76, 76, 76, 0.25);
+  border-left: 1px solid rgba(76, 76, 76, 0.5);
+  border-top: 1px solid rgba(76, 76, 76, 0.5);
+  box-shadow: inset 2px 2px 6px rgba(76, 76, 76, 0.25);
+  text-shadow: 2px 2px 4px rgba(76, 76, 76, 0.5); }
+#app .gui-text {
+  border-radius: 5px;
+  background-color: whitesmoke;
+  background-image: -moz-linear-gradient(whitesmoke, #ebebeb);
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(whitesmoke), to(#ebebeb));
+  background-image: -webkit-linear-gradient(whitesmoke, #ebebeb);
+  background-image: -o-linear-gradient(whitesmoke, #ebebeb);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='whitesmoke', endColorstr='#ebebeb',GradientType=0);
+  background-image: linear-gradient(whitesmoke, #ebebeb);
+  box-shadow: 2px 2px 6px rgba(76, 76, 76, 0.5);
+  border-top: 1px solid rgba(76, 76, 76, 0.25);
+  border-left: 1px solid rgba(76, 76, 76, 0.25);
+  border-right: 1px solid rgba(76, 76, 76, 0.5);
+  border-bottom: 1px solid rgba(76, 76, 76, 0.5); }
+#app .gui-text .flag {
+  position: absolute;
+  top: -18px;
+  left: 1%;
+  border: 1px solid #999999;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  padding: 0.25em 0.5em; }
+#app .gui-text q:before {
+  content: "„"; }
+#app .gui-text q:after {
+  content: "“"; }
+#app .gui-write-text form {
+  margin: 0; }
+#app .gui-write-text input, #app .gui-write-text textarea {
+  width: 100%; }
+#app .gui-write-text .gui-saving-progress, #app .gui-write-text .gui-saving-error {
+  display: none; }
+#app .gui-check-header {
+  margin-left: 1em; }
+#app .gui-check-text .btn-group {
+  float: right; }
+#app .gui-check-text.progress-danger {
+  background-color: #ffd7d5; }
+#app .gui-check-text.progress-warning {
+  background-color: #faebbb; }
+#app .gui-check-text.progress-success {
+  background-color: #d7ffd7; }
+#app .gui-check-text q.text {
+  display: inline-block;
+  height: 1.5em;
+  overflow: hidden; }
+#app #toggleleft {
+  position: absolute;
+  top: 25%;
+  left: 0; }
+#app #toggleright {
+  position: absolute;
+  top: 25%;
+  right: 0; }
+#app ul.texthistory {
+  margin: 0; }
+#app ul.texthistory li {
+  list-style: none;
+  border-bottom: 1px solid #cccccc; }
+#app ul.texthistory li:last-child {
+  border: none; }
+#app ul.texthistory span.time {
+  float: right;
+  font-style: italic; }
+#app .textcomments .gravatar {
+  margin-right: 1em; }
+#app .projectprogress.compact dt, #app .projectprogress.compact dd {
+  display: none; }
+#app .projectprogress.compact dd.total {
+  display: block; }
+#app blockquote.multiline p {
+  margin-bottom: 1em; }
+#app blockquote.multiline p:after {
+  content: " ¶";
+  color: silver; }
+#app .projecttree ul {
+  list-style: none;
+  margin: 0 0 0 1.5em; }
+#app .projecttree ul.hide-texts li.gui-text-node {
+  display: none; }
+#app .projecttree label.checkbox {
+  float: right; }
+#app header {
+  background-color: white;
+  background-image: -moz-linear-gradient(white, #e6e6e6);
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(white), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(white, #e6e6e6);
+  background-image: -o-linear-gradient(white, #e6e6e6);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='white', endColorstr='#e6e6e6',GradientType=0);
+  background-image: linear-gradient(white, #e6e6e6);
+  border-right: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
+  border-left: 1px solid white;
+  border-top: 1px solid white;
+  height: 40px;
+  color: #4c4c4c; }
+  #app header h2 {
+    font-size: 1.125em;
+    padding: 0 0.5em;
     margin: 0; }
-  #app .gui-write-text input, #app .gui-write-text textarea {
-    width: 100%; }
-  #app .gui-write-text .gui-saving-progress, #app .gui-write-text .gui-saving-error {
-    display: none; }
-  #app .gui-check-header {
-    margin-left: 1em; }
-  #app .gui-check-text .btn-group {
-    float: right; }
-  #app .gui-check-text.progress-danger {
-    background-color: #ffd7d5; }
-  #app .gui-check-text.progress-warning {
-    background-color: #faebbb; }
-  #app .gui-check-text.progress-success {
-    background-color: #d7ffd7; }
-  #app .gui-check-text q.text {
-    display: inline-block;
-    height: 1.5em;
-    overflow: hidden; }
-  #app #toggleleft {
-    position: absolute;
-    top: 25%;
-    left: 0; }
-  #app #toggleright {
-    position: absolute;
-    top: 25%;
-    right: 0; }
-  #app ul.texthistory {
-    margin: 0; }
-  #app ul.texthistory li {
-    list-style: none;
-    border-bottom: 1px solid #cccccc; }
-  #app ul.texthistory li:last-child {
-    border: none; }
-  #app ul.texthistory span.time {
+  #app header nav.button-switcher {
     float: right;
-    font-style: italic; }
-  #app .textcomments .gravatar {
-    margin-right: 1em; }
-  #app .projectprogress.compact dt, #app .projectprogress.compact dd {
-    display: none; }
-  #app .projectprogress.compact dd.total {
-    display: block; }
-  #app blockquote.multiline p {
-    margin-bottom: 1em; }
-  #app blockquote.multiline p:after {
-    content: " ¶";
-    color: silver; }
-  #app .projecttree ul {
+    margin: 0.5em 0.5em 0 0; }
+    #app header nav.button-switcher ul {
+      list-style: none; }
+      #app header nav.button-switcher ul li {
+        float: left;
+        margin-left: 0.5em; }
+        #app header nav.button-switcher ul li .btn {
+          padding: 0 0.25em;
+          font-size: 1.5em;
+          line-height: 1.25em; }
+#app aside {
+  font-family: Arial, sans-serif; }
+  #app aside h2, #app aside h3, #app aside h4, #app aside h5, #app aside h6 {
+    padding: 0 0.5em;
+    margin: 0; }
+    #app aside h2 a, #app aside h3 a, #app aside h4 a, #app aside h5 a, #app aside h6 a {
+      float: right; }
+  #app aside h3, #app aside h4, #app aside h5, #app aside h6, #app aside legend {
+    line-height: 2.5em;
+    font-size: 0.875em;
+    text-transform: uppercase;
+    font-weight: bold; }
+  #app aside h3 + nav ul {
     list-style: none;
-    margin: 0 0 0 1.5em; }
-  #app .projecttree ul.hide-texts li.gui-text-node {
-    display: none; }
-  #app .projecttree label.checkbox {
-    float: right; }
-  #app header {
-    background-color: white;
-    background-image: -moz-linear-gradient(white, #e6e6e6);
-    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(white), to(#e6e6e6));
-    background-image: -webkit-linear-gradient(white, #e6e6e6);
-    background-image: -o-linear-gradient(white, #e6e6e6);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='white', endColorstr='#e6e6e6',GradientType=0);
-    background-image: linear-gradient(white, #e6e6e6);
-    border-right: 1px solid #d9d9d9;
-    border-bottom: 1px solid #d9d9d9;
-    border-left: 1px solid white;
-    border-top: 1px solid white;
-    height: 40px;
-    color: #4c4c4c; }
-    #app header h2 {
-      font-size: 1.125em;
-      padding: 0 0.5em;
-      margin: 0; }
-    #app header nav.button-switcher {
-      float: right;
-      margin: 0.5em 0.5em 0 0; }
-      #app header nav.button-switcher ul {
-        list-style: none; }
-        #app header nav.button-switcher ul li {
-          float: left;
-          margin-left: 0.5em; }
-          #app header nav.button-switcher ul li .btn {
-            padding: 0 0.25em;
-            font-size: 1.5em;
-            line-height: 1.25em; }
-  #app aside {
-    font-family: Arial, sans-serif; }
-    #app aside h2, #app aside h3, #app aside h4, #app aside h5, #app aside h6 {
-      padding: 0 0.5em;
-      margin: 0; }
-      #app aside h2 a, #app aside h3 a, #app aside h4 a, #app aside h5 a, #app aside h6 a {
-        float: right; }
-    #app aside h3, #app aside h4, #app aside h5, #app aside h6, #app aside legend {
-      line-height: 2.5em;
-      font-size: 0.875em;
-      text-transform: uppercase;
-      font-weight: bold; }
-    #app aside h3 + nav ul {
-      list-style: none;
-      margin: 0; }
-      #app aside h3 + nav ul li {
-        padding: 0.25em 0.5em; }
-        #app aside h3 + nav ul li .badge {
-          float: right;
-          -webkit-border-radius: 3px 3px;
-          -moz-border-radius: 1;
-          -khtml-border-radius: 1;
-          border-radius: 1; }
-    #app aside form {
-      margin: 0 0.5em; }
-    #app aside legend {
-      margin: 0;
-      padding: 0;
-      border: 0; }
-      #app aside legend a {
-        float: right; }
-      #app aside legend a.small-text {
-        text-transform: none;
-        font-weight: normal; }
-    #app aside fieldset {
-      margin: 0 0 0.5em 0;
-      padding: 0 0 0.5em 0;
-      border-bottom-width: 1px;
-      border-bottom-style: solid; }
-    #app aside fieldset:last-child {
-      margin-bottom: 0;
-      border-bottom: none; }
-    #app aside p {
-      margin: 0 0.5em 1em 0.5em; }
-  #app aside .aside-body h3, #app aside .aside-body h4, #app aside .aside-body h5, #app aside .aside-body h6 {
-    background-color: #f4f4f4;
-    border-top: 1px solid white;
-    border-bottom: 1px solid #eaeaea; }
-  #app aside .aside-body legend {
-    color: #7f7f7f; }
-  #app aside .aside-body fieldset {
-    border-color: rgba(76, 76, 76, 0.2); }
-  #app aside.inverse .aside-body {
-    background-color: #343434;
+    margin: 0; }
+    #app aside h3 + nav ul li {
+      padding: 0.25em 0.5em; }
+      #app aside h3 + nav ul li .badge {
+        float: right;
+        -webkit-border-radius: 3px 3px;
+        -moz-border-radius: 1;
+        -khtml-border-radius: 1;
+        border-radius: 1; }
+  #app aside form {
+    margin: 0 0.5em; }
+  #app aside legend {
+    margin: 0;
+    padding: 0;
+    border: 0; }
+    #app aside legend a {
+      float: right; }
+    #app aside legend a.small-text {
+      text-transform: none;
+      font-weight: normal; }
+  #app aside fieldset {
+    margin: 0 0 0.5em 0;
+    padding: 0 0 0.5em 0;
+    border-bottom-width: 1px;
+    border-bottom-style: solid; }
+  #app aside fieldset:last-child {
+    margin-bottom: 0;
+    border-bottom: none; }
+  #app aside p {
+    margin: 0 0.5em 1em 0.5em; }
+#app aside .aside-body h3, #app aside .aside-body h4, #app aside .aside-body h5, #app aside .aside-body h6 {
+  background-color: #f4f4f4;
+  border-top: 1px solid white;
+  border-bottom: 1px solid #eaeaea; }
+#app aside .aside-body legend {
+  color: #7f7f7f; }
+#app aside .aside-body fieldset {
+  border-color: rgba(76, 76, 76, 0.2); }
+#app aside.inverse .aside-body {
+  background-color: #343434;
+  color: #9b9b9b; }
+  #app aside.inverse .aside-body a, #app aside.inverse .aside-body legend {
     color: #9b9b9b; }
-    #app aside.inverse .aside-body a, #app aside.inverse .aside-body legend {
-      color: #9b9b9b; }
-    #app aside.inverse .aside-body a:hover {
+  #app aside.inverse .aside-body a:hover {
+    color: white; }
+  #app aside.inverse .aside-body .dim {
+    color: #686868; }
+  #app aside.inverse .aside-body legend {
+    color: #686868; }
+  #app aside.inverse .aside-body fieldset {
+    border-color: rgba(155, 155, 155, 0.2); }
+  #app aside.inverse .aside-body .inset {
+    background-color: #2f2f2f;
+    border-top: 1px solid #2a2a2a;
+    border-bottom: 1px solid #3e3e3e; }
+    #app aside.inverse .aside-body .inset h4 {
+      border: none;
+      background-color: transparent; }
+  #app aside.inverse .aside-body h3, #app aside.inverse .aside-body h4, #app aside.inverse .aside-body h5, #app aside.inverse .aside-body h6 {
+    background-color: #3e3e3e;
+    border-top: 1px solid #484848;
+    border-bottom: 1px solid #343434; }
+  #app aside.inverse .aside-body h3 + nav ul li .badge {
+    background-color: #4e4e4e;
+    color: rgba(155, 155, 155, 0.85); }
+  #app aside.inverse .aside-body h3 + nav ul li.active {
+    background-color: #4e8ef7;
+    background-image: -moz-linear-gradient(#4e8ef7, #3a82f7);
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#4e8ef7), to(#3a82f7));
+    background-image: -webkit-linear-gradient(#4e8ef7, #3a82f7);
+    background-image: -o-linear-gradient(#4e8ef7, #3a82f7);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4e8ef7', endColorstr='#3a82f7',GradientType=0);
+    background-image: linear-gradient(#4e8ef7, #3a82f7);
+    color: white; }
+    #app aside.inverse .aside-body h3 + nav ul li.active .badge {
+      background-color: #366cc5;
+      border-top: 1px solid #0953cc;
+      border-left: 1px solid #0953cc;
+      border-bottom: 1px solid #75a7f9;
+      border-right: 1px solid #75a7f9;
+      color: rgba(255, 255, 255, 0.85); }
+    #app aside.inverse .aside-body h3 + nav ul li.active a {
       color: white; }
-    #app aside.inverse .aside-body .dim {
-      color: #686868; }
-    #app aside.inverse .aside-body legend {
-      color: #686868; }
-    #app aside.inverse .aside-body fieldset {
-      border-color: rgba(155, 155, 155, 0.2); }
-    #app aside.inverse .aside-body .inset {
-      background-color: #2f2f2f;
-      border-top: 1px solid #2a2a2a;
-      border-bottom: 1px solid #3e3e3e; }
-      #app aside.inverse .aside-body .inset h4 {
-        border: none;
-        background-color: transparent; }
-    #app aside.inverse .aside-body h3, #app aside.inverse .aside-body h4, #app aside.inverse .aside-body h5, #app aside.inverse .aside-body h6 {
-      background-color: #3e3e3e;
-      border-top: 1px solid #484848;
-      border-bottom: 1px solid #343434; }
-    #app aside.inverse .aside-body h3 + nav ul li .badge {
-      background-color: #4e4e4e;
-      color: rgba(155, 155, 155, 0.85); }
-    #app aside.inverse .aside-body h3 + nav ul li.active {
-      background-color: #4e8ef7;
-      background-image: -moz-linear-gradient(#4e8ef7, #3a82f7);
-      background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#4e8ef7), to(#3a82f7));
-      background-image: -webkit-linear-gradient(#4e8ef7, #3a82f7);
-      background-image: -o-linear-gradient(#4e8ef7, #3a82f7);
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4e8ef7', endColorstr='#3a82f7',GradientType=0);
-      background-image: linear-gradient(#4e8ef7, #3a82f7);
+#app #orientation {
+  float: left;
+  width: 25%; }
+  #app #orientation ul.elements {
+    font-size: 0.875em;
+    line-height: 1em;
+    list-style: none;
+    margin: 0;
+    padding: 1em 0.5em 1em 0.5em; }
+    #app #orientation ul.elements .container {
+      font-style: italic; }
+      #app #orientation ul.elements .container .count {
+        color: rgba(155, 155, 155, 0.25);
+        float: right;
+        font-style: normal; }
+    #app #orientation ul.elements .status {
+      color: rgba(155, 155, 155, 0.25); }
+    #app #orientation ul.elements li {
+      padding: 0; }
+    #app #orientation ul.elements a:hover .count {
       color: white; }
-      #app aside.inverse .aside-body h3 + nav ul li.active .badge {
-        background-color: #366cc5;
-        border-top: 1px solid #0953cc;
-        border-left: 1px solid #0953cc;
-        border-bottom: 1px solid #75a7f9;
-        border-right: 1px solid #75a7f9;
-        color: rgba(255, 255, 255, 0.85); }
-      #app aside.inverse .aside-body h3 + nav ul li.active a {
-        color: white; }
-  #app #orientation {
-    float: left;
-    width: 25%; }
-    #app #orientation ul.elements {
-      font-size: 0.875em;
-      line-height: 1em;
-      list-style: none;
+    #app #orientation ul.elements ul {
+      padding: 0 0 0 0.5em;
+      border-left: 1px solid rgba(155, 155, 155, 0.5);
+      margin-left: 0.6em;
+      list-style: none; }
+  #app #orientation dl.projectprogress {
+    margin: 0 0.5em;
+    font-size: 0.875em; }
+    #app #orientation dl.projectprogress dd {
       margin: 0;
-      padding: 1em 0.5em 1em 0.5em; }
-      #app #orientation ul.elements .container {
-        font-style: italic; }
-        #app #orientation ul.elements .container .count {
-          color: rgba(155, 155, 155, 0.25);
-          float: right;
-          font-style: normal; }
-      #app #orientation ul.elements .status {
-        color: rgba(155, 155, 155, 0.25); }
-      #app #orientation ul.elements li {
-        padding: 0; }
-      #app #orientation ul.elements a:hover .count {
-        color: white; }
-      #app #orientation ul.elements ul {
-        padding: 0 0 0 0.5em;
-        border-left: 1px solid rgba(155, 155, 155, 0.5);
-        margin-left: 0.6em;
-        list-style: none; }
-    #app #orientation dl.projectprogress {
-      margin: 0 0.5em;
-      font-size: 0.875em; }
-      #app #orientation dl.projectprogress dd {
+      margin-bottom: 0.5em; }
+      #app #orientation dl.projectprogress dd .progress {
         margin: 0;
-        margin-bottom: 0.5em; }
-        #app #orientation dl.projectprogress dd .progress {
-          margin: 0;
-          height: 15px; }
-  #app #content {
-    float: left;
-    width: 50%; }
-    #app #content hr {
-      border: 0;
-      border-bottom: 1px dotted #cccccc; }
-    #app #content hr.sep {
-      border: 0;
-      height: 0.5em; }
-    #app #content article {
-      text-shadow: rgba(48, 48, 48, 0.2) 1px 1px 2px;
-      padding: 0.5em 0.5em; }
-      #app #content article h2 {
-        border-bottom: 1px dotted #cccccc;
-        margin: 1em 0 0.75em 0;
-        padding-bottom: 0.5em; }
-      #app #content article p {
-        line-height: 1.75em; }
-      #app #content article .multiline {
-        line-height: 1.15em; }
-    #app #content aside.band {
-      margin-top: 1em;
-      padding: 0.5em 0.5em;
-      background-color: #e4f3fc;
-      border-top: 1px solid #bebebe; }
-      #app #content aside.band h2 {
-        margin: 0;
-        border: 0; }
-    #app #content header {
-      border-left: 1px solid white;
-      border-right: 1px solid #d9d9d9;
-      margin-bottom: 1em; }
-      #app #content header nav.breadcrumb {
-        color: #4c4c4c; }
-        #app #content header nav.breadcrumb ul {
-          list-style: none;
-          margin: 0 0 0 1em; }
-          #app #content header nav.breadcrumb ul li {
-            float: left;
-            line-height: 40px; }
-          #app #content header nav.breadcrumb ul li:after {
-            content: "/";
-            padding: 0 0.5em;
-            color: rgba(76, 76, 76, 0.5); }
-          #app #content header nav.breadcrumb ul li:last-child:after {
-            content: ""; }
-  #app #context {
-    float: left;
-    width: 25%;
-    background-color: #f9f9f9;
-    background-image: -moz-linear-gradient(#f9f9f9, #fefefe);
-    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f9f9f9), to(#fefefe));
-    background-image: -webkit-linear-gradient(#f9f9f9, #fefefe);
-    background-image: -o-linear-gradient(#f9f9f9, #fefefe);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#fefefe',GradientType=0);
-    background-image: linear-gradient(#f9f9f9, #fefefe);
-    color: #666666; }
-
-#app.login {
+        height: 15px; }
+#app #content {
+  float: left;
+  width: 50%; }
+  #app #content hr {
+    border: 0;
+    border-bottom: 1px dotted #cccccc; }
+  #app #content hr.sep {
+    border: 0;
+    height: 0.5em; }
+  #app #content article {
+    text-shadow: rgba(48, 48, 48, 0.2) 1px 1px 2px;
+    padding: 0.5em 0.5em; }
+    #app #content article h2 {
+      border-bottom: 1px dotted #cccccc;
+      margin: 1em 0 0.75em 0;
+      padding-bottom: 0.5em; }
+    #app #content article p {
+      line-height: 1.75em; }
+    #app #content article .multiline {
+      line-height: 1.15em; }
+  #app #content aside.band {
+    margin-top: 1em;
+    padding: 0.5em 0.5em;
+    background-color: #e4f3fc;
+    border-top: 1px solid #bebebe; }
+    #app #content aside.band h2 {
+      margin: 0;
+      border: 0; }
+  #app #content header {
+    border-left: 1px solid white;
+    border-right: 1px solid #d9d9d9;
+    margin-bottom: 1em; }
+    #app #content header nav.breadcrumb {
+      color: #4c4c4c; }
+      #app #content header nav.breadcrumb ul {
+        list-style: none;
+        margin: 0 0 0 1em; }
+        #app #content header nav.breadcrumb ul li {
+          float: left;
+          line-height: 40px; }
+        #app #content header nav.breadcrumb ul li:after {
+          content: "/";
+          padding: 0 0.5em;
+          color: rgba(76, 76, 76, 0.5); }
+        #app #content header nav.breadcrumb ul li:last-child:after {
+          content: ""; }
+#app #context {
+  float: left;
+  width: 25%;
+  background-color: #f9f9f9;
+  background-image: -moz-linear-gradient(#f9f9f9, #fefefe);
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f9f9f9), to(#fefefe));
+  background-image: -webkit-linear-gradient(#f9f9f9, #fefefe);
+  background-image: -o-linear-gradient(#f9f9f9, #fefefe);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#fefefe',GradientType=0);
+  background-image: linear-gradient(#f9f9f9, #fefefe);
+  color: #666666; }
+#app article.compact {
   width: 400px; }
-  #app.login header h2 {
+  #app article.compact header h2 {
     padding-left: 1em; }
-  #app.login form {
+  #app article.compact form {
     padding: 1em 1em 0 1em; }
-  #app.login input[type=email], #app.login input[type=password] {
+  #app article.compact input[type=email], #app article.compact input[type=password], #app article.compact input[type=text] {
     width: 96%; }

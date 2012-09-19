@@ -9,6 +9,7 @@ define([
     'text!templates/page/register.html'
 ], function (PageViewBase, RegisterModel, RegisterPageTemplate) {
     return PageViewBase.extend({
+        className: 'container compact',
         initialize:function () {
             this.model = new RegisterModel();
         },

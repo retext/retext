@@ -1,0 +1,23 @@
+// Scale Mixin
+
+@mixin scaleX($xAmount) {
+// Gecko
+  -moz-transform: scaleX($xAmount);
+// Opera
+  -o-transform: scaleX($xAmount);
+// webkit
+  -webkit-transform: scaleX($xAmount);
+// Standard
+  transform: scaleX($xAmount);
+}
+
+@mixin scaleY($xAmount) {
+// Gecko
+  -moz-transform: scaleY($xAmount);
+// Opera
+  -o-transform: scaleY($xAmount);
+// webkit
+  -webkit-transform: scaleY($xAmount);
+// Standard
+  transform: scaleY($xAmount);
+}

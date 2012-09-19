@@ -14,6 +14,25 @@ define([
         }
         $(view.el).remove();
     };
+    var updateExtras = function (el) {
+        // Enable tooltips
+        $(el).find('[rel=tooltip]').tooltip();
+        $(el).find('[rel=popover]').popover();
+        $(el).find('label[title]').tooltip();
+        // Extender dropdowns
+        $('.extender-toggle').each(function (idx, el) {
+            var el = $(el);
+            el.click(function (ev) {
+                $(el.data('target')).toggleClass('hidden');
+                var hiddenIcons = el.find('i.hidden');
+                if (hiddenIcons.length > 0) {
+                    el.find('i').toggleClass('hidden');
+                }
+                console.log(el.find('i'));
+            });
+
+        });
+    };
     var create = function (context, name, View, options) {
         // Create new view
         var view = new View(_.isUndefined(options) ? {} : options);
@@ -34,25 +53,8 @@ define([
             views[name].complete();
         }
         Events.trigger('viewCreated:' + name);
+        updateExtras(view.el);
         return view;
-    };
-    var updateExtras = function (el) {
-        // Enable tooltips
-        $(el).find('[rel=tooltip]').tooltip();
-        $(el).find('label[title]').tooltip();
-        // Extender dropdowns
-        $('.extender-toggle').each(function (idx, el) {
-            var el = $(el);
-            el.click(function (ev) {
-                $(el.data('target')).toggleClass('hidden');
-                var hiddenIcons = el.find('i.hidden');
-                if (hiddenIcons.length > 0) {
-                    el.find('i').toggleClass('hidden');
-                }
-                console.log(el.find('i'));
-            });
-
-        });
     };
     return {
         create:create,

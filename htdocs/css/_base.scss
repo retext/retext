@@ -132,5 +132,24 @@ footer {
     border-bottom: 1px solid $grey;
     border-top: 1px solid $darkgrey;
   }
+  a.back {
+    i.icon-share-alt {
+      font-size: 2em;
+      color: #3A3A3A;
+      text-shadow: #333 0px -2px 1px , #666 0px 1px 1px;
+      margin-top: 2em;
+      display: inline-block;
+    }
+    i.icon-share-alt:before {
+      @include scaleX(-1);
+    }
+  }
+
 }
 
+// Popover
+.popover {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  text-align: left;
+  font-size: 0.875em;
+}

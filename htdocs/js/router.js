@@ -8,6 +8,7 @@ define([
     "vm"
 ], function (Events, Vm) {
     return Backbone.Router.extend({
+        pageEl:$('#app'),
         initialize:function (appView) {
             this.appView = appView;
             Events.on('navigate', this.navigate, this);
@@ -25,8 +26,9 @@ define([
         },
         showPage:function (pageId, options) {
             var appView = this.appView;
+            var pageEl = this.pageEl;
             require(['views/page/' + pageId], function (PageView) {
-                $('#page').html(Vm.create(appView, 'page', PageView, options).el);
+                pageEl.html(Vm.create(appView, 'page', PageView, options).el);
             });
         },
         project:function (projectId, mode, parentContainerId) {
