@@ -4,8 +4,9 @@
  * @author Markus Tacker <m@tckr.cc>
  */
 define([
-    'remote'
-], function (Remote) {
+    'remote',
+    'validateerror'
+], function (Remote, ValidateError) {
     var User = Backbone.Model.extend({
         urlRoot:Remote.apiUrlBase + 'login',
         defaults:{
@@ -14,10 +15,21 @@ define([
             authenticated:false
         },
         validate:function (attrs) {
-            if (!attrs.hasOwnProperty('email')) return 'missing_email';
-            if (attrs.email.length < 6) return 'email_invalid';
-            if (!attrs.hasOwnProperty('password')) return 'missing_password';
-            if (attrs.password.length < 8) return 'password_invalid';
+            var errors = {
+                email:ValidateError.create(),
+                password:ValidateError.create()
+            };
+            if (!attrs.hasOwnProperty('email')) {
+                errors.email.isMissing();
+            } else if (attrs.email.length < 6) {
+                errors.email.isInvalid('must be at least 6 characters long.');
+            }
+            if (!attrs.hasOwnProperty('password')) {
+                errors.password.isMissing();
+            } else if (attrs.password.length < 8) {
+                errors.password.isInvalid('must be at least 8 characters long.');
+            }
+            return errors.email.error || errors.password.error ? errors : null;
         }
     });
     return User;

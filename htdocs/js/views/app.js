@@ -31,17 +31,15 @@ define([
         },
         // Check if already authorized
         complete:function () {
-            /*
-             var authorized = new Auth();
-             authorized.fetch(
-             {
-             success:function (model, response) {
-             if (model.get('authorized')) {
-             Events.trigger('userLogon');
-             }
-             }
-             });
-             */
+            var authorized = new Auth();
+            authorized.fetch(
+                {
+                    success:function (model, response) {
+                        if (model.get('authorized')) {
+                            Events.trigger('userLogon');
+                        }
+                    }
+                });
         },
         // Log all events
         logEvents:function (eventName) {

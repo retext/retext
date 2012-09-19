@@ -317,6 +317,11 @@ body {
   display: none; }
 #app .projecttree label.checkbox {
   float: right; }
+#app form label small.error {
+  color: #e01e25; }
+#app form input.error {
+  border-color: #c91b22;
+  color: #c91b22; }
 #app header {
   background-color: white;
   background-image: -moz-linear-gradient(white, #e6e6e6);

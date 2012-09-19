@@ -212,6 +212,21 @@ blockquote.multiline p:after {
   float: right;
 }
 
+// Forms
+form {
+  label {
+    small.error {
+      color: darken($danger_color, 5);
+    }
+  }
+
+  input.error {
+    border-color: darken($danger_color, 10);
+    color: darken($danger_color, 10);
+  }
+
+}
+
 // Content header
 header {
   @include gradient(lighten($header_bg, 5), darken($header_bg, 5));
