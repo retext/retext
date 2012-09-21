@@ -4,8 +4,8 @@ namespace Retext\ApiBundle\Listener;
 
 use Retext\ApiBundle\Controller\ApiResponse;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent,
-    Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException,
-    Symfony\Component\HttpFoundation\Response;
+Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException,
+Symfony\Component\HttpFoundation\Response;
 use JMS\SerializerBundle\Serializer\Serializer;
 
 /**
@@ -49,6 +49,9 @@ class Exception
             $response->setStatusCode($exception->getStatusCode());
         } elseif ($exception instanceof \MongoCursorException && $exception->getCode() == 11000) {
             $response->setStatusCode(409);
+        } elseif ($exception instanceof \MongoConnectionException) {
+            $response->setStatusCode(500);
+            $data['code'] = \Retext\ApiBundle\Exception\Base::CODE_DATABASE_ERROR;
         } else {
             $response->setStatusCode(500);
         }
