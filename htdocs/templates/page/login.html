@@ -4,38 +4,27 @@
 <form class="clearfix">
     <% if(model.authenticated) { %>
     <div class="alert alert-success">Hallo!</div>
-    <% } %>
-    <% if(model.error) { %>
+    <% } %> <% if(model.error) { %>
     <div class="alert alert-error">
-        <% if(model.unexpected_error) { %>
-        <strong>Oops.</strong> Something went terribly wrong.
-        <% } else if (model.validate_error) { %>
-        <i class="icon-warning-sign"></i> Please check your input.
-        <% } else { %>
-        <%= model.errormessage %>
-        <% } %>
+        <%= model.error_message %>
     </div>
-    <% } %>
-    <% if(model.loading) { %>
+    <% } %> <% if(model.loading) { %>
     <p>Logging in …</p>
+
     <div class="progress progress-striped active">
         <div class="bar" style="width: 50%;"></div>
     </div>
     <% } else { %>
 
     <small class="align-right"><a href="#register" class="dim">Not registered?</a></small>
-    <label for="email">
-        Email address
-        <% if(model.validate.email.error) { %><br><small class="error"><%= model.validate.email.message %></small><% } %>
-    </label>
-    <input type="email" name="email" id="email" class="input-large <% if(model.validate.email.error) { %>error<% } %>" placeholder="user@domain.com" value="<%= model.email %>" required tabindex="1">
+    <label for="email"> Email address </label>
+    <input type="email" name="email" id="email" class="input-large" placeholder="user@domain.com" value="<%= model.email %>" required tabindex="1" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}">
     <small class="align-right"><a href="#lostpassword" class="dim">Lost password?</a></small>
-    <label for="password">
-        Password
-        <% if(model.validate.password.error) { %><br><small class="error"><%= model.validate.password.message %></small><% } %>
-    </label>
-    <input type="password" name="password" id="password" class="input-large <% if(model.validate.email.error) { %>error<% } %>" value="<%= model.password %>"  required tabindex="2">
+    <label for="password"> Password </label>
+    <input type="password" name="password" id="password" class="input-large" value="<%= model.password %>" required tabindex="2" pattern=".{8,}">
 
-    <button type="submit" class="btn btn-primary align-right clearfix" tabindex="3"><% if(model.error) { %>Try again<% } else { %>Login<% } %></button>
+    <button type="submit" class="btn btn-primary align-right clearfix" tabindex="3"><% if(model.error) { %>Try again<% }
+        else { %>Login<% } %>
+    </button>
     <% } %>
 </form>

@@ -7,11 +7,9 @@ define([
     'remote'
 ], function (Remote) {
     return Backbone.Model.extend({
-        urlRoot:Remote.apiUrlBase + 'login',
+        urlRoot:Remote.apiUrlBase + 'lostpassword',
         defaults:{
-            email:'',
-            password:'',
-            authenticated:false
+            email:''
         }
     });
 });

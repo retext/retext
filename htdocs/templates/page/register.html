@@ -1,10 +1,33 @@
 <header><h2>Register</h2></header>
 <form class="clearfix">
+
+    <% if(model.success) { %>
+    <div class="alert alert-success">Great! Check your email.</div>
+    <p>Instructions on how to complete your registration have been sent to your
+        email address <%= model.email %>.</p>
+    <% } else { %>
+
+    <% if(model.error) { %>
+    <div class="alert alert-error">
+        <%= model.error_message %>
+    </div>
+    <% } %> <% if(model.loading) { %><p>Processing registration …</p>
+
+    <div class="progress progress-striped active">
+        <div class="bar" style="width: 50%;"></div>
+    </div>
+    <% } %>
+
     <label for="email">Email address</label>
-    <input type="email" name="email" id="email" class="input-large" placeholder="user@domain.com" required tabindex="1">
-    <small class="align-right"><a href="http://retext.it/#signupform" class="dim" rel="popover" data-title="Limited access" data-content="Access to <em>Re:Text</em> is limited to friends and family at the moment. Click the link and sign up with your email address to get notified when <em>Re:Text</em> is available for you." data-trigger="hover" data-placement="right">No code?</a></small>
+    <input type="email" name="email" id="email" class="input-large" placeholder="user@domain.com" required tabindex="1" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}">
+    <small class="align-right">
+        <a href="http://retext.it/#signupform" class="dim" rel="popover" data-title="Limited access" data-content="Access to <em>Re:Text</em> is limited to friends and family at the moment. Click the link and sign up with your email address to get notified when <em>Re:Text</em> is available for you." data-trigger="hover" data-placement="right">No
+            code?</a></small>
     <label for="code">Invitation code</label>
     <input type="text" name="code" id="code" class="input-large" placeholder="abc-def-ghi" required tabindex="2" pattern="[a-z]{3}-[a-z]{3}-[a-z]{3}">
 
     <button type="submit" class="btn btn-primary align-right clearfix" tabindex="3">Continue</button>
+
+    <% } %>
+
 </form>

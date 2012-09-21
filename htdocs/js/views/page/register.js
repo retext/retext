@@ -6,12 +6,16 @@
 define([
     'views/page/base',
     'models/register',
+    'viewmodels/register',
     'text!templates/page/register.html'
-], function (PageViewBase, RegisterModel, RegisterPageTemplate) {
+], function (PageViewBase, Model, ViewModel, ViewTemplate) {
     return PageViewBase.extend({
-        className: 'container compact',
+        className:'container compact',
+        template:_.template(ViewTemplate),
         initialize:function () {
-            this.model = new RegisterModel();
+            this.model = new Model();
+            this.viewmodel = new ViewModel();
+            this.viewmodel.bind('change', this.render, this);
         },
         events:{
             'submit form':'submitForm'
@@ -19,27 +23,27 @@ define([
         submitForm:function (ev) {
             ev.preventDefault();
             var form = $($(this.el).find('form'));
-            form.parent().prepend('<div class="well" id="register-progress"><p>Verarbeite Registrierung…</p><div class="progress progress-striped active"><div class="bar" style="width: 50%;"></div></div></div>');
-            $(".alert").alert('close');
+            var model = this.model;
+            var viewmodel = this.viewmodel;
+            var email = form.find('input[name=email]').attr('value');
+            var code = form.find('input[name=code]').attr('value');
+            viewmodel.set({error:false, loading:true, email:email, code:code});
             this.model.save(
                 {
-                    email:form.find('input[type=email]').attr('value')
+                    email:email, code:code
                 },
                 {
-                    error:function () {
-                        form.parent().prepend('<div class="alert alert-error"><a class="close" data-dismiss="alert" href="#">&times;</a><strong>Oops.</strong> Irgendwas ist schief gelaufen.</div>');
-                        $('#register-progress').remove();
+                    error:function (model, response) {
+                        viewmodel.set({error:true, error_message:Remote.getErrorMessage(response), loading:false});
                     },
                     success:function () {
-                        form.parent().prepend('<div class="alert alert-success">Toll! Danke für deine Registrierung. Bitte überprüfe dein Postfach um die Registrierung abzuschließen.</div>');
-                        form.hide();
-                        $('#register-progress').remove();
+                        viewmodel.set({success:true, loading:false});
                     }
                 }
             );
         },
         render:function () {
-            $(this.el).html(RegisterPageTemplate);
+            $(this.el).html(this.template({model:this.viewmodel.toJSON()}));
             return this;
         }
     });

@@ -1,5 +1,5 @@
 /**
- * ViewModel für die Login-View
+ * ViewModel für die Lost-Password-View
  *
  * @author Markus Tacker <m@tckr.cc>
  */
@@ -10,10 +10,8 @@ define([
             error:false,
             error_name:null,
             error_message:null,
-            authorized:false,
-            loading:false,
             email:null,
-            password:null
+            success:false
         }
     });
 });

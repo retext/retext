@@ -29,39 +29,23 @@ define([
             var viewmodel = this.viewmodel;
             var email = form.find('input[name=email]').attr('value');
             var pass = form.find('input[name=password]').attr('value');
-            this.model.set({
-                email:email,
-                password:pass
-            }, {
-                error:function (model, validate_result) {
-                    viewmodel.set({error:true, validate_error:true, validate:validate_result, email:email, password:pass});
-                }
-            });
-            if (this.model.isValid()) {
-                viewmodel.set({error:false, loading:true, email:email, password:pass});
-                this.model.save({},
-                    {
-                        error:function (model, response) {
-                            console.log(model);
-                            console.log(response);
-                            console.log(response.responseText);
-                            var status = JSON.parse(response.responseText);
-                            if (_.has(status, 'code') && status.code == Remote.errorCode.loginFailed) {
-                                viewmodel.set({error:true, errormessage:status.message, loading:false});
-                            } else {
-                                viewmodel.set({error:true, unexpected_error:true, loading:false});
-                            }
-                            Events.trigger('userLogoff');
-                        },
-                        success:function () {
-                            model.set('authenticated', true);
-                            viewmodel.set({authenticated:true, loading:false});
-                            Events.trigger('userLogon');
-                        }
+            viewmodel.set({error:false, loading:true, email:email, password:pass});
+            this.model.save({
+                    email:email,
+                    password:pass
+                },
+                {
+                    error:function (model, response) {
+                        viewmodel.set({error:true, error_message:Remote.getErrorMessage(response), loading:false});
+                        Events.trigger('userLogoff');
+                    },
+                    success:function () {
+                        model.set('authenticated', true);
+                        viewmodel.set({authenticated:true, loading:false});
+                        Events.trigger('userLogon');
                     }
-                );
-            }
-
+                }
+            );
         },
         render:function () {
             $(this.el).html(this.template({model:this.viewmodel.toJSON()}));
