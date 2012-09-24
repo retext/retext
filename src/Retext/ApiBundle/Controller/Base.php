@@ -166,25 +166,32 @@ abstract class Base extends Controller
                 }
                 return $key->getDefaultValue();
             }
+            // Check format
             switch ($key->getFormat()) {
                 case RequestParameter::FORMAT_INTEGER:
                     if (!preg_match('/^[0-9]+$/', $value)) throw $this->createException(400, 'Bad Request | input ' . $key->getName() . ' must be integer');
-                    return (int)$value;
+                    $value = (int)$value;
+                    break;
                 case RequestParameter::FORMAT_BOOLEAN:
                     if (is_bool($value)) return $value;
                     if (!preg_match('/^true|false|0|1$/', $value)) throw $this->createException(400, 'Bad Request | input ' . $key->getName() . ' must be boolean');
-                    return (boolean)$value;
+                    $value = (boolean)$value;
+                    break;
                 case RequestParameter::FORMAT_LIST:
-                    $data = $value;
-                    if (!is_array($data)) throw $this->createException(400, 'Bad Request | input ' . $key->getName() . ' must be list');
-                    return $data;
+                    if (!is_array($value)) throw $this->createException(400, 'Bad Request | input ' . $key->getName() . ' must be list');
+                    break;
                 case RequestParameter::FORMAT_OBJECT:
-                    $data = $value;
-                    if (!is_object($data)) throw $this->createException(400, 'Bad Request | input ' . $key->getName() . ' must be object');
-                    return $data;
-                default:
-                    return $value;
+                    if (!is_object($value)) throw $this->createException(400, 'Bad Request | input ' . $key->getName() . ' must be object');
+                    break;
             }
+
+            // Check regex format
+            if ($key->hasRegexFormat() && $key->getFormat() === RequestParameter::FORMAT_STRING) {
+                if (!preg_match($key->getRegexFormat(), $value)) throw $this->createException(400, 'Bad Request | input ' . $key->getName() . ' has invalid format');
+            }
+
+            // Return value
+            return $value;
         };
 
         $args = func_get_args();

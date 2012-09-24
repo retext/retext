@@ -21,10 +21,13 @@ class RegisterController extends Base
     public function registerAction()
     {
         $email = $this->getFromRequest('email');
+        $code = $this->getFromRequest(RequestParameter::create('code')->makeOptional()->regexFormat('^[a-z]{3}-[a-z]{3}-[a-z]{3}$'));
+
         $user = new User();
         $user->setEmail($email);
-        // TODO: generate Passwords
-        $user->setPassword($email);
+        $password = $this->generatePassword();
+        $user->setPassword($password);
+        $user->setCode($code);
 
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $dm->persist($user);
@@ -39,5 +42,16 @@ class RegisterController extends Base
     public function getUserAction($id)
     {
         return $this->createResponse($this->getDocument('User', $id));
+    }
+
+    private function generatePassword()
+    {
+        $pass = '';
+        $chars = 'abcdefghkmnpqrstuvwxyzABCDEFGHKMNPQRSTUVWXYZ23456789#+*§$%&-_';
+        $clen = strlen($chars) - 1;
+        while (strlen($pass) < 12) {
+            $pass .= $chars[rand(0, $clen)];
+        }
+        return $pass;
     }
 }

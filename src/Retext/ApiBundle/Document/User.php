@@ -36,6 +36,12 @@ class User extends \Retext\ApiBundle\Model\Base
     protected $password;
 
     /**
+     * @MongoDB\String
+     * @SerializerBundle\Exclude
+     */
+    protected $code;
+
+    /**
      * @return string $id
      */
     public function getId()
@@ -114,5 +120,21 @@ class User extends \Retext\ApiBundle\Model\Base
     function getRelatedDocuments()
     {
         return null;
+    }
+
+    /**
+     * @param string $code
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
     }
 }

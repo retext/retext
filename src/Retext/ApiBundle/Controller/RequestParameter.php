@@ -36,6 +36,11 @@ class RequestParameter
     private $format = self::FORMAT_STRING;
 
     /**
+     * @var string
+     */
+    private $regexFormat;
+
+    /**
      * @static
      * @param $name
      * @return \Retext\ApiBundle\Controller\RequestParameter
@@ -143,5 +148,29 @@ class RequestParameter
     public function getFormat()
     {
         return $this->format;
+    }
+
+    /**
+     * @param string $regexFormat
+     */
+    public function setRegexFormat($regexFormat)
+    {
+        $this->regexFormat = $regexFormat;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function hasRegexFormat()
+    {
+        return $this->regexFormat !== null;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRegexFormat()
+    {
+        return $this->regexFormat;
     }
 }
