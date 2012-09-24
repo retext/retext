@@ -13,3 +13,6 @@ web/.htaccess
 composer.lock
 .idea
 web/app.php
+vert.x/*.pid
+vert.x/.project
+vert.x/.pydevproject
